@@ -1,0 +1,7 @@
+{
+  "name": "Aura Exchange - Trade with Clarity",
+  "description": "Next-generation digital trading and product marketplace platform with portfolio management, options trading, wallet, and real-time ledger.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

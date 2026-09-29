@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-primary: #6A2E62;
+    --brand-hover: #56234F;
+    --brand-active: #441A3E;
+    --brand-subtle: #F7EFF6;
+    --brand-light: #ECD6E9;
+    --canvas-bg: #FAFAF9;
+    --surface-bg: #FFFFFF;
+    --surface-secondary: #F5F5F4;
+    --border-color: #E7E5E4;
+    --border-subtle: #F0EEE9;
+    --text-primary: #171717;
+    --text-secondary: #6B6B6B;
+    --text-muted: #8A8A8A;
+    --positive: #16803C;
+    --positive-bg: #ECFDF3;
+    --negative: #C62828;
+    --negative-bg: #FEF2F2;
+    --warning: #B7791F;
+    --warning-bg: #FFFBEB;
+    --info: #1D4ED8;
+    --info-bg: #EFF6FF;
+  }
+
+  body {
+    font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--canvas-bg);
+    color: var(--text-primary);
+  }
+
+  /* Ensure tabular numbers for all prices and quantities */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D6D3D1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A8A29E;
+}
