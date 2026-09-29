@@ -2,51 +2,43 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Source of Truth: Meadow Green */
-    --color-brand-primary: #1FC777;
-    --color-brand-primary-hover: #18B36A;
-    --color-brand-primary-active: #12A560;
-    --color-brand-primary-subtle: #E9FAF1;
-    --color-brand-primary-strong: #087A4A;
-    --color-brand-on-primary: #0C0F0C;
-
-    /* Backgrounds */
-    --color-background-default: #F7F6F2;
+    /* Tradeon Blue Fintech tokens */
+    --color-brand-primary: #0070BA;
+    --color-brand-primary-hover: #005EA8;
+    --color-brand-primary-active: #003087;
+    --color-brand-primary-subtle: #F0FAFF;
+    --color-brand-primary-strong: #003087;
+    --color-brand-on-primary: #FFFFFF;
+    --color-background-default: #F6F8FB;
     --color-background-surface: #FFFFFF;
-    --color-background-secondary: #EFEEE9;
+    --color-background-secondary: #EEF2F7;
     --color-background-elevated: #FFFFFF;
-    --color-background-subtle: #E9FAF1;
-    --color-background-inverse: #171A17;
-
-    /* Text */
-    --color-text-primary: #171A17;
-    --color-text-secondary: #5A5A53;
-    --color-text-tertiary: #6B6B63;
-    --color-text-disabled: #A3A29A;
-    --color-text-placeholder: #6B6B63;
+    --color-background-subtle: #F0FAFF;
+    --color-background-inverse: #001B4D;
+    --color-text-primary: #101828;
+    --color-text-secondary: #344256;
+    --color-text-tertiary: #657386;
+    --color-text-disabled: #98A5B5;
+    --color-text-placeholder: #657386;
     --color-text-inverse: #FFFFFF;
-    --color-text-link: #087A4A;
-
-    /* Borders */
-    --color-border-subtle: #E2E1DA;
-    --color-border-default: #CBCAC2;
-    --color-border-strong: #8F8E85;
-    --color-border-focus: #087A4A;
-    --color-divider: #EFEEE9;
-
-    /* Semantic Status */
-    --color-status-success: #12A560;
-    --color-status-success-strong: #0A7A45;
-    --color-status-success-subtle: #E3F6EC;
-    --color-status-error: #E5484D;
-    --color-status-error-strong: #BF2A2A;
-    --color-status-error-subtle: #FCE9E7;
-    --color-status-warning: #C77700;
-    --color-status-warning-strong: #8A5A00;
-    --color-status-warning-subtle: #FFF3D6;
-    --color-status-info: #2F80ED;
-    --color-status-info-strong: #1B5FBF;
-    --color-status-info-subtle: #E6EFFC;
+    --color-text-link: #005EA8;
+    --color-border-subtle: #E1E7EF;
+    --color-border-default: #C8D1DD;
+    --color-border-strong: #98A5B5;
+    --color-border-focus: #0070BA;
+    --color-divider: #EEF2F7;
+    --color-status-success: #16803C;
+    --color-status-success-strong: #11632F;
+    --color-status-success-subtle: #E8F7EE;
+    --color-status-error: #C62828;
+    --color-status-error-strong: #A61F1F;
+    --color-status-error-subtle: #FDECEC;
+    --color-status-warning: #A15C00;
+    --color-status-warning-strong: #804900;
+    --color-status-warning-subtle: #FFF4DB;
+    --color-status-info: #0069C0;
+    --color-status-info-strong: #00549A;
+    --color-status-info-subtle: #E8F4FF;
   }
 
   body {
@@ -62,17 +54,10 @@
 }
 
 /* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #CBCAC2;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #A3A29A;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
+
+button, a, input, select, textarea { outline-color: var(--color-brand-primary); }
+::selection { background: var(--color-brand-primary-subtle); color: var(--color-brand-primary-strong); }

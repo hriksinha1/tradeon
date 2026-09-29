@@ -2,22 +2,12 @@ import React, { useState } from 'react';
 import { useTrading } from '../../context/TradingContext';
 import { ViewMode } from '../../types';
 import { Button } from '../common/Button';
-import {
-  Smartphone,
-  Monitor,
-  BookOpen,
-  ArrowRight,
-  Menu,
-  X,
-} from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 
 export const MarketingNavbar: React.FC = () => {
   const {
     currentView,
     setCurrentView,
-    deviceFrame,
-    setDeviceFrame,
-    setIsDossierOpen,
     setIsAuthModalOpen,
   } = useTrading();
 
@@ -53,79 +43,14 @@ export const MarketingNavbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#CBCAC2]/80 transition-all">
-      {/* Utility Notice & Device Simulator Bar */}
-      <div className="bg-[#F7F6F2] border-b border-[#E2E1DA] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-[12px] text-[#5A5A53] gap-2">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1FC777]" />
-          <span className="font-semibold text-[#171A17]">Tradeon Platform Concept</span>
-          <span className="text-[#CBCAC2] hidden sm:inline" aria-hidden="true">·</span>
-          <span className="hidden sm:inline text-[#5A5A53]">
-            Web, iOS & Android preview with illustrative product listings
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2.5">
-          {/* Device Frame Viewport Switcher */}
-          <div className="flex items-center bg-white border border-[#CBCAC2] rounded-[8px] p-0.5 shadow-2xs">
-            <button
-              onClick={() => setDeviceFrame('responsive')}
-              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
-                deviceFrame === 'responsive'
-                  ? 'bg-[#1FC777] text-[#0C0F0C]'
-                  : 'text-[#6B6B63] hover:text-[#171A17]'
-              }`}
-              title="Full Responsive Web View"
-            >
-              <Monitor className="w-3 h-3" />
-              <span>Web</span>
-            </button>
-            <button
-              onClick={() => setDeviceFrame('ios')}
-              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
-                deviceFrame === 'ios'
-                  ? 'bg-[#1FC777] text-[#0C0F0C]'
-                  : 'text-[#6B6B63] hover:text-[#171A17]'
-              }`}
-              title="Simulate iPhone 16 Pro"
-            >
-              <Smartphone className="w-3 h-3" />
-              <span>iOS</span>
-            </button>
-            <button
-              onClick={() => setDeviceFrame('android')}
-              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
-                deviceFrame === 'android'
-                  ? 'bg-[#1FC777] text-[#0C0F0C]'
-                  : 'text-[#6B6B63] hover:text-[#171A17]'
-              }`}
-              title="Simulate Pixel 9 Pro"
-            >
-              <Smartphone className="w-3 h-3" />
-              <span>Android</span>
-            </button>
-          </div>
-
-          {/* Strategy Dossier Drawer Trigger */}
-          <button
-            onClick={() => setIsDossierOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-[#087A4A] bg-white hover:bg-[#E9FAF1] border border-[#A2E8C5] rounded-[8px] transition-colors shadow-2xs cursor-pointer"
-            title="Inspect Master Product Strategy & Design Tokens"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-[#087A4A]" />
-            <span className="hidden md:inline">Strategy Dossier</span>
-            <span className="md:hidden">Dossier</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Marketing Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-18 flex items-center justify-between gap-6">
+      {/* Customer-facing navigation */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-6">
         {/* Brand Wordmark */}
         <button
           onClick={() => handleNavClick('home')}
           className="group flex items-center gap-2.5 text-left focus:outline-none cursor-pointer"
         >
-          <div className="w-9 h-9 rounded-[10px] bg-[#1FC777] flex items-center justify-center text-[#0C0F0C] font-extrabold text-[18px] tracking-tight group-hover:bg-[#18B36A] transition-colors shadow-xs">
+          <div className="w-9 h-9 rounded-[10px] bg-[#0070BA] flex items-center justify-center text-white font-extrabold text-[18px] tracking-tight group-hover:bg-[#005EA8] transition-colors shadow-xs">
             T
           </div>
           <div>
@@ -148,7 +73,7 @@ export const MarketingNavbar: React.FC = () => {
                 onClick={() => handleNavClick(link.view)}
                 className={`text-[14px] font-medium transition-colors cursor-pointer py-1 relative ${
                   isActive
-                    ? 'text-[#087A4A] font-semibold'
+                    ? 'text-[#005EA8] font-semibold'
                     : 'text-[#5A5A53] hover:text-[#171A17]'
                 }`}
               >
@@ -222,7 +147,7 @@ export const MarketingNavbar: React.FC = () => {
                 setCurrentView('app-dashboard');
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-3 text-center text-[14px] font-bold text-[#0C0F0C] bg-[#1FC777] hover:bg-[#18B36A] rounded-[10px] transition-colors shadow-2xs"
+              className="w-full py-3 text-center text-[14px] font-bold text-[#0C0F0C] bg-[#0070BA] hover:bg-[#005EA8] rounded-[10px] transition-colors shadow-2xs"
             >
               Explore platform
             </button>
