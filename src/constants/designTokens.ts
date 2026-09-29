@@ -1,68 +1,35 @@
 /**
- * CONFIDENTIAL · DESIGN FOUNDATION
- * Color Design System & Typography
- * Source of Truth: Meadow Green (#1FC777) & Warm Neutrals (#F7F6F2)
+ * Tradeon Design Foundation
+ * Blue-led fintech system for marketing and trading surfaces
+ * Source of truth: crisp neutrals, deep navy, and restrained semantic color
  */
 
 export const BRAND_SYSTEM = {
-  name: 'Meadow Green Design Foundation',
+  name: 'Tradeon Blue Fintech System',
   primaryBrandColor: {
-    name: 'Meadow Green',
-    hex: '#1FC777',
-    rgb: '31, 199, 119',
-    hsl: '151°, 73%, 45%',
-    accessibleVariant: '#087A4A', // Brand 700
-    textOnBrandFill: '#0C0F0C', // Ink text (8.72:1 contrast)
+    name: 'Tradeon Blue',
+    hex: '#0070BA',
+    rgb: '0, 112, 186',
+    hsl: '204°, 100%, 36%',
+    accessibleVariant: '#005EA8',
+    textOnBrandFill: '#FFFFFF',
   },
   palette: {
     brand: {
-      50: '#E9FAF1', // Subtle highlight, selected background
-      100: '#CFF3E0', // Tinted fills
-      200: '#A2E8C5', // Decorative fills, light data series
-      300: '#6EDBA5', // Data series, illustrations
-      400: '#3ACF8B', // Accent on dark surfaces
-      500: '#1FC777', // MAIN PRODUCTION BRAND COLOR
-      600: '#12A560', // Pressed state, data lines (graphics only)
-      700: '#087A4A', // Accessible brand: links, text, icons, focus
-      800: '#0A603C', // Link hover, pressed text
-      900: '#0B4E33', // Deep brand surfaces
-      950: '#04231A', // Darkest brand tone
+      50: '#F0FAFF', 100: '#DFF6FF', 200: '#BFEAFF', 300: '#8EDCFF',
+      400: '#60CDFF', 500: '#0070BA', 600: '#005EA8', 700: '#003087',
+      800: '#00266B', 900: '#001B4D', 950: '#001126',
     },
     neutral: {
-      0: '#FFFFFF', // Surfaces
-      50: '#F7F6F2', // App background (warm off-white base)
-      100: '#EFEEE9', // Secondary surface, dividers, inputs
-      200: '#E2E1DA', // Subtle border, light outlines
-      300: '#CBCAC2', // Default border, standard outlines
-      400: '#A3A29A', // Disabled text
-      500: '#6B6B63', // Tertiary text, placeholder
-      600: '#5A5A53', // Secondary text
-      700: '#40403B', // Strong secondary elements
-      800: '#2A2A26', // Dark surfaces
-      900: '#171A17', // Primary text, inverse surface
-      950: '#0C0F0C', // Ink: text on brand fills
+      0: '#FFFFFF', 25: '#FCFDFF', 50: '#F6F8FB', 100: '#EEF2F7',
+      200: '#E1E7EF', 300: '#C8D1DD', 400: '#98A5B5', 500: '#657386',
+      600: '#4B5A6D', 700: '#344256', 800: '#1E2B3B', 900: '#101828', 950: '#07111F',
     },
     semantic: {
-      success: {
-        base: '#12A560',
-        strong: '#0A7A45',
-        subtle: '#E3F6EC',
-      },
-      error: {
-        base: '#E5484D',
-        strong: '#BF2A2A',
-        subtle: '#FCE9E7',
-      },
-      warning: {
-        base: '#C77700',
-        strong: '#8A5A00',
-        subtle: '#FFF3D6',
-      },
-      info: {
-        base: '#2F80ED',
-        strong: '#1B5FBF',
-        subtle: '#E6EFFC',
-      },
+      success: { base: '#16803C', strong: '#11632F', subtle: '#E8F7EE' },
+      error: { base: '#C62828', strong: '#A61F1F', subtle: '#FDECEC' },
+      warning: { base: '#A15C00', strong: '#804900', subtle: '#FFF4DB' },
+      info: { base: '#0069C0', strong: '#00549A', subtle: '#E8F4FF' },
     },
   },
   typographyScale: [

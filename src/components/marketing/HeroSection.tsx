@@ -82,7 +82,7 @@ export const HeroSection: React.FC = () => {
         {/* Editorial Product Composition (Not a giant dashboard) */}
         <div className="mt-16 sm:mt-20 relative max-w-5xl mx-auto">
           {/* Subtle Ambient Background Accent */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#E9FAF1] rounded-full blur-3xl -z-10 opacity-70 pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#F0FAFF] rounded-full blur-3xl -z-10 opacity-70 pointer-events-none" />
 
           {/* Desktop Product Preview Frame (Clean browser viewport) */}
           <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] overflow-hidden text-left">
@@ -127,7 +127,7 @@ export const HeroSection: React.FC = () => {
 
                   <button
                     onClick={() => openBuySell('buy', previewProduct)}
-                    className="ml-2 px-4 py-2.5 bg-[#1FC777] text-[#0C0F0C] font-bold text-[13px] rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer shadow-xs"
+                    className="ml-2 px-4 py-2.5 bg-[#0070BA] text-white font-bold text-[13px] rounded-[10px] hover:bg-[#005EA8] transition-colors cursor-pointer shadow-xs"
                   >
                     Order unit
                   </button>
@@ -188,7 +188,7 @@ export const HeroSection: React.FC = () => {
 
           {/* Floating Options Callout (Right overlay) */}
           <div className="hidden lg:block absolute -right-8 top-12 w-64 bg-[#171A17] text-white border border-[#2A2A26] rounded-[22px] shadow-[0_20px_45px_rgba(0,0,0,0.16)] p-4 text-left z-20">
-            <div className="flex items-center justify-between text-[11px] text-[#1FC777] font-semibold">
+            <div className="flex items-center justify-between text-[11px] text-[#60CDFF] font-semibold">
               <span>Structured Options</span>
               <span className="text-[#A3A29A]">Oct cycle</span>
             </div>
