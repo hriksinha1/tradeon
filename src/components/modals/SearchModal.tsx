@@ -71,7 +71,7 @@ export const SearchModal: React.FC = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products, orders, ledger, IDs..."
-            className="w-full pl-11 pr-4 py-3 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] text-[16px] text-[#171717] focus:outline-[#6A2E62] focus:bg-white transition-colors"
+            className="w-full pl-11 pr-4 py-3 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] text-[16px] text-[#171717] focus:outline-[#087A4A] focus:bg-white transition-colors"
           />
         </div>
 
@@ -82,7 +82,7 @@ export const SearchModal: React.FC = () => {
               key={tab}
               onClick={() => setFilter(tab)}
               className={`px-3 py-1 rounded-[7px] text-[12px] font-semibold capitalize transition-all ${
-                filter === tab ? 'bg-white text-[#6A2E62] shadow-xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+                filter === tab ? 'bg-white text-[#087A4A] shadow-xs' : 'text-[#6B6B6B] hover:text-[#171717]'
               }`}
             >
               {tab}
@@ -96,7 +96,7 @@ export const SearchModal: React.FC = () => {
           {(filter === 'all' || filter === 'products') && (
             <div>
               <div className="text-[11px] font-bold text-[#78716C] uppercase tracking-wider mb-2 flex items-center gap-1">
-                <Compass className="w-3.5 h-3.5 text-[#6A2E62]" />
+                <Compass className="w-3.5 h-3.5 text-[#087A4A]" />
                 <span>Tradable Products ({filteredProducts.length})</span>
               </div>
               <div className="space-y-1">
@@ -104,11 +104,11 @@ export const SearchModal: React.FC = () => {
                   <div
                     key={p.id}
                     onClick={() => handleSelectProduct(p.id)}
-                    className="p-2.5 hover:bg-[#FAF4F9] rounded-[10px] cursor-pointer border border-transparent hover:border-[#ECD6E9] transition-all flex items-center justify-between group"
+                    className="p-2.5 hover:bg-[#E9FAF1] rounded-[10px] cursor-pointer border border-transparent hover:border-[#CFF3E0] transition-all flex items-center justify-between group"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-[14px] text-[#171717] group-hover:text-[#6A2E62]">
+                        <span className="font-bold text-[14px] text-[#171717] group-hover:text-[#087A4A]">
                           {p.name}
                         </span>
                         <span className="text-[12px] text-[#8A8A8A] font-mono">{p.id}</span>
@@ -138,7 +138,7 @@ export const SearchModal: React.FC = () => {
           {(filter === 'all' || filter === 'orders') && filteredOrders.length > 0 && (
             <div>
               <div className="text-[11px] font-bold text-[#78716C] uppercase tracking-wider mb-2 flex items-center gap-1">
-                <FileCheck className="w-3.5 h-3.5 text-[#6A2E62]" />
+                <FileCheck className="w-3.5 h-3.5 text-[#087A4A]" />
                 <span>Orders ({filteredOrders.length})</span>
               </div>
               <div className="space-y-1">
@@ -176,7 +176,7 @@ export const SearchModal: React.FC = () => {
           {(filter === 'all' || filter === 'transactions') && filteredTransactions.length > 0 && (
             <div>
               <div className="text-[11px] font-bold text-[#78716C] uppercase tracking-wider mb-2 flex items-center gap-1">
-                <Receipt className="w-3.5 h-3.5 text-[#6A2E62]" />
+                <Receipt className="w-3.5 h-3.5 text-[#087A4A]" />
                 <span>Ledger Entries ({filteredTransactions.length})</span>
               </div>
               <div className="space-y-1">

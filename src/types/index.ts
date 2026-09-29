@@ -1,19 +1,41 @@
 export type ViewMode =
-  | 'landing'
-  | 'dashboard'
-  | 'markets'
-  | 'product-detail'
+  // Marketing Pages (Primary Website)
+  | 'home'
+  | 'products'
+  | 'how-it-works'
+  | 'mobile-app'
   | 'options'
+  | 'payments'
+  | 'security'
+  | 'about'
+  | 'faq'
+  | 'contact'
+  | 'privacy'
+  | 'terms'
+  // Interactive Platform Prototype Experience
+  | 'landing'
+  | 'app-preview'
+  | 'app-dashboard'
+  | 'dashboard'
+  | 'app-markets'
+  | 'markets'
+  | 'app-product-detail'
+  | 'product-detail'
+  | 'app-options'
+  | 'app-portfolio'
   | 'portfolio'
+  | 'app-orders'
   | 'orders'
+  | 'app-wallet'
   | 'wallet'
+  | 'app-ledger'
   | 'ledger'
+  | 'app-profile'
+  | 'profile'
   | 'watchlist'
   | 'notifications'
-  | 'profile'
   | 'settings'
-  | 'support'
-  | 'dossier';
+  | 'support';
 
 export type DeviceFrameType = 'responsive' | 'ios' | 'android';
 

@@ -59,7 +59,7 @@ export const OptionsTradingView: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[12px] font-bold text-[#6A2E62] uppercase tracking-wider bg-[#FAF4F9] px-2.5 py-0.5 rounded-[6px] border border-[#ECD6E9]">
+            <span className="text-[12px] font-bold text-[#087A4A] uppercase tracking-wider bg-[#E9FAF1] px-2.5 py-0.5 rounded-[6px] border border-[#CFF3E0]">
               Derivative Contract Shell
             </span>
           </div>
@@ -79,7 +79,7 @@ export const OptionsTradingView: React.FC = () => {
               const firstOpt = options.find((o) => o.productRef === e.target.value);
               if (firstOpt) setSelectedOption(firstOpt);
             }}
-            className="px-3 py-2 bg-white border border-[#E7E5E4] rounded-[10px] text-[13px] font-bold text-[#171717] focus:outline-[#6A2E62]"
+            className="px-3 py-2 bg-white border border-[#E7E5E4] rounded-[10px] text-[13px] font-bold text-[#171717] focus:outline-[#087A4A]"
           >
             {products.slice(0, 4).map((p) => (
               <option key={p.id} value={p.id}>
@@ -107,7 +107,7 @@ export const OptionsTradingView: React.FC = () => {
               Current Expiry Cycle
             </span>
             <div className="flex items-center gap-1.5 text-[13px] font-semibold text-[#171717] mt-0.5">
-              <Calendar className="w-3.5 h-3.5 text-[#6A2E62]" />
+              <Calendar className="w-3.5 h-3.5 text-[#087A4A]" />
               <span>29 Oct 2026 (Monthly)</span>
             </div>
           </div>
@@ -120,7 +120,7 @@ export const OptionsTradingView: React.FC = () => {
               key={t}
               onClick={() => setSelectedType(t)}
               className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold uppercase transition-all ${
-                selectedType === t ? 'bg-white text-[#6A2E62] shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+                selectedType === t ? 'bg-white text-[#087A4A] shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
               }`}
             >
               {t === 'all' ? 'All Contracts' : `${t}s`}
@@ -161,8 +161,8 @@ export const OptionsTradingView: React.FC = () => {
                         setSelectedOption(opt);
                         setIsOrdered(false);
                       }}
-                      className={`hover:bg-[#FAF4F9]/60 cursor-pointer transition-colors ${
-                        isSelected ? 'bg-[#FAF4F9]' : ''
+                      className={`hover:bg-[#E9FAF1]/60 cursor-pointer transition-colors ${
+                        isSelected ? 'bg-[#E9FAF1]' : ''
                       }`}
                     >
                       <td className="py-3 px-3">
@@ -183,7 +183,7 @@ export const OptionsTradingView: React.FC = () => {
                         <span className="text-[#A8A29E] mx-1">/</span>
                         <span>{formatINR(opt.ask, { decimals: 1 })}</span>
                       </td>
-                      <td className="py-3 px-3 font-bold text-[#6A2E62] tabular-nums">
+                      <td className="py-3 px-3 font-bold text-[#087A4A] tabular-nums">
                         {formatINR(opt.premium, { decimals: 1 })}
                       </td>
                       <td className="py-3 px-3 text-[12px] text-[#57534E] tabular-nums">
@@ -193,7 +193,7 @@ export const OptionsTradingView: React.FC = () => {
                         <button
                           className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold transition-colors ${
                             isSelected
-                              ? 'bg-[#6A2E62] text-white'
+                              ? 'bg-[#1FC777] text-[#0C0F0C] font-bold'
                               : 'bg-white border border-[#E7E5E4] text-[#6B6B6B] hover:text-[#171717]'
                           }`}
                         >
@@ -253,7 +253,7 @@ export const OptionsTradingView: React.FC = () => {
             </div>
 
             {/* Payoff Breakdown Card */}
-            <div className="p-3.5 bg-[#FAF4F9] border border-[#ECD6E9] rounded-[12px] text-[13px] space-y-2">
+            <div className="p-3.5 bg-[#E9FAF1] border border-[#CFF3E0] rounded-[12px] text-[13px] space-y-2">
               <div className="flex justify-between">
                 <span className="text-[#6B6B6B]">Unit Premium</span>
                 <span className="font-semibold text-[#171717] tabular-nums">
@@ -268,9 +268,9 @@ export const OptionsTradingView: React.FC = () => {
                 <span className="text-[#6B6B6B]">Max Downside Risk</span>
                 <span className="font-semibold text-[#C62828] tabular-nums">{formatINR(premiumCost)}</span>
               </div>
-              <div className="pt-2 border-t border-[#ECD6E9] flex justify-between font-bold text-[14px]">
+              <div className="pt-2 border-t border-[#CFF3E0] flex justify-between font-bold text-[14px]">
                 <span className="text-[#171717]">Total Premium Payable</span>
-                <span className="text-[#6A2E62] tabular-nums">{formatINR(premiumCost)}</span>
+                <span className="text-[#087A4A] tabular-nums">{formatINR(premiumCost)}</span>
               </div>
             </div>
 

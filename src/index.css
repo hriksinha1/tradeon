@@ -2,36 +2,60 @@
 
 @layer base {
   :root {
-    --brand-primary: #6A2E62;
-    --brand-hover: #56234F;
-    --brand-active: #441A3E;
-    --brand-subtle: #F7EFF6;
-    --brand-light: #ECD6E9;
-    --canvas-bg: #FAFAF9;
-    --surface-bg: #FFFFFF;
-    --surface-secondary: #F5F5F4;
-    --border-color: #E7E5E4;
-    --border-subtle: #F0EEE9;
-    --text-primary: #171717;
-    --text-secondary: #6B6B6B;
-    --text-muted: #8A8A8A;
-    --positive: #16803C;
-    --positive-bg: #ECFDF3;
-    --negative: #C62828;
-    --negative-bg: #FEF2F2;
-    --warning: #B7791F;
-    --warning-bg: #FFFBEB;
-    --info: #1D4ED8;
-    --info-bg: #EFF6FF;
+    /* Brand Colors - Source of Truth: Meadow Green */
+    --color-brand-primary: #1FC777;
+    --color-brand-primary-hover: #18B36A;
+    --color-brand-primary-active: #12A560;
+    --color-brand-primary-subtle: #E9FAF1;
+    --color-brand-primary-strong: #087A4A;
+    --color-brand-on-primary: #0C0F0C;
+
+    /* Backgrounds */
+    --color-background-default: #F7F6F2;
+    --color-background-surface: #FFFFFF;
+    --color-background-secondary: #EFEEE9;
+    --color-background-elevated: #FFFFFF;
+    --color-background-subtle: #E9FAF1;
+    --color-background-inverse: #171A17;
+
+    /* Text */
+    --color-text-primary: #171A17;
+    --color-text-secondary: #5A5A53;
+    --color-text-tertiary: #6B6B63;
+    --color-text-disabled: #A3A29A;
+    --color-text-placeholder: #6B6B63;
+    --color-text-inverse: #FFFFFF;
+    --color-text-link: #087A4A;
+
+    /* Borders */
+    --color-border-subtle: #E2E1DA;
+    --color-border-default: #CBCAC2;
+    --color-border-strong: #8F8E85;
+    --color-border-focus: #087A4A;
+    --color-divider: #EFEEE9;
+
+    /* Semantic Status */
+    --color-status-success: #12A560;
+    --color-status-success-strong: #0A7A45;
+    --color-status-success-subtle: #E3F6EC;
+    --color-status-error: #E5484D;
+    --color-status-error-strong: #BF2A2A;
+    --color-status-error-subtle: #FCE9E7;
+    --color-status-warning: #C77700;
+    --color-status-warning-strong: #8A5A00;
+    --color-status-warning-subtle: #FFF3D6;
+    --color-status-info: #2F80ED;
+    --color-status-info-strong: #1B5FBF;
+    --color-status-info-subtle: #E6EFFC;
   }
 
   body {
     font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--canvas-bg);
-    color: var(--text-primary);
+    background-color: var(--color-background-default);
+    color: var(--color-text-primary);
   }
 
-  /* Ensure tabular numbers for all prices and quantities */
+  /* Ensure tabular numbers for financial figures */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
@@ -46,9 +70,9 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D6D3D1;
+  background: #CBCAC2;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A8A29E;
+  background: #A3A29A;
 }

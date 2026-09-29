@@ -147,7 +147,7 @@ export const DashboardView: React.FC = () => {
                     onClick={() => setChartPeriod(period)}
                     className={`px-2.5 py-1 rounded-[6px] text-[11px] font-semibold transition-all ${
                       chartPeriod === period
-                        ? 'bg-white text-[#6A2E62] shadow-2xs'
+                        ? 'bg-white text-[#087A4A] shadow-2xs'
                         : 'text-[#6B6B6B] hover:text-[#171717]'
                     }`}
                   >
@@ -158,19 +158,19 @@ export const DashboardView: React.FC = () => {
             </div>
 
             {/* SVG Minimalist Area Chart */}
-            <div className="w-full h-44 relative overflow-hidden bg-[#FAF4F9]/40 rounded-[12px] p-2 border border-[#F3E5F1]">
+            <div className="w-full h-44 relative overflow-hidden bg-[#E9FAF1]/40 rounded-[12px] p-2 border border-[#CFF3E0]">
               <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-full preserve-3d">
                 <defs>
                   <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#6A2E62" stopOpacity="0.25" />
-                    <stop offset="100%" stopColor="#6A2E62" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#087A4A" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#087A4A" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <path d={areaD} fill="url(#chartGradient)" />
                 <path
                   d={pathD}
                   fill="none"
-                  stroke="#6A2E62"
+                  stroke="#087A4A"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -190,7 +190,7 @@ export const DashboardView: React.FC = () => {
               </div>
               <button
                 onClick={() => setCurrentView('markets')}
-                className="text-[12px] font-semibold text-[#6A2E62] hover:underline"
+                className="text-[12px] font-semibold text-[#087A4A] hover:underline"
               >
                 View all ({products.length})
               </button>
@@ -200,7 +200,7 @@ export const DashboardView: React.FC = () => {
               {watchlistProducts.slice(0, 4).map((item) => (
                 <div
                   key={item.id}
-                  className="p-3 bg-[#FAFAF9] hover:bg-[#FAF4F9] border border-[#E7E5E4] hover:border-[#ECD6E9] rounded-[12px] transition-all flex items-center justify-between"
+                  className="p-3 bg-[#FAFAF9] hover:bg-[#E9FAF1] border border-[#E7E5E4] hover:border-[#CFF3E0] rounded-[12px] transition-all flex items-center justify-between"
                 >
                   <div
                     className="cursor-pointer"
@@ -209,7 +209,7 @@ export const DashboardView: React.FC = () => {
                       setCurrentView('product-detail');
                     }}
                   >
-                    <span className="font-bold text-[14px] text-[#171717] hover:text-[#6A2E62] block">
+                    <span className="font-bold text-[14px] text-[#171717] hover:text-[#087A4A] block">
                       {item.name}
                     </span>
                     <span className="text-[11px] text-[#78716C]">{item.id}</span>
@@ -232,7 +232,7 @@ export const DashboardView: React.FC = () => {
                   <div className="pl-2">
                     <button
                       onClick={() => openBuySell('buy', item)}
-                      className="px-2.5 py-1 text-[11px] font-semibold text-[#6A2E62] bg-white border border-[#ECD6E9] rounded-[6px] hover:bg-[#FAF4F9] transition-colors"
+                      className="px-2.5 py-1 text-[11px] font-semibold text-[#087A4A] bg-white border border-[#CFF3E0] rounded-[6px] hover:bg-[#E9FAF1] transition-colors"
                     >
                       Trade
                     </button>
@@ -243,14 +243,14 @@ export const DashboardView: React.FC = () => {
           </div>
 
           {/* Quick Options Banner */}
-          <div className="mt-5 p-3.5 bg-[#FAF4F9] border border-[#ECD6E9] rounded-[12px] flex items-center justify-between">
+          <div className="mt-5 p-3.5 bg-[#E9FAF1] border border-[#CFF3E0] rounded-[12px] flex items-center justify-between">
             <div>
-              <span className="text-[12px] font-bold text-[#6A2E62] uppercase block">Options Chain</span>
+              <span className="text-[12px] font-bold text-[#087A4A] uppercase block">Options Chain</span>
               <span className="text-[13px] text-[#171717] font-semibold">Active Call & Put Contracts</span>
             </div>
             <button
               onClick={() => setCurrentView('options')}
-              className="p-1.5 bg-white text-[#6A2E62] rounded-lg border border-[#ECD6E9] hover:bg-[#F7EFF6] transition-colors"
+              className="p-1.5 bg-white text-[#087A4A] rounded-lg border border-[#CFF3E0] hover:bg-[#E9FAF1] transition-colors"
               title="Open Options Chain"
             >
               <ChevronRight className="w-4 h-4" />
@@ -270,7 +270,7 @@ export const DashboardView: React.FC = () => {
             </div>
             <button
               onClick={() => setCurrentView('portfolio')}
-              className="text-[12px] font-semibold text-[#6A2E62] hover:underline flex items-center gap-1"
+              className="text-[12px] font-semibold text-[#087A4A] hover:underline flex items-center gap-1"
             >
               <span>Portfolio Breakdown</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -293,7 +293,7 @@ export const DashboardView: React.FC = () => {
                 {positions.map((pos) => {
                   const product = products.find((p) => p.id === pos.productId);
                   return (
-                    <tr key={pos.id} className="hover:bg-[#FAF4F9]/60 transition-colors">
+                    <tr key={pos.id} className="hover:bg-[#E9FAF1]/60 transition-colors">
                       <td className="py-3 px-3">
                         <span className="font-bold text-[#171717] block">{pos.productName}</span>
                         <span className="text-[11px] text-[#78716C] font-mono">{pos.productId}</span>
@@ -356,7 +356,7 @@ export const DashboardView: React.FC = () => {
               <h3 className="text-[17px] font-bold text-[#171717]">Recent Ledger Entries</h3>
               <button
                 onClick={() => setCurrentView('ledger')}
-                className="text-[12px] font-semibold text-[#6A2E62] hover:underline"
+                className="text-[12px] font-semibold text-[#087A4A] hover:underline"
               >
                 All activity
               </button>

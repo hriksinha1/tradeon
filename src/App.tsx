@@ -1,12 +1,13 @@
 /**
- * Aura Exchange - Trading & Product Marketplace Platform
+ * Tradeon — Modern Digital Trading & Product Marketplace Platform
  * 
  * Features:
  * - Confidential Product Abstraction Layer
- * - #6A2E62 Brand Color & League Spartan Typography System
- * - Real reactive trading state (Wallet, Orders, Positions, Ledger, Options, Notifications)
- * - Multi-Platform simulation (Desktop Web 1440px, iPhone 16 Pro, Pixel 9 Pro)
- * - Interactive Master Product Strategy & Design Tokens Dossier
+ * - Meadow Green (#1FC777) Design Foundation & Warm Neutrals (#F7F6F2)
+ * - Complete Marketing Website (Home, Products, How It Works, Options, Mobile App, Payments, Security, About, FAQ, Contact, Terms, Privacy)
+ * - Complete Interactive Platform Application (Dashboard, Markets, Product Details, Options, Portfolio, Orders, Wallet, Ledger, Profile)
+ * - Multi-Platform simulation (Desktop Web 1440px baseline, iPhone 16 Pro, Pixel 9 Pro)
+ * - Appwrite Decoupled Enterprise Service Architecture
  */
 
 import React from 'react';
@@ -15,6 +16,17 @@ import { Navbar } from './components/layout/Navbar';
 import { BottomNav } from './components/layout/BottomNav';
 import { DeviceFrame } from './components/layout/DeviceFrame';
 import { ToastContainer } from './components/common/Toast';
+import { Modal } from './components/common/Modal';
+
+// Marketing components
+import { MarketingNavbar } from './components/marketing/MarketingNavbar';
+import { ProductsPage } from './components/marketing/ProductsPage';
+import { HowItWorksPage } from './components/marketing/HowItWorksPage';
+import { MobileAppPage } from './components/marketing/MobileAppPage';
+import { OptionsPage } from './components/marketing/OptionsPage';
+import { PaymentsPage } from './components/marketing/PaymentsPage';
+import { SecurityPage } from './components/marketing/SecurityPage';
+import { AboutAndLegalPages } from './components/marketing/AboutAndLegalPages';
 
 // Modals
 import { BuySellModal } from './components/modals/BuySellModal';
@@ -24,7 +36,7 @@ import { TransactionModal } from './components/modals/TransactionModal';
 import { SearchModal } from './components/modals/SearchModal';
 import { ProductDossierModal } from './components/modals/ProductDossierModal';
 
-// Views
+// Application Views
 import { LandingPage } from './components/views/LandingPage';
 import { DashboardView } from './components/views/DashboardView';
 import { MarketsView } from './components/views/MarketsView';
@@ -42,55 +54,108 @@ import { HelpSupportView } from './components/views/HelpSupportView';
 import { AuthView } from './components/views/AuthView';
 
 const MainAppContent: React.FC = () => {
-  const { currentView } = useTrading();
+  const { currentView, isAuthModalOpen, setIsAuthModalOpen } = useTrading();
+
+  // Marketing views list
+  const isMarketingView = [
+    'home',
+    'landing',
+    'products',
+    'how-it-works',
+    'mobile-app',
+    'options',
+    'payments',
+    'security',
+    'about',
+    'faq',
+    'contact',
+    'privacy',
+    'terms',
+  ].includes(currentView);
 
   const renderCurrentView = () => {
     switch (currentView) {
+      // Marketing Views
+      case 'home':
       case 'landing':
         return <LandingPage />;
+      case 'products':
+        return <ProductsPage />;
+      case 'how-it-works':
+        return <HowItWorksPage />;
+      case 'mobile-app':
+        return <MobileAppPage />;
+      case 'options':
+        return <OptionsPage />;
+      case 'payments':
+        return <PaymentsPage />;
+      case 'security':
+        return <SecurityPage />;
+      case 'about':
+        return <AboutAndLegalPages page="about" />;
+      case 'faq':
+        return <AboutAndLegalPages page="faq" />;
+      case 'contact':
+        return <AboutAndLegalPages page="contact" />;
+      case 'privacy':
+        return <AboutAndLegalPages page="privacy" />;
+      case 'terms':
+        return <AboutAndLegalPages page="terms" />;
+
+      // Interactive App Views
+      case 'app-preview':
+      case 'app-dashboard':
       case 'dashboard':
         return <DashboardView />;
+      case 'app-markets':
       case 'markets':
         return <MarketsView />;
+      case 'app-product-detail':
       case 'product-detail':
         return <ProductDetailView />;
-      case 'options':
+      case 'app-options':
         return <OptionsTradingView />;
+      case 'app-portfolio':
       case 'portfolio':
         return <PortfolioView />;
+      case 'app-orders':
       case 'orders':
         return <OrdersView />;
+      case 'app-wallet':
       case 'wallet':
         return <WalletView />;
+      case 'app-ledger':
       case 'ledger':
         return <LedgerView />;
+      case 'app-profile':
+      case 'profile':
+        return <ProfileView />;
       case 'watchlist':
         return <WatchlistView />;
       case 'notifications':
         return <NotificationsView />;
-      case 'profile':
-        return <ProfileView />;
       case 'settings':
         return <SettingsView />;
       case 'support':
         return <HelpSupportView />;
+
       default:
-        return <DashboardView />;
+        return <LandingPage />;
     }
   };
 
   return (
     <DeviceFrame>
-      {/* Top Bar with 3-Zone contract */}
-      <Navbar />
+      {/* Top Navbar dynamically switches between Marketing and Trading Terminal */}
+      {isMarketingView ? <MarketingNavbar /> : <Navbar />}
 
       {/* Main View Area */}
       <main className="flex-1 pb-20 sm:pb-8">
         {renderCurrentView()}
       </main>
 
-      {/* Mobile Bottom Navigation */}
-      <BottomNav />
+      {/* Mobile Bottom Navigation shown in App Terminal mode */}
+      {!isMarketingView && <BottomNav />}
 
       {/* Interactive Global Modals */}
       <BuySellModal />
@@ -99,6 +164,17 @@ const MainAppContent: React.FC = () => {
       <TransactionModal />
       <SearchModal />
       <ProductDossierModal />
+
+      {/* Auth Modal for Sign In / Sign Up testing */}
+      <Modal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        title="Account Access"
+        subtitle="Sign in or register your Tradeon account"
+        maxWidth="md"
+      >
+        <AuthView />
+      </Modal>
 
       {/* Reactive Action Feedback Toast Container */}
       <ToastContainer />

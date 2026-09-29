@@ -22,8 +22,8 @@ export interface AppwriteConfig {
 
 export const APPWRITE_DEFAULT_CONFIG: AppwriteConfig = {
   endpoint: 'https://cloud.appwrite.io/v1',
-  projectId: 'aura-trading-platform-preview',
-  databaseId: 'aura_main_db',
+  projectId: 'tradeon-platform-preview',
+  databaseId: 'tradeon_main_db',
   collections: {
     products: 'col_products',
     orders: 'col_orders',

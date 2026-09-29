@@ -31,7 +31,7 @@ export const TransactionModal: React.FC = () => {
     >
       <div className="space-y-4">
         {/* Header Amount Card */}
-        <div className="p-4 bg-[#FAF4F9] border border-[#ECD6E9] rounded-[14px] text-center">
+        <div className="p-4 bg-[#E9FAF1] border border-[#CFF3E0] rounded-[14px] text-center">
           <Badge
             status={
               selectedTransaction.type === 'buy'
@@ -79,7 +79,7 @@ export const TransactionModal: React.FC = () => {
           </div>
           <div className="p-3 flex items-center justify-between">
             <span className="text-[#6B6B6B]">Running Balance Post-Transaction</span>
-            <span className="font-bold text-[#6A2E62] tabular-nums">
+            <span className="font-bold text-[#087A4A] tabular-nums">
               {formatINR(selectedTransaction.runningBalance, { decimals: 2 })}
             </span>
           </div>
@@ -97,7 +97,7 @@ export const TransactionModal: React.FC = () => {
               </span>
               <button
                 onClick={handleCopyRef}
-                className="p-1 hover:bg-[#F5F5F4] rounded transition-colors text-[#6A2E62]"
+                className="p-1 hover:bg-[#F5F5F4] rounded transition-colors text-[#087A4A]"
                 title="Copy reference"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-[#16803C]" /> : <Copy className="w-3.5 h-3.5" />}

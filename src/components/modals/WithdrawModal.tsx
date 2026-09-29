@@ -75,7 +75,7 @@ export const WithdrawModal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setAmount(wallet.availableBalance)}
-                className="text-[11px] font-semibold text-[#6A2E62] hover:underline"
+                className="text-[11px] font-semibold text-[#087A4A] hover:underline"
               >
                 Withdraw Full ({formatINR(wallet.availableBalance)})
               </button>
@@ -88,7 +88,7 @@ export const WithdrawModal: React.FC = () => {
                 max={wallet.availableBalance}
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full pl-9 pr-4 py-2.5 border border-[#E7E5E4] rounded-[10px] text-[20px] font-bold text-[#171717] tabular-nums focus:outline-[#6A2E62]"
+                className="w-full pl-9 pr-4 py-2.5 border border-[#E7E5E4] rounded-[10px] text-[20px] font-bold text-[#171717] tabular-nums focus:outline-[#087A4A]"
                 placeholder="Enter amount"
               />
             </div>
@@ -101,7 +101,7 @@ export const WithdrawModal: React.FC = () => {
             </label>
             <div className="p-3 bg-[#F5F5F4] border border-[#E7E5E4] rounded-[10px] flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Building2 className="w-5 h-5 text-[#6A2E62]" />
+                <Building2 className="w-5 h-5 text-[#087A4A]" />
                 <div>
                   <span className="text-[13px] font-bold text-[#171717] block">HDFC Bank Limited</span>
                   <span className="text-[11px] text-[#6B6B6B]">A/C No: ••••••••4091 · IFSC: HDFC000124</span>
@@ -125,7 +125,7 @@ export const WithdrawModal: React.FC = () => {
             </div>
             <div className="pt-2 border-t border-[#E7E5E4] flex items-center justify-between text-[14px] font-bold">
               <span className="text-[#171717]">Net Amount to Account</span>
-              <span className="text-[#6A2E62] tabular-nums">{formatINR(netCredit)}</span>
+              <span className="text-[#087A4A] tabular-nums">{formatINR(netCredit)}</span>
             </div>
           </div>
 

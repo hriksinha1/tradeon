@@ -26,7 +26,7 @@ export const SettingsView: React.FC = () => {
       {/* General Settings */}
       <div className="bg-white border border-[#E7E5E4] rounded-[18px] p-6 shadow-xs space-y-4">
         <h3 className="text-[17px] font-bold text-[#171717] flex items-center gap-2">
-          <Globe className="w-5 h-5 text-[#6A2E62]" />
+          <Globe className="w-5 h-5 text-[#087A4A]" />
           <span>Regional & Currency Formatting</span>
         </h3>
 
@@ -51,7 +51,7 @@ export const SettingsView: React.FC = () => {
               <span className="font-bold text-[14px] text-[#171717] block">Appearance Mode</span>
               <span className="text-[12px] text-[#6B6B6B]">Optimized for financial clarity and contrast standards.</span>
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FAF4F9] border border-[#ECD6E9] rounded-[8px] text-[12px] font-bold text-[#6A2E62]">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#E9FAF1] border border-[#CFF3E0] rounded-[8px] text-[12px] font-bold text-[#087A4A]">
               <Sun className="w-4 h-4" />
               <span>Clean Light Theme</span>
             </div>
@@ -62,7 +62,7 @@ export const SettingsView: React.FC = () => {
       {/* Notification Delivery */}
       <div className="bg-white border border-[#E7E5E4] rounded-[18px] p-6 shadow-xs space-y-4">
         <h3 className="text-[17px] font-bold text-[#171717] flex items-center gap-2">
-          <Bell className="w-5 h-5 text-[#6A2E62]" />
+          <Bell className="w-5 h-5 text-[#087A4A]" />
           <span>Notification Preferences</span>
         </h3>
 
@@ -76,7 +76,7 @@ export const SettingsView: React.FC = () => {
               type="checkbox"
               checked={orderNotifs}
               onChange={(e) => setOrderNotifs(e.target.checked)}
-              className="w-4 h-4 accent-[#6A2E62] cursor-pointer"
+              className="w-4 h-4 accent-[#087A4A] cursor-pointer"
             />
           </div>
 
@@ -89,7 +89,7 @@ export const SettingsView: React.FC = () => {
               type="checkbox"
               checked={emailDigest}
               onChange={(e) => setEmailDigest(e.target.checked)}
-              className="w-4 h-4 accent-[#6A2E62] cursor-pointer"
+              className="w-4 h-4 accent-[#087A4A] cursor-pointer"
             />
           </div>
         </div>

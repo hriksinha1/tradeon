@@ -6,20 +6,18 @@ import { ViewMode } from '../../types';
 export const BottomNav: React.FC = () => {
   const { currentView, setCurrentView, openBuySell } = useTrading();
 
-  const navItems: { label: string; view: ViewMode; icon: React.ReactNode }[] = [
-    { label: 'Home', view: 'dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
-    { label: 'Markets', view: 'markets', icon: <Compass className="w-5 h-5" /> },
-    { label: 'Portfolio', view: 'portfolio', icon: <PieChart className="w-5 h-5" /> },
-    { label: 'Profile', view: 'profile', icon: <User className="w-5 h-5" /> },
-  ];
+  const isHomeActive = currentView === 'app-dashboard' || currentView === 'dashboard';
+  const isMarketsActive = currentView === 'app-markets' || currentView === 'markets';
+  const isPortfolioActive = currentView === 'app-portfolio' || currentView === 'portfolio';
+  const isProfileActive = currentView === 'app-profile' || currentView === 'profile';
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E7E5E4] px-3 py-1.5 flex items-center justify-around max-w-lg mx-auto sm:hidden shadow-lg">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#FFFFFF]/95 backdrop-blur-md border-t border-[#CBCAC2] px-3 py-1.5 flex items-center justify-around max-w-lg mx-auto sm:hidden shadow-lg">
       {/* Home */}
       <button
-        onClick={() => setCurrentView('dashboard')}
-        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors ${
-          currentView === 'dashboard' ? 'text-[#6A2E62]' : 'text-[#8A8A8A] hover:text-[#171717]'
+        onClick={() => setCurrentView('app-dashboard')}
+        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
+          isHomeActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <LayoutDashboard className="w-5 h-5" />
@@ -28,9 +26,9 @@ export const BottomNav: React.FC = () => {
 
       {/* Markets */}
       <button
-        onClick={() => setCurrentView('markets')}
-        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors ${
-          currentView === 'markets' ? 'text-[#6A2E62]' : 'text-[#8A8A8A] hover:text-[#171717]'
+        onClick={() => setCurrentView('app-markets')}
+        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
+          isMarketsActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <Compass className="w-5 h-5" />
@@ -41,7 +39,7 @@ export const BottomNav: React.FC = () => {
       <div className="relative -top-3">
         <button
           onClick={() => openBuySell('buy')}
-          className="w-12 h-12 rounded-full bg-[#6A2E62] text-white flex items-center justify-center shadow-md hover:bg-[#56234F] active:scale-95 transition-transform"
+          className="w-12 h-12 rounded-full bg-[#1FC777] text-[#0C0F0C] flex items-center justify-center shadow-md hover:bg-[#18B36A] active:scale-95 transition-transform cursor-pointer font-bold"
           aria-label="Open Trading Drawer"
         >
           <ArrowLeftRight className="w-5 h-5" />
@@ -50,9 +48,9 @@ export const BottomNav: React.FC = () => {
 
       {/* Portfolio */}
       <button
-        onClick={() => setCurrentView('portfolio')}
-        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors ${
-          currentView === 'portfolio' ? 'text-[#6A2E62]' : 'text-[#8A8A8A] hover:text-[#171717]'
+        onClick={() => setCurrentView('app-portfolio')}
+        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
+          isPortfolioActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <PieChart className="w-5 h-5" />
@@ -61,9 +59,9 @@ export const BottomNav: React.FC = () => {
 
       {/* Profile */}
       <button
-        onClick={() => setCurrentView('profile')}
-        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors ${
-          currentView === 'profile' ? 'text-[#6A2E62]' : 'text-[#8A8A8A] hover:text-[#171717]'
+        onClick={() => setCurrentView('app-profile')}
+        className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
+          isProfileActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <User className="w-5 h-5" />

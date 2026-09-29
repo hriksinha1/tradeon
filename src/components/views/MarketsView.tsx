@@ -78,7 +78,7 @@ export const MarketsView: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by product name, code (e.g. ATLAS-01)..."
-              className="w-full pl-9 pr-4 py-2 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[10px] text-[13px] text-[#171717] focus:outline-[#6A2E62] focus:bg-white transition-colors"
+              className="w-full pl-9 pr-4 py-2 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[10px] text-[13px] text-[#171717] focus:outline-[#087A4A] focus:bg-white transition-colors"
             />
           </div>
 
@@ -91,7 +91,7 @@ export const MarketsView: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-3 py-1.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[8px] text-[13px] font-semibold text-[#171717] focus:outline-[#6A2E62]"
+              className="px-3 py-1.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[8px] text-[13px] font-semibold text-[#171717] focus:outline-[#087A4A]"
             >
               <option value="value-desc">Highest Valuation</option>
               <option value="value-asc">Lowest Valuation</option>
@@ -110,7 +110,7 @@ export const MarketsView: React.FC = () => {
                 key={tab}
                 onClick={() => setSelectedTab(tab)}
                 className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold capitalize transition-all ${
-                  selectedTab === tab ? 'bg-white text-[#6A2E62] shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+                  selectedTab === tab ? 'bg-white text-[#087A4A] shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
                 }`}
               >
                 {tab}
@@ -126,7 +126,7 @@ export const MarketsView: React.FC = () => {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-2.5 py-1 rounded-[8px] text-[12px] font-medium border transition-colors whitespace-nowrap ${
                   selectedCategory === cat
-                    ? 'border-[#6A2E62] bg-[#FAF4F9] text-[#6A2E62] font-semibold'
+                    ? 'border-[#087A4A] bg-[#E9FAF1] text-[#087A4A] font-semibold'
                     : 'border-[#E7E5E4] bg-white text-[#6B6B6B] hover:text-[#171717]'
                 }`}
               >
@@ -159,7 +159,7 @@ export const MarketsView: React.FC = () => {
                 return (
                   <tr
                     key={prod.id}
-                    className="hover:bg-[#FAF4F9]/60 transition-colors group cursor-pointer"
+                    className="hover:bg-[#E9FAF1]/60 transition-colors group cursor-pointer"
                     onClick={() => handleSelectProduct(prod)}
                   >
                     {/* Star / Watchlist toggle */}
@@ -184,7 +184,7 @@ export const MarketsView: React.FC = () => {
 
                     {/* Product Name */}
                     <td className="py-3.5 px-4">
-                      <span className="font-bold text-[15px] text-[#171717] group-hover:text-[#6A2E62] block leading-tight">
+                      <span className="font-bold text-[15px] text-[#171717] group-hover:text-[#087A4A] block leading-tight">
                         {prod.name}
                       </span>
                       <span className="text-[11px] text-[#78716C] font-mono mt-0.5 block">
@@ -267,7 +267,7 @@ export const MarketsView: React.FC = () => {
                 setSelectedCategory('all');
                 setSelectedTab('all');
               }}
-              className="text-[13px] font-semibold text-[#6A2E62] underline mt-1"
+              className="text-[13px] font-semibold text-[#087A4A] underline mt-1"
             >
               Reset all filters
             </button>

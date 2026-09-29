@@ -99,7 +99,7 @@ interface TradingContextType {
 const TradingContext = createContext<TradingContextType | undefined>(undefined);
 
 export const TradingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentView, setCurrentView] = useState<ViewMode>('dashboard');
+  const [currentView, setCurrentView] = useState<ViewMode>('home');
   const [selectedProductId, setSelectedProductId] = useState<string>('ATLAS-01');
   const [deviceFrame, setDeviceFrame] = useState<DeviceFrameType>('responsive');
 

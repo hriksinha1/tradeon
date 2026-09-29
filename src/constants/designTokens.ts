@@ -1,82 +1,86 @@
 /**
- * Design Tokens & Brand System
- * Primary Brand Color: #6A2E62 (Plum)
- * Typography: League Spartan (Single cohesive type family) + Monospace/Tabular numerals
+ * CONFIDENTIAL · DESIGN FOUNDATION
+ * Color Design System & Typography
+ * Source of Truth: Meadow Green (#1FC777) & Warm Neutrals (#F7F6F2)
  */
 
 export const BRAND_SYSTEM = {
-  name: 'Aura Design System',
-  brandColorHex: '#6A2E62',
-  accessibleVariants: {
-    darkTextOnWhite: '#6A2E62',
-    whiteOnBrand: '#FFFFFF',
-    subtleBg: '#F7EFF6',
-    border: '#ECD6E9',
+  name: 'Meadow Green Design Foundation',
+  primaryBrandColor: {
+    name: 'Meadow Green',
+    hex: '#1FC777',
+    rgb: '31, 199, 119',
+    hsl: '151°, 73%, 45%',
+    accessibleVariant: '#087A4A', // Brand 700
+    textOnBrandFill: '#0C0F0C', // Ink text (8.72:1 contrast)
   },
   palette: {
     brand: {
-      50: '#FAF4F9',
-      100: '#F3E5F1',
-      200: '#E7CDE3',
-      300: '#D5A8CF',
-      400: '#BD7BB4',
-      500: '#6A2E62', // Primary
-      600: '#5C2755',
-      700: '#4D2047',
-      800: '#3F1A3A',
-      900: '#341630',
-      950: '#200B1D',
+      50: '#E9FAF1', // Subtle highlight, selected background
+      100: '#CFF3E0', // Tinted fills
+      200: '#A2E8C5', // Decorative fills, light data series
+      300: '#6EDBA5', // Data series, illustrations
+      400: '#3ACF8B', // Accent on dark surfaces
+      500: '#1FC777', // MAIN PRODUCTION BRAND COLOR
+      600: '#12A560', // Pressed state, data lines (graphics only)
+      700: '#087A4A', // Accessible brand: links, text, icons, focus
+      800: '#0A603C', // Link hover, pressed text
+      900: '#0B4E33', // Deep brand surfaces
+      950: '#04231A', // Darkest brand tone
     },
     neutral: {
-      0: '#FFFFFF',
-      50: '#FAFAF9', // App canvas background
-      100: '#F5F5F4', // Secondary surfaces
-      200: '#E7E5E4', // Borders
-      300: '#D6D3D1',
-      400: '#A8A29E',
-      500: '#78716C',
-      600: '#57534E',
-      700: '#44403C',
-      800: '#292524',
-      900: '#1C1917',
-      950: '#0C0A09',
+      0: '#FFFFFF', // Surfaces
+      50: '#F7F6F2', // App background (warm off-white base)
+      100: '#EFEEE9', // Secondary surface, dividers, inputs
+      200: '#E2E1DA', // Subtle border, light outlines
+      300: '#CBCAC2', // Default border, standard outlines
+      400: '#A3A29A', // Disabled text
+      500: '#6B6B63', // Tertiary text, placeholder
+      600: '#5A5A53', // Secondary text
+      700: '#40403B', // Strong secondary elements
+      800: '#2A2A26', // Dark surfaces
+      900: '#171A17', // Primary text, inverse surface
+      950: '#0C0F0C', // Ink: text on brand fills
     },
     semantic: {
-      positive: '#16803C',
-      positiveBg: '#ECFDF3',
-      positiveBorder: '#A6F4C5',
-      negative: '#C62828',
-      negativeBg: '#FEF2F2',
-      negativeBorder: '#FECDCA',
-      warning: '#B7791F',
-      warningBg: '#FFFBEB',
-      warningBorder: '#FEDF89',
-      info: '#1D4ED8',
-      infoBg: '#EFF6FF',
-      infoBorder: '#BFDBFE',
+      success: {
+        base: '#12A560',
+        strong: '#0A7A45',
+        subtle: '#E3F6EC',
+      },
+      error: {
+        base: '#E5484D',
+        strong: '#BF2A2A',
+        subtle: '#FCE9E7',
+      },
+      warning: {
+        base: '#C77700',
+        strong: '#8A5A00',
+        subtle: '#FFF3D6',
+      },
+      info: {
+        base: '#2F80ED',
+        strong: '#1B5FBF',
+        subtle: '#E6EFFC',
+      },
     },
   },
   typographyScale: [
-    { token: 'H1', size: '26px', weight: 700, lineHeight: '32px', letterSpacing: '-0.02em', usage: 'Major page titles' },
-    { token: 'H2', size: '22px', weight: 700, lineHeight: '28px', letterSpacing: '-0.015em', usage: 'Section titles & hero metrics' },
-    { token: 'H3', size: '19px', weight: 600, lineHeight: '24px', letterSpacing: '-0.01em', usage: 'Card titles & modal headers' },
-    { token: 'H4', size: '16px', weight: 600, lineHeight: '21px', letterSpacing: '-0.005em', usage: 'Group headings & sub-headers' },
-    { token: 'Body Large', size: '17px', weight: 400, lineHeight: '25px', letterSpacing: '0', usage: 'Lead paragraphs & hero copy' },
-    { token: 'Body', size: '15px', weight: 400, lineHeight: '22px', letterSpacing: '0', usage: 'Standard interface copy' },
-    { token: 'Body Small', size: '13px', weight: 400, lineHeight: '19px', letterSpacing: '0.005em', usage: 'Secondary details & captions' },
-    { token: 'Body Small Medium', size: '13px', weight: 500, lineHeight: '19px', letterSpacing: '0.005em', usage: 'Data labels & interactive items' },
-    { token: 'Label', size: '14px', weight: 600, lineHeight: '18px', letterSpacing: '0.01em', usage: 'Form labels & table headers' },
-    { token: 'Label Small', size: '12px', weight: 600, lineHeight: '16px', letterSpacing: '0.01em', usage: 'Compact tags & badges' },
-    { token: 'Caption', size: '12px', weight: 400, lineHeight: '16px', letterSpacing: '0.01em', usage: 'Timestamps & footnotes' },
-    { token: 'Metadata', size: '12px', weight: 500, lineHeight: '16px', letterSpacing: '0.02em', usage: 'Unit counts & reference codes' },
-    { token: 'Button', size: '15px', weight: 600, lineHeight: '20px', letterSpacing: '0.005em', usage: 'CTA & action buttons' },
-    { token: 'Navigation', size: '11px', weight: 600, lineHeight: '14px', letterSpacing: '0.02em', usage: 'Mobile bottom nav & compact labels' },
+    { token: 'Display', size: '56px - 72px', weight: 700, lineHeight: '1.08', letterSpacing: '-0.025em', usage: 'Marketing hero headline' },
+    { token: 'H1', size: '48px - 64px', weight: 700, lineHeight: '1.12', letterSpacing: '-0.02em', usage: 'Major page titles' },
+    { token: 'H2', size: '36px - 48px', weight: 700, lineHeight: '1.18', letterSpacing: '-0.015em', usage: 'Section headings' },
+    { token: 'H3', size: '24px - 30px', weight: 600, lineHeight: '1.25', letterSpacing: '-0.01em', usage: 'Card titles & feature headers' },
+    { token: 'Body Large', size: '18px - 20px', weight: 400, lineHeight: '1.5', letterSpacing: '0', usage: 'Lead paragraphs & intros' },
+    { token: 'Body', size: '16px - 18px', weight: 400, lineHeight: '1.55', letterSpacing: '0', usage: 'Standard marketing copy' },
+    { token: 'Small', size: '14px', weight: 400, lineHeight: '1.5', letterSpacing: '0.005em', usage: 'Secondary details & captions' },
+    { token: 'Caption', size: '12px - 13px', weight: 500, lineHeight: '1.4', letterSpacing: '0.01em', usage: 'Timestamps & footnotes' },
+    { token: 'Button', size: '15px - 16px', weight: 600, lineHeight: '1.2', letterSpacing: '0.005em', usage: 'Primary and secondary CTAs' },
   ],
   radius: {
     button: '10px',
     input: '10px',
     card: '16px',
-    panel: '20px',
+    largeCard: '20px',
   },
 };
 

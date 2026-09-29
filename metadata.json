@@ -1,6 +1,6 @@
 {
-  "name": "Aura Exchange - Trade with Clarity",
-  "description": "Next-generation digital trading and product marketplace platform with portfolio management, options trading, wallet, and real-time ledger.",
+  "name": "Tradeon — Modern Digital Trading & Product Marketplace",
+  "description": "A modern platform for discovering, trading and managing listed products — built around clarity, control and transparent transactions.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

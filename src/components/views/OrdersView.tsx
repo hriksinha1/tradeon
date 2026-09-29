@@ -31,7 +31,7 @@ export const OrdersView: React.FC = () => {
               key={tab}
               onClick={() => setFilter(tab)}
               className={`px-3 py-1 rounded-[7px] text-[12px] font-semibold capitalize transition-all ${
-                filter === tab ? 'bg-[#6A2E62] text-white shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+                filter === tab ? 'bg-[#1FC777] text-[#0C0F0C] font-bold shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
               }`}
             >
               {tab}
@@ -61,7 +61,7 @@ export const OrdersView: React.FC = () => {
               {filteredOrders.map((order) => {
                 const isBuy = order.side === 'buy';
                 return (
-                  <tr key={order.id} className="hover:bg-[#FAF4F9]/60 transition-colors">
+                  <tr key={order.id} className="hover:bg-[#E9FAF1]/60 transition-colors">
                     <td className="py-3.5 px-4">
                       <span className="font-mono font-bold text-[13px] text-[#171717] block">
                         {order.id}
@@ -75,7 +75,7 @@ export const OrdersView: React.FC = () => {
                           setSelectedProductId(order.productId);
                           setCurrentView('product-detail');
                         }}
-                        className="font-bold text-[14px] text-[#171717] hover:text-[#6A2E62] block text-left"
+                        className="font-bold text-[14px] text-[#171717] hover:text-[#087A4A] block text-left"
                       >
                         {order.productName}
                       </button>

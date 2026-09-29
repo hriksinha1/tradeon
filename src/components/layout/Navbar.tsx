@@ -11,6 +11,9 @@ import {
   Monitor,
   User,
   Plus,
+  ArrowLeft,
+  ArrowRight,
+  TrendingUp,
 } from 'lucide-react';
 import { ViewMode, DeviceFrameType } from '../../types';
 
@@ -29,37 +32,45 @@ export const Navbar: React.FC = () => {
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
-  const navLinks: { label: string; view: ViewMode }[] = [
-    { label: 'Dashboard', view: 'dashboard' },
-    { label: 'Markets', view: 'markets' },
-    { label: 'Options', view: 'options' },
-    { label: 'Portfolio', view: 'portfolio' },
-    { label: 'Orders', view: 'orders' },
-    { label: 'Ledger', view: 'ledger' },
+  const appNavLinks: { label: string; view: ViewMode }[] = [
+    { label: 'Dashboard', view: 'app-dashboard' },
+    { label: 'Markets', view: 'app-markets' },
+    { label: 'Options', view: 'app-options' },
+    { label: 'Portfolio', view: 'app-portfolio' },
+    { label: 'Orders', view: 'app-orders' },
+    { label: 'Ledger', view: 'app-ledger' },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E7E5E4] transition-all">
+    <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#CBCAC2] shadow-2xs transition-all">
       {/* Utility Bar: Mode selector & Confidential Platform banner */}
-      <div className="bg-[#FAF4F9] border-b border-[#F3E5F1] px-4 sm:px-8 py-1.5 flex items-center justify-between text-[12px] text-[#6A2E62]">
+      <div className="bg-[#E9FAF1] border-b border-[#CFF3E0] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-[12px] text-[#087A4A] gap-2">
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#16803C]" />
-          <span className="font-semibold">Interactive Prototype Preview</span>
-          <span className="text-[#A8A29E] hidden md:inline">·</span>
-          <span className="hidden md:inline text-[#78716C]">
-            Neutral Product Abstraction · Production-Ready Design System
+          <button
+            onClick={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center gap-1.5 font-bold text-[#0C0F0C] hover:text-[#087A4A] hover:underline cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-[#12A560]" />
+            <span>Marketing Website</span>
+          </button>
+          <span className="text-[#A2E8C5] hidden md:inline">|</span>
+          <span className="hidden md:inline text-[#087A4A] font-medium">
+            Interactive Trading Simulation · Meadow Green #1FC777 Foundation
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           {/* Device Frame Viewport Switcher */}
-          <div className="flex items-center bg-white border border-[#E7E5E4] rounded-lg p-0.5 shadow-2xs">
+          <div className="flex items-center bg-white border border-[#CBCAC2] rounded-[8px] p-0.5 shadow-2xs">
             <button
               onClick={() => setDeviceFrame('responsive')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
+              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
                 deviceFrame === 'responsive'
-                  ? 'bg-[#6A2E62] text-white'
-                  : 'text-[#6B6B6B] hover:text-[#171717]'
+                  ? 'bg-[#1FC777] text-[#0C0F0C]'
+                  : 'text-[#6B6B63] hover:text-[#171717]'
               }`}
               title="Full Responsive Web"
             >
@@ -68,24 +79,24 @@ export const Navbar: React.FC = () => {
             </button>
             <button
               onClick={() => setDeviceFrame('ios')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
+              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
                 deviceFrame === 'ios'
-                  ? 'bg-[#6A2E62] text-white'
-                  : 'text-[#6B6B6B] hover:text-[#171717]'
+                  ? 'bg-[#1FC777] text-[#0C0F0C]'
+                  : 'text-[#6B6B63] hover:text-[#171717]'
               }`}
-              title="Simulate iOS App"
+              title="Simulate iPhone 16 Pro"
             >
               <Smartphone className="w-3 h-3" />
               <span>iOS</span>
             </button>
             <button
               onClick={() => setDeviceFrame('android')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
+              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
                 deviceFrame === 'android'
-                  ? 'bg-[#6A2E62] text-white'
-                  : 'text-[#6B6B6B] hover:text-[#171717]'
+                  ? 'bg-[#1FC777] text-[#0C0F0C]'
+                  : 'text-[#6B6B63] hover:text-[#171717]'
               }`}
-              title="Simulate Android App"
+              title="Simulate Pixel 9 Pro"
             >
               <Smartphone className="w-3 h-3" />
               <span>Android</span>
@@ -95,11 +106,12 @@ export const Navbar: React.FC = () => {
           {/* Master Product Context & Design Tokens Drawer Button */}
           <button
             onClick={() => setIsDossierOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-[#6A2E62] bg-[#F7EFF6] hover:bg-[#ECD6E9] border border-[#ECD6E9] rounded-lg transition-colors shadow-2xs"
+            className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold text-[#087A4A] bg-white hover:bg-[#E9FAF1] border border-[#A2E8C5] rounded-[8px] transition-colors shadow-2xs cursor-pointer"
             title="Inspect Master Product Strategy & Design Tokens"
           >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Master Strategy & Tokens</span>
+            <BookOpen className="w-3.5 h-3.5 text-[#12A560]" />
+            <span className="hidden sm:inline">Design System Dossier</span>
+            <span className="sm:hidden">Dossier</span>
           </button>
         </div>
       </div>
@@ -109,38 +121,38 @@ export const Navbar: React.FC = () => {
         {/* Zone 1: Single text element wordmark */}
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setCurrentView('dashboard')}
-            className="group flex items-center gap-2 text-left focus:outline-none"
+            onClick={() => setCurrentView('app-dashboard')}
+            className="group flex items-center gap-2.5 text-left focus:outline-none cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-lg bg-[#6A2E62] flex items-center justify-center text-white font-bold text-[16px] tracking-tight group-hover:bg-[#56234F] transition-colors shadow-sm">
-              A
+            <div className="w-8 h-8 rounded-[8px] bg-[#1FC777] flex items-center justify-center text-[#0C0F0C] font-extrabold text-[16px] tracking-tight group-hover:bg-[#18B36A] transition-colors shadow-2xs">
+              T
             </div>
             <div>
-              <span className="text-[19px] font-bold tracking-tight text-[#171717] block leading-none">
-                AURA
+              <span className="text-[19px] font-black tracking-tight text-[#171A17] block leading-none">
+                Tradeon
               </span>
-              <span className="text-[10px] uppercase font-semibold text-[#8A8A8A] tracking-wider block mt-0.5">
-                Exchange
+              <span className="text-[10px] uppercase font-bold text-[#087A4A] tracking-wider block mt-0.5">
+                Terminal
               </span>
             </div>
           </button>
         </div>
 
-        {/* Zone 2: 4-6 text navigation links */}
+        {/* Zone 2: Navigation links */}
         <nav className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => {
+          {appNavLinks.map((link) => {
             const isActive = currentView === link.view;
             return (
               <button
                 key={link.view}
                 onClick={() => setCurrentView(link.view)}
-                className={`relative py-1 text-[14px] font-medium transition-colors ${
-                  isActive ? 'text-[#6A2E62] font-semibold' : 'text-[#6B6B6B] hover:text-[#171717]'
+                className={`relative py-1 text-[14px] font-semibold transition-colors cursor-pointer ${
+                  isActive ? 'text-[#087A4A]' : 'text-[#5A5A53] hover:text-[#171A17]'
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#6A2E62] rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#1FC777] rounded-full" />
                 )}
               </button>
             );
@@ -152,26 +164,28 @@ export const Navbar: React.FC = () => {
           {/* Quick Search */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center gap-2 px-2.5 py-1.5 text-xs text-[#8A8A8A] bg-[#F5F5F4] hover:bg-[#E7E5E4] border border-[#E7E5E4] rounded-lg transition-colors"
+            className="flex items-center gap-2 px-2.5 py-1.5 text-xs text-[#5A5A53] bg-[#F7F6F2] hover:bg-[#EFEEE9] border border-[#CBCAC2] rounded-[10px] transition-colors cursor-pointer"
             title="Search products and transactions (Cmd+K)"
           >
-            <Search className="w-3.5 h-3.5" />
-            <span className="hidden md:inline text-[12px]">Search</span>
-            <kbd className="hidden md:inline text-[10px] bg-white border border-[#D6D3D1] px-1 py-0.2 rounded font-mono text-[#78716C]">
+            <Search className="w-3.5 h-3.5 text-[#6B6B63]" />
+            <span className="hidden md:inline text-[12px] font-medium">Search</span>
+            <kbd className="hidden md:inline text-[10px] bg-white border border-[#CBCAC2] px-1 py-0.2 rounded font-mono text-[#5A5A53]">
               ⌘K
             </kbd>
           </button>
 
           {/* Available Balance preview pill */}
           <button
-            onClick={() => setCurrentView('wallet')}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#FAF4F9] hover:bg-[#F3E5F1] border border-[#ECD6E9] rounded-lg transition-colors text-left"
+            onClick={() => setCurrentView('app-wallet')}
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#E9FAF1] hover:bg-[#CFF3E0] border border-[#A2E8C5] rounded-[10px] transition-colors text-left cursor-pointer"
             title="View Wallet Balance"
           >
-            <WalletIcon className="w-3.5 h-3.5 text-[#6A2E62]" />
+            <WalletIcon className="w-4 h-4 text-[#087A4A]" />
             <div className="leading-tight">
-              <span className="block text-[10px] text-[#78716C] uppercase font-semibold">Available</span>
-              <span className="block text-[13px] font-semibold text-[#171717] tabular-nums">
+              <span className="block text-[10px] text-[#087A4A] uppercase font-bold">
+                Available
+              </span>
+              <span className="block text-[13px] font-extrabold text-[#0C0F0C] tabular-nums">
                 {formatINR(wallet.availableBalance)}
               </span>
             </div>
@@ -180,8 +194,9 @@ export const Navbar: React.FC = () => {
           {/* Primary Action CTA */}
           <Button
             size="sm"
+            variant="primary"
             onClick={() => setIsAddFundsOpen(true)}
-            className="flex items-center gap-1.5"
+            className="flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add Funds</span>
@@ -190,22 +205,22 @@ export const Navbar: React.FC = () => {
           {/* Notifications button */}
           <button
             onClick={() => setCurrentView('notifications')}
-            className="relative p-2 text-[#6B6B6B] hover:text-[#171717] hover:bg-[#F5F5F4] rounded-lg transition-colors"
+            className="relative p-2 text-[#5A5A53] hover:text-[#171A17] hover:bg-[#F7F6F2] rounded-lg transition-colors cursor-pointer"
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#C62828] rounded-full" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#E5484D] rounded-full" />
             )}
           </button>
 
           {/* Profile button */}
           <button
-            onClick={() => setCurrentView('profile')}
-            className={`p-1.5 rounded-lg border transition-colors ${
-              currentView === 'profile'
-                ? 'border-[#6A2E62] bg-[#F7EFF6] text-[#6A2E62]'
-                : 'border-[#E7E5E4] hover:bg-[#F5F5F4] text-[#57534E]'
+            onClick={() => setCurrentView('app-profile')}
+            className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
+              currentView === 'app-profile'
+                ? 'border-[#1FC777] bg-[#E9FAF1] text-[#087A4A]'
+                : 'border-[#CBCAC2] hover:bg-[#F7F6F2] text-[#5A5A53]'
             }`}
             aria-label="User Profile"
           >

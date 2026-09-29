@@ -55,7 +55,7 @@ export const AddFundsModal: React.FC = () => {
               ₹{amount.toLocaleString('en-IN')} has been deposited and is immediately available for trading.
             </p>
           </div>
-          <div className="p-3 bg-[#FAF4F9] border border-[#ECD6E9] rounded-[12px] text-[13px] font-semibold text-[#6A2E62]">
+          <div className="p-3 bg-[#E9FAF1] border border-[#CFF3E0] rounded-[12px] text-[13px] font-semibold text-[#087A4A]">
             New Available Balance: {formatINR(wallet.availableBalance)}
           </div>
           <Button fullWidth onClick={handleClose}>
@@ -77,7 +77,7 @@ export const AddFundsModal: React.FC = () => {
                 step="500"
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full pl-9 pr-4 py-2.5 border border-[#E7E5E4] rounded-[10px] text-[20px] font-bold text-[#171717] tabular-nums focus:outline-[#6A2E62]"
+                className="w-full pl-9 pr-4 py-2.5 border border-[#E7E5E4] rounded-[10px] text-[20px] font-bold text-[#171717] tabular-nums focus:outline-[#087A4A]"
                 placeholder="Enter amount"
               />
             </div>
@@ -91,7 +91,7 @@ export const AddFundsModal: React.FC = () => {
                   onClick={() => setAmount(p)}
                   className={`flex-1 py-1 text-[12px] font-semibold rounded-[8px] border transition-colors ${
                     amount === p
-                      ? 'border-[#6A2E62] bg-[#FAF4F9] text-[#6A2E62]'
+                      ? 'border-[#087A4A] bg-[#E9FAF1] text-[#087A4A]'
                       : 'border-[#E7E5E4] hover:bg-[#F5F5F4] text-[#57534E]'
                   }`}
                 >
@@ -112,12 +112,12 @@ export const AddFundsModal: React.FC = () => {
                 onClick={() => setMethod('upi')}
                 className={`p-3 rounded-[10px] border cursor-pointer transition-all flex items-center justify-between ${
                   method === 'upi'
-                    ? 'border-[#6A2E62] bg-[#FAF4F9]'
+                    ? 'border-[#087A4A] bg-[#E9FAF1]'
                     : 'border-[#E7E5E4] hover:border-[#D6D3D1]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#6A2E62]">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#087A4A]">
                     <Smartphone className="w-4 h-4" />
                   </div>
                   <div>
@@ -130,18 +130,18 @@ export const AddFundsModal: React.FC = () => {
                   name="paymentMethod"
                   checked={method === 'upi'}
                   onChange={() => setMethod('upi')}
-                  className="accent-[#6A2E62]"
+                  className="accent-[#087A4A]"
                 />
               </div>
 
               {method === 'upi' && (
-                <div className="px-3 pb-2 pt-1 bg-[#FAF4F9] rounded-b-[10px] -mt-1 border-x border-b border-[#6A2E62]/30">
+                <div className="px-3 pb-2 pt-1 bg-[#E9FAF1] rounded-b-[10px] -mt-1 border-x border-b border-[#087A4A]/30">
                   <input
                     type="text"
                     value={upiId}
                     onChange={(e) => setUpiId(e.target.value)}
                     placeholder="Enter UPI VPA (e.g. mobile@upi)"
-                    className="w-full px-3 py-1.5 bg-white border border-[#ECD6E9] rounded-[8px] text-[13px] focus:outline-[#6A2E62]"
+                    className="w-full px-3 py-1.5 bg-white border border-[#CFF3E0] rounded-[8px] text-[13px] focus:outline-[#087A4A]"
                   />
                 </div>
               )}
@@ -151,7 +151,7 @@ export const AddFundsModal: React.FC = () => {
                 onClick={() => setMethod('netbanking')}
                 className={`p-3 rounded-[10px] border cursor-pointer transition-all flex items-center justify-between ${
                   method === 'netbanking'
-                    ? 'border-[#6A2E62] bg-[#FAF4F9]'
+                    ? 'border-[#087A4A] bg-[#E9FAF1]'
                     : 'border-[#E7E5E4] hover:border-[#D6D3D1]'
                 }`}
               >
@@ -169,7 +169,7 @@ export const AddFundsModal: React.FC = () => {
                   name="paymentMethod"
                   checked={method === 'netbanking'}
                   onChange={() => setMethod('netbanking')}
-                  className="accent-[#6A2E62]"
+                  className="accent-[#087A4A]"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export const AddFundsModal: React.FC = () => {
                 onClick={() => setMethod('card')}
                 className={`p-3 rounded-[10px] border cursor-pointer transition-all flex items-center justify-between ${
                   method === 'card'
-                    ? 'border-[#6A2E62] bg-[#FAF4F9]'
+                    ? 'border-[#087A4A] bg-[#E9FAF1]'
                     : 'border-[#E7E5E4] hover:border-[#D6D3D1]'
                 }`}
               >
@@ -196,7 +196,7 @@ export const AddFundsModal: React.FC = () => {
                   name="paymentMethod"
                   checked={method === 'card'}
                   onChange={() => setMethod('card')}
-                  className="accent-[#6A2E62]"
+                  className="accent-[#087A4A]"
                 />
               </div>
             </div>

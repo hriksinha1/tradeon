@@ -88,7 +88,7 @@ export const PortfolioView: React.FC = () => {
           <span className="text-[11px] font-bold uppercase tracking-wider text-[#78716C] block">
             Unallocated Cash Reserve
           </span>
-          <span className="text-[26px] font-bold text-[#6A2E62] tabular-nums block mt-1">
+          <span className="text-[26px] font-bold text-[#087A4A] tabular-nums block mt-1">
             {formatINR(wallet.availableBalance)}
           </span>
           <span className="text-[12px] text-[#78716C] block mt-1">{cashPercent}% of total portfolio</span>
@@ -104,12 +104,12 @@ export const PortfolioView: React.FC = () => {
           </span>
         </div>
         <div className="w-full h-3 bg-[#E7E5E4] rounded-full overflow-hidden flex">
-          <div style={{ width: `${holdingsPercent}%` }} className="bg-[#6A2E62] h-full" title="Active Holdings" />
+          <div style={{ width: `${holdingsPercent}%` }} className="bg-[#1FC777] h-full" title="Active Holdings" />
           <div style={{ width: `${cashPercent}%` }} className="bg-[#A6F4C5] h-full" title="Cash Balance" />
         </div>
         <div className="flex items-center gap-6 text-[12px] text-[#57534E]">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#6A2E62]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1FC777]" />
             <span>Active Product Contracts ({formatINR(totalCurrent)})</span>
           </div>
           <div className="flex items-center gap-2">
@@ -146,14 +146,14 @@ export const PortfolioView: React.FC = () => {
               {positions.map((pos) => {
                 const prod = products.find((p) => p.id === pos.productId);
                 return (
-                  <tr key={pos.id} className="hover:bg-[#FAF4F9]/60 transition-colors">
+                  <tr key={pos.id} className="hover:bg-[#E9FAF1]/60 transition-colors">
                     <td className="py-3.5 px-4">
                       <button
                         onClick={() => {
                           setSelectedProductId(pos.productId);
                           setCurrentView('product-detail');
                         }}
-                        className="font-bold text-[14px] text-[#171717] hover:text-[#6A2E62] text-left block"
+                        className="font-bold text-[14px] text-[#171717] hover:text-[#087A4A] text-left block"
                       >
                         {pos.productName}
                       </button>
