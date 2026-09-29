@@ -79,7 +79,7 @@ export const BuyJourneySection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl space-y-4 mb-14 sm:mb-18">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             The Complete Story
           </div>
           <h2 className="text-[34px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -104,13 +104,13 @@ export const BuyJourneySection: React.FC = () => {
                   isCurrent
                     ? 'bg-[#171A17] text-white border-[#171A17] shadow-xs'
                     : isCompleted
-                    ? 'bg-[#E9FAF1] text-[#087A4A] border-[#1FC777]'
+                    ? 'bg-[#F0FAFF] text-[#005EA8] border-[#0070BA]'
                     : 'bg-[#F7F6F2] text-[#5A5A53] border-[#E2E1DA] hover:bg-[#EFEEE9]'
                 }`}
               >
                 <div className="flex items-center justify-between text-xs font-mono font-bold mb-1">
                   <span>0{step.num}</span>
-                  {isCompleted && <Check className="w-3.5 h-3.5 text-[#087A4A]" />}
+                  {isCompleted && <Check className="w-3.5 h-3.5 text-[#005EA8]" />}
                 </div>
                 <div className="text-xs font-bold truncate">{step.title}</div>
               </button>
@@ -123,7 +123,7 @@ export const BuyJourneySection: React.FC = () => {
           {/* Left Column: Narrative Details */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-3">
-              <span className="text-xs font-bold text-[#087A4A] uppercase tracking-wider block">
+              <span className="text-xs font-bold text-[#005EA8] uppercase tracking-wider block">
                 Step 0{activeStep} of 06 · {journeySteps[activeStep - 1].title}
               </span>
               <h3 className="text-[26px] sm:text-[32px] font-extrabold text-[#171A17] leading-tight">
@@ -152,7 +152,7 @@ export const BuyJourneySection: React.FC = () => {
                     setActiveStep((prev) => prev + 1);
                   }
                 }}
-                className="px-5 py-2 text-xs font-bold rounded-[8px] bg-[#1FC777] text-[#0C0F0C] hover:bg-[#18B36A] transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+                className="px-5 py-2 text-xs font-bold rounded-[8px] bg-[#0070BA] text-[#0C0F0C] hover:bg-[#005EA8] transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
               >
                 <span>{activeStep === 6 ? 'Restart Walkthrough' : 'Next Step'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -167,7 +167,7 @@ export const BuyJourneySection: React.FC = () => {
               <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
                 <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE9]">
                   <div>
-                    <span className="font-mono text-xs text-[#087A4A] font-bold">
+                    <span className="font-mono text-xs text-[#005EA8] font-bold">
                       {sampleProduct.id}
                     </span>
                     <h4 className="text-[22px] font-bold text-[#171A17] mt-0.5">
@@ -204,7 +204,7 @@ export const BuyJourneySection: React.FC = () => {
               <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-5">
                 <div className="flex justify-between items-center text-xs text-[#6B6B63]">
                   <span>Ordering units for {sampleProduct.name}</span>
-                  <span className="text-[#087A4A] font-medium">Real-time calculator</span>
+                  <span className="text-[#005EA8] font-medium">Real-time calculator</span>
                 </div>
 
                 <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA] flex items-center justify-between">
@@ -264,7 +264,7 @@ export const BuyJourneySection: React.FC = () => {
                 <div className="pt-3 border-t border-[#EFEEE9] flex justify-between items-baseline">
                   <div>
                     <span className="text-xs text-[#6B6B63]">Net wallet debit</span>
-                    <div className="text-[22px] font-extrabold text-[#087A4A] tabular-nums">
+                    <div className="text-[22px] font-extrabold text-[#005EA8] tabular-nums">
                       {formatINR(totalCost)}
                     </div>
                   </div>
@@ -276,7 +276,7 @@ export const BuyJourneySection: React.FC = () => {
             {/* Step 4 UI: Confirm */}
             {activeStep === 4 && (
               <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-5 text-center">
-                <div className="w-12 h-12 rounded-full bg-[#E9FAF1] text-[#087A4A] flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 rounded-full bg-[#F0FAFF] text-[#005EA8] flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
 
@@ -294,7 +294,7 @@ export const BuyJourneySection: React.FC = () => {
 
                 <button
                   onClick={() => setActiveStep(5)}
-                  className="w-full py-3 bg-[#1FC777] text-[#0C0F0C] font-bold text-sm rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer shadow-xs"
+                  className="w-full py-3 bg-[#0070BA] text-[#0C0F0C] font-bold text-sm rounded-[10px] hover:bg-[#005EA8] transition-colors cursor-pointer shadow-xs"
                 >
                   Click to Authorize & Execute
                 </button>
@@ -306,7 +306,7 @@ export const BuyJourneySection: React.FC = () => {
               <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[#EFEEE9]">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#12A560]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#16803C]" />
                     <span className="font-bold text-xs text-[#171A17]">Order Executed</span>
                   </div>
                   <span className="font-mono text-xs text-[#6B6B63]">ORD-9912084</span>
@@ -331,7 +331,7 @@ export const BuyJourneySection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-3 bg-[#E9FAF1] rounded-[12px] text-xs text-[#087A4A] flex items-center justify-between">
+                <div className="p-3 bg-[#F0FAFF] rounded-[12px] text-xs text-[#005EA8] flex items-center justify-between">
                   <span>Unit balance credited to portfolio</span>
                   <Check className="w-4 h-4" />
                 </div>
@@ -343,7 +343,7 @@ export const BuyJourneySection: React.FC = () => {
               <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[#EFEEE9]">
                   <span className="font-bold text-xs text-[#171A17]">Double-Entry Ledger Record</span>
-                  <span className="font-mono text-xs text-[#087A4A]">TXN-88219</span>
+                  <span className="font-mono text-xs text-[#005EA8]">TXN-88219</span>
                 </div>
 
                 <div className="p-3 bg-[#F7F6F2] rounded-[12px] space-y-1.5 text-xs">
@@ -361,7 +361,7 @@ export const BuyJourneySection: React.FC = () => {
 
                 <div className="text-xs text-[#5A5A53] flex items-center justify-between pt-1">
                   <span>Timestamp: Just now</span>
-                  <span className="text-[#087A4A] font-semibold">Reconciled to ledger</span>
+                  <span className="text-[#005EA8] font-semibold">Reconciled to ledger</span>
                 </div>
               </div>
             )}

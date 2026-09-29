@@ -44,21 +44,21 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#CBCAC2] shadow-2xs transition-all">
       {/* Utility Bar: Mode selector & Confidential Platform banner */}
-      <div className="bg-[#E9FAF1] border-b border-[#CFF3E0] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-[12px] text-[#087A4A] gap-2">
+      <div className="bg-[#F0FAFF] border-b border-[#DFF6FF] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-[12px] text-[#005EA8] gap-2">
         <div className="flex items-center gap-2">
           <button
             onClick={() => {
               setCurrentView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center gap-1.5 font-bold text-[#0C0F0C] hover:text-[#087A4A] hover:underline cursor-pointer"
+            className="flex items-center gap-1.5 font-bold text-[#0C0F0C] hover:text-[#005EA8] hover:underline cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5 text-[#12A560]" />
+            <ArrowLeft className="w-3.5 h-3.5 text-[#16803C]" />
             <span>Marketing Website</span>
           </button>
           <span className="text-[#A2E8C5] hidden md:inline">|</span>
-          <span className="hidden md:inline text-[#087A4A] font-medium">
-            Interactive Trading Simulation · Meadow Green #1FC777 Foundation
+          <span className="hidden md:inline text-[#005EA8] font-medium">
+            Interactive Trading Simulation · Meadow Green #0070BA Foundation
           </span>
         </div>
 
@@ -69,7 +69,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setDeviceFrame('responsive')}
               className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
                 deviceFrame === 'responsive'
-                  ? 'bg-[#1FC777] text-[#0C0F0C]'
+                  ? 'bg-[#0070BA] text-[#0C0F0C]'
                   : 'text-[#6B6B63] hover:text-[#171717]'
               }`}
               title="Full Responsive Web"
@@ -81,7 +81,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setDeviceFrame('ios')}
               className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
                 deviceFrame === 'ios'
-                  ? 'bg-[#1FC777] text-[#0C0F0C]'
+                  ? 'bg-[#0070BA] text-[#0C0F0C]'
                   : 'text-[#6B6B63] hover:text-[#171717]'
               }`}
               title="Simulate iPhone 16 Pro"
@@ -93,7 +93,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setDeviceFrame('android')}
               className={`flex items-center gap-1 px-2.5 py-0.5 rounded-[6px] text-[11px] font-semibold transition-all cursor-pointer ${
                 deviceFrame === 'android'
-                  ? 'bg-[#1FC777] text-[#0C0F0C]'
+                  ? 'bg-[#0070BA] text-[#0C0F0C]'
                   : 'text-[#6B6B63] hover:text-[#171717]'
               }`}
               title="Simulate Pixel 9 Pro"
@@ -106,10 +106,10 @@ export const Navbar: React.FC = () => {
           {/* Master Product Context & Design Tokens Drawer Button */}
           <button
             onClick={() => setIsDossierOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold text-[#087A4A] bg-white hover:bg-[#E9FAF1] border border-[#A2E8C5] rounded-[8px] transition-colors shadow-2xs cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold text-[#005EA8] bg-white hover:bg-[#F0FAFF] border border-[#A2E8C5] rounded-[8px] transition-colors shadow-2xs cursor-pointer"
             title="Inspect Master Product Strategy & Design Tokens"
           >
-            <BookOpen className="w-3.5 h-3.5 text-[#12A560]" />
+            <BookOpen className="w-3.5 h-3.5 text-[#16803C]" />
             <span className="hidden sm:inline">Design System Dossier</span>
             <span className="sm:hidden">Dossier</span>
           </button>
@@ -124,14 +124,14 @@ export const Navbar: React.FC = () => {
             onClick={() => setCurrentView('app-dashboard')}
             className="group flex items-center gap-2.5 text-left focus:outline-none cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-[8px] bg-[#1FC777] flex items-center justify-center text-[#0C0F0C] font-extrabold text-[16px] tracking-tight group-hover:bg-[#18B36A] transition-colors shadow-2xs">
+            <div className="w-8 h-8 rounded-[8px] bg-[#0070BA] flex items-center justify-center text-[#0C0F0C] font-extrabold text-[16px] tracking-tight group-hover:bg-[#005EA8] transition-colors shadow-2xs">
               T
             </div>
             <div>
               <span className="text-[19px] font-black tracking-tight text-[#171A17] block leading-none">
                 Tradeon
               </span>
-              <span className="text-[10px] uppercase font-bold text-[#087A4A] tracking-wider block mt-0.5">
+              <span className="text-[10px] uppercase font-bold text-[#005EA8] tracking-wider block mt-0.5">
                 Terminal
               </span>
             </div>
@@ -147,12 +147,12 @@ export const Navbar: React.FC = () => {
                 key={link.view}
                 onClick={() => setCurrentView(link.view)}
                 className={`relative py-1 text-[14px] font-semibold transition-colors cursor-pointer ${
-                  isActive ? 'text-[#087A4A]' : 'text-[#5A5A53] hover:text-[#171A17]'
+                  isActive ? 'text-[#005EA8]' : 'text-[#5A5A53] hover:text-[#171A17]'
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#1FC777] rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#0070BA] rounded-full" />
                 )}
               </button>
             );
@@ -177,12 +177,12 @@ export const Navbar: React.FC = () => {
           {/* Available Balance preview pill */}
           <button
             onClick={() => setCurrentView('app-wallet')}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#E9FAF1] hover:bg-[#CFF3E0] border border-[#A2E8C5] rounded-[10px] transition-colors text-left cursor-pointer"
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#F0FAFF] hover:bg-[#DFF6FF] border border-[#A2E8C5] rounded-[10px] transition-colors text-left cursor-pointer"
             title="View Wallet Balance"
           >
-            <WalletIcon className="w-4 h-4 text-[#087A4A]" />
+            <WalletIcon className="w-4 h-4 text-[#005EA8]" />
             <div className="leading-tight">
-              <span className="block text-[10px] text-[#087A4A] uppercase font-bold">
+              <span className="block text-[10px] text-[#005EA8] uppercase font-bold">
                 Available
               </span>
               <span className="block text-[13px] font-extrabold text-[#0C0F0C] tabular-nums">
@@ -219,7 +219,7 @@ export const Navbar: React.FC = () => {
             onClick={() => setCurrentView('app-profile')}
             className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
               currentView === 'app-profile'
-                ? 'border-[#1FC777] bg-[#E9FAF1] text-[#087A4A]'
+                ? 'border-[#0070BA] bg-[#F0FAFF] text-[#005EA8]'
                 : 'border-[#CBCAC2] hover:bg-[#F7F6F2] text-[#5A5A53]'
             }`}
             aria-label="User Profile"

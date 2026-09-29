@@ -8,7 +8,7 @@ interface BadgeProps {
 
 export const Badge: React.FC<BadgeProps> = ({ status, label, className = '' }) => {
   const styles = {
-    brand: 'text-[#087A4A] bg-[#E9FAF1] border border-[#A2E8C5]',
+    brand: 'text-[#005EA8] bg-[#F0FAFF] border border-[#A2E8C5]',
     positive: 'text-[#0A7A45] bg-[#E3F6EC] border border-[#A2E8C5]',
     negative: 'text-[#BF2A2A] bg-[#FCE9E7] border border-[#E5484D]/30',
     warning: 'text-[#8A5A00] bg-[#FFF3D6] border border-[#C77700]/30',

@@ -31,7 +31,7 @@ export const ProductShowcaseSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 sm:mb-16">
           <div className="max-w-2xl space-y-3">
-            <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
               Product Discovery
             </div>
             <h2 className="text-[34px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -51,7 +51,7 @@ export const ProductShowcaseSection: React.FC = () => {
                 placeholder="Search products or IDs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full sm:w-60 pl-9 pr-3.5 py-2 bg-white border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#087A4A]"
+                className="w-full sm:w-60 pl-9 pr-3.5 py-2 bg-white border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#005EA8]"
               />
             </div>
 
@@ -62,7 +62,7 @@ export const ProductShowcaseSection: React.FC = () => {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3 py-1.5 rounded-[7px] text-[12px] font-semibold transition-all cursor-pointer ${
                     selectedCategory === cat
-                      ? 'bg-[#1FC777] text-[#0C0F0C]'
+                      ? 'bg-[#0070BA] text-[#0C0F0C]'
                       : 'text-[#5A5A53] hover:text-[#171A17]'
                   }`}
                 >
@@ -86,7 +86,7 @@ export const ProductShowcaseSection: React.FC = () => {
                 {/* 1. What is it? (Name + Context) */}
                 <div className="lg:w-1/3 space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-[#087A4A]">{p.id}</span>
+                    <span className="font-mono text-xs font-bold text-[#005EA8]">{p.id}</span>
                     <span className="text-xs text-[#6B6B63]">·</span>
                     <span className="text-xs text-[#6B6B63] font-medium">{p.category}</span>
                   </div>
@@ -148,7 +148,7 @@ export const ProductShowcaseSection: React.FC = () => {
 
                   <button
                     onClick={() => openBuySell('buy', p)}
-                    className="px-4 py-2 bg-[#1FC777] text-[#0C0F0C] font-bold text-xs rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
+                    className="px-4 py-2 bg-[#0070BA] text-[#0C0F0C] font-bold text-xs rounded-[10px] hover:bg-[#005EA8] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
                   >
                     <span>Order units</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -173,7 +173,7 @@ export const ProductShowcaseSection: React.FC = () => {
               setCurrentView('products');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-bold text-[#087A4A] hover:underline cursor-pointer whitespace-nowrap ml-4"
+            className="font-bold text-[#005EA8] hover:underline cursor-pointer whitespace-nowrap ml-4"
           >
             Explore full catalog →
           </button>

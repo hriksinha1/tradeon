@@ -25,7 +25,7 @@ export const MobileAppPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header: "The product should feel complete, wherever you are." */}
         <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Mobile Native Experience
           </div>
           <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
@@ -46,7 +46,7 @@ export const MobileAppPage: React.FC = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F0C]/80 via-[#0C0F0C]/30 to-transparent" />
           <div className="absolute bottom-6 left-6 right-6 text-white max-w-2xl">
-            <span className="text-xs font-bold text-[#1FC777] uppercase tracking-wider block mb-1">
+            <span className="text-xs font-bold text-[#0070BA] uppercase tracking-wider block mb-1">
               Ergonomic Handheld Depth
             </span>
             <h2 className="text-[24px] sm:text-[30px] font-extrabold leading-snug">
@@ -61,7 +61,7 @@ export const MobileAppPage: React.FC = () => {
         {/* Dual Platform Showcase Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {/* iOS Showcase */}
-          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between space-y-6">
+          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#0070BA] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between text-xs text-[#5A5A53]">
                 <span className="font-bold text-[#171A17]">Apple iOS Edition</span>
@@ -78,15 +78,15 @@ export const MobileAppPage: React.FC = () => {
 
               <div className="space-y-3 pt-2">
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C] shrink-0 mt-0.5" />
                   <span>Dynamic Island status updates for order fills and ledger deposits</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C] shrink-0 mt-0.5" />
                   <span>Face ID authentication with hardware-backed secure storage</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C] shrink-0 mt-0.5" />
                   <span>Native bottom-nav bar with thumb-zone trade drawer trigger</span>
                 </div>
               </div>
@@ -95,7 +95,7 @@ export const MobileAppPage: React.FC = () => {
             <div className="pt-4 border-t border-[#EFEEE9]">
               <button
                 onClick={() => launchSimulator('ios')}
-                className="w-full py-3.5 bg-[#1FC777] hover:bg-[#18B36A] text-[#0C0F0C] font-bold text-[14px] rounded-[12px] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+                className="w-full py-3.5 bg-[#0070BA] hover:bg-[#005EA8] text-[#0C0F0C] font-bold text-[14px] rounded-[12px] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
               >
                 <span>Launch iPhone 16 Pro Simulator</span>
                 <ArrowRight className="w-4 h-4" />
@@ -104,7 +104,7 @@ export const MobileAppPage: React.FC = () => {
           </div>
 
           {/* Android Showcase */}
-          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between space-y-6">
+          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#0070BA] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between text-xs text-[#5A5A53]">
                 <span className="font-bold text-[#171A17]">Google Android Edition</span>
@@ -121,15 +121,15 @@ export const MobileAppPage: React.FC = () => {
 
               <div className="space-y-3 pt-2">
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C] shrink-0 mt-0.5" />
                   <span>Pixel 9 Pro camera notch accommodation with edge-to-edge content</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C] shrink-0 mt-0.5" />
                   <span>Biometric prompt with hardware key security</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C] shrink-0 mt-0.5" />
                   <span>Direct UPI app handoff with PhonePe, Google Pay, and Paytm</span>
                 </div>
               </div>
@@ -160,7 +160,7 @@ export const MobileAppPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Zap className="w-5 h-5 text-[#087A4A]" />
+              <Zap className="w-5 h-5 text-[#005EA8]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Fluid Responsiveness</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
                 Responsive layouts and smooth interactive micro-transitions.
@@ -168,7 +168,7 @@ export const MobileAppPage: React.FC = () => {
             </div>
 
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Shield className="w-5 h-5 text-[#087A4A]" />
+              <Shield className="w-5 h-5 text-[#005EA8]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Secure Storage</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
                 Local token protection with device-isolated authentication storage.
@@ -176,7 +176,7 @@ export const MobileAppPage: React.FC = () => {
             </div>
 
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Bell className="w-5 h-5 text-[#087A4A]" />
+              <Bell className="w-5 h-5 text-[#005EA8]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Instant Alerts</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
                 Immediate delivery for order executions and wallet deposits.
@@ -184,7 +184,7 @@ export const MobileAppPage: React.FC = () => {
             </div>
 
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Fingerprint className="w-5 h-5 text-[#087A4A]" />
+              <Fingerprint className="w-5 h-5 text-[#005EA8]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Biometric Lock</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
                 Fingerprint and Face ID confirmation on high-value orders and withdrawals.

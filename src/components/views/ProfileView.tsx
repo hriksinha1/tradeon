@@ -44,7 +44,7 @@ export const ProfileView: React.FC = () => {
       <div className="bg-white border border-[#E7E5E4] rounded-[18px] p-6 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E7E5E4]">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#E9FAF1] border border-[#CFF3E0] text-[#087A4A] flex items-center justify-center font-bold text-[22px]">
+            <div className="w-16 h-16 rounded-full bg-[#F0FAFF] border border-[#DFF6FF] text-[#005EA8] flex items-center justify-center font-bold text-[22px]">
               {user.name.charAt(0)}
             </div>
             <div>
@@ -60,7 +60,7 @@ export const ProfileView: React.FC = () => {
 
           <div className="text-right">
             <span className="text-[12px] text-[#78716C] block uppercase font-bold">Trading Level</span>
-            <span className="text-[14px] font-bold text-[#087A4A] block mt-0.5">{user.tier}</span>
+            <span className="text-[14px] font-bold text-[#005EA8] block mt-0.5">{user.tier}</span>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export const ProfileView: React.FC = () => {
           {/* 2FA */}
           <div className="py-3.5 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Shield className="w-5 h-5 text-[#087A4A]" />
+              <Shield className="w-5 h-5 text-[#005EA8]" />
               <div>
                 <span className="font-bold text-[14px] text-[#171717] block">
                   Two-Factor Authentication (2FA)
@@ -104,7 +104,7 @@ export const ProfileView: React.FC = () => {
             <button
               onClick={toggle2FA}
               className={`w-11 h-6 rounded-full transition-colors relative p-0.5 ${
-                twoFa ? 'bg-[#1FC777]' : 'bg-[#D6D3D1]'
+                twoFa ? 'bg-[#0070BA]' : 'bg-[#D6D3D1]'
               }`}
             >
               <span
@@ -153,7 +153,7 @@ export const ProfileView: React.FC = () => {
         <div className="space-y-3">
           <div className="p-3.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] flex items-center justify-between text-[13px]">
             <div className="flex items-center gap-3">
-              <Laptop className="w-5 h-5 text-[#087A4A]" />
+              <Laptop className="w-5 h-5 text-[#005EA8]" />
               <div>
                 <span className="font-bold text-[#171717] block">Chrome on macOS · Current Session</span>
                 <span className="text-[11px] text-[#78716C]">Bengaluru, India · IP 103.21.201.8</span>

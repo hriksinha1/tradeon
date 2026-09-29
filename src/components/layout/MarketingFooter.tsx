@@ -19,7 +19,7 @@ export const MarketingFooter: React.FC = () => {
           {/* Brand Col */}
           <div className="col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-[8px] bg-[#1FC777] flex items-center justify-center text-[#0C0F0C] font-black text-[16px]">
+              <div className="w-8 h-8 rounded-[8px] bg-[#0070BA] flex items-center justify-center text-[#0C0F0C] font-black text-[16px]">
                 T
               </div>
               <span className="text-[22px] font-bold text-white tracking-tight">Tradeon</span>
@@ -27,8 +27,8 @@ export const MarketingFooter: React.FC = () => {
             <p className="text-[14px] text-[#A3A29A] max-w-sm leading-relaxed">
               A modern digital trading and product marketplace platform built around clarity, control, and transparent transactions across Web, iOS, and Android.
             </p>
-            <div className="flex items-center gap-2 text-[12px] text-[#1FC777]">
-              <span className="w-2 h-2 rounded-full bg-[#1FC777]" />
+            <div className="flex items-center gap-2 text-[12px] text-[#0070BA]">
+              <span className="w-2 h-2 rounded-full bg-[#0070BA]" />
               <span className="font-semibold">Meadow Green Design System Specification</span>
             </div>
           </div>
@@ -58,7 +58,7 @@ export const MarketingFooter: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('app-preview')} className="text-[#1FC777] font-semibold hover:underline flex items-center gap-1 cursor-pointer">
+                <button onClick={() => handleNav('app-preview')} className="text-[#0070BA] font-semibold hover:underline flex items-center gap-1 cursor-pointer">
                   <span>Interactive App</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>

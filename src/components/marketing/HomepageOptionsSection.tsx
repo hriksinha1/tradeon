@@ -83,7 +83,7 @@ export const HomepageOptionsSection: React.FC = () => {
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl space-y-4">
-            <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
               Advanced Capability
             </div>
             <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -130,7 +130,7 @@ export const HomepageOptionsSection: React.FC = () => {
             }`}
           >
             <span>Call Contracts (Right to Acquire)</span>
-            <span className="text-[11px] px-1.5 py-0.2 rounded bg-white/20 text-[#1FC777]">
+            <span className="text-[11px] px-1.5 py-0.2 rounded bg-white/20 text-[#0070BA]">
               Upside
             </span>
           </button>
@@ -157,11 +157,11 @@ export const HomepageOptionsSection: React.FC = () => {
             {filteredOptions.map((opt) => (
               <div
                 key={opt.symbol}
-                className="bg-[#F7F6F2] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[20px] p-6 transition-all space-y-5"
+                className="bg-[#F7F6F2] border border-[#CBCAC2] hover:border-[#0070BA] rounded-[20px] p-6 transition-all space-y-5"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-xs font-mono text-[#087A4A] font-bold block mb-1">
+                    <span className="text-xs font-mono text-[#005EA8] font-bold block mb-1">
                       {opt.symbol}
                     </span>
                     <h3 className="text-[20px] font-bold text-[#171A17]">{opt.productName}</h3>
@@ -203,7 +203,7 @@ export const HomepageOptionsSection: React.FC = () => {
                   </div>
                   <div className="bg-[#EFEEE9] p-2 rounded-[8px]">
                     <div className="text-[11px] text-[#6B6B63]">Max Capital at Risk</div>
-                    <div className="text-[13px] font-bold text-[#087A4A] tabular-nums">
+                    <div className="text-[13px] font-bold text-[#005EA8] tabular-nums">
                       {formatINR(opt.premium)}
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export const HomepageOptionsSection: React.FC = () => {
 
                 <div className="pt-2 flex items-center justify-between">
                   <span className="text-xs text-[#6B6B63] flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#12A560]" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#16803C]" />
                     Defined loss profile
                   </span>
 
@@ -223,7 +223,7 @@ export const HomepageOptionsSection: React.FC = () => {
                     className="px-3.5 py-1.5 bg-[#171A17] text-white hover:bg-[#0C0F0C] font-semibold text-xs rounded-[8px] transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>Inspect specification</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#1FC777]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#0070BA]" />
                   </button>
                 </div>
               </div>
@@ -262,7 +262,7 @@ export const HomepageOptionsSection: React.FC = () => {
                       <td className="py-3 px-4 text-right text-[#5A5A53] tabular-nums">
                         {formatINR(opt.ask)}
                       </td>
-                      <td className="py-3 px-4 text-right font-bold text-[#087A4A] tabular-nums">
+                      <td className="py-3 px-4 text-right font-bold text-[#005EA8] tabular-nums">
                         {formatINR(opt.premium)}
                       </td>
                       <td className="py-3 px-4 text-right text-[#5A5A53] text-xs">{opt.expiry}</td>
@@ -291,7 +291,7 @@ export const HomepageOptionsSection: React.FC = () => {
               setCurrentView('options');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="text-xs font-bold text-[#087A4A] hover:underline flex items-center gap-1 cursor-pointer whitespace-nowrap"
+            className="text-xs font-bold text-[#005EA8] hover:underline flex items-center gap-1 cursor-pointer whitespace-nowrap"
           >
             <span>Explore full options catalog</span>
             <ChevronRight className="w-4 h-4" />

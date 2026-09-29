@@ -24,7 +24,7 @@ export const ProductDossierModal: React.FC = () => {
       isOpen={isDossierOpen}
       onClose={() => setIsDossierOpen(false)}
       title="Master Product Strategy & Design System Dossier"
-      subtitle="Tradeon Platform Specification & Meadow Green (#1FC777) Design Foundation"
+      subtitle="Tradeon Platform Specification & Meadow Green (#0070BA) Design Foundation"
       maxWidth="4xl"
     >
       <div className="space-y-4">
@@ -33,7 +33,7 @@ export const ProductDossierModal: React.FC = () => {
           <button
             onClick={() => setActiveTab('strategy')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] text-[13px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'strategy' ? 'bg-white text-[#087A4A] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
+              activeTab === 'strategy' ? 'bg-white text-[#005EA8] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -42,7 +42,7 @@ export const ProductDossierModal: React.FC = () => {
           <button
             onClick={() => setActiveTab('requirements')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] text-[13px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'requirements' ? 'bg-white text-[#087A4A] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
+              activeTab === 'requirements' ? 'bg-white text-[#005EA8] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
             }`}
           >
             <FileText className="w-3.5 h-3.5" />
@@ -51,16 +51,16 @@ export const ProductDossierModal: React.FC = () => {
           <button
             onClick={() => setActiveTab('tokens')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] text-[13px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'tokens' ? 'bg-white text-[#087A4A] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
+              activeTab === 'tokens' ? 'bg-white text-[#005EA8] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
             }`}
           >
             <Palette className="w-3.5 h-3.5" />
-            <span>3. Meadow Green (#1FC777) Color System</span>
+            <span>3. Meadow Green (#0070BA) Color System</span>
           </button>
           <button
             onClick={() => setActiveTab('questions')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] text-[13px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'questions' ? 'bg-white text-[#087A4A] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
+              activeTab === 'questions' ? 'bg-white text-[#005EA8] shadow-xs' : 'text-[#6B6B63] hover:text-[#171717]'
             }`}
           >
             <HelpCircle className="w-3.5 h-3.5" />
@@ -71,8 +71,8 @@ export const ProductDossierModal: React.FC = () => {
         {/* Tab 1: Strategy & Conceptual Model */}
         {activeTab === 'strategy' && (
           <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 text-[13px] text-[#40403B] leading-relaxed">
-            <div className="p-4 bg-[#E9FAF1] border border-[#A2E8C5] rounded-[14px]">
-              <h3 className="text-[16px] font-bold text-[#087A4A] mb-1">
+            <div className="p-4 bg-[#F0FAFF] border border-[#A2E8C5] rounded-[14px]">
+              <h3 className="text-[16px] font-bold text-[#005EA8] mb-1">
                 Executive Product Summary & Confidentiality Boundary
               </h3>
               <p>
@@ -109,15 +109,15 @@ export const ProductDossierModal: React.FC = () => {
               <h3 className="text-[15px] font-bold text-[#171A17] mb-3">Pre-Advance Prototype Deliverables</h3>
               <ul className="space-y-2 text-[13px] text-[#5A5A53]">
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1FC777] mt-2 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0070BA] mt-2 shrink-0" />
                   <span><strong>Marketing Website:</strong> Hero showcase with live reactive quote, Listed products catalog, Platform principles, Native iOS/Android showcase, Payments & Ledger breakdown, and FAQs.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1FC777] mt-2 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0070BA] mt-2 shrink-0" />
                   <span><strong>Device Simulation:</strong> Interactive viewport switcher allowing instant preview across Web (1440px desktop), Apple iPhone 16 Pro (Dynamic Island), and Google Pixel 9 Pro.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1FC777] mt-2 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0070BA] mt-2 shrink-0" />
                   <span><strong>Complete Interactive App:</strong> Dashboard, Markets, Product Details, Option Trading, Orders, Wallet, Ledger, Watchlist, Profile, and Settings with reactive local state.</span>
                 </li>
               </ul>
@@ -128,18 +128,18 @@ export const ProductDossierModal: React.FC = () => {
         {/* Tab 3: Design Tokens (Source of Truth) */}
         {activeTab === 'tokens' && (
           <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 text-[13px]">
-            <div className="flex items-center justify-between p-3.5 bg-[#E9FAF1] border border-[#A2E8C5] rounded-[12px]">
+            <div className="flex items-center justify-between p-3.5 bg-[#F0FAFF] border border-[#A2E8C5] rounded-[12px]">
               <div>
-                <span className="font-bold text-[14px] text-[#087A4A] block">
-                  Meadow Green (#1FC777) Design System
+                <span className="font-bold text-[14px] text-[#005EA8] block">
+                  Meadow Green (#0070BA) Design System
                 </span>
                 <span className="text-[12px] text-[#5A5A53]">
-                  Accessible Brand 700 (#087A4A), Ink Text (#0C0F0C), Warm Neutrals (#F7F6F2)
+                  Accessible Brand 700 (#005EA8), Ink Text (#0C0F0C), Warm Neutrals (#F7F6F2)
                 </span>
               </div>
               <button
                 onClick={copyTokensJSON}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#1FC777] hover:bg-[#18B36A] text-[#0C0F0C] font-bold text-[12px] rounded-[8px] transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0070BA] hover:bg-[#005EA8] text-[#0C0F0C] font-bold text-[12px] rounded-[8px] transition-colors cursor-pointer"
               >
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Tokens JSON'}</span>
@@ -148,14 +148,14 @@ export const ProductDossierModal: React.FC = () => {
 
             {/* Color Swatches Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="p-3 bg-[#1FC777] text-[#0C0F0C] rounded-[10px] shadow-2xs">
+              <div className="p-3 bg-[#0070BA] text-[#0C0F0C] rounded-[10px] shadow-2xs">
                 <span className="text-[10px] font-bold uppercase tracking-wider block">Brand 500 (Primary)</span>
-                <span className="font-mono font-bold text-[14px]">#1FC777</span>
+                <span className="font-mono font-bold text-[14px]">#0070BA</span>
                 <span className="text-[10px] opacity-80 block mt-1">Meadow Green</span>
               </div>
-              <div className="p-3 bg-[#1FC777] text-[#0C0F0C] font-bold rounded-[10px] shadow-2xs">
+              <div className="p-3 bg-[#0070BA] text-[#0C0F0C] font-bold rounded-[10px] shadow-2xs">
                 <span className="text-[10px] font-bold uppercase tracking-wider block">Brand 700 (Accessible)</span>
-                <span className="font-mono font-bold text-[14px]">#087A4A</span>
+                <span className="font-mono font-bold text-[14px]">#005EA8</span>
                 <span className="text-[10px] opacity-80 block mt-1">Links, text, icons (4.5:1+)</span>
               </div>
               <div className="p-3 bg-[#0C0F0C] text-white rounded-[10px] shadow-2xs">
@@ -184,10 +184,10 @@ export const ProductDossierModal: React.FC = () => {
                   <span className="font-bold text-[#5A5A53]">Secondary/Cards</span>
                   <span className="text-[10px] text-[#6B6B63] block">Surfaces & Text</span>
                 </div>
-                <div className="p-2 bg-[#E9FAF1] rounded-[8px] border border-[#A2E8C5]">
-                  <span className="font-extrabold text-[16px] text-[#087A4A] block">10%</span>
-                  <span className="font-bold text-[#087A4A]">Meadow Green</span>
-                  <span className="text-[10px] text-[#087A4A] block">Primary CTAs & Active</span>
+                <div className="p-2 bg-[#F0FAFF] rounded-[8px] border border-[#A2E8C5]">
+                  <span className="font-extrabold text-[16px] text-[#005EA8] block">10%</span>
+                  <span className="font-bold text-[#005EA8]">Meadow Green</span>
+                  <span className="text-[10px] text-[#005EA8] block">Primary CTAs & Active</span>
                 </div>
               </div>
             </div>

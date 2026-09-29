@@ -40,7 +40,7 @@ export const ProductsPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header with Narrative: "Start with curiosity." */}
         <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Marketplace Catalog
           </div>
           <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
@@ -62,7 +62,7 @@ export const ProductsPage: React.FC = () => {
                 placeholder="Search products by name or ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#087A4A] focus:bg-white"
+                className="w-full pl-9 pr-4 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#005EA8] focus:bg-white"
               />
             </div>
 
@@ -75,7 +75,7 @@ export const ProductsPage: React.FC = () => {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-3 py-1 rounded-[7px] text-[12px] font-semibold transition-all cursor-pointer ${
                       selectedCategory === cat
-                        ? 'bg-[#1FC777] text-[#0C0F0C] shadow-2xs'
+                        ? 'bg-[#0070BA] text-[#0C0F0C] shadow-2xs'
                         : 'text-[#5A5A53] hover:text-[#171A17]'
                     }`}
                   >
@@ -87,7 +87,7 @@ export const ProductsPage: React.FC = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] font-medium text-[#171A17] focus:outline-[#087A4A] cursor-pointer"
+                className="px-3 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] font-medium text-[#171A17] focus:outline-[#005EA8] cursor-pointer"
               >
                 <option value="value-desc">Sort by highest value</option>
                 <option value="value-asc">Sort by lowest value</option>
@@ -106,13 +106,13 @@ export const ProductsPage: React.FC = () => {
             return (
               <div
                 key={product.id}
-                className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[20px] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
+                className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#0070BA] rounded-[20px] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
               >
                 <div>
                   {/* Clean unboxed metadata header */}
                   <div className="flex items-center justify-between text-xs text-[#5A5A53] pb-3 border-b border-[#EFEEE9]">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-[#087A4A]">{product.category}</span>
+                      <span className="font-semibold text-[#005EA8]">{product.category}</span>
                       <span aria-hidden="true">·</span>
                       <span className="font-mono">{product.id}</span>
                     </div>
@@ -142,7 +142,7 @@ export const ProductsPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <h3 className="mt-4 text-[22px] font-bold text-[#171A17] group-hover:text-[#087A4A] transition-colors">
+                  <h3 className="mt-4 text-[22px] font-bold text-[#171A17] group-hover:text-[#005EA8] transition-colors">
                     {product.name}
                   </h3>
 
@@ -193,7 +193,7 @@ export const ProductsPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => openBuySell('buy', product)}
-                    className="flex-1 py-2.5 text-center text-[13px] font-bold text-[#0C0F0C] bg-[#1FC777] hover:bg-[#18B36A] rounded-[10px] transition-colors cursor-pointer shadow-2xs"
+                    className="flex-1 py-2.5 text-center text-[13px] font-bold text-[#0C0F0C] bg-[#0070BA] hover:bg-[#005EA8] rounded-[10px] transition-colors cursor-pointer shadow-2xs"
                   >
                     Trade unit
                   </button>
@@ -217,7 +217,7 @@ export const ProductsPage: React.FC = () => {
               setCurrentView('app-dashboard');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-bold text-[#087A4A] hover:underline cursor-pointer whitespace-nowrap ml-4"
+            className="font-bold text-[#005EA8] hover:underline cursor-pointer whitespace-nowrap ml-4"
           >
             Launch terminal preview →
           </button>

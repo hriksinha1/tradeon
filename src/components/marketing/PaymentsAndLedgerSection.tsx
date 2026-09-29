@@ -49,7 +49,7 @@ export const PaymentsAndLedgerSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section 1: Wallet & Payments Header */}
         <div className="max-w-3xl space-y-4 mb-14 sm:mb-18">
-          <div className="text-xs font-semibold text-[#1FC777] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#0070BA] tracking-wider uppercase">
             Wallet & Payments
           </div>
           <h2 className="text-[34px] sm:text-[48px] font-extrabold text-white tracking-tight leading-[1.12]">
@@ -68,8 +68,8 @@ export const PaymentsAndLedgerSection: React.FC = () => {
               <span className="text-xs font-semibold text-[#A3A29A] uppercase tracking-wider">
                 Trading Wallet
               </span>
-              <span className="text-xs text-[#1FC777] font-semibold flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#1FC777]" />
+              <span className="text-xs text-[#0070BA] font-semibold flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#0070BA]" />
                 <span>Active</span>
               </span>
             </div>
@@ -91,7 +91,7 @@ export const PaymentsAndLedgerSection: React.FC = () => {
 
               <div className="p-4 bg-[#202320] rounded-[14px] border border-[#2A2A26]">
                 <span className="text-xs text-[#A3A29A] block">Allocated in units</span>
-                <span className="text-[20px] font-bold text-[#1FC777] tabular-nums block mt-0.5">
+                <span className="text-[20px] font-bold text-[#0070BA] tabular-nums block mt-0.5">
                   {formatINR(wallet.totalValue - wallet.availableBalance)}
                 </span>
               </div>
@@ -127,15 +127,15 @@ export const PaymentsAndLedgerSection: React.FC = () => {
               </div>
               <div className="grid grid-cols-3 gap-2 text-center text-xs">
                 <div className="p-2.5 bg-[#202320] rounded-[10px] border border-[#2A2A26]">
-                  <Smartphone className="w-4 h-4 text-[#1FC777] mx-auto mb-1" />
+                  <Smartphone className="w-4 h-4 text-[#0070BA] mx-auto mb-1" />
                   <span className="text-white block font-medium">UPI / QR</span>
                 </div>
                 <div className="p-2.5 bg-[#202320] rounded-[10px] border border-[#2A2A26]">
-                  <Building className="w-4 h-4 text-[#1FC777] mx-auto mb-1" />
+                  <Building className="w-4 h-4 text-[#0070BA] mx-auto mb-1" />
                   <span className="text-white block font-medium">Bank Transfer</span>
                 </div>
                 <div className="p-2.5 bg-[#202320] rounded-[10px] border border-[#2A2A26]">
-                  <CreditCard className="w-4 h-4 text-[#1FC777] mx-auto mb-1" />
+                  <CreditCard className="w-4 h-4 text-[#0070BA] mx-auto mb-1" />
                   <span className="text-white block font-medium">Debit Cards</span>
                 </div>
               </div>
@@ -158,11 +158,11 @@ export const PaymentsAndLedgerSection: React.FC = () => {
                   onClick={() => setActivePaymentStep(idx)}
                   className={`p-4 rounded-[16px] border transition-all cursor-pointer flex items-start gap-4 ${
                     activePaymentStep === idx
-                      ? 'bg-[#202320] border-[#1FC777]'
+                      ? 'bg-[#202320] border-[#0070BA]'
                       : 'bg-[#171A17] border-[#2A2A26] hover:bg-[#202320]/60'
                   }`}
                 >
-                  <div className="w-7 h-7 rounded-full bg-[#2A2A26] text-[#1FC777] font-mono text-xs flex items-center justify-center font-bold shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-full bg-[#2A2A26] text-[#0070BA] font-mono text-xs flex items-center justify-center font-bold shrink-0 mt-0.5">
                     {step.step}
                   </div>
                   <div className="space-y-1">
@@ -180,7 +180,7 @@ export const PaymentsAndLedgerSection: React.FC = () => {
                   setCurrentView('app-ledger');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="text-[#1FC777] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                className="text-[#0070BA] font-bold hover:underline flex items-center gap-1 cursor-pointer"
               >
                 <span>View all records</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -192,7 +192,7 @@ export const PaymentsAndLedgerSection: React.FC = () => {
         {/* Section 2: Ledger Trace ("Later, you'll want to know where every rupee went.") */}
         <div className="border-t border-[#2A2A26] pt-16 sm:pt-20">
           <div className="max-w-3xl space-y-4 mb-12">
-            <div className="text-xs font-semibold text-[#1FC777] tracking-wider uppercase">
+            <div className="text-xs font-semibold text-[#0070BA] tracking-wider uppercase">
               Transaction Records
             </div>
             <h2 className="text-[32px] sm:text-[44px] font-extrabold text-white tracking-tight leading-[1.12]">
@@ -206,25 +206,25 @@ export const PaymentsAndLedgerSection: React.FC = () => {
           {/* Visual Ledger Trace Progression */}
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-10 text-xs">
             <div className="p-4 bg-[#171A17] border border-[#2A2A26] rounded-[16px]">
-              <span className="text-[#1FC777] font-bold block mb-1">01 · Action</span>
+              <span className="text-[#0070BA] font-bold block mb-1">01 · Action</span>
               <span className="font-bold text-white text-sm block">Order or Deposit</span>
               <span className="text-[#A3A29A] mt-0.5 block">Explicit quantity and price confirmed</span>
             </div>
 
             <div className="p-4 bg-[#171A17] border border-[#2A2A26] rounded-[16px]">
-              <span className="text-[#1FC777] font-bold block mb-1">02 · Wallet Change</span>
+              <span className="text-[#0070BA] font-bold block mb-1">02 · Wallet Change</span>
               <span className="font-bold text-white text-sm block">Instant Debit/Credit</span>
               <span className="text-[#A3A29A] mt-0.5 block">Available cash immediately updates</span>
             </div>
 
             <div className="p-4 bg-[#171A17] border border-[#2A2A26] rounded-[16px]">
-              <span className="text-[#1FC777] font-bold block mb-1">03 · Running Balance</span>
+              <span className="text-[#0070BA] font-bold block mb-1">03 · Running Balance</span>
               <span className="font-bold text-white text-sm block">Recorded Total</span>
               <span className="text-[#A3A29A] mt-0.5 block">Snapshot balance preserved for audit</span>
             </div>
 
             <div className="p-4 bg-[#171A17] border border-[#2A2A26] rounded-[16px]">
-              <span className="text-[#1FC777] font-bold block mb-1">04 · Reference Code</span>
+              <span className="text-[#0070BA] font-bold block mb-1">04 · Reference Code</span>
               <span className="font-bold text-white text-sm block">Unique Hash</span>
               <span className="text-[#A3A29A] mt-0.5 block">Reference code for easy tracking</span>
             </div>
@@ -261,7 +261,7 @@ export const PaymentsAndLedgerSection: React.FC = () => {
                     <div className="text-left sm:text-right">
                       <div
                         className={`text-[16px] font-bold tabular-nums ${
-                          isCredit ? 'text-[#1FC777]' : 'text-white'
+                          isCredit ? 'text-[#0070BA]' : 'text-white'
                         }`}
                       >
                         {isCredit ? '+' : '-'}{formatINR(Math.abs(tx.amount))}

@@ -41,7 +41,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
       <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-            <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
               Get in Touch
             </div>
             <h1 className="text-[38px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
@@ -56,8 +56,8 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
             <div className="md:col-span-7 bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-6 sm:p-8 shadow-xs">
               {submitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-[#E9FAF1] text-[#087A4A] flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-6 h-6 text-[#12A560]" />
+                  <div className="w-12 h-12 rounded-full bg-[#F0FAFF] text-[#005EA8] flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6 text-[#16803C]" />
                   </div>
                   <h3 className="text-[20px] font-bold text-[#171A17]">Message Received</h3>
                   <p className="text-[14px] text-[#5A5A53] max-w-md mx-auto">
@@ -79,7 +79,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                       placeholder="e.g. Vikram Mehta"
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#005EA8] focus:bg-white"
                     />
                   </div>
 
@@ -94,7 +94,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                         placeholder="name@company.com"
                         value={contactEmail}
                         onChange={(e) => setContactEmail(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                        className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#005EA8] focus:bg-white"
                       />
                     </div>
                     <div>
@@ -106,7 +106,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                         placeholder="+91 (optional)"
                         value={contactPhone}
                         onChange={(e) => setContactPhone(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                        className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#005EA8] focus:bg-white"
                       />
                     </div>
                   </div>
@@ -118,7 +118,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                     <select
                       value={contactReason}
                       onChange={(e) => setContactReason(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#005EA8] focus:bg-white"
                     >
                       <option value="Marketplace inquiry">Marketplace inquiry</option>
                       <option value="Product listing partnership">Product listing partnership</option>
@@ -137,13 +137,13 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                       placeholder="Share a brief overview of your inquiry or requirements..."
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#005EA8] focus:bg-white"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3 bg-[#1FC777] hover:bg-[#18B36A] text-[#0C0F0C] font-bold text-[14px] rounded-[10px] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+                    className="w-full py-3 bg-[#0070BA] hover:bg-[#005EA8] text-[#0C0F0C] font-bold text-[14px] rounded-[10px] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
                   >
                     <Send className="w-4 h-4" />
                     <span>Send inquiry</span>
@@ -157,15 +157,15 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                 <h3 className="text-[17px] font-bold text-[#171A17]">Direct Contacts</h3>
                 <div className="space-y-3 text-xs text-[#5A5A53]">
                   <div className="flex items-center gap-2.5">
-                    <Mail className="w-4 h-4 text-[#087A4A]" />
+                    <Mail className="w-4 h-4 text-[#005EA8]" />
                     <span>team@tradeon.exchange</span>
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <Phone className="w-4 h-4 text-[#087A4A]" />
+                    <Phone className="w-4 h-4 text-[#005EA8]" />
                     <span>+91 (080) 4129-8800</span>
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <MapPin className="w-4 h-4 text-[#087A4A]" />
+                    <MapPin className="w-4 h-4 text-[#005EA8]" />
                     <span>Bengaluru, Karnataka, India</span>
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
       <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-8 space-y-10">
           <div className="space-y-3">
-            <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
               Design Philosophy
             </div>
             <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
@@ -239,7 +239,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
     <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8">
         <div>
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Legal Documentation
           </div>
           <h1 className="text-[38px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight mt-2">

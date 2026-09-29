@@ -14,22 +14,22 @@ export const SecurityPage: React.FC = () => {
 
   const securityPillars = [
     {
-      icon: <KeyRound className="w-5 h-5 text-[#1FC777]" />,
+      icon: <KeyRound className="w-5 h-5 text-[#0070BA]" />,
       title: 'Two-Factor Authentication (2FA)',
       desc: 'Mandatory secondary verification for sensitive actions including fund withdrawals, password updates, and session authorizations.',
     },
     {
-      icon: <Laptop className="w-5 h-5 text-[#1FC777]" />,
+      icon: <Laptop className="w-5 h-5 text-[#0070BA]" />,
       title: 'Active Session Awareness',
       desc: 'Complete real-time visibility into all active web and mobile device sessions with one-tap remote revocation for any unrecognized device.',
     },
     {
-      icon: <Lock className="w-5 h-5 text-[#1FC777]" />,
+      icon: <Lock className="w-5 h-5 text-[#0070BA]" />,
       title: 'Transport Encryption & Storage Isolation',
       desc: 'All communications between client devices and servers use standard TLS 1.3 encryption with strict database token isolation.',
     },
     {
-      icon: <FileCheck className="w-5 h-5 text-[#1FC777]" />,
+      icon: <FileCheck className="w-5 h-5 text-[#0070BA]" />,
       title: 'Auditable Ledger Records',
       desc: 'Every financial state change is logged in a double-entry accounting structure with mathematical verification of running balances.',
     },
@@ -40,7 +40,7 @@ export const SecurityPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-14 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Security & Controls
           </div>
           <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
@@ -58,7 +58,7 @@ export const SecurityPage: React.FC = () => {
               key={idx}
               className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-7 shadow-xs space-y-3"
             >
-              <div className="w-10 h-10 rounded-[12px] bg-[#E9FAF1] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-[12px] bg-[#F0FAFF] flex items-center justify-center">
                 {p.icon}
               </div>
               <h3 className="text-[19px] font-bold text-[#171A17]">{p.title}</h3>
@@ -77,8 +77,8 @@ export const SecurityPage: React.FC = () => {
           </p>
 
           <div className="pt-4 border-t border-[#EFEEE9] flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#087A4A]">
-              <CheckCircle2 className="w-4 h-4 text-[#12A560]" />
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#005EA8]">
+              <CheckCircle2 className="w-4 h-4 text-[#16803C]" />
               <span>Full audit trail ready</span>
             </div>
             <button

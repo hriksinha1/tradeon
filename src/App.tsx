@@ -3,7 +3,7 @@
  * 
  * Features:
  * - Confidential Product Abstraction Layer
- * - Meadow Green (#1FC777) Design Foundation & Warm Neutrals (#F7F6F2)
+ * - Tradeon Blue (#0070BA) Design Foundation & Cool Neutrals (#F6F8FB)
  * - Complete Marketing Website (Home, Products, How It Works, Options, Mobile App, Payments, Security, About, FAQ, Contact, Terms, Privacy)
  * - Complete Interactive Platform Application (Dashboard, Markets, Product Details, Options, Portfolio, Orders, Wallet, Ledger, Profile)
  * - Multi-Platform simulation (Desktop Web 1440px baseline, iPhone 16 Pro, Pixel 9 Pro)

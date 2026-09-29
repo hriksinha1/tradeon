@@ -45,7 +45,7 @@ export const MarketingFaqSection: React.FC = () => {
     <section className="py-20 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
       <div className="max-w-4xl mx-auto px-4 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-18 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Clarity First
           </div>
           <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -73,7 +73,7 @@ export const MarketingFaqSection: React.FC = () => {
                   </span>
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform ${
-                      isOpen ? 'rotate-180 bg-[#1FC777] text-[#0C0F0C]' : 'bg-[#EFEEE9] text-[#6B6B63]'
+                      isOpen ? 'rotate-180 bg-[#0070BA] text-[#0C0F0C]' : 'bg-[#EFEEE9] text-[#6B6B63]'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -98,7 +98,7 @@ export const MarketingFaqSection: React.FC = () => {
               setCurrentView('contact');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-bold text-[#087A4A] hover:underline cursor-pointer"
+            className="font-bold text-[#005EA8] hover:underline cursor-pointer"
           >
             Talk to our team →
           </button>

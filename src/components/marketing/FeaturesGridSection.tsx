@@ -38,7 +38,7 @@ export const FeaturesGridSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
         <div className="max-w-3xl space-y-4 mb-16 sm:mb-20">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Product Manifesto
           </div>
           <h2 className="text-[34px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -56,7 +56,7 @@ export const FeaturesGridSection: React.FC = () => {
               key={item.num}
               className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 pt-8 border-t border-[#E2E1DA] items-baseline"
             >
-              <div className="lg:col-span-2 font-mono text-sm font-bold text-[#087A4A]">
+              <div className="lg:col-span-2 font-mono text-sm font-bold text-[#005EA8]">
                 {item.num} / 05
               </div>
 
@@ -83,7 +83,7 @@ export const FeaturesGridSection: React.FC = () => {
               setCurrentView('about');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-bold text-[#087A4A] hover:underline flex items-center gap-1.5 cursor-pointer text-sm"
+            className="font-bold text-[#005EA8] hover:underline flex items-center gap-1.5 cursor-pointer text-sm"
           >
             <span>Read more about our design philosophy</span>
             <ArrowRight className="w-4 h-4" />

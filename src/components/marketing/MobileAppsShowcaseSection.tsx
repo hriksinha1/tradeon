@@ -27,7 +27,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
         <div className="space-y-3 text-left">
           <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
             <span className="text-xs font-bold text-[#171A17]">Marketplace</span>
-            <span className="text-[10px] font-mono text-[#087A4A] bg-[#E9FAF1] px-2 py-0.5 rounded">Live</span>
+            <span className="text-[10px] font-mono text-[#005EA8] bg-[#F0FAFF] px-2 py-0.5 rounded">Live</span>
           </div>
 
           <div className="p-2 bg-white rounded-[10px] border border-[#E2E1DA] flex items-center gap-2 text-xs text-[#6B6B63]">
@@ -86,7 +86,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
             </div>
             <div className="flex justify-between text-xs">
               <span className="text-[#5A5A53]">Settlement rail</span>
-              <span className="font-bold text-[#087A4A]">Direct Reconciled</span>
+              <span className="font-bold text-[#005EA8]">Direct Reconciled</span>
             </div>
           </div>
 
@@ -106,7 +106,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
         <div className="space-y-3 text-left">
           <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
             <span className="font-bold text-[13px] text-[#171A17]">Order Slip</span>
-            <span className="text-[11px] text-[#087A4A] font-semibold">Ready to submit</span>
+            <span className="text-[11px] text-[#005EA8] font-semibold">Ready to submit</span>
           </div>
 
           <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] flex justify-between items-center">
@@ -125,11 +125,11 @@ export const MobileAppsShowcaseSection: React.FC = () => {
             </div>
             <div className="pt-2 border-t border-[#EFEEE9] flex justify-between font-bold text-[13px] text-[#171A17]">
               <span>Total deduction</span>
-              <span className="text-[#087A4A]">₹12,262.25</span>
+              <span className="text-[#005EA8]">₹12,262.25</span>
             </div>
           </div>
 
-          <div className="w-full py-2.5 bg-[#1FC777] text-[#0C0F0C] font-bold text-xs rounded-[10px] text-center shadow-xs">
+          <div className="w-full py-2.5 bg-[#0070BA] text-[#0C0F0C] font-bold text-xs rounded-[10px] text-center shadow-xs">
             Authorize Order
           </div>
         </div>
@@ -145,7 +145,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
         <div className="space-y-3 text-left">
           <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
             <span className="font-bold text-[13px] text-[#171A17]">Ledger Receipt</span>
-            <span className="text-[10px] text-[#12A560] font-semibold flex items-center gap-1">
+            <span className="text-[10px] text-[#16803C] font-semibold flex items-center gap-1">
               <Check className="w-3 h-3" />
               Cleared
             </span>
@@ -162,7 +162,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-2.5 bg-[#E9FAF1] rounded-[10px] text-[11px] text-[#087A4A] flex items-center gap-2">
+          <div className="p-2.5 bg-[#F0FAFF] rounded-[10px] text-[11px] text-[#005EA8] flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>Auditable in your permanent transaction ledger</span>
           </div>
@@ -176,7 +176,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl space-y-4 mb-14 sm:mb-20">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Mobile Experience
           </div>
           <h2 className="text-[34px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
@@ -201,7 +201,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F0C]/75 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-xs text-[#1FC777] font-bold uppercase tracking-wider block">
+                <span className="text-xs text-[#0070BA] font-bold uppercase tracking-wider block">
                   On-the-go Clarity
                 </span>
                 <span className="text-sm font-semibold">
@@ -220,11 +220,11 @@ export const MobileAppsShowcaseSection: React.FC = () => {
                     onClick={() => setActiveStageIndex(idx)}
                     className={`p-4 rounded-[16px] text-left transition-all border cursor-pointer ${
                       isSelected
-                        ? 'bg-[#FFFFFF] border-[#1FC777] shadow-sm'
+                        ? 'bg-[#FFFFFF] border-[#0070BA] shadow-sm'
                         : 'bg-white/60 border-[#E2E1DA] hover:bg-white'
                     }`}
                   >
-                    <div className="flex items-center justify-between text-xs text-[#087A4A] font-semibold mb-1">
+                    <div className="flex items-center justify-between text-xs text-[#005EA8] font-semibold mb-1">
                       <span>{stage.kicker}</span>
                       <span className="text-[11px] text-[#6B6B63]">0{idx + 1}</span>
                     </div>
@@ -278,7 +278,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
               <div className="w-full h-full bg-[#F7F6F2] rounded-[38px] overflow-hidden flex flex-col justify-between p-4 pt-10 text-left">
                 {/* Active Screen Content */}
                 <div className="pt-2">
-                  <div className="text-[11px] font-semibold text-[#087A4A] uppercase tracking-wider mb-2">
+                  <div className="text-[11px] font-semibold text-[#005EA8] uppercase tracking-wider mb-2">
                     {stages[activeStageIndex].kicker} · {stages[activeStageIndex].title}
                   </div>
                   {stages[activeStageIndex].screenContent}

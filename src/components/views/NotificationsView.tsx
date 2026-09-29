@@ -34,7 +34,7 @@ export const NotificationsView: React.FC = () => {
             key={tab}
             onClick={() => setFilter(tab)}
             className={`px-3 py-1.5 rounded-[8px] text-[12px] font-semibold capitalize transition-all whitespace-nowrap ${
-              filter === tab ? 'bg-[#1FC777] text-[#0C0F0C] font-bold shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+              filter === tab ? 'bg-[#0070BA] text-[#0C0F0C] font-bold shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
             }`}
           >
             {tab}
@@ -47,7 +47,7 @@ export const NotificationsView: React.FC = () => {
         {filtered.map((item) => {
           const icon = {
             orders: <FileCheck className="w-5 h-5 text-[#16803C]" />,
-            payments: <CreditCard className="w-5 h-5 text-[#087A4A]" />,
+            payments: <CreditCard className="w-5 h-5 text-[#005EA8]" />,
             portfolio: <PieChart className="w-5 h-5 text-[#1D4ED8]" />,
             security: <ShieldCheck className="w-5 h-5 text-[#B7791F]" />,
             system: <Info className="w-5 h-5 text-[#78716C]" />,
@@ -58,7 +58,7 @@ export const NotificationsView: React.FC = () => {
               key={item.id}
               onClick={() => markNotificationRead(item.id)}
               className={`p-4 sm:p-5 flex items-start gap-4 cursor-pointer transition-colors ${
-                !item.read ? 'bg-[#E9FAF1]/60' : 'hover:bg-[#FAFAF9]'
+                !item.read ? 'bg-[#F0FAFF]/60' : 'hover:bg-[#FAFAF9]'
               }`}
             >
               <div className="p-2 bg-white border border-[#E7E5E4] rounded-[10px] shrink-0 mt-0.5">
@@ -70,7 +70,7 @@ export const NotificationsView: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <h4 className="text-[15px] font-bold text-[#171717]">{item.title}</h4>
                     {!item.read && (
-                      <span className="w-2 h-2 rounded-full bg-[#1FC777]" />
+                      <span className="w-2 h-2 rounded-full bg-[#0070BA]" />
                     )}
                   </div>
                   <span className="text-[12px] text-[#78716C] shrink-0">{item.timestamp}</span>

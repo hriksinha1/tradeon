@@ -19,7 +19,7 @@ export const AuthView: React.FC = () => {
     <div className="min-h-[80vh] flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white border border-[#E7E5E4] rounded-[20px] shadow-lg p-6 sm:p-8 space-y-6">
         <div className="text-center space-y-1">
-          <div className="w-10 h-10 rounded-xl bg-[#1FC777] text-[#0C0F0C] font-bold flex items-center justify-center font-extrabold text-lg mx-auto mb-2 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#0070BA] text-[#0C0F0C] font-bold flex items-center justify-center font-extrabold text-lg mx-auto mb-2 shadow-xs">
             T
           </div>
           <h2 className="text-[22px] font-bold text-[#171717]">
@@ -40,7 +40,7 @@ export const AuthView: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 border border-[#E7E5E4] rounded-[10px] text-[14px] focus:outline-[#087A4A]"
+                className="w-full pl-9 pr-3 py-2 border border-[#E7E5E4] rounded-[10px] text-[14px] focus:outline-[#005EA8]"
               />
             </div>
           </div>
@@ -52,7 +52,7 @@ export const AuthView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => showToast('Password Link Sent', 'Check your email inbox.', 'info')}
-                  className="text-[11px] font-semibold text-[#087A4A] hover:underline"
+                  className="text-[11px] font-semibold text-[#005EA8] hover:underline"
                 >
                   Forgot?
                 </button>
@@ -65,7 +65,7 @@ export const AuthView: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 border border-[#E7E5E4] rounded-[10px] text-[14px] focus:outline-[#087A4A]"
+                className="w-full pl-9 pr-3 py-2 border border-[#E7E5E4] rounded-[10px] text-[14px] focus:outline-[#005EA8]"
               />
             </div>
           </div>
@@ -116,7 +116,7 @@ export const AuthView: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsSignUp(!isSignUp)}
-            className="font-bold text-[#087A4A] hover:underline"
+            className="font-bold text-[#005EA8] hover:underline"
           >
             {isSignUp ? 'Sign In' : 'Sign Up'}
           </button>

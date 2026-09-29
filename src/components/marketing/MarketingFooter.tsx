@@ -18,7 +18,7 @@ export const MarketingFooter: React.FC = () => {
           {/* Brand & Purpose (Col 1-5) */}
           <div className="lg:col-span-5 space-y-5">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-[8px] bg-[#1FC777] flex items-center justify-center text-[#0C0F0C] font-black text-[16px]">
+              <div className="w-8 h-8 rounded-[8px] bg-[#0070BA] flex items-center justify-center text-[#0C0F0C] font-black text-[16px]">
                 T
               </div>
               <span className="text-[20px] font-black tracking-tight text-white">Tradeon</span>
@@ -33,13 +33,13 @@ export const MarketingFooter: React.FC = () => {
                 onClick={() => setIsDossierOpen(true)}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#2A2A26] hover:bg-[#40403B] text-white text-[12px] font-semibold rounded-[8px] transition-colors cursor-pointer"
               >
-                <BookOpen className="w-3.5 h-3.5 text-[#1FC777]" />
+                <BookOpen className="w-3.5 h-3.5 text-[#0070BA]" />
                 <span>Strategy Dossier</span>
               </button>
 
               <button
                 onClick={() => handleNav('app-dashboard')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1FC777] hover:bg-[#18B36A] text-[#0C0F0C] text-[12px] font-bold rounded-[8px] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0070BA] hover:bg-[#005EA8] text-[#0C0F0C] text-[12px] font-bold rounded-[8px] transition-colors cursor-pointer"
               >
                 <span>Launch App</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
