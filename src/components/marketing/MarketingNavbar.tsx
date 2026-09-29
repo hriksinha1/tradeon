@@ -79,7 +79,7 @@ export const MarketingNavbar: React.FC = () => {
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#1FC777] rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0070BA] rounded-full" />
                 )}
               </button>
             );
@@ -126,7 +126,7 @@ export const MarketingNavbar: React.FC = () => {
             <button
               key={link.view}
               onClick={() => handleNavClick(link.view)}
-              className="w-full text-left px-3 py-2.5 rounded-[10px] text-[15px] font-medium text-[#171A17] hover:bg-[#F7F6F2] hover:text-[#087A4A] transition-colors flex items-center justify-between"
+              className="w-full text-left px-3 py-2.5 rounded-[10px] text-[15px] font-medium text-[#171A17] hover:bg-[#F7F6F2] hover:text-[#005EA8] transition-colors flex items-center justify-between"
             >
               <span>{link.label}</span>
               <ArrowRight className="w-4 h-4 text-[#A3A29A]" />

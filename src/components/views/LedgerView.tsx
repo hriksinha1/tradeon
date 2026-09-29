@@ -51,7 +51,7 @@ export const LedgerView: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[12px] font-bold text-[#087A4A] uppercase tracking-wider bg-[#E9FAF1] px-2.5 py-0.5 rounded-[6px] border border-[#CFF3E0]">
+            <span className="text-[12px] font-bold text-[#005EA8] uppercase tracking-wider bg-[#F0FAFF] px-2.5 py-0.5 rounded-[6px] border border-[#DFF6FF]">
               Transaction Audit Log
             </span>
           </div>
@@ -81,7 +81,7 @@ export const LedgerView: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by ID, keyword, reference code..."
-            className="w-full pl-9 pr-4 py-2 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[10px] text-[13px] text-[#171717] focus:outline-[#087A4A] focus:bg-white"
+            className="w-full pl-9 pr-4 py-2 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[10px] text-[13px] text-[#171717] focus:outline-[#005EA8] focus:bg-white"
           />
         </div>
 
@@ -93,7 +93,7 @@ export const LedgerView: React.FC = () => {
               onClick={() => setSelectedType(type)}
               className={`px-3 py-1.5 rounded-[8px] text-[12px] font-semibold capitalize transition-all whitespace-nowrap ${
                 selectedType === type
-                  ? 'bg-[#1FC777] text-[#0C0F0C] font-bold shadow-2xs'
+                  ? 'bg-[#0070BA] text-[#0C0F0C] font-bold shadow-2xs'
                   : 'bg-[#F5F5F4] text-[#6B6B6B] hover:text-[#171717]'
               }`}
             >
@@ -126,10 +126,10 @@ export const LedgerView: React.FC = () => {
                   <tr
                     key={txn.id}
                     onClick={() => openTransactionDetail(txn)}
-                    className="hover:bg-[#E9FAF1]/60 cursor-pointer transition-colors group"
+                    className="hover:bg-[#F0FAFF]/60 cursor-pointer transition-colors group"
                   >
                     <td className="py-3.5 px-4">
-                      <span className="font-mono font-bold text-[13px] text-[#171717] group-hover:text-[#087A4A] block">
+                      <span className="font-mono font-bold text-[13px] text-[#171717] group-hover:text-[#005EA8] block">
                         {txn.id}
                       </span>
                       <span className="text-[11px] text-[#78716C]">
@@ -171,7 +171,7 @@ export const LedgerView: React.FC = () => {
                       {txn.fee > 0 ? formatINR(txn.fee, { decimals: 2 }) : '₹0.00'}
                     </td>
 
-                    <td className="py-3.5 px-4 font-bold text-[#087A4A] tabular-nums">
+                    <td className="py-3.5 px-4 font-bold text-[#005EA8] tabular-nums">
                       {formatINR(txn.runningBalance, { decimals: 2 })}
                     </td>
 
@@ -180,7 +180,7 @@ export const LedgerView: React.FC = () => {
                     </td>
 
                     <td className="py-3.5 px-4 text-right">
-                      <button className="text-[12px] font-semibold text-[#087A4A] group-hover:underline">
+                      <button className="text-[12px] font-semibold text-[#005EA8] group-hover:underline">
                         Receipt
                       </button>
                     </td>

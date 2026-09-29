@@ -72,7 +72,7 @@ export const HowItWorksPage: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-16 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Platform Workflow
           </div>
           <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
@@ -88,10 +88,10 @@ export const HowItWorksPage: React.FC = () => {
           {journey.map((item) => (
             <div
               key={item.step}
-              className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:border-[#1FC777] transition-all"
+              className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:border-[#0070BA] transition-all"
             >
               <div className="space-y-2 max-w-2xl">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#087A4A] tracking-wide">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#005EA8] tracking-wide">
                   <span>{item.step}</span>
                   <span aria-hidden="true">·</span>
                   <span className="uppercase">{item.phase}</span>
@@ -106,7 +106,7 @@ export const HowItWorksPage: React.FC = () => {
                 </p>
 
                 <div className="pt-1 text-xs text-[#171A17] font-semibold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#12A560]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#16803C]" />
                   <span>{item.highlight}</span>
                 </div>
               </div>

@@ -17,7 +17,7 @@ export const BottomNav: React.FC = () => {
       <button
         onClick={() => setCurrentView('app-dashboard')}
         className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
-          isHomeActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
+          isHomeActive ? 'text-[#005EA8] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <LayoutDashboard className="w-5 h-5" />
@@ -28,7 +28,7 @@ export const BottomNav: React.FC = () => {
       <button
         onClick={() => setCurrentView('app-markets')}
         className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
-          isMarketsActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
+          isMarketsActive ? 'text-[#005EA8] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <Compass className="w-5 h-5" />
@@ -39,7 +39,7 @@ export const BottomNav: React.FC = () => {
       <div className="relative -top-3">
         <button
           onClick={() => openBuySell('buy')}
-          className="w-12 h-12 rounded-full bg-[#1FC777] text-[#0C0F0C] flex items-center justify-center shadow-md hover:bg-[#18B36A] active:scale-95 transition-transform cursor-pointer font-bold"
+          className="w-12 h-12 rounded-full bg-[#0070BA] text-[#0C0F0C] flex items-center justify-center shadow-md hover:bg-[#005EA8] active:scale-95 transition-transform cursor-pointer font-bold"
           aria-label="Open Trading Drawer"
         >
           <ArrowLeftRight className="w-5 h-5" />
@@ -50,7 +50,7 @@ export const BottomNav: React.FC = () => {
       <button
         onClick={() => setCurrentView('app-portfolio')}
         className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
-          isPortfolioActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
+          isPortfolioActive ? 'text-[#005EA8] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <PieChart className="w-5 h-5" />
@@ -61,7 +61,7 @@ export const BottomNav: React.FC = () => {
       <button
         onClick={() => setCurrentView('app-profile')}
         className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] transition-colors cursor-pointer ${
-          isProfileActive ? 'text-[#087A4A] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
+          isProfileActive ? 'text-[#005EA8] font-bold' : 'text-[#6B6B63] hover:text-[#171A17]'
         }`}
       >
         <User className="w-5 h-5" />

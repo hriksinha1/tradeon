@@ -38,7 +38,7 @@ export const MarketingNavbar: React.FC = () => {
       <div className="bg-[#171A17] text-white text-[12px] px-4 sm:px-8 py-2 flex items-center justify-between border-b border-[#2A2A26]">
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#1FC777]" />
+            <span className="w-2 h-2 rounded-full bg-[#0070BA]" />
             <span className="font-semibold text-white/95">Client Pre-Advance Presentation</span>
             <span className="text-white/40 hidden sm:inline">|</span>
             <span className="text-white/70 hidden sm:inline">
@@ -49,7 +49,7 @@ export const MarketingNavbar: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsDossierOpen(true)}
-              className="flex items-center gap-1.5 text-[11px] font-bold text-[#1FC777] hover:text-[#3ACF8B] transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 text-[11px] font-bold text-[#0070BA] hover:text-[#3ACF8B] transition-colors cursor-pointer"
             >
               <BookOpen className="w-3.5 h-3.5" />
               <span>Color & Design System PDF</span>
@@ -57,7 +57,7 @@ export const MarketingNavbar: React.FC = () => {
             <span className="text-white/30 hidden md:inline">|</span>
             <button
               onClick={() => handleNavClick('app-preview')}
-              className="hidden md:flex items-center gap-1.5 text-[11px] font-bold text-white hover:text-[#1FC777] transition-colors cursor-pointer"
+              className="hidden md:flex items-center gap-1.5 text-[11px] font-bold text-white hover:text-[#0070BA] transition-colors cursor-pointer"
             >
               <Smartphone className="w-3.5 h-3.5" />
               <span>Interactive App Preview</span>
@@ -80,7 +80,7 @@ export const MarketingNavbar: React.FC = () => {
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-2.5 text-left focus:outline-none cursor-pointer group"
           >
-            <div className="w-9 h-9 rounded-[10px] bg-[#1FC777] flex items-center justify-center text-[#0C0F0C] font-black text-[18px] tracking-tight group-hover:bg-[#18B36A] transition-colors shadow-2xs">
+            <div className="w-9 h-9 rounded-[10px] bg-[#0070BA] flex items-center justify-center text-[#0C0F0C] font-black text-[18px] tracking-tight group-hover:bg-[#005EA8] transition-colors shadow-2xs">
               T
             </div>
             <div>
@@ -103,13 +103,13 @@ export const MarketingNavbar: React.FC = () => {
                   onClick={() => handleNavClick(link.view)}
                   className={`text-[15px] font-medium transition-colors cursor-pointer py-1 relative ${
                     isActive
-                      ? 'text-[#087A4A] font-bold'
+                      ? 'text-[#005EA8] font-bold'
                       : 'text-[#5A5A53] hover:text-[#171717]'
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#1FC777] rounded-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0070BA] rounded-full" />
                   )}
                 </button>
               );
@@ -170,7 +170,7 @@ export const MarketingNavbar: React.FC = () => {
                   key={link.view}
                   onClick={() => handleNavClick(link.view)}
                   className={`text-left text-[16px] font-semibold py-1.5 ${
-                    currentView === link.view ? 'text-[#087A4A]' : 'text-[#171717]'
+                    currentView === link.view ? 'text-[#005EA8]' : 'text-[#171717]'
                   }`}
                 >
                   {link.label}

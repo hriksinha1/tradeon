@@ -124,7 +124,7 @@ export const WhatTradeonIsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-14 sm:mb-18 space-y-4">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             The Complete Product
           </div>
           <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -153,7 +153,7 @@ export const WhatTradeonIsSection: React.FC = () => {
                   onClick={() => setActiveStepIndex(idx)}
                   className={`w-full text-left p-4 rounded-[14px] transition-all flex items-center justify-between border cursor-pointer ${
                     isActive
-                      ? 'bg-[#F7F6F2] border-[#1FC777] shadow-xs'
+                      ? 'bg-[#F7F6F2] border-[#0070BA] shadow-xs'
                       : 'bg-transparent border-transparent hover:bg-[#F7F6F2]/60 hover:border-[#E2E1DA]'
                   }`}
                 >
@@ -161,7 +161,7 @@ export const WhatTradeonIsSection: React.FC = () => {
                     <div
                       className={`w-9 h-9 rounded-[10px] flex items-center justify-center transition-colors ${
                         isActive
-                          ? 'bg-[#1FC777] text-[#0C0F0C]'
+                          ? 'bg-[#0070BA] text-[#0C0F0C]'
                           : 'bg-[#EFEEE9] text-[#5A5A53]'
                       }`}
                     >
@@ -182,7 +182,7 @@ export const WhatTradeonIsSection: React.FC = () => {
 
                   <ArrowRight
                     className={`w-4 h-4 transition-transform ${
-                      isActive ? 'text-[#087A4A] translate-x-1' : 'text-[#CBCAC2]'
+                      isActive ? 'text-[#005EA8] translate-x-1' : 'text-[#CBCAC2]'
                     }`}
                   />
                 </button>
@@ -194,11 +194,11 @@ export const WhatTradeonIsSection: React.FC = () => {
           <div className="lg:col-span-7 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[24px] p-6 sm:p-10 space-y-8">
             <div className="flex items-center justify-between border-b border-[#E2E1DA] pb-5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-[12px] bg-[#1FC777] text-[#0C0F0C] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-[12px] bg-[#0070BA] text-[#0C0F0C] flex items-center justify-center font-bold">
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-[#087A4A] uppercase tracking-wider block">
+                  <span className="text-xs font-semibold text-[#005EA8] uppercase tracking-wider block">
                     {current.kicker}
                   </span>
                   <h3 className="text-[22px] font-bold text-[#171A17]">{current.name} Experience</h3>
@@ -223,7 +223,7 @@ export const WhatTradeonIsSection: React.FC = () => {
             <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[16px] p-5 shadow-2xs space-y-3">
               <div className="flex items-center justify-between text-xs text-[#6B6B63]">
                 <span className="font-semibold text-[#171A17]">{current.previewSnippet.label}</span>
-                <span className="text-[#087A4A] flex items-center gap-1 font-medium">
+                <span className="text-[#005EA8] flex items-center gap-1 font-medium">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Live in Platform
                 </span>
@@ -248,7 +248,7 @@ export const WhatTradeonIsSection: React.FC = () => {
                 className="w-full sm:w-auto px-5 py-2.5 bg-[#171A17] text-[#FFFFFF] hover:bg-[#0C0F0C] font-semibold text-sm rounded-[10px] transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Preview {current.name} in interactive terminal</span>
-                <ArrowRight className="w-4 h-4 text-[#1FC777]" />
+                <ArrowRight className="w-4 h-4 text-[#0070BA]" />
               </button>
 
               <button
@@ -256,7 +256,7 @@ export const WhatTradeonIsSection: React.FC = () => {
                   setCurrentView('how-it-works');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="text-xs font-semibold text-[#087A4A] hover:underline cursor-pointer"
+                className="text-xs font-semibold text-[#005EA8] hover:underline cursor-pointer"
               >
                 Read full {current.name.toLowerCase()} specification →
               </button>

@@ -50,7 +50,7 @@ export const PaymentsPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-14 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Payment Rails & Wallet
           </div>
           <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
@@ -76,7 +76,7 @@ export const PaymentsPage: React.FC = () => {
             <div className="pt-3 border-t border-[#EFEEE9]">
               <button
                 onClick={() => setIsAddFundsOpen(true)}
-                className="text-xs font-bold text-[#087A4A] hover:underline cursor-pointer flex items-center gap-1"
+                className="text-xs font-bold text-[#005EA8] hover:underline cursor-pointer flex items-center gap-1"
               >
                 <span>Add funds via UPI →</span>
               </button>
@@ -87,7 +87,7 @@ export const PaymentsPage: React.FC = () => {
             <span className="text-xs font-bold text-[#6B6B63] uppercase tracking-wider block">
               Allocated Product Equity
             </span>
-            <div className="text-[32px] font-extrabold text-[#087A4A] tabular-nums">
+            <div className="text-[32px] font-extrabold text-[#005EA8] tabular-nums">
               {formatINR(wallet.totalValue - wallet.availableBalance)}
             </div>
             <p className="text-xs text-[#5A5A53]">
@@ -96,7 +96,7 @@ export const PaymentsPage: React.FC = () => {
             <div className="pt-3 border-t border-[#EFEEE9]">
               <button
                 onClick={() => setCurrentView('app-portfolio')}
-                className="text-xs font-bold text-[#087A4A] hover:underline cursor-pointer flex items-center gap-1"
+                className="text-xs font-bold text-[#005EA8] hover:underline cursor-pointer flex items-center gap-1"
               >
                 <span>View holdings breakdown →</span>
               </button>
@@ -108,7 +108,7 @@ export const PaymentsPage: React.FC = () => {
               Ledger Trace Status
             </span>
             <div className="flex items-center gap-2 pt-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#12A560]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#16803C]" />
               <span className="text-[24px] font-bold text-[#171A17]">Reconciled</span>
             </div>
             <p className="text-xs text-[#5A5A53]">
@@ -117,7 +117,7 @@ export const PaymentsPage: React.FC = () => {
             <div className="pt-3 border-t border-[#EFEEE9]">
               <button
                 onClick={() => setCurrentView('app-ledger')}
-                className="text-xs font-bold text-[#087A4A] hover:underline cursor-pointer flex items-center gap-1"
+                className="text-xs font-bold text-[#005EA8] hover:underline cursor-pointer flex items-center gap-1"
               >
                 <span>Audit full ledger →</span>
               </button>
@@ -140,7 +140,7 @@ export const PaymentsPage: React.FC = () => {
             {lifecycleStages.map((stage) => (
               <div key={stage.num} className="p-5 bg-[#F7F6F2] rounded-[18px] border border-[#E2E1DA] space-y-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-bold text-[#087A4A]">{stage.num}</span>
+                  <span className="font-bold text-[#005EA8]">{stage.num}</span>
                   <span className="text-[#6B6B63]">{stage.badge}</span>
                 </div>
                 <h3 className="font-bold text-[16px] text-[#171A17]">{stage.title}</h3>

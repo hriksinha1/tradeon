@@ -25,7 +25,7 @@ export const OptionsPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12 space-y-3">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Structured Contracts
           </div>
           <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
@@ -59,7 +59,7 @@ export const OptionsPage: React.FC = () => {
           </div>
 
           <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[20px] p-6 shadow-2xs space-y-3">
-            <div className="text-xs font-bold text-[#087A4A] uppercase tracking-wider">
+            <div className="text-xs font-bold text-[#005EA8] uppercase tracking-wider">
               Automatic Settlement
             </div>
             <h3 className="text-[20px] font-bold text-[#171A17]">Cash Settlement</h3>
@@ -87,7 +87,7 @@ export const OptionsPage: React.FC = () => {
                 onClick={() => setSelectedType('all')}
                 className={`px-3 py-1.5 rounded-[7px] text-[12px] font-semibold cursor-pointer ${
                   selectedType === 'all'
-                    ? 'bg-[#1FC777] text-[#0C0F0C]'
+                    ? 'bg-[#0070BA] text-[#0C0F0C]'
                     : 'text-[#5A5A53] hover:text-[#171A17]'
                 }`}
               >
@@ -97,7 +97,7 @@ export const OptionsPage: React.FC = () => {
                 onClick={() => setSelectedType('call')}
                 className={`px-3 py-1.5 rounded-[7px] text-[12px] font-semibold cursor-pointer ${
                   selectedType === 'call'
-                    ? 'bg-[#1FC777] text-[#0C0F0C]'
+                    ? 'bg-[#0070BA] text-[#0C0F0C]'
                     : 'text-[#5A5A53] hover:text-[#171A17]'
                 }`}
               >
@@ -107,7 +107,7 @@ export const OptionsPage: React.FC = () => {
                 onClick={() => setSelectedType('put')}
                 className={`px-3 py-1.5 rounded-[7px] text-[12px] font-semibold cursor-pointer ${
                   selectedType === 'put'
-                    ? 'bg-[#1FC777] text-[#0C0F0C]'
+                    ? 'bg-[#0070BA] text-[#0C0F0C]'
                     : 'text-[#5A5A53] hover:text-[#171A17]'
                 }`}
               >
@@ -149,7 +149,7 @@ export const OptionsPage: React.FC = () => {
                       <td className="py-4 px-4 text-right font-bold text-[#171A17] tabular-nums">
                         {formatINR(opt.strike)}
                       </td>
-                      <td className="py-4 px-4 text-right font-bold text-[#087A4A] tabular-nums">
+                      <td className="py-4 px-4 text-right font-bold text-[#005EA8] tabular-nums">
                         {formatINR(opt.premium, { decimals: 2 })}
                       </td>
                       <td className="py-4 px-4 text-[#5A5A53] flex items-center gap-1.5">

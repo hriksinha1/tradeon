@@ -23,7 +23,7 @@ export const HeroSection: React.FC = () => {
         {/* Top Text Content */}
         <div className="max-w-3xl mx-auto text-center space-y-5">
           {/* Quiet text kicker - zero pill */}
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#087A4A] tracking-wide uppercase">
+          <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#005EA8] tracking-wide uppercase">
             <span>Marketplace Platform</span>
             <span aria-hidden="true">·</span>
             <span>Web, iOS & Android</span>
@@ -33,12 +33,12 @@ export const HeroSection: React.FC = () => {
 
           {/* Primary Headline */}
           <h1 className="text-[42px] sm:text-[62px] lg:text-[70px] font-extrabold tracking-tight text-[#171A17] leading-[1.08] text-balance">
-            Trading shouldn't feel harder than it is.
+            Trade with more context.
           </h1>
 
           {/* Supporting Human Copy */}
           <p className="text-[18px] sm:text-[21px] text-[#5A5A53] max-w-2xl mx-auto leading-relaxed font-normal">
-            Discover listed products, place orders, move money and keep every transaction in view — with zero noise and complete clarity.
+            Discover products, understand the numbers, review the impact, and place orders from one clear workspace.
           </p>
 
           {/* CTAs */}
@@ -52,7 +52,7 @@ export const HeroSection: React.FC = () => {
               }}
               className="flex items-center gap-2 w-full sm:w-auto shadow-xs cursor-pointer font-bold"
             >
-              <span>Explore the platform</span>
+              <span>Explore Tradeon</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
 
@@ -94,8 +94,8 @@ export const HeroSection: React.FC = () => {
                 <span className="w-2.5 h-2.5 rounded-full bg-[#CBCAC2]" />
                 <span className="ml-3 font-mono text-[11px] text-[#6B6B63]">tradeon.exchange/products</span>
               </div>
-              <div className="text-[11px] text-[#087A4A] font-semibold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#12A560]" />
+              <div className="text-[11px] text-[#005EA8] font-semibold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0070BA]" />
                 <span>Live Marketplace</span>
               </div>
             </div>
@@ -157,7 +157,7 @@ export const HeroSection: React.FC = () => {
                   <div className="text-[18px] font-bold text-[#171A17] mt-1">
                     Direct Reconciled
                   </div>
-                  <div className="text-[11px] text-[#087A4A] mt-0.5 font-medium">Reconciled to wallet balance</div>
+                  <div className="text-[11px] text-[#005EA8] mt-0.5 font-medium">Reconciled to wallet balance</div>
                 </div>
               </div>
             </div>
@@ -167,7 +167,7 @@ export const HeroSection: React.FC = () => {
           <div className="hidden lg:block absolute -left-10 -bottom-8 w-72 bg-[#FFFFFF] border border-[#CBCAC2] rounded-[28px] shadow-[0_20px_45px_rgba(0,0,0,0.12)] p-4 text-left z-20 transition-transform hover:-translate-y-1">
             <div className="flex items-center justify-between pb-3 border-b border-[#EFEEE9] text-xs font-semibold text-[#171A17]">
               <span>Wallet balance</span>
-              <span className="text-[11px] text-[#087A4A]">Reconciled</span>
+              <span className="text-[11px] text-[#005EA8]">Reconciled</span>
             </div>
 
             <div className="mt-3">
@@ -195,7 +195,7 @@ export const HeroSection: React.FC = () => {
             <div className="mt-2 text-[15px] font-bold text-white">ATLAS-C 2500</div>
             <div className="mt-2 p-2 bg-[#2A2A26] rounded-[8px] flex items-center justify-between text-xs">
               <span className="text-[#A3A29A]">Premium</span>
-              <span className="font-bold text-[#1FC777] tabular-nums">₹79.80</span>
+              <span className="font-bold text-[#60CDFF] tabular-nums">₹79.80</span>
             </div>
             <div className="mt-2 text-[10px] text-[#A3A29A]">
               Predefined strike level · Bounded risk

@@ -64,7 +64,7 @@ export const HelpSupportView: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search articles and FAQs (e.g. withdrawal, order type)..."
-            className="w-full pl-9 pr-4 py-2.5 bg-white border border-[#E7E5E4] rounded-[12px] text-[14px] text-[#171717] focus:outline-[#087A4A] shadow-2xs"
+            className="w-full pl-9 pr-4 py-2.5 bg-white border border-[#E7E5E4] rounded-[12px] text-[14px] text-[#171717] focus:outline-[#005EA8] shadow-2xs"
           />
         </div>
       </div>
@@ -77,7 +77,7 @@ export const HelpSupportView: React.FC = () => {
             onClick={() => setSelectedCat(c)}
             className={`px-3 py-1 rounded-[8px] text-[12px] font-semibold transition-all whitespace-nowrap ${
               selectedCat === c
-                ? 'bg-[#1FC777] text-[#0C0F0C] font-bold'
+                ? 'bg-[#0070BA] text-[#0C0F0C] font-bold'
                 : 'bg-white border border-[#E7E5E4] text-[#6B6B6B] hover:text-[#171717]'
             }`}
           >
@@ -90,7 +90,7 @@ export const HelpSupportView: React.FC = () => {
       <div className="space-y-3">
         {filtered.map((item, idx) => (
           <div key={idx} className="p-4 bg-white border border-[#E7E5E4] rounded-[14px] shadow-2xs space-y-1">
-            <span className="text-[11px] font-bold text-[#087A4A] uppercase tracking-wider block">
+            <span className="text-[11px] font-bold text-[#005EA8] uppercase tracking-wider block">
               {item.cat}
             </span>
             <h4 className="text-[15px] font-bold text-[#171717]">{item.title}</h4>
@@ -102,7 +102,7 @@ export const HelpSupportView: React.FC = () => {
       {/* Contact Support Form */}
       <div className="p-6 bg-white border border-[#E7E5E4] rounded-[18px] shadow-xs space-y-4">
         <div className="flex items-center gap-2">
-          <MessageSquare className="w-5 h-5 text-[#087A4A]" />
+          <MessageSquare className="w-5 h-5 text-[#005EA8]" />
           <h3 className="text-[17px] font-bold text-[#171717]">Contact Support Desk</h3>
         </div>
 
@@ -127,7 +127,7 @@ export const HelpSupportView: React.FC = () => {
                 value={ticketSubject}
                 onChange={(e) => setTicketSubject(e.target.value)}
                 placeholder="Brief summary of inquiry"
-                className="w-full px-3 py-2 border border-[#E7E5E4] rounded-[8px] text-[13px] focus:outline-[#087A4A]"
+                className="w-full px-3 py-2 border border-[#E7E5E4] rounded-[8px] text-[13px] focus:outline-[#005EA8]"
               />
             </div>
             <div>
@@ -138,7 +138,7 @@ export const HelpSupportView: React.FC = () => {
                 value={ticketMessage}
                 onChange={(e) => setTicketMessage(e.target.value)}
                 placeholder="Provide relevant order ID or transaction reference if applicable..."
-                className="w-full px-3 py-2 border border-[#E7E5E4] rounded-[8px] text-[13px] focus:outline-[#087A4A]"
+                className="w-full px-3 py-2 border border-[#E7E5E4] rounded-[8px] text-[13px] focus:outline-[#005EA8]"
               />
             </div>
             <Button type="submit" size="md" className="flex items-center gap-2">

@@ -36,7 +36,7 @@ export const HomepageSecuritySection: React.FC = () => {
     <section className="py-20 sm:py-28 bg-[#FFFFFF] border-b border-[#CBCAC2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="max-w-3xl mb-14 sm:mb-18 space-y-4">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             Trust & Control
           </div>
           <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -54,9 +54,9 @@ export const HomepageSecuritySection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="p-7 rounded-[20px] bg-[#F7F6F2] border border-[#CBCAC2] space-y-4 transition-all hover:border-[#1FC777]"
+                className="p-7 rounded-[20px] bg-[#F7F6F2] border border-[#CBCAC2] space-y-4 transition-all hover:border-[#0070BA]"
               >
-                <div className="w-10 h-10 rounded-[12px] bg-[#FFFFFF] border border-[#E2E1DA] text-[#087A4A] flex items-center justify-center font-bold shadow-2xs">
+                <div className="w-10 h-10 rounded-[12px] bg-[#FFFFFF] border border-[#E2E1DA] text-[#005EA8] flex items-center justify-center font-bold shadow-2xs">
                   <Icon className="w-5 h-5" />
                 </div>
 
@@ -88,7 +88,7 @@ export const HomepageSecuritySection: React.FC = () => {
               setCurrentView('security');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="inline-flex items-center gap-2 text-xs font-bold text-[#087A4A] hover:underline cursor-pointer whitespace-nowrap"
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#005EA8] hover:underline cursor-pointer whitespace-nowrap"
           >
             <span>Read full security architecture</span>
             <ArrowRight className="w-3.5 h-3.5" />

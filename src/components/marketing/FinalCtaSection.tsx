@@ -9,7 +9,7 @@ export const FinalCtaSection: React.FC = () => {
   return (
     <section className="py-20 sm:py-32 bg-[#FFFFFF] border-b border-[#CBCAC2]">
       <div className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-6">
-        <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+        <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
           Interactive Preview
         </div>
 

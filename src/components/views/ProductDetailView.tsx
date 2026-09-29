@@ -91,7 +91,7 @@ export const ProductDetailView: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#E7E5E4]">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-[12px] font-bold text-[#087A4A] uppercase tracking-wider bg-[#E9FAF1] px-2.5 py-0.5 rounded-[6px] border border-[#CFF3E0]">
+              <span className="text-[12px] font-bold text-[#005EA8] uppercase tracking-wider bg-[#F0FAFF] px-2.5 py-0.5 rounded-[6px] border border-[#DFF6FF]">
                 {product.category}
               </span>
               <span className="text-[12px] text-[#78716C] font-mono">{product.id}</span>
@@ -166,7 +166,7 @@ export const ProductDetailView: React.FC = () => {
                   onClick={() => setPeriod(p)}
                   className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold transition-all ${
                     period === p
-                      ? 'bg-white text-[#087A4A] shadow-2xs'
+                      ? 'bg-white text-[#005EA8] shadow-2xs'
                       : 'text-[#6B6B6B] hover:text-[#171717]'
                   }`}
                 >
@@ -177,19 +177,19 @@ export const ProductDetailView: React.FC = () => {
           </div>
 
           {/* SVG Chart */}
-          <div className="w-full h-56 sm:h-64 bg-[#E9FAF1]/50 rounded-[14px] p-3 border border-[#CFF3E0] relative overflow-hidden">
+          <div className="w-full h-56 sm:h-64 bg-[#F0FAFF]/50 rounded-[14px] p-3 border border-[#DFF6FF] relative overflow-hidden">
             <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-full preserve-3d">
               <defs>
                 <linearGradient id="prodDetailGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#087A4A" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#087A4A" stopOpacity="0.0" />
+                  <stop offset="0%" stopColor="#005EA8" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#005EA8" stopOpacity="0.0" />
                 </linearGradient>
               </defs>
               <path d={areaD} fill="url(#prodDetailGrad)" />
               <path
                 d={pathD}
                 fill="none"
-                stroke="#087A4A"
+                stroke="#005EA8"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -234,7 +234,7 @@ export const ProductDetailView: React.FC = () => {
           <h3 className="text-[17px] font-bold text-[#171717] mb-3">Your Position in this Listing</h3>
           {holding ? (
             <div className="space-y-4">
-              <div className="grid grid-cols-3 gap-3 p-3.5 bg-[#E9FAF1] border border-[#CFF3E0] rounded-[12px] text-[13px]">
+              <div className="grid grid-cols-3 gap-3 p-3.5 bg-[#F0FAFF] border border-[#DFF6FF] rounded-[12px] text-[13px]">
                 <div>
                   <span className="text-[#78716C] block text-[11px] font-semibold uppercase">Holding</span>
                   <span className="font-bold text-[#171717] text-[16px] tabular-nums">
@@ -289,7 +289,7 @@ export const ProductDetailView: React.FC = () => {
                 onClick={() => {
                   setSelectedProductId(item.id);
                 }}
-                className="p-3 bg-[#FAFAF9] hover:bg-[#E9FAF1] border border-[#E7E5E4] hover:border-[#CFF3E0] rounded-[12px] cursor-pointer transition-colors flex items-center justify-between"
+                className="p-3 bg-[#FAFAF9] hover:bg-[#F0FAFF] border border-[#E7E5E4] hover:border-[#DFF6FF] rounded-[12px] cursor-pointer transition-colors flex items-center justify-between"
               >
                 <div>
                   <span className="font-bold text-[14px] text-[#171717] block">{item.name}</span>

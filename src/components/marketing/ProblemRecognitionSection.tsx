@@ -31,7 +31,7 @@ export const ProblemRecognitionSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Editorial Section Intro */}
         <div className="max-w-3xl mb-14 sm:mb-18 space-y-4">
-          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
             A More Honest Approach
           </div>
           <h2 className="text-[34px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
@@ -57,7 +57,7 @@ export const ProblemRecognitionSection: React.FC = () => {
 
               {/* Caption Overlay */}
               <div className="absolute bottom-5 left-5 right-5 text-white p-4 bg-[#0C0F0C]/70 backdrop-blur-md rounded-[16px] border border-white/10">
-                <div className="text-xs text-[#1FC777] font-semibold uppercase tracking-wider">
+                <div className="text-xs text-[#0070BA] font-semibold uppercase tracking-wider">
                   The Human Context
                 </div>
                 <div className="text-[15px] font-bold mt-1 leading-snug">
@@ -71,7 +71,7 @@ export const ProblemRecognitionSection: React.FC = () => {
 
             {/* Subtle floating assurance pill */}
             <div className="hidden sm:flex absolute -bottom-5 -right-5 bg-[#FFFFFF] border border-[#CBCAC2] rounded-[16px] p-3.5 shadow-md items-center gap-3">
-              <div className="w-8 h-8 rounded-[10px] bg-[#E9FAF1] text-[#087A4A] flex items-center justify-center font-bold">
+              <div className="w-8 h-8 rounded-[10px] bg-[#F0FAFF] text-[#005EA8] flex items-center justify-center font-bold">
                 <CheckCircle2 className="w-4 h-4" />
               </div>
               <div className="text-xs">
@@ -86,7 +86,7 @@ export const ProblemRecognitionSection: React.FC = () => {
             <div className="space-y-8 divide-y divide-[#E2E1DA]">
               {observations.map((item, idx) => (
                 <div key={idx} className={idx === 0 ? '' : 'pt-7'}>
-                  <div className="text-xs font-bold text-[#087A4A] uppercase tracking-wider mb-2">
+                  <div className="text-xs font-bold text-[#005EA8] uppercase tracking-wider mb-2">
                     {item.kicker}
                   </div>
                   <h3 className="text-[20px] sm:text-[23px] font-bold text-[#171A17] tracking-tight leading-snug">
@@ -106,7 +106,7 @@ export const ProblemRecognitionSection: React.FC = () => {
                   setCurrentView('how-it-works');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 text-[15px] font-bold text-[#087A4A] hover:text-[#065A36] cursor-pointer"
+                className="inline-flex items-center gap-2 text-[15px] font-bold text-[#005EA8] hover:text-[#065A36] cursor-pointer"
               >
                 <span>Follow the journey from discovery to settlement</span>
                 <ArrowRight className="w-4 h-4" />
