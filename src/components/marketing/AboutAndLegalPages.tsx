@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { useTrading } from '../../context/TradingContext';
-import { ViewMode } from '../../types';
 import { Button } from '../common/Button';
 import {
-  ShieldCheck,
   Mail,
   Send,
   Phone,
   MapPin,
   CheckCircle2,
-  HelpCircle,
-  FileText,
-  Lock,
+  ArrowRight,
+  Sparkles,
 } from 'lucide-react';
 
 interface Props {
@@ -24,6 +21,8 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
   // Contact form state
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [contactReason, setContactReason] = useState('Marketplace inquiry');
   const [contactMessage, setContactMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -31,25 +30,25 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
     e.preventDefault();
     setSubmitted(true);
     showToast(
-      'Message Received',
-      'Thank you for contacting Tradeon product operations. We will reply within 4 business hours.',
+      'Inquiry Sent',
+      'Thank you for reaching out. A product specialist will contact you shortly.',
       'success'
     );
   };
 
   if (page === 'contact') {
     return (
-      <div className="bg-[#F7F6F2] min-h-screen py-12 sm:py-16">
+      <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3.5 py-1 rounded-full border border-[#CFF3E0]">
+          <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+            <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
               Get in Touch
-            </span>
-            <h1 className="text-[36px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight mt-3">
-              Contact Product Operations
+            </div>
+            <h1 className="text-[38px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
+              Talk to our product team.
             </h1>
-            <p className="mt-2 text-[16px] text-[#5A5A53]">
-              Have questions regarding market listings, enterprise liquidity, or custom matching rules? Reach out directly.
+            <p className="text-[17px] text-[#5A5A53]">
+              Have questions regarding market listings, order matching mechanics, or commercial platform deployment? We'd love to connect.
             </p>
           </div>
 
@@ -57,22 +56,22 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
             <div className="md:col-span-7 bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-6 sm:p-8 shadow-xs">
               {submitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-[#E3F6EC] text-[#0A7A45] flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-12 h-12 rounded-full bg-[#E9FAF1] text-[#087A4A] flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6 text-[#12A560]" />
                   </div>
-                  <h3 className="text-[20px] font-bold text-[#171A17]">Message Dispatched</h3>
+                  <h3 className="text-[20px] font-bold text-[#171A17]">Message Received</h3>
                   <p className="text-[14px] text-[#5A5A53] max-w-md mx-auto">
-                    Your inquiry has been logged in our institutional support ticketing queue. A product consultant will contact you shortly.
+                    Your inquiry has been received by our product operations team. We typically respond within one business day.
                   </p>
-                  <Button variant="outline" onClick={() => setSubmitted(false)}>
-                    Send Another Message
+                  <Button variant="outline" size="sm" onClick={() => setSubmitted(false)}>
+                    Send another message
                   </Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmitContact} className="space-y-4">
                   <div>
-                    <label className="block text-[13px] font-bold text-[#171A17] mb-1">
-                      Full Name
+                    <label className="block text-xs font-bold text-[#171A17] mb-1">
+                      Your full name
                     </label>
                     <input
                       type="text"
@@ -80,35 +79,65 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                       placeholder="e.g. Vikram Mehta"
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
                     />
                   </div>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-[#171A17] mb-1">
+                        Email address
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="name@company.com"
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-[#171A17] mb-1">
+                        Phone number
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+91 (optional)"
+                        value={contactPhone}
+                        onChange={(e) => setContactPhone(e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="block text-[13px] font-bold text-[#171A17] mb-1">
-                      Email Address
+                    <label className="block text-xs font-bold text-[#171A17] mb-1">
+                      Reason for contacting
                     </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="vikram@example.com"
-                      value={contactEmail}
-                      onChange={(e) => setContactEmail(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
-                    />
+                    <select
+                      value={contactReason}
+                      onChange={(e) => setContactReason(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                    >
+                      <option value="Marketplace inquiry">Marketplace inquiry</option>
+                      <option value="Product listing partnership">Product listing partnership</option>
+                      <option value="Technical architecture">Technical architecture</option>
+                      <option value="Other question">Other question</option>
+                    </select>
                   </div>
 
                   <div>
-                    <label className="block text-[13px] font-bold text-[#171A17] mb-1">
-                      Message / Requirement
+                    <label className="block text-xs font-bold text-[#171A17] mb-1">
+                      How can we help?
                     </label>
                     <textarea
                       required
                       rows={4}
-                      placeholder="Describe your inquiry or platform question..."
+                      placeholder="Share a brief overview of your inquiry or requirements..."
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] focus:outline-[#087A4A] focus:bg-white"
                     />
                   </div>
 
@@ -117,7 +146,7 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                     className="w-full py-3 bg-[#1FC777] hover:bg-[#18B36A] text-[#0C0F0C] font-bold text-[14px] rounded-[10px] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Transmit Message</span>
+                    <span>Send inquiry</span>
                   </button>
                 </form>
               )}
@@ -126,10 +155,10 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
             <div className="md:col-span-5 space-y-4">
               <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[20px] p-6 shadow-2xs space-y-4">
                 <h3 className="text-[17px] font-bold text-[#171A17]">Direct Contacts</h3>
-                <div className="space-y-3 text-[13px] text-[#5A5A53]">
+                <div className="space-y-3 text-xs text-[#5A5A53]">
                   <div className="flex items-center gap-2.5">
                     <Mail className="w-4 h-4 text-[#087A4A]" />
-                    <span>operations@tradeon.exchange</span>
+                    <span>team@tradeon.exchange</span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <Phone className="w-4 h-4 text-[#087A4A]" />
@@ -137,15 +166,15 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
                   </div>
                   <div className="flex items-center gap-2.5">
                     <MapPin className="w-4 h-4 text-[#087A4A]" />
-                    <span>Fintech District, Bengaluru, Karnataka</span>
+                    <span>Bengaluru, Karnataka, India</span>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-[#E9FAF1] border border-[#A2E8C5] rounded-[20px] p-6 text-[13px] text-[#087A4A] space-y-2">
-                <h4 className="font-bold text-[14px] text-[#0C0F0C]">Production SLAs</h4>
-                <p>
-                  Urgent gateway reconciliations and settlement disputes are prioritized with guaranteed sub-15 minute callback times.
+              <div className="bg-white border border-[#CBCAC2] rounded-[20px] p-6 text-xs text-[#5A5A53] space-y-2">
+                <h4 className="font-bold text-[14px] text-[#171A17]">Platform Status</h4>
+                <p className="leading-relaxed">
+                  Active pre-advance prototype preview. All product models and trading metrics shown are for illustrative verification.
                 </p>
               </div>
             </div>
@@ -157,60 +186,79 @@ export const AboutAndLegalPages: React.FC<Props> = ({ page }) => {
 
   if (page === 'about') {
     return (
-      <div className="bg-[#F7F6F2] min-h-screen py-12 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8">
-          <div>
-            <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3.5 py-1 rounded-full border border-[#CFF3E0]">
-              About Tradeon
-            </span>
-            <h1 className="text-[36px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight mt-3">
-              Institutional Product Exchange Architecture
+      <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-8 space-y-10">
+          <div className="space-y-3">
+            <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+              Design Philosophy
+            </div>
+            <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
+              Why Tradeon exists.
             </h1>
-            <p className="mt-3 text-[17px] text-[#5A5A53] leading-relaxed">
-              Tradeon was engineered from first principles to provide business product and asset owners with a turnkey, high-performance exchange platform.
+            <p className="text-[18px] text-[#5A5A53] leading-relaxed">
+              We started with a simple belief: trading software shouldn't require users to decode cryptic jargon or manage five screens to understand one transaction.
             </p>
           </div>
 
-          <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-8 shadow-xs space-y-6 text-[15px] text-[#5A5A53] leading-relaxed">
-            <h2 className="text-[22px] font-bold text-[#171A17]">Our Philosophy</h2>
-            <p>
-              Traditional marketplaces either force products into ill-fitting crypto tokens or require prohibitively complex securities clearing. Tradeon introduces a clean, neutral asset abstraction layer: products have transparent values, verified available units, and automated double-entry ledger settlements without unnecessary baggage.
-            </p>
+          <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[24px] p-8 sm:p-10 shadow-xs space-y-8 text-[15px] text-[#5A5A53] leading-relaxed">
+            <div className="space-y-3">
+              <h2 className="text-[22px] font-bold text-[#171A17]">
+                A neutral foundation for real business products
+              </h2>
+              <p>
+                Most marketplace architectures either force physical assets into ill-fitting crypto tokens or burden simple products with public stock exchange bureaucracy. Tradeon introduces a clean, neutral asset abstraction: products have transparent values, verified available units, and automated double-entry ledger settlements without unnecessary baggage.
+              </p>
+            </div>
 
-            <h2 className="text-[22px] font-bold text-[#171A17] pt-4 border-t border-[#EFEEE9]">
-              Multi-Platform Native Engineering
-            </h2>
-            <p>
-              We believe financial software should look and perform impeccably regardless of device. Tradeon provides seamless consistency whether viewed on a 1440px multi-monitor desktop terminal, an iPhone 16 Pro running iOS 18 with Dynamic Island notifications, or a Google Pixel 9 Pro with Android 15 Material 3 fluidity.
-            </p>
+            <div className="space-y-3 pt-6 border-t border-[#EFEEE9]">
+              <h2 className="text-[22px] font-bold text-[#171A17]">
+                Calm complexity over sensory overload
+              </h2>
+              <p>
+                Green and red numbers flashing every half-second may look dramatic in movies, but it creates cognitive fatigue in real life. We designed Tradeon using a calming Meadow Green palette and warm neutrals, ensuring that data is legible, decisions feel deliberate, and records remain clear months later.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-6 border-t border-[#EFEEE9]">
+              <h2 className="text-[22px] font-bold text-[#171A17]">
+                True multi-platform parity
+              </h2>
+              <p>
+                Mobile is where modern trading happens. We built Tradeon to treat Apple iOS 18 (with Dynamic Island live activity awareness) and Google Android 15 as primary canvas environments alongside our 1440px desktop baseline.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 
-  // Legal (terms or privacy)
+  // Legal Pages (terms or privacy)
   const isTerms = page === 'terms';
   return (
-    <div className="bg-[#F7F6F2] min-h-screen py-12 sm:py-16">
+    <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8">
         <div>
-          <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3.5 py-1 rounded-full border border-[#CFF3E0]">
-            Legal Document
-          </span>
-          <h1 className="text-[36px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight mt-3">
+          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            Legal Documentation
+          </div>
+          <h1 className="text-[38px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight mt-2">
             {isTerms ? 'Terms of Service' : 'Privacy & Data Protection Policy'}
           </h1>
-          <p className="mt-2 text-[15px] text-[#6B6B63]">
-            Last updated: September 2026 · Confidential Prototype Edition
+          <p className="mt-2 text-xs text-[#6B6B63]">
+            Version 1.0 · Prototype Release · Updated September 2026
           </p>
         </div>
 
-        <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-8 shadow-xs space-y-6 text-[14px] text-[#5A5A53] leading-relaxed">
+        <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[24px] p-8 sm:p-10 shadow-xs space-y-6 text-[14px] text-[#5A5A53] leading-relaxed">
+          <div className="p-4 bg-[#F7F6F2] border border-[#E2E1DA] rounded-[12px] text-xs text-[#171A17]">
+            <strong>Prototype Notice:</strong> This document represents standard operating language for the Tradeon software preview. Final terms and disclosures will be adapted to reflect the client’s confirmed operating model and applicable statutory guidelines upon commercial launch.
+          </div>
+
           <section className="space-y-2">
             <h3 className="text-[17px] font-bold text-[#171A17]">1. Platform Scope & Purpose</h3>
             <p>
-              Tradeon operates as a digital product trading and transaction settlement platform. The platform does not deal in stocks, cryptocurrencies, or conventional public equities. All listed products are supplied and managed directly by the platform operator.
+              Tradeon operates as a digital product trading and transaction settlement platform. The platform does not deal in stocks, cryptocurrencies, gold, silver, or public equities. All listed products are supplied and managed directly by the platform operator.
             </p>
           </section>
 

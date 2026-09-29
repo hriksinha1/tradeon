@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTrading } from '../../context/TradingContext';
 import { formatINR } from '../../constants/designTokens';
 import { Button } from '../common/Button';
@@ -9,8 +9,7 @@ import {
   ArrowDownLeft,
   CheckCircle2,
   Lock,
-  RefreshCw,
-  FileText,
+  ArrowRight,
   CreditCard,
   Building,
   Smartphone,
@@ -18,78 +17,82 @@ import {
 
 export const PaymentsAndLedgerSection: React.FC = () => {
   const { wallet, transactions, setIsAddFundsOpen, setIsWithdrawOpen, setCurrentView } = useTrading();
+  const [selectedTxn, setSelectedTxn] = useState<number>(0);
 
   const previewTransactions = transactions.slice(0, 4);
 
   return (
-    <section className="py-20 bg-[#FFFFFF] border-b border-[#CBCAC2]">
+    <section className="py-24 sm:py-32 bg-[#171A17] text-[#FFFFFF] border-b border-[#2A2A26] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3.5 py-1 rounded-full border border-[#CFF3E0]">
-            Financial Infrastructure
-          </span>
-          <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight mt-3">
-            Payments, wallet, and immutable ledger.
+        {/* Section Header */}
+        <div className="max-w-3xl space-y-4 mb-16">
+          <div className="text-xs font-semibold text-[#1FC777] tracking-wider uppercase">
+            Financial Transparency
+          </div>
+          <h2 className="text-[36px] sm:text-[48px] font-extrabold text-white tracking-tight leading-[1.12]">
+            When you need to know where every rupee went.
           </h2>
-          <p className="mt-3 text-[17px] text-[#5A5A53]">
-            Every rupee deposited, allocated, or withdrawn is recorded in real time with double-entry cryptographic verification.
+          <p className="text-[18px] text-[#A3A29A] leading-relaxed">
+            No mystery balances. No delayed reconciliation. Every unit trade, top-up, and withdrawal is tracked through an immutable double-entry ledger with visible running totals.
           </p>
         </div>
 
+        {/* 2-Column High-Contrast Breakdown */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left: Wallet & Payment Gateway Rails */}
+          {/* Left Column: Internal Wallet & Payment Gateway Rails */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-[#F7F6F2] border border-[#CBCAC2] rounded-[22px] p-6 shadow-xs">
+            <div className="bg-[#2A2A26] border border-[#40403B] rounded-[24px] p-6 sm:p-8 space-y-6">
               <div className="flex items-center justify-between">
-                <span className="text-[12px] font-bold text-[#6B6B63] uppercase tracking-wider">
-                  Internal Trading Wallet
+                <span className="text-xs font-semibold text-[#A3A29A] uppercase tracking-wider">
+                  Internal Wallet
                 </span>
-                <span className="text-[11px] font-bold text-[#087A4A] bg-[#E9FAF1] px-2.5 py-0.5 rounded-full border border-[#CFF3E0]">
-                  Reconciled
+                <span className="text-xs font-bold text-[#1FC777] flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#1FC777]" />
+                  <span>Real-time reconciled</span>
                 </span>
               </div>
 
-              {/* Total Balance */}
-              <div className="mt-4">
-                <div className="text-[36px] font-extrabold text-[#171A17] tabular-nums">
+              <div>
+                <span className="text-xs text-[#A3A29A]">Total liquid & allocated value</span>
+                <div className="text-[36px] sm:text-[42px] font-extrabold text-white tabular-nums mt-1">
                   {formatINR(wallet.totalValue)}
                 </div>
-                <span className="text-[13px] text-[#5A5A53]">Total Asset & Cash Valuation</span>
               </div>
 
-              {/* Balance Breakdown Pills */}
-              <div className="mt-6 grid grid-cols-2 gap-3 pt-4 border-t border-[#E2E1DA]">
-                <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA]">
-                  <span className="text-[11px] font-semibold text-[#6B6B63] block">Available Cash</span>
-                  <span className="text-[18px] font-bold text-[#171A17] tabular-nums block mt-0.5">
+              {/* Balance Split */}
+              <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#40403B]">
+                <div className="p-4 bg-[#171A17] rounded-[14px] border border-[#2A2A26]">
+                  <span className="text-xs text-[#A3A29A] block">Available cash</span>
+                  <span className="text-[20px] font-bold text-white tabular-nums block mt-0.5">
                     {formatINR(wallet.availableBalance)}
                   </span>
                 </div>
-                <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA]">
-                  <span className="text-[11px] font-semibold text-[#6B6B63] block">Allocated in Units</span>
-                  <span className="text-[18px] font-bold text-[#087A4A] tabular-nums block mt-0.5">
+
+                <div className="p-4 bg-[#171A17] rounded-[14px] border border-[#2A2A26]">
+                  <span className="text-xs text-[#A3A29A] block">In active products</span>
+                  <span className="text-[20px] font-bold text-[#1FC777] tabular-nums block mt-0.5">
                     {formatINR(wallet.totalValue - wallet.availableBalance)}
                   </span>
                 </div>
               </div>
 
-              {/* Interactive Quick Actions */}
-              <div className="mt-6 flex items-center gap-3">
+              {/* Action Buttons */}
+              <div className="pt-2 flex items-center gap-3">
                 <Button
                   variant="primary"
                   fullWidth
                   onClick={() => setIsAddFundsOpen(true)}
-                  className="flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                  className="flex items-center justify-center gap-1.5 cursor-pointer shadow-xs font-bold"
                 >
                   <ArrowDownLeft className="w-4 h-4" />
-                  <span>Add Funds (UPI)</span>
+                  <span>Add funds (UPI)</span>
                 </Button>
 
                 <Button
                   variant="outline"
                   fullWidth
                   onClick={() => setIsWithdrawOpen(true)}
-                  className="flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex items-center justify-center gap-1.5 cursor-pointer text-white border-[#5A5A53] hover:bg-[#40403B]"
                 >
                   <ArrowUpRight className="w-4 h-4" />
                   <span>Withdraw</span>
@@ -97,43 +100,38 @@ export const PaymentsAndLedgerSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Payment Rails badges */}
-            <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-5 space-y-3 shadow-2xs">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#6B6B63] block">
-                Supported Instant Payment Rails
+            {/* Supported Payment Rails */}
+            <div className="p-6 bg-[#2A2A26] border border-[#40403B] rounded-[20px] space-y-3">
+              <span className="text-xs font-semibold text-[#A3A29A] uppercase tracking-wider block">
+                Instant Gateway Rails
               </span>
-              <div className="grid grid-cols-3 gap-2.5 text-center text-[12px]">
-                <div className="p-2.5 bg-[#F7F6F2] rounded-[10px] border border-[#E2E1DA]">
-                  <Smartphone className="w-4 h-4 text-[#087A4A] mx-auto mb-1" />
-                  <span className="font-bold text-[#171A17] block">UPI / QR</span>
-                  <span className="text-[10px] text-[#6B6B63]">0% Fee · Instant</span>
+              <div className="grid grid-cols-3 gap-2.5 text-center text-xs">
+                <div className="p-3 bg-[#171A17] rounded-[12px] border border-[#2A2A26]">
+                  <Smartphone className="w-4 h-4 text-[#1FC777] mx-auto mb-1" />
+                  <span className="font-bold text-white block">UPI / QR</span>
+                  <span className="text-[10px] text-[#A3A29A]">Instant</span>
                 </div>
-                <div className="p-2.5 bg-[#F7F6F2] rounded-[10px] border border-[#E2E1DA]">
-                  <Building className="w-4 h-4 text-[#087A4A] mx-auto mb-1" />
-                  <span className="font-bold text-[#171A17] block">Net Banking</span>
-                  <span className="text-[10px] text-[#6B6B63]">50+ Banks</span>
+                <div className="p-3 bg-[#171A17] rounded-[12px] border border-[#2A2A26]">
+                  <Building className="w-4 h-4 text-[#1FC777] mx-auto mb-1" />
+                  <span className="font-bold text-white block">Net Banking</span>
+                  <span className="text-[10px] text-[#A3A29A]">Direct debit</span>
                 </div>
-                <div className="p-2.5 bg-[#F7F6F2] rounded-[10px] border border-[#E2E1DA]">
-                  <CreditCard className="w-4 h-4 text-[#087A4A] mx-auto mb-1" />
-                  <span className="font-bold text-[#171A17] block">Cards / IMPS</span>
-                  <span className="text-[10px] text-[#6B6B63]">Direct Settlement</span>
+                <div className="p-3 bg-[#171A17] rounded-[12px] border border-[#2A2A26]">
+                  <CreditCard className="w-4 h-4 text-[#1FC777] mx-auto mb-1" />
+                  <span className="font-bold text-white block">Cards / IMPS</span>
+                  <span className="text-[10px] text-[#A3A29A]">Bank payout</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right: Immutable Double-Entry Ledger Preview */}
-          <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#CBCAC2] rounded-[22px] p-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-[#EFEEE9] gap-2">
+          {/* Right Column: Live Audited Double-Entry Ledger */}
+          <div className="lg:col-span-7 bg-[#2A2A26] border border-[#40403B] rounded-[24px] p-6 sm:p-8 space-y-6">
+            <div className="flex items-center justify-between pb-5 border-b border-[#40403B]">
               <div>
-                <div className="flex items-center gap-2">
-                  <Receipt className="w-5 h-5 text-[#1FC777]" />
-                  <h3 className="text-[20px] font-bold text-[#171A17]">
-                    Live Transaction Ledger
-                  </h3>
-                </div>
-                <p className="text-[13px] text-[#5A5A53] mt-0.5">
-                  Complete audit log of executed trades, deposits, and fee settlements.
+                <h3 className="text-[20px] font-bold text-white">Live Ledger Trace</h3>
+                <p className="text-xs text-[#A3A29A] mt-0.5">
+                  Every debit matches a credit. Every record preserves the running balance.
                 </p>
               </div>
 
@@ -142,70 +140,53 @@ export const PaymentsAndLedgerSection: React.FC = () => {
                   setCurrentView('app-ledger');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="text-[12px] font-bold text-[#087A4A] hover:underline flex items-center gap-1 self-start sm:self-auto cursor-pointer"
+                className="text-xs font-semibold text-[#1FC777] hover:underline flex items-center gap-1 cursor-pointer"
               >
-                <span>Full Ledger View</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>Full ledger view</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Table of transactions */}
-            <div className="overflow-x-auto mt-4">
-              <table className="w-full text-left text-[13px]">
-                <thead>
-                  <tr className="border-b border-[#EFEEE9] text-[11px] font-bold uppercase tracking-wider text-[#6B6B63]">
-                    <th className="py-2.5 px-3">Transaction / ID</th>
-                    <th className="py-2.5 px-3">Type</th>
-                    <th className="py-2.5 px-3 text-right">Amount</th>
-                    <th className="py-2.5 px-3 text-right">Balance After</th>
-                    <th className="py-2.5 px-3 text-center">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#EFEEE9]">
-                  {previewTransactions.map((tx) => {
-                    const isCredit = tx.type === 'deposit' || tx.type === 'sell';
-                    return (
-                      <tr key={tx.id} className="hover:bg-[#F7F6F2] transition-colors">
-                        <td className="py-3.5 px-3">
-                          <span className="font-bold text-[#171A17] block">{tx.description}</span>
-                          <span className="text-[11px] font-mono text-[#6B6B63]">{tx.id}</span>
-                        </td>
-                        <td className="py-3.5 px-3">
-                          <span className="capitalize font-semibold text-[#5A5A53] px-2 py-0.5 bg-[#EFEEE9] rounded-[6px] text-[11px]">
-                            {tx.type}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-3 text-right font-bold tabular-nums">
-                          <span className={isCredit ? 'text-[#0A7A45]' : 'text-[#171A17]'}>
-                            {isCredit ? '+' : '-'}
-                            {formatINR(Math.abs(tx.amount))}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-3 text-right font-medium text-[#5A5A53] tabular-nums">
-                          {formatINR(tx.runningBalance)}
-                        </td>
-                        <td className="py-3.5 px-3 text-center">
-                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0A7A45] bg-[#E3F6EC] px-2 py-0.5 rounded-full">
-                            <CheckCircle2 className="w-3 h-3" />
-                            <span>Verified</span>
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            {/* Transactions List */}
+            <div className="space-y-3">
+              {previewTransactions.map((tx, idx) => {
+                const isCredit = tx.type === 'deposit' || tx.type === 'sell';
+                return (
+                  <div
+                    key={tx.id}
+                    onClick={() => setSelectedTxn(idx)}
+                    className="p-4 bg-[#171A17] hover:bg-[#202320] border border-[#40403B] rounded-[16px] transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-[14px] text-white">{tx.description}</span>
+                        <span className="text-[11px] font-mono text-[#A3A29A]">{tx.id}</span>
+                      </div>
+                      <div className="text-[11px] text-[#A3A29A] mt-0.5">
+                        {tx.date} at {tx.time} · {tx.reference}
+                      </div>
+                    </div>
+
+                    <div className="text-left sm:text-right">
+                      <div className={`font-bold text-[15px] tabular-nums ${isCredit ? 'text-[#1FC777]' : 'text-white'}`}>
+                        {isCredit ? '+' : '-'}{formatINR(Math.abs(tx.amount))}
+                      </div>
+                      <div className="text-[11px] text-[#A3A29A] tabular-nums">
+                        Balance after: {formatINR(tx.runningBalance)}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Double-Entry Compliance Note */}
-            <div className="mt-5 p-3.5 bg-[#E9FAF1] border border-[#A2E8C5] rounded-[12px] flex items-center justify-between text-[12px] text-[#087A4A]">
-              <span className="flex items-center gap-2">
-                <Lock className="w-4 h-4 text-[#12A560]" />
-                <span className="font-semibold">
-                  Zero discrepancy guarantee: Assets + Reserves = Total Equity
-                </span>
-              </span>
-              <span className="font-bold">Audit Pass</span>
+            {/* Zero Variance Guarantee Banner */}
+            <div className="p-4 bg-[#171A17] border border-[#40403B] rounded-[16px] flex items-center justify-between text-xs text-[#A3A29A]">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#1FC777]" />
+                <span>Double-entry mathematical integrity: Zero balance variance</span>
+              </div>
+              <span className="text-white font-mono font-semibold">100% Audit pass</span>
             </div>
           </div>
         </div>

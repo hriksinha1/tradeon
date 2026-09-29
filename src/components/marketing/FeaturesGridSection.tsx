@@ -1,129 +1,89 @@
 import React from 'react';
 import { useTrading } from '../../context/TradingContext';
-import {
-  ShieldCheck,
-  Zap,
-  BookOpenCheck,
-  TrendingUp,
-  Smartphone,
-  Server,
-  ArrowRight,
-  CheckCircle2,
-} from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 
 export const FeaturesGridSection: React.FC = () => {
   const { setCurrentView } = useTrading();
 
-  const features = [
+  const principles = [
     {
-      icon: <Zap className="w-6 h-6 text-[#1FC777]" />,
-      badge: 'Execution Speed',
-      title: 'Real-time Market & Limit Trading',
-      description:
-        'Execute transactions at instantaneous market prices or place targeted limit orders. Transparent fee calculations ensure zero hidden deductions.',
-      cta: 'Explore Trading Flows',
-      view: 'how-it-works' as const,
+      num: '01',
+      title: 'Clarity over clutter.',
+      text: 'Every interface element must justify its presence. If a metric or button does not directly help the user understand or act, it gets removed.',
     },
     {
-      icon: <BookOpenCheck className="w-6 h-6 text-[#1FC777]" />,
-      badge: 'Financial Integrity',
-      title: 'Audited Double-Entry Ledger',
-      description:
-        'Every unit acquisition, sell order, deposit, and payout is logged with an immutable audit hash and running balance verification.',
-      cta: 'Inspect Ledger Model',
-      view: 'payments' as const,
+      num: '02',
+      title: 'Show the important thing first.',
+      text: 'What is this product? What is it worth right now? How much cash do I have available? The essentials should never be hidden behind three nested tabs.',
     },
     {
-      icon: <TrendingUp className="w-6 h-6 text-[#1FC777]" />,
-      badge: 'Advanced Contracts',
-      title: 'Structured Options Trading',
-      description:
-        'Hedge or participate in defined price movements with Call and Put contracts featuring transparent strike prices, premiums, and automated expiry settlement.',
-      cta: 'View Options Mechanics',
-      view: 'options' as const,
+      num: '03',
+      title: 'Every action must have a visible consequence.',
+      text: 'When you place an order, you should immediately see your available cash update, your product holding adjust, and a permanent ledger entry created.',
     },
     {
-      icon: <Smartphone className="w-6 h-6 text-[#1FC777]" />,
-      badge: 'Unified UX',
-      title: 'Web, iOS & Android Parity',
-      description:
-        'Engineered consistently across 1440px Desktop Web, iPhone 16 Pro (Dynamic Island & iOS haptics), and Android Pixel 9 Pro gesture interfaces.',
-      cta: 'Test Device Simulator',
-      view: 'mobile-app' as const,
+      num: '04',
+      title: 'Your records should make sense three months later.',
+      text: 'A good transaction ledger isn’t a mystery code. It explains clearly: what was bought, at what price, what fee was charged, and what your balance became.',
     },
     {
-      icon: <ShieldCheck className="w-6 h-6 text-[#1FC777]" />,
-      badge: 'Bank-Grade Custody',
-      title: 'Secure Account & Asset Custody',
-      description:
-        'Two-factor authentication, device authorization, session management, and encrypted payment gateway rails protect investor capital.',
-      cta: 'Review Security Controls',
-      view: 'security' as const,
+      num: '05',
+      title: 'Complex workflows should still feel calm.',
+      text: 'Options contracts and limit orders are powerful tools. They should look understandable, clean, and bounded, not intimidating.',
     },
     {
-      icon: <Server className="w-6 h-6 text-[#1FC777]" />,
-      badge: 'Modular Stack',
-      title: 'Appwrite Enterprise Architecture',
-      description:
-        'Decoupled service layer ready for seamless Appwrite Cloud or self-hosted integration across Auth, Products, Orders, Wallets, and Ledger databases.',
-      cta: 'View Architecture',
-      view: 'about' as const,
+      num: '06',
+      title: 'Web and mobile are the same product.',
+      text: 'Mobile is not a stripped-down afterthought. The exact same data, ledger audit, and order capabilities follow you wherever you go.',
     },
   ];
 
   return (
-    <section className="py-20 bg-[#FFFFFF] border-b border-[#CBCAC2]">
+    <section className="py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#CBCAC2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3.5 py-1 rounded-full border border-[#CFF3E0]">
-            Platform Principles
-          </span>
-          <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight mt-3">
-            Engineered for clarity, control, and scale.
+        {/* Section Header */}
+        <div className="max-w-3xl space-y-4 mb-16">
+          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            Product Manifesto
+          </div>
+          <h2 className="text-[36px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
+            What we believe trading interfaces should feel like.
           </h2>
-          <p className="mt-3 text-[17px] text-[#5A5A53]">
-            Every interaction is structured to provide institutional transparency without unnecessary complexity.
+          <p className="text-[18px] text-[#5A5A53] leading-relaxed">
+            We didn’t set out to copy Wall Street screens or build another crypto casino. We built a product around restraint, transparency, and respect for the user’s attention.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, idx) => (
-            <div
-              key={idx}
-              className="bg-[#F7F6F2] hover:bg-[#FFFFFF] border border-[#E2E1DA] hover:border-[#1FC777] rounded-[20px] p-6 transition-all shadow-2xs hover:shadow-md flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-[14px] bg-[#FFFFFF] border border-[#CBCAC2] group-hover:border-[#1FC777] flex items-center justify-center shadow-2xs transition-colors">
-                    {feature.icon}
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-2.5 py-0.5 rounded-full border border-[#CFF3E0]">
-                    {feature.badge}
-                  </span>
-                </div>
-
-                <h3 className="mt-5 text-[19px] font-bold text-[#171A17] group-hover:text-[#087A4A] transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-[14px] text-[#5A5A53] leading-relaxed">
-                  {feature.description}
-                </p>
+        {/* 6 Principles in an Editorial 2-Column Modular Layout (Not 3 identical cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 border-t border-[#EFEEE9] pt-12">
+          {principles.map((item) => (
+            <div key={item.num} className="space-y-3 pb-8 border-b border-[#EFEEE9]">
+              <div className="text-xs font-bold text-[#087A4A] tracking-wider">
+                Principle {item.num}
               </div>
-
-              <div className="mt-6 pt-4 border-t border-[#E2E1DA]">
-                <button
-                  onClick={() => {
-                    setCurrentView(feature.view);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#087A4A] group-hover:text-[#0A603C] hover:underline cursor-pointer"
-                >
-                  <span>{feature.cta}</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
+              <h3 className="text-[22px] font-bold text-[#171A17] tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-[15px] text-[#5A5A53] leading-relaxed">
+                {item.text}
+              </p>
             </div>
           ))}
+        </div>
+
+        {/* Closing Thought */}
+        <div className="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 text-xs text-[#6B6B63]">
+          <span>Built for the moment you decide to act.</span>
+          <button
+            onClick={() => {
+              setCurrentView('about');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="font-bold text-[#087A4A] hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <span>Read more about our design philosophy</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
     </section>

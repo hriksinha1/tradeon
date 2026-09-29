@@ -8,7 +8,6 @@ import {
   Shield,
   Bell,
   Fingerprint,
-  Layers,
   ArrowRight,
 } from 'lucide-react';
 
@@ -22,59 +21,56 @@ export const MobileAppPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#F7F6F2] min-h-screen py-12 sm:py-16">
+    <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3.5 py-1 rounded-full border border-[#CFF3E0]">
-            Native Mobile Architecture
-          </span>
-          <h1 className="text-[36px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight mt-3">
-            iOS & Android Native Ecosystem
+        <div className="max-w-3xl mb-14 space-y-3">
+          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            Mobile Native Architecture
+          </div>
+          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
+            The whole product in your hand.
           </h1>
-          <p className="mt-3 text-[17px] text-[#5A5A53]">
-            Tradeon is engineered with true multi-platform consistency. Native performance, tailored design guidelines for Apple iOS 18 and Google Android 15 Material 3, and synchronized state management.
+          <p className="text-[18px] text-[#5A5A53] leading-relaxed">
+            Engineered natively for Apple iOS 18 with Dynamic Island awareness and Google Android 15 with Material 3 fluidity. Never a web view masquerading as an app.
           </p>
         </div>
 
-        {/* Comparison Showcase Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
-          {/* iOS Card */}
-          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between">
-            <div className="space-y-5">
-              <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F7F6F2] border border-[#E2E1DA] rounded-full text-[12px] font-bold text-[#171A17]">
-                  <Smartphone className="w-3.5 h-3.5 text-[#087A4A]" />
-                  <span>Apple iOS Architecture</span>
-                </div>
-                <span className="text-[11px] font-mono text-[#6B6B63]">Swift / SwiftUI Native</span>
+        {/* Dual Platform Showcase Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          {/* iOS Showcase */}
+          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-xs text-[#5A5A53]">
+                <span className="font-bold text-[#171A17]">Apple iOS Edition</span>
+                <span className="font-mono">iPhone 16 Pro Architecture</span>
               </div>
 
-              <h2 className="text-[26px] font-bold text-[#171A17]">
-                iPhone 16 Pro Edition
+              <h2 className="text-[26px] font-bold text-[#171A17] tracking-tight">
+                Designed around Apple ergonomics
               </h2>
 
               <p className="text-[15px] text-[#5A5A53] leading-relaxed">
-                Employs Apple Human Interface Guidelines with Dynamic Island live trading status, Face ID biometrics, SF Pro typography, and fluid bottom-sheet gestures.
+                Dynamic Island live order confirmations, Face ID biometric authentication, native SF Symbols typography, and fluid bottom-sheet order slips.
               </p>
 
               <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-2.5 text-[13px] text-[#171A17]">
+                <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Dynamic Island integration for pending orders and trade confirmations</span>
+                  <span>Dynamic Island status updates for order fills and ledger deposits</span>
                 </div>
-                <div className="flex items-start gap-2.5 text-[13px] text-[#171A17]">
+                <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Biometric Face ID authentication with secure enclave storage</span>
+                  <span>Face ID authentication with hardware-backed secure enclave</span>
                 </div>
-                <div className="flex items-start gap-2.5 text-[13px] text-[#171A17]">
+                <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Apple Pay & UPI rapid payment sheets for zero-friction top-ups</span>
+                  <span>Native bottom-nav bar with thumb-zone trade drawer trigger</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#EFEEE9]">
+            <div className="pt-4 border-t border-[#EFEEE9]">
               <button
                 onClick={() => launchSimulator('ios')}
                 className="w-full py-3.5 bg-[#1FC777] hover:bg-[#18B36A] text-[#0C0F0C] font-bold text-[14px] rounded-[12px] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
@@ -85,42 +81,39 @@ export const MobileAppPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Android Card */}
-          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between">
-            <div className="space-y-5">
-              <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F7F6F2] border border-[#E2E1DA] rounded-full text-[12px] font-bold text-[#171A17]">
-                  <Smartphone className="w-3.5 h-3.5 text-[#087A4A]" />
-                  <span>Google Android Architecture</span>
-                </div>
-                <span className="text-[11px] font-mono text-[#6B6B63]">Kotlin / Jetpack Compose</span>
+          {/* Android Showcase */}
+          <div className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[24px] p-8 shadow-xs transition-all flex flex-col justify-between space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-xs text-[#5A5A53]">
+                <span className="font-bold text-[#171A17]">Google Android Edition</span>
+                <span className="font-mono">Pixel 9 Pro Architecture</span>
               </div>
 
-              <h2 className="text-[26px] font-bold text-[#171A17]">
-                Pixel 9 Pro Edition
+              <h2 className="text-[26px] font-bold text-[#171A17] tracking-tight">
+                Material Design 3 precision
               </h2>
 
               <p className="text-[15px] text-[#5A5A53] leading-relaxed">
-                Follows Material Design 3 guidelines with adaptive layout, punch-hole camera accommodation, predictive back navigation, and edge-to-edge system gestures.
+                Adaptive layout aware of punch-hole cameras, predictive back gestures, fingerprint prompt integration, and instant UPI intent routing.
               </p>
 
               <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-2.5 text-[13px] text-[#171A17]">
+                <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Pixel 9 Pro punch-hole aware status bar layout</span>
+                  <span>Pixel 9 Pro camera notch accommodation with edge-to-edge content</span>
                 </div>
-                <div className="flex items-start gap-2.5 text-[13px] text-[#171A17]">
+                <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Fingerprint biometric prompt with hardware-backed Keystore</span>
+                  <span>Biometric prompt with hardware Keystore token isolation</span>
                 </div>
-                <div className="flex items-start gap-2.5 text-[13px] text-[#171A17]">
+                <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Direct UPI Intent integration with PhonePe, GPay, and Paytm apps</span>
+                  <span>Direct UPI app handoff with PhonePe, Google Pay, and Paytm</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#EFEEE9]">
+            <div className="pt-4 border-t border-[#EFEEE9]">
               <button
                 onClick={() => launchSimulator('android')}
                 className="w-full py-3.5 bg-[#EFEEE9] hover:bg-[#E2E1DA] text-[#171A17] font-bold text-[14px] rounded-[12px] flex items-center justify-center gap-2 transition-colors cursor-pointer"
@@ -132,41 +125,47 @@ export const MobileAppPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Feature Highlights Grid */}
+        {/* 4 Feature Highlights Grid */}
         <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[24px] p-8 shadow-xs">
-          <h3 className="text-[20px] font-bold text-[#171A17] mb-6">
-            Shared Engineering Highlights
-          </h3>
+          <div className="max-w-2xl mb-8 space-y-1">
+            <h3 className="text-[22px] font-bold text-[#171A17]">
+              Shared Engineering Standards
+            </h3>
+            <p className="text-xs text-[#5A5A53]">
+              Every native app build follows strict performance and data security budgets.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
-              <Zap className="w-6 h-6 text-[#1FC777] mb-2" />
-              <h4 className="font-bold text-[15px] text-[#171A17]">60fps Visuals</h4>
-              <p className="text-[13px] text-[#5A5A53] mt-1">
+            <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
+              <Zap className="w-5 h-5 text-[#1FC777]" />
+              <h4 className="font-bold text-[15px] text-[#171A17]">60fps Performance</h4>
+              <p className="text-xs text-[#5A5A53] leading-relaxed">
                 Hardware-accelerated charts and fluid interactive micro-transitions.
               </p>
             </div>
 
-            <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
-              <Shield className="w-6 h-6 text-[#1FC777] mb-2" />
+            <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
+              <Shield className="w-5 h-5 text-[#1FC777]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Encrypted Vault</h4>
-              <p className="text-[13px] text-[#5A5A53] mt-1">
-                Local token encryption with device-isolated authentication tokens.
+              <p className="text-xs text-[#5A5A53] leading-relaxed">
+                Local token encryption with device-isolated authentication storage.
               </p>
             </div>
 
-            <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
-              <Bell className="w-6 h-6 text-[#1FC777] mb-2" />
-              <h4 className="font-bold text-[15px] text-[#171A17]">Push Delivery</h4>
-              <p className="text-[13px] text-[#5A5A53] mt-1">
-                Immediate APNs and FCM delivery for trade execution and price triggers.
+            <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
+              <Bell className="w-5 h-5 text-[#1FC777]" />
+              <h4 className="font-bold text-[15px] text-[#171A17]">Sub-second Alerts</h4>
+              <p className="text-xs text-[#5A5A53] leading-relaxed">
+                Immediate APNs and FCM delivery for order fills and wallet settlements.
               </p>
             </div>
 
-            <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
-              <Fingerprint className="w-6 h-6 text-[#1FC777] mb-2" />
+            <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
+              <Fingerprint className="w-5 h-5 text-[#1FC777]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Biometric Lock</h4>
-              <p className="text-[13px] text-[#5A5A53] mt-1">
-                Re-authenticate for high-value buy/sell orders and withdrawal requests.
+              <p className="text-xs text-[#5A5A53] leading-relaxed">
+                Fingerprint and Face ID confirmation on high-value orders and withdrawals.
               </p>
             </div>
           </div>

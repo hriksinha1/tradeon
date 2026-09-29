@@ -6,12 +6,7 @@ import {
   TrendingUp,
   TrendingDown,
   Search,
-  SlidersHorizontal,
   ArrowRight,
-  Shield,
-  Layers,
-  ArrowUpDown,
-  Filter,
 } from 'lucide-react';
 
 export const ProductsPage: React.FC = () => {
@@ -39,23 +34,23 @@ export const ProductsPage: React.FC = () => {
     });
 
   return (
-    <div className="bg-[#F7F6F2] min-h-screen py-12 sm:py-16">
+    <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Header */}
-        <div className="max-w-3xl mb-10">
-          <span className="text-[12px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-3 py-1 rounded-full border border-[#CFF3E0]">
-            Marketplace Catalog
-          </span>
-          <h1 className="text-[36px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight mt-3">
-            Listed Products & Assets
+        {/* Header with Narrative */}
+        <div className="max-w-3xl mb-12 space-y-3">
+          <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
+            Product Catalog
+          </div>
+          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
+            There’s more to a product than a number.
           </h1>
-          <p className="mt-2 text-[17px] text-[#5A5A53]">
-            Browse all verified listings supplied by the client's business. Inspect real-time valuation, 24h trading volume, available unit quota, and historical price performance.
+          <p className="text-[18px] text-[#5A5A53] leading-relaxed">
+            Every listing comes with tangible context: indicative valuations, verified business supply limits, historical price performance, and direct double-entry settlement.
           </p>
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[18px] p-4 sm:p-5 mb-8 shadow-2xs space-y-4">
+        <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[18px] p-4 sm:p-5 mb-10 shadow-2xs space-y-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             {/* Search Input */}
             <div className="relative w-full sm:w-80">
@@ -71,7 +66,7 @@ export const ProductsPage: React.FC = () => {
 
             {/* Sort & Category Selectors */}
             <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-              <div className="flex items-center gap-1.5 p-1 bg-[#F7F6F2] border border-[#E2E1DA] rounded-[10px]">
+              <div className="flex items-center gap-1 p-1 bg-[#F7F6F2] border border-[#E2E1DA] rounded-[10px]">
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -92,9 +87,9 @@ export const ProductsPage: React.FC = () => {
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="px-3 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] font-medium text-[#171A17] focus:outline-[#087A4A] cursor-pointer"
               >
-                <option value="value-desc">Highest Value</option>
-                <option value="value-asc">Lowest Value</option>
-                <option value="change-desc">Top Gainers</option>
+                <option value="value-desc">Highest value</option>
+                <option value="value-asc">Lowest value</option>
+                <option value="change-desc">Top gainers</option>
               </select>
             </div>
           </div>
@@ -110,57 +105,49 @@ export const ProductsPage: React.FC = () => {
                 className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#1FC777] rounded-[20px] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#087A4A] bg-[#E9FAF1] px-2.5 py-0.5 rounded-full border border-[#CFF3E0]">
-                      {product.category}
-                    </span>
-                    <span
-                      className={`inline-flex items-center gap-1 text-[13px] font-bold px-2 py-0.5 rounded-full ${
-                        isPositive
-                          ? 'bg-[#E3F6EC] text-[#0A7A45]'
-                          : 'bg-[#FCE9E7] text-[#BF2A2A]'
-                      }`}
-                    >
-                      {isPositive ? '+' : ''}
-                      {product.changePercent}%
+                  {/* Clean unboxed metadata header */}
+                  <div className="flex items-center justify-between text-xs text-[#5A5A53] pb-3 border-b border-[#EFEEE9]">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-[#087A4A]">{product.category}</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="font-mono">{product.id}</span>
+                    </div>
+
+                    <span className={`font-semibold tabular-nums ${isPositive ? 'text-[#0A7A45]' : 'text-[#BF2A2A]'}`}>
+                      {isPositive ? '+' : ''}{product.changePercent}%
                     </span>
                   </div>
 
                   <h3 className="mt-4 text-[22px] font-bold text-[#171A17] group-hover:text-[#087A4A] transition-colors">
                     {product.name}
                   </h3>
-                  <div className="text-[12px] font-mono text-[#6B6B63] mt-0.5">
-                    Identifier: {product.id} · {product.unitMeasure}
-                  </div>
 
-                  <p className="mt-3 text-[14px] text-[#5A5A53] leading-relaxed">
+                  <p className="mt-2 text-[14px] text-[#5A5A53] leading-relaxed line-clamp-2">
                     {product.description}
                   </p>
 
                   {/* Valuation box */}
-                  <div className="mt-5 p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
+                  <div className="mt-6 p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
                     <div className="flex justify-between items-baseline">
-                      <span className="text-[11px] font-bold uppercase text-[#6B6B63]">
-                        Unit Price
-                      </span>
-                      <span className="text-[12px] text-[#5A5A53]">
-                        Available: {product.availableUnits.toLocaleString()} units
+                      <span className="text-xs text-[#6B6B63] font-medium">Indicative unit value</span>
+                      <span className="text-xs text-[#5A5A53]">
+                        {product.availableUnits.toLocaleString()} units available
                       </span>
                     </div>
                     <div className="text-[28px] font-extrabold text-[#171A17] tabular-nums mt-1">
                       {formatINR(product.currentValue)}
                     </div>
 
-                    <div className="mt-3 pt-3 border-t border-[#E2E1DA] grid grid-cols-2 gap-2 text-[11px] text-[#6B6B63]">
+                    <div className="mt-3 pt-2.5 border-t border-[#E2E1DA] grid grid-cols-2 gap-2 text-xs text-[#6B6B63]">
                       <div>
-                        <span>24h Range:</span>
-                        <div className="font-semibold text-[#171A17]">
-                          {formatINR(product.low24h)} - {formatINR(product.high24h)}
+                        <span>24h Range</span>
+                        <div className="font-semibold text-[#171A17] mt-0.5">
+                          {formatINR(product.low24h)} – {formatINR(product.high24h)}
                         </div>
                       </div>
                       <div>
-                        <span>24h Volume:</span>
-                        <div className="font-semibold text-[#171A17]">
+                        <span>24h Volume</span>
+                        <div className="font-semibold text-[#171A17] mt-0.5">
                           {formatINR(product.volume24h)}
                         </div>
                       </div>
@@ -176,20 +163,25 @@ export const ProductsPage: React.FC = () => {
                       setCurrentView('app-product-detail');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="flex-1 py-2.5 text-center text-[13px] font-bold text-[#171A17] bg-[#EFEEE9] hover:bg-[#E2E1DA] rounded-[10px] transition-colors cursor-pointer"
+                    className="flex-1 py-2.5 text-center text-[13px] font-semibold text-[#171A17] bg-[#EFEEE9] hover:bg-[#E2E1DA] rounded-[10px] transition-colors cursor-pointer"
                   >
-                    View Chart & Depth
+                    View details
                   </button>
                   <button
                     onClick={() => openBuySell('buy', product)}
                     className="flex-1 py-2.5 text-center text-[13px] font-bold text-[#0C0F0C] bg-[#1FC777] hover:bg-[#18B36A] rounded-[10px] transition-colors cursor-pointer shadow-2xs"
                   >
-                    Trade Unit
+                    Trade unit
                   </button>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Quiet Footnote */}
+        <div className="mt-12 text-center text-xs text-[#6B6B63]">
+          All products listed are demonstration models designed to test marketplace workflows and do not represent real securities.
         </div>
       </div>
     </div>
