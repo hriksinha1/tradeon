@@ -23,17 +23,39 @@ export const MobileAppPage: React.FC = () => {
   return (
     <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Header */}
-        <div className="max-w-3xl mb-14 space-y-3">
+        {/* Header: "The product should feel complete, wherever you are." */}
+        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
-            Mobile Native Architecture
+            Mobile Native Experience
           </div>
-          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            The whole product in your hand.
+          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+            The product should feel complete, wherever you are.
           </h1>
           <p className="text-[18px] text-[#5A5A53] leading-relaxed">
-            Engineered natively for Apple iOS 18 with Dynamic Island awareness and Google Android 15 with Material 3 fluidity. Never a web view masquerading as an app.
+            Crafted natively for Apple iOS and Google Android devices. With full portfolio parity, fluid order slips, and double-entry ledger verification right in your hand.
           </p>
+        </div>
+
+        {/* Large Editorial Hero Photo + Feature Banner */}
+        <div className="relative rounded-[24px] overflow-hidden border border-[#CBCAC2] mb-14 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=80"
+            alt="Young professional reviewing trading context on mobile in a calm workspace"
+            className="w-full h-[320px] sm:h-[440px] object-cover filter brightness-[0.97]"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F0C]/80 via-[#0C0F0C]/30 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6 text-white max-w-2xl">
+            <span className="text-xs font-bold text-[#1FC777] uppercase tracking-wider block mb-1">
+              Ergonomic Handheld Depth
+            </span>
+            <h2 className="text-[24px] sm:text-[30px] font-extrabold leading-snug">
+              Every detail engineered for quick comprehension and decisive execution.
+            </h2>
+            <p className="text-sm text-[#CBCAC2] mt-1.5 hidden sm:block">
+              Whether placing a unit order on the go or checking running balances between meetings, the mobile experience retains desktop-class depth.
+            </p>
+          </div>
         </div>
 
         {/* Dual Platform Showcase Cards */}
@@ -51,7 +73,7 @@ export const MobileAppPage: React.FC = () => {
               </h2>
 
               <p className="text-[15px] text-[#5A5A53] leading-relaxed">
-                Dynamic Island live order confirmations, Face ID biometric authentication, native SF Symbols typography, and fluid bottom-sheet order slips.
+                Dynamic Island order fill notifications, Face ID authentication, native SF typography, and fluid bottom-sheet order slips.
               </p>
 
               <div className="space-y-3 pt-2">
@@ -61,7 +83,7 @@ export const MobileAppPage: React.FC = () => {
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Face ID authentication with hardware-backed secure enclave</span>
+                  <span>Face ID authentication with hardware-backed secure storage</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
@@ -94,7 +116,7 @@ export const MobileAppPage: React.FC = () => {
               </h2>
 
               <p className="text-[15px] text-[#5A5A53] leading-relaxed">
-                Adaptive layout aware of punch-hole cameras, predictive back gestures, fingerprint prompt integration, and instant UPI intent routing.
+                Adaptive layout aware of punch-hole cameras, predictive back gestures, biometric fingerprint prompt, and instant UPI intent routing.
               </p>
 
               <div className="space-y-3 pt-2">
@@ -104,7 +126,7 @@ export const MobileAppPage: React.FC = () => {
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
-                  <span>Biometric prompt with hardware Keystore token isolation</span>
+                  <span>Biometric prompt with hardware key security</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-[14px] text-[#171A17]">
                   <CheckCircle2 className="w-4 h-4 text-[#12A560] shrink-0 mt-0.5" />
@@ -138,31 +160,31 @@ export const MobileAppPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Zap className="w-5 h-5 text-[#1FC777]" />
-              <h4 className="font-bold text-[15px] text-[#171A17]">60fps Performance</h4>
+              <Zap className="w-5 h-5 text-[#087A4A]" />
+              <h4 className="font-bold text-[15px] text-[#171A17]">Fluid Responsiveness</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
-                Hardware-accelerated charts and fluid interactive micro-transitions.
+                Responsive layouts and smooth interactive micro-transitions.
               </p>
             </div>
 
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Shield className="w-5 h-5 text-[#1FC777]" />
-              <h4 className="font-bold text-[15px] text-[#171A17]">Encrypted Vault</h4>
+              <Shield className="w-5 h-5 text-[#087A4A]" />
+              <h4 className="font-bold text-[15px] text-[#171A17]">Secure Storage</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
-                Local token encryption with device-isolated authentication storage.
+                Local token protection with device-isolated authentication storage.
               </p>
             </div>
 
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Bell className="w-5 h-5 text-[#1FC777]" />
-              <h4 className="font-bold text-[15px] text-[#171A17]">Sub-second Alerts</h4>
+              <Bell className="w-5 h-5 text-[#087A4A]" />
+              <h4 className="font-bold text-[15px] text-[#171A17]">Instant Alerts</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
-                Immediate APNs and FCM delivery for order fills and wallet settlements.
+                Immediate delivery for order executions and wallet deposits.
               </p>
             </div>
 
             <div className="p-5 bg-[#F7F6F2] rounded-[16px] border border-[#E2E1DA] space-y-2">
-              <Fingerprint className="w-5 h-5 text-[#1FC777]" />
+              <Fingerprint className="w-5 h-5 text-[#087A4A]" />
               <h4 className="font-bold text-[15px] text-[#171A17]">Biometric Lock</h4>
               <p className="text-xs text-[#5A5A53] leading-relaxed">
                 Fingerprint and Face ID confirmation on high-value orders and withdrawals.

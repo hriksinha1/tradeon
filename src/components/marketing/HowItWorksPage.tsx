@@ -61,7 +61,7 @@ export const HowItWorksPage: React.FC = () => {
       title: 'Keep every transaction in an audited ledger',
       description:
         'Every debit, credit, and order execution leaves a permanent double-entry trail. Your running balance is reconciled in real time.',
-      highlight: 'Double-entry math with zero discrepancy',
+      highlight: 'Double-entry accounting with transparent running balance',
       action: 'View live ledger',
       onClick: () => setCurrentView('app-ledger'),
     },
@@ -75,8 +75,8 @@ export const HowItWorksPage: React.FC = () => {
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
             Platform Workflow
           </div>
-          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            A transparent journey from discovery to settlement.
+          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+            From first look to final record.
           </h1>
           <p className="text-[18px] text-[#5A5A53] leading-relaxed">
             Trading shouldn't be a maze. Here is how you move from finding an interesting product to seeing it recorded in your permanent ledger.

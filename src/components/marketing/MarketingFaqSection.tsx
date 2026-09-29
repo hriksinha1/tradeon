@@ -8,63 +8,67 @@ export const MarketingFaqSection: React.FC = () => {
 
   const faqs = [
     {
-      q: 'What can users trade on Tradeon?',
-      a: 'Users can interact with products listed and supplied directly by the platform owner’s business. Built with a neutral product architecture, the platform easily accommodates inventory allocations, ownership units, digital product rights, or proprietary contracts once commercial operations launch.',
+      q: 'What can I trade?',
+      a: 'You can discover and trade products listed directly on the platform marketplace. The platform uses a neutral product architecture built for units, allocations, and tradeable product contracts. We do not trade stocks, Bitcoin, gold, or silver.',
     },
     {
-      q: 'Will the exact product category change later?',
-      a: 'Yes. The underlying traded asset is intentionally confidential during this prototype phase. The design, order slips, wallet calculations, and double-entry ledger are engineered as a flexible foundation that maps cleanly to the client’s real business model.',
+      q: 'How does product discovery work?',
+      a: 'Browse the product catalog with transparent indicative valuations, 24-hour activity trends, and available unit supply limits. Every listing shows context before you act, so you never have to guess what you are looking at.',
     },
     {
-      q: 'How does the Buy and Sell process operate?',
-      a: 'You can execute instant Market orders matched directly against business inventory or place Limit orders specifying your exact target price. Orders settle directly against your internal wallet cash balance with zero guesswork.',
+      q: 'How do I buy or sell?',
+      a: 'Choose your desired product, specify your quantity of units, and review the exact cost and fee breakdown on an order slip. Once you confirm, the order executes against your wallet balance and immediately generates a transparent ledger receipt.',
     },
     {
-      q: 'What are option contracts in Tradeon?',
-      a: 'Tradeon supports structured Call and Put options for users who want predefined risk parameters. Each contract features a fixed strike price, defined expiry cycle, and an upfront premium calculation. Upon expiry, in-the-money contracts settle directly to cash.',
+      q: 'What are options?',
+      a: 'Options-style contracts (Call and Put) provide bounded risk parameters for more structured strategies. A Call contract gives you defined upside exposure above a strike level, while a Put contract acts as downside protection. Risk is strictly capped at the upfront premium paid.',
     },
     {
-      q: 'How are transaction charges and platform fees presented?',
-      a: 'Every platform fee is calculated and shown on the order review slip before you confirm. We charge zero hidden processing fees, and every deduction is permanently logged in your double-entry transaction history.',
+      q: 'How does the wallet work?',
+      a: 'Your internal trading wallet holds available cash for orders. You can deposit funds via UPI, bank transfer, or debit cards. Your wallet updates in real time whenever an order is placed, an option is acquired, or funds are withdrawn.',
     },
     {
-      q: 'What appears in my transaction ledger?',
-      a: 'Every event: wallet top-ups, order deductions, unit sales, fees, and option settlements. Each entry includes the exact timestamp, transaction type, counterparty reference, debit/credit split, and your resulting running balance.',
+      q: 'How are transactions recorded?',
+      a: 'Every event—deposits, unit purchases, sales, and withdrawals—is recorded in a double-entry ledger. Each entry includes the exact timestamp, transaction type, reference code, debit or credit amount, and your resulting running balance.',
     },
     {
-      q: 'Is the platform available on mobile devices?',
-      a: 'Yes. Tradeon is built for Web (1440px desktop baseline), Apple iOS 18 (with Dynamic Island live activity integration), and Google Android 15. You can test each device simulator directly on this website.',
+      q: 'Can I use the product on mobile?',
+      a: 'Yes. Tradeon has been designed for native Apple iOS and Google Android mobile devices. You can also test the full interactive experience directly in the interactive simulator on this website.',
+    },
+    {
+      q: 'When will the final product category be disclosed?',
+      a: 'The underlying product category is intentionally confidential during this platform demonstration and preview phase. The user experience, order workflows, and accounting layers are fully functional and ready to map directly to the commercial category upon official launch.',
     },
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
+    <section className="py-20 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
       <div className="max-w-4xl mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-18 space-y-3">
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
             Clarity First
           </div>
-          <h2 className="text-[36px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
+          <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
             Straightforward answers.
           </h2>
           <p className="text-[17px] text-[#5A5A53]">
-            Common questions regarding marketplace listings, double-entry settlement, and multi-platform availability.
+            Common questions regarding marketplace listings, order execution, and platform availability.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[18px] overflow-hidden transition-all shadow-2xs"
+                className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[16px] overflow-hidden transition-all"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F7F6F2]/60 transition-colors"
+                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                 >
-                  <span className="text-[17px] font-bold text-[#171A17]">
+                  <span className="text-[17px] font-bold text-[#171A17] leading-snug">
                     {faq.q}
                   </span>
                   <div
@@ -75,8 +79,9 @@ export const MarketingFaqSection: React.FC = () => {
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
+
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-1 text-[15px] text-[#5A5A53] leading-relaxed border-t border-[#EFEEE9]">
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-[15px] text-[#5A5A53] leading-relaxed border-t border-[#EFEEE9] pt-4">
                     {faq.a}
                   </div>
                 )}
@@ -85,23 +90,17 @@ export const MarketingFaqSection: React.FC = () => {
           })}
         </div>
 
-        {/* Quiet Contact Row */}
-        <div className="mt-14 p-6 bg-white border border-[#CBCAC2] rounded-[20px] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div>
-            <h4 className="text-[16px] font-bold text-[#171A17]">Have a specialized question?</h4>
-            <p className="text-xs text-[#5A5A53] mt-0.5">
-              Our engineering team can discuss order matching mechanics, custody, and settlement rails.
-            </p>
-          </div>
+        {/* Contact Link */}
+        <div className="mt-12 text-center text-sm text-[#5A5A53]">
+          <span>Have a question not covered here? </span>
           <button
             onClick={() => {
               setCurrentView('contact');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="px-5 py-2.5 bg-[#EFEEE9] hover:bg-[#E2E1DA] text-[#171A17] font-bold rounded-[10px] text-xs flex items-center gap-1.5 whitespace-nowrap cursor-pointer transition-colors"
+            className="font-bold text-[#087A4A] hover:underline cursor-pointer"
           >
-            <span>Talk to product team</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            Talk to our team →
           </button>
         </div>
       </div>

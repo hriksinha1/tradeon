@@ -43,8 +43,8 @@ export const SecurityPage: React.FC = () => {
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
             Security & Controls
           </div>
-          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            Confidence starts with knowing what is happening.
+          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+            Confidence comes from visibility.
           </h1>
           <p className="text-[18px] text-[#5A5A53] leading-relaxed">
             Security isn’t a marketing badge. It belongs in the foundation: clear session boundaries, multi-factor account locks, and complete audit readiness across web, iOS, and Android.

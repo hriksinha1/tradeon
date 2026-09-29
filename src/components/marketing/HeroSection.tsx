@@ -28,7 +28,7 @@ export const HeroSection: React.FC = () => {
             <span aria-hidden="true">·</span>
             <span>Web, iOS & Android</span>
             <span aria-hidden="true">·</span>
-            <span>Audited Ledger</span>
+            <span>Double-Entry Ledger</span>
           </div>
 
           {/* Primary Headline */}
@@ -155,9 +155,9 @@ export const HeroSection: React.FC = () => {
                 <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
                   <div className="text-xs text-[#6B6B63]">Settlement rail</div>
                   <div className="text-[18px] font-bold text-[#171A17] mt-1">
-                    Instant Double-Entry
+                    Direct Reconciled
                   </div>
-                  <div className="text-[11px] text-[#087A4A] mt-0.5 font-medium">Reconciled to wallet</div>
+                  <div className="text-[11px] text-[#087A4A] mt-0.5 font-medium">Reconciled to wallet balance</div>
                 </div>
               </div>
             </div>

@@ -7,133 +7,164 @@ import {
   CheckCircle2,
   ArrowRight,
   TrendingUp,
-  Layers,
-  ArrowLeftRight,
-  PieChart,
-  User,
-  Compass,
-  Receipt,
-  Wallet,
+  Search,
+  Check,
+  ShieldCheck,
 } from 'lucide-react';
 
 export const MobileAppsShowcaseSection: React.FC = () => {
   const { setDeviceFrame, setCurrentView, products, wallet } = useTrading();
-  const [activeScreenIndex, setActiveScreenIndex] = useState(0);
+  const [activeStageIndex, setActiveStageIndex] = useState(0);
 
-  const mobileScreens = [
+  const stages = [
     {
-      id: '01',
-      title: 'Home & Activity',
-      tagline: '“Good evening. 2 things changed today.”',
-      description: 'Quiet, calm overview of your total liquid balance, intraday trajectory, and active positions without visual screaming.',
+      kicker: 'Phase 01',
+      title: 'Find it.',
+      headline: 'Quick discovery without endless scrolling.',
+      description:
+        'Search products, filter by activity, or inspect trending units with clean indicative pricing and unit quotas right from your home feed.',
       screenContent: (
         <div className="space-y-3 text-left">
           <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
-            <span className="text-[11px] text-[#6B6B63]">Good evening</span>
-            <span className="text-[10px] font-mono text-[#087A4A]">Live connected</span>
+            <span className="text-xs font-bold text-[#171A17]">Marketplace</span>
+            <span className="text-[10px] font-mono text-[#087A4A] bg-[#E9FAF1] px-2 py-0.5 rounded">Live</span>
           </div>
-          <div>
-            <span className="text-[10px] uppercase font-semibold text-[#6B6B63]">Total portfolio</span>
-            <div className="text-[22px] font-extrabold text-[#171A17] tabular-nums mt-0.5">
-              {formatINR(wallet.totalValue)}
-            </div>
-            <div className="text-[11px] font-semibold text-[#0A7A45] mt-0.5">
-              +1.42% today (+₹6,840)
-            </div>
+
+          <div className="p-2 bg-white rounded-[10px] border border-[#E2E1DA] flex items-center gap-2 text-xs text-[#6B6B63]">
+            <Search className="w-3.5 h-3.5 text-[#5A5A53]" />
+            <span>Search listed products...</span>
           </div>
-          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA]">
-            <div className="text-[10px] text-[#6B6B63]">Available cash</div>
-            <div className="text-[16px] font-bold text-[#171A17] tabular-nums">
-              {formatINR(wallet.availableBalance)}
-            </div>
+
+          <div className="space-y-2 pt-1">
+            {products.slice(0, 3).map((p) => (
+              <div
+                key={p.id}
+                className="p-2.5 bg-white rounded-[12px] border border-[#E2E1DA] flex items-center justify-between shadow-2xs"
+              >
+                <div>
+                  <div className="font-bold text-[13px] text-[#171A17]">{p.name}</div>
+                  <div className="text-[10px] text-[#6B6B63]">
+                    {p.availableUnits.toLocaleString()} units
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="font-extrabold text-[13px] text-[#171A17] tabular-nums">
+                    {formatINR(p.currentValue)}
+                  </div>
+                  <div className="text-[10px] font-semibold text-[#0A7A45]">+{p.changePercent}%</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       ),
     },
     {
-      id: '02',
-      title: 'Product Discovery',
-      tagline: '“Find a product. Review it. Decide.”',
-      description: 'Browse verified listings with clear unit valuations, available supply quotas, and historical spread indicators.',
+      kicker: 'Phase 02',
+      title: 'Understand it.',
+      headline: 'All the context before you place a rupee.',
+      description:
+        'Tap any listing to inspect unit history, allocation limits, recent volatility, and double-entry settlement terms.',
       screenContent: (
-        <div className="space-y-2 text-left">
-          <div className="text-[11px] font-bold text-[#171A17] pb-1 border-b border-[#E2E1DA]">
-            Featured listings
-          </div>
-          {products.slice(0, 3).map((p) => (
-            <div key={p.id} className="p-2.5 bg-white rounded-[10px] border border-[#E2E1DA] flex items-center justify-between">
-              <div>
-                <div className="font-bold text-[13px] text-[#171A17]">{p.name}</div>
-                <div className="text-[10px] text-[#6B6B63]">{p.category} · {p.availableUnits} units</div>
-              </div>
-              <div className="text-right">
-                <div className="font-extrabold text-[13px] text-[#171A17] tabular-nums">{formatINR(p.currentValue)}</div>
-                <div className="text-[10px] font-semibold text-[#0A7A45]">+{p.changePercent}%</div>
-              </div>
+        <div className="space-y-3 text-left">
+          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
+            <div>
+              <div className="font-bold text-[14px] text-[#171A17]">Atlas Contract</div>
+              <div className="text-[10px] font-mono text-[#6B6B63]">ATLAS-01</div>
             </div>
-          ))}
+            <span className="text-[14px] font-extrabold text-[#171A17] tabular-nums">₹2,450.00</span>
+          </div>
+
+          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] space-y-2">
+            <div className="flex justify-between text-xs">
+              <span className="text-[#5A5A53]">Available quota</span>
+              <span className="font-bold text-[#171A17]">4,200 units</span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-[#5A5A53]">24h Movement</span>
+              <span className="font-bold text-[#0A7A45]">+3.4%</span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-[#5A5A53]">Settlement rail</span>
+              <span className="font-bold text-[#087A4A]">Direct Reconciled</span>
+            </div>
+          </div>
+
+          <div className="p-2.5 bg-[#EFEEE9] rounded-[10px] text-[11px] text-[#5A5A53]">
+            Verified commercial supply with direct seller double-entry settlement.
+          </div>
         </div>
       ),
     },
     {
-      id: '03',
-      title: 'Buy & Sell Slip',
-      tagline: '“Review before you place it.”',
-      description: 'Clear quantity steppers, transparent platform fees, and instant settlement calculations right at your thumb.',
+      kicker: 'Phase 03',
+      title: 'Act.',
+      headline: 'A bottom-sheet order slip with zero guesswork.',
+      description:
+        'Choose your quantity. The total debit, fee breakdown, and execution prompt are calculated right above your thumb before you commit.',
       screenContent: (
-        <div className="space-y-2.5 text-left">
-          <div className="flex items-center justify-between pb-1.5 border-b border-[#E2E1DA]">
-            <span className="font-bold text-[12px] text-[#171A17]">Order unit</span>
-            <span className="text-[10px] font-mono text-[#087A4A]">ATLAS-01</span>
+        <div className="space-y-3 text-left">
+          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
+            <span className="font-bold text-[13px] text-[#171A17]">Order Slip</span>
+            <span className="text-[11px] text-[#087A4A] font-semibold">Ready to submit</span>
           </div>
-          <div className="p-2.5 bg-white rounded-[10px] border border-[#E2E1DA] flex justify-between items-center text-xs">
-            <span>Units</span>
-            <span className="font-bold text-[15px] text-[#171A17]">5 units</span>
+
+          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] flex justify-between items-center">
+            <span className="text-xs text-[#5A5A53]">Quantity</span>
+            <span className="font-bold text-[16px] text-[#171A17]">5 units</span>
           </div>
-          <div className="p-2.5 bg-white rounded-[10px] border border-[#E2E1DA] space-y-1 text-[11px]">
+
+          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] space-y-1.5 text-xs">
             <div className="flex justify-between text-[#5A5A53]">
-              <span>Price per unit</span>
-              <span className="font-semibold text-[#171A17]">{formatINR(2480)}</span>
+              <span>5 × ₹2,450.00</span>
+              <span className="font-semibold text-[#171A17]">₹12,250.00</span>
             </div>
             <div className="flex justify-between text-[#5A5A53]">
-              <span>Fee (0.1%)</span>
-              <span className="font-semibold text-[#171A17]">{formatINR(12)}</span>
+              <span>Platform fee (0.1%)</span>
+              <span className="font-semibold text-[#171A17]">₹12.25</span>
             </div>
-            <div className="pt-1 border-t border-[#EFEEE9] flex justify-between font-bold text-[#171A17]">
+            <div className="pt-2 border-t border-[#EFEEE9] flex justify-between font-bold text-[13px] text-[#171A17]">
               <span>Total deduction</span>
-              <span className="text-[#087A4A]">{formatINR(12412)}</span>
+              <span className="text-[#087A4A]">₹12,262.25</span>
             </div>
           </div>
-          <div className="w-full py-2 bg-[#1FC777] text-[#0C0F0C] font-bold text-[12px] rounded-[8px] text-center">
-            Confirm buy order
+
+          <div className="w-full py-2.5 bg-[#1FC777] text-[#0C0F0C] font-bold text-xs rounded-[10px] text-center shadow-xs">
+            Authorize Order
           </div>
         </div>
       ),
     },
     {
-      id: '04',
-      title: 'Ledger & Trace',
-      tagline: '“Every action leaves a useful trail.”',
-      description: 'Double-entry transaction history with verifiable timestamps, running cash balances, and immutable audit keys.',
+      kicker: 'Phase 04',
+      title: 'Keep track.',
+      headline: 'A transparent ledger entry before you close the app.',
+      description:
+        'The moment your order fills, your wallet updates and an itemized receipt appears with sequential timestamp and updated running balance.',
       screenContent: (
-        <div className="space-y-2 text-left">
-          <div className="flex items-center justify-between pb-1 border-b border-[#E2E1DA]">
-            <span className="font-bold text-[12px] text-[#171A17]">Recent ledger entries</span>
-            <span className="text-[10px] text-[#087A4A]">Audit verified</span>
+        <div className="space-y-3 text-left">
+          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
+            <span className="font-bold text-[13px] text-[#171A17]">Ledger Receipt</span>
+            <span className="text-[10px] text-[#12A560] font-semibold flex items-center gap-1">
+              <Check className="w-3 h-3" />
+              Cleared
+            </span>
           </div>
-          <div className="p-2 bg-white rounded-[8px] border border-[#E2E1DA] text-[11px]">
-            <div className="flex justify-between font-bold">
-              <span>Bought 5 units Atlas</span>
-              <span className="text-[#171A17]">-₹12,412</span>
+
+          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] space-y-2">
+            <div className="text-[10px] text-[#6B6B63] font-mono">ORD-9912084 · Just now</div>
+            <div className="flex justify-between items-baseline">
+              <span className="text-xs font-bold text-[#171A17]">Bought 5 Atlas units</span>
+              <span className="font-bold text-xs text-[#E5484D]">-₹12,262.25</span>
             </div>
-            <div className="text-[10px] text-[#6B6B63] mt-0.5">Bal after: ₹71,838 · ORD-9912084</div>
+            <div className="text-[11px] text-[#5A5A53] pt-1 border-t border-[#EFEEE9]">
+              Updated Wallet Balance: <span className="font-bold text-[#171A17]">₹71,987.75</span>
+            </div>
           </div>
-          <div className="p-2 bg-white rounded-[8px] border border-[#E2E1DA] text-[11px]">
-            <div className="flex justify-between font-bold">
-              <span>UPI Top-up</span>
-              <span className="text-[#0A7A45]">+₹5,000</span>
-            </div>
-            <div className="text-[10px] text-[#6B6B63] mt-0.5">Bal after: ₹84,250 · TXN-88219</div>
+
+          <div className="p-2.5 bg-[#E9FAF1] rounded-[10px] text-[11px] text-[#087A4A] flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 shrink-0" />
+            <span>Auditable in your permanent transaction ledger</span>
           </div>
         </div>
       ),
@@ -141,53 +172,73 @@ export const MobileAppsShowcaseSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
+    <section className="py-20 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-3 mb-16">
+        {/* Header */}
+        <div className="max-w-3xl space-y-4 mb-14 sm:mb-20">
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
-            Native Mobile Experience
+            Mobile Experience
           </div>
-          <h2 className="text-[36px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
+          <h2 className="text-[34px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
             The whole product in your hand.
           </h2>
-          <p className="text-[18px] text-[#5A5A53] leading-relaxed">
-            Not a shrunk-down desktop dashboard. A purposeful, ergonomic experience engineered natively for Apple iOS 18 with Dynamic Island awareness and Google Android 15 Material precision.
+          <p className="text-[17px] sm:text-[19px] text-[#5A5A53] leading-relaxed">
+            Not a watered-down mobile web wrapper. A complete, fluid touch interface designed for native Apple iOS and Google Android devices.
           </p>
         </div>
 
-        {/* Dual Simulator Launchers */}
+        {/* Narrative Split: Authentic Human Photo + 4-Stage Step Walkthrough + Real Mobile Device */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left: Interactive Screen Selector */}
-          <div className="lg:col-span-6 space-y-4">
-            {mobileScreens.map((screen, idx) => {
-              const isSelected = activeScreenIndex === idx;
-              return (
-                <div
-                  key={screen.id}
-                  onClick={() => setActiveScreenIndex(idx)}
-                  className={`p-6 rounded-[20px] border transition-all cursor-pointer ${
-                    isSelected
-                      ? 'bg-white border-[#1FC777] shadow-sm'
-                      : 'bg-white/60 border-[#E2E1DA] hover:bg-white'
-                  }`}
-                >
-                  <div className="flex items-center justify-between text-xs text-[#087A4A] font-semibold">
-                    <span>Screen {screen.id}</span>
-                    <span className="text-[#6B6B63]">{screen.title}</span>
-                  </div>
-                  <h3 className="mt-2 text-[18px] font-bold text-[#171A17]">
-                    {screen.tagline}
-                  </h3>
-                  <p className="mt-1.5 text-[14px] text-[#5A5A53] leading-relaxed">
-                    {screen.description}
-                  </p>
-                </div>
-              );
-            })}
+          {/* Left Column: Human Context Photo & Stage Steps */}
+          <div className="lg:col-span-6 space-y-6">
+            {/* Real Lifestyle Image */}
+            <div className="relative rounded-[20px] overflow-hidden border border-[#CBCAC2] shadow-sm mb-6">
+              <img
+                src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=80"
+                alt="Person calmly using mobile application in a clean workspace"
+                className="w-full h-48 sm:h-56 object-cover filter brightness-[0.98]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F0C]/75 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <span className="text-xs text-[#1FC777] font-bold uppercase tracking-wider block">
+                  On-the-go Clarity
+                </span>
+                <span className="text-sm font-semibold">
+                  Every feature from the desktop terminal, thoughtfully scaled for handheld clarity.
+                </span>
+              </div>
+            </div>
 
-            {/* Launchers */}
-            <div className="pt-4 flex flex-wrap items-center gap-3">
+            {/* 4 Interactive Stages (Find it -> Understand it -> Act -> Keep track) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {stages.map((stage, idx) => {
+                const isSelected = activeStageIndex === idx;
+                return (
+                  <button
+                    key={stage.title}
+                    onClick={() => setActiveStageIndex(idx)}
+                    className={`p-4 rounded-[16px] text-left transition-all border cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#FFFFFF] border-[#1FC777] shadow-sm'
+                        : 'bg-white/60 border-[#E2E1DA] hover:bg-white'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between text-xs text-[#087A4A] font-semibold mb-1">
+                      <span>{stage.kicker}</span>
+                      <span className="text-[11px] text-[#6B6B63]">0{idx + 1}</span>
+                    </div>
+                    <div className="text-[18px] font-bold text-[#171A17]">{stage.title}</div>
+                    <p className="text-xs text-[#5A5A53] mt-1 line-clamp-2 leading-relaxed">
+                      {stage.headline}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Simulator Launchers */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <Button
                 variant="primary"
                 onClick={() => {
@@ -195,7 +246,7 @@ export const MobileAppsShowcaseSection: React.FC = () => {
                   setCurrentView('app-dashboard');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="flex items-center gap-2 cursor-pointer font-bold shadow-xs"
+                className="flex items-center gap-2 cursor-pointer font-bold shadow-xs text-xs sm:text-sm"
               >
                 <span>Launch iPhone 16 Pro Simulator</span>
                 <ArrowRight className="w-4 h-4" />
@@ -208,18 +259,18 @@ export const MobileAppsShowcaseSection: React.FC = () => {
                   setCurrentView('app-dashboard');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="cursor-pointer"
+                className="cursor-pointer text-xs sm:text-sm"
               >
                 Launch Pixel 9 Pro Simulator
               </Button>
             </div>
           </div>
 
-          {/* Right: Realistic Phone Frame Displaying Active Screen */}
+          {/* Right Column: Realistic Phone Frame Displaying Active Screen */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="w-[310px] sm:w-[340px] h-[640px] bg-black rounded-[48px] p-3 shadow-2xl border-4 border-[#2A2A26] relative">
-              {/* Dynamic Island */}
-              <div className="w-24 h-5 bg-black rounded-full absolute left-1/2 -translate-x-1/2 top-4 flex items-center justify-end px-2 z-30">
+            <div className="w-[300px] sm:w-[330px] h-[600px] sm:h-[630px] bg-[#0C0F0C] rounded-[48px] p-3 shadow-2xl border-4 border-[#2A2A26] relative">
+              {/* Dynamic Island Header */}
+              <div className="w-24 h-5 bg-[#000000] rounded-full absolute left-1/2 -translate-x-1/2 top-4 flex items-center justify-end px-2 z-30">
                 <div className="w-2 h-2 rounded-full bg-[#1A1A1A]" />
               </div>
 
@@ -227,7 +278,10 @@ export const MobileAppsShowcaseSection: React.FC = () => {
               <div className="w-full h-full bg-[#F7F6F2] rounded-[38px] overflow-hidden flex flex-col justify-between p-4 pt-10 text-left">
                 {/* Active Screen Content */}
                 <div className="pt-2">
-                  {mobileScreens[activeScreenIndex].screenContent}
+                  <div className="text-[11px] font-semibold text-[#087A4A] uppercase tracking-wider mb-2">
+                    {stages[activeStageIndex].kicker} · {stages[activeStageIndex].title}
+                  </div>
+                  {stages[activeStageIndex].screenContent}
                 </div>
 
                 {/* Bottom Home Indicator */}

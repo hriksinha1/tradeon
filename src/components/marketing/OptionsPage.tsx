@@ -28,8 +28,8 @@ export const OptionsPage: React.FC = () => {
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
             Structured Contracts
           </div>
-          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            More control when the decision gets more complex.
+          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+            When a simple order is not enough.
           </h1>
           <p className="text-[18px] text-[#5A5A53] leading-relaxed">
             Structured order experiences for users who need more than a simple buy or sell. Predefined strike levels, clear premium calculations, and bounded downside risk.

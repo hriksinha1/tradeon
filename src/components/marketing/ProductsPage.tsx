@@ -7,10 +7,12 @@ import {
   TrendingDown,
   Search,
   ArrowRight,
+  Star,
+  Info,
 } from 'lucide-react';
 
 export const ProductsPage: React.FC = () => {
-  const { products, openBuySell, setSelectedProductId, setCurrentView } = useTrading();
+  const { products, openBuySell, setSelectedProductId, setCurrentView, watchlist, toggleWatchlist } = useTrading();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'value-desc' | 'value-asc' | 'change-desc'>('value-desc');
@@ -36,16 +38,16 @@ export const ProductsPage: React.FC = () => {
   return (
     <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Header with Narrative */}
-        <div className="max-w-3xl mb-12 space-y-3">
+        {/* Header with Narrative: "Start with curiosity." */}
+        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
-            Product Catalog
+            Marketplace Catalog
           </div>
-          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            There’s more to a product than a number.
+          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+            Start with curiosity.
           </h1>
-          <p className="text-[18px] text-[#5A5A53] leading-relaxed">
-            Every listing comes with tangible context: indicative valuations, verified business supply limits, historical price performance, and direct double-entry settlement.
+          <p className="text-[17px] sm:text-[19px] text-[#5A5A53] leading-relaxed">
+            There’s more to a product than a number. Explore listings with tangible context, verified unit availability, 24-hour activity, and direct settlement terms.
           </p>
         </div>
 
@@ -57,10 +59,10 @@ export const ProductsPage: React.FC = () => {
               <Search className="w-4 h-4 text-[#A3A29A] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search by name, ID or category..."
+                placeholder="Search products by name or ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[14px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#087A4A] focus:bg-white"
+                className="w-full pl-9 pr-4 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#087A4A] focus:bg-white"
               />
             </div>
 
@@ -87,9 +89,9 @@ export const ProductsPage: React.FC = () => {
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="px-3 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] font-medium text-[#171A17] focus:outline-[#087A4A] cursor-pointer"
               >
-                <option value="value-desc">Highest value</option>
-                <option value="value-asc">Lowest value</option>
-                <option value="change-desc">Top gainers</option>
+                <option value="value-desc">Sort by highest value</option>
+                <option value="value-asc">Sort by lowest value</option>
+                <option value="change-desc">Sort by 24h gainers</option>
               </select>
             </div>
           </div>
@@ -99,6 +101,8 @@ export const ProductsPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((product) => {
             const isPositive = product.changePercent >= 0;
+            const inWatchlist = watchlist.includes(product.id);
+
             return (
               <div
                 key={product.id}
@@ -113,9 +117,29 @@ export const ProductsPage: React.FC = () => {
                       <span className="font-mono">{product.id}</span>
                     </div>
 
-                    <span className={`font-semibold tabular-nums ${isPositive ? 'text-[#0A7A45]' : 'text-[#BF2A2A]'}`}>
-                      {isPositive ? '+' : ''}{product.changePercent}%
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleWatchlist(product.id);
+                        }}
+                        className={`p-1 rounded transition-colors cursor-pointer ${
+                          inWatchlist ? 'text-[#C77700]' : 'text-[#CBCAC2] hover:text-[#5A5A53]'
+                        }`}
+                        title={inWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}
+                      >
+                        <Star className="w-3.5 h-3.5" fill={inWatchlist ? 'currentColor' : 'none'} />
+                      </button>
+
+                      <span
+                        className={`font-semibold tabular-nums ${
+                          isPositive ? 'text-[#0A7A45]' : 'text-[#BF2A2A]'
+                        }`}
+                      >
+                        {isPositive ? '+' : ''}
+                        {product.changePercent}%
+                      </span>
+                    </div>
                   </div>
 
                   <h3 className="mt-4 text-[22px] font-bold text-[#171A17] group-hover:text-[#087A4A] transition-colors">
@@ -123,7 +147,7 @@ export const ProductsPage: React.FC = () => {
                   </h3>
 
                   <p className="mt-2 text-[14px] text-[#5A5A53] leading-relaxed line-clamp-2">
-                    {product.description}
+                    {product.description || 'Verified product listing with structured supply quota.'}
                   </p>
 
                   {/* Valuation box */}
@@ -134,7 +158,7 @@ export const ProductsPage: React.FC = () => {
                         {product.availableUnits.toLocaleString()} units available
                       </span>
                     </div>
-                    <div className="text-[28px] font-extrabold text-[#171A17] tabular-nums mt-1">
+                    <div className="text-[26px] font-extrabold text-[#171A17] tabular-nums mt-1">
                       {formatINR(product.currentValue)}
                     </div>
 
@@ -180,8 +204,23 @@ export const ProductsPage: React.FC = () => {
         </div>
 
         {/* Quiet Footnote */}
-        <div className="mt-12 text-center text-xs text-[#6B6B63]">
-          All products listed are demonstration models designed to test marketplace workflows and do not represent real securities.
+        <div className="mt-12 p-4 bg-[#FFFFFF] border border-[#E2E1DA] rounded-[14px] flex items-center justify-between text-xs text-[#5A5A53]">
+          <div className="flex items-center gap-2">
+            <Info className="w-4 h-4 text-[#6B6B63] shrink-0" />
+            <span>
+              All products listed are demonstration models designed to test marketplace workflows and do not represent real securities.
+            </span>
+          </div>
+
+          <button
+            onClick={() => {
+              setCurrentView('app-dashboard');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="font-bold text-[#087A4A] hover:underline cursor-pointer whitespace-nowrap ml-4"
+          >
+            Launch terminal preview →
+          </button>
         </div>
       </div>
     </div>

@@ -53,11 +53,11 @@ export const PaymentsPage: React.FC = () => {
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
             Payment Rails & Wallet
           </div>
-          <h1 className="text-[38px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            Moving money should not feel mysterious.
+          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+            Move money. Know what happened.
           </h1>
           <p className="text-[18px] text-[#5A5A53] leading-relaxed">
-            Real-time payment gateway settlements, transparent wallet balances, and a mathematical double-entry transaction ledger that leaves a permanent, auditable paper trail.
+            Straightforward deposit workflows, transparent wallet balances, and a clean transaction ledger that records every rupee with an updated running balance.
           </p>
         </div>
 
@@ -105,14 +105,14 @@ export const PaymentsPage: React.FC = () => {
 
           <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[20px] p-6 shadow-2xs space-y-3">
             <span className="text-xs font-bold text-[#6B6B63] uppercase tracking-wider block">
-              Ledger Health Status
+              Ledger Trace Status
             </span>
             <div className="flex items-center gap-2 pt-1">
               <span className="w-2.5 h-2.5 rounded-full bg-[#12A560]" />
-              <span className="text-[24px] font-bold text-[#171A17]">100% Balanced</span>
+              <span className="text-[24px] font-bold text-[#171A17]">Reconciled</span>
             </div>
             <p className="text-xs text-[#5A5A53]">
-              Zero variance between debit allocations, credits, and gateway confirmations.
+              Every transaction maps to an itemized record with an updated running balance.
             </p>
             <div className="pt-3 border-t border-[#EFEEE9]">
               <button

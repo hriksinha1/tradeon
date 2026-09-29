@@ -12,7 +12,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     volume24h: 1845000,
     high24h: 2520,
     low24h: 2390,
-    description: 'Tier-1 primary enterprise listing with verified settlement cycles and scheduled yield delivery.',
+    description: 'Tier-1 primary enterprise listing with transparent settlement cycles and regular unit allocations.',
     unitMeasure: 'units',
     status: 'active',
     history: {

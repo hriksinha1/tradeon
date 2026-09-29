@@ -131,7 +131,7 @@ export const MarketingFooter: React.FC = () => {
                   onClick={() => handleNav('app-ledger')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Audited Ledger
+                  Transaction Ledger
                 </button>
               </li>
             </ul>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTrading } from '../../context/TradingContext';
-import { ViewMode, DeviceFrameType } from '../../types';
+import { ViewMode } from '../../types';
 import { Button } from '../common/Button';
 import {
   Smartphone,
@@ -23,13 +23,26 @@ export const MarketingNavbar: React.FC = () => {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks: { label: string; view: ViewMode }[] = [
+  // Desktop primary links (clean, uncluttered)
+  const desktopNavLinks: { label: string; view: ViewMode }[] = [
     { label: 'Products', view: 'products' },
-    { label: 'How It Works', view: 'how-it-works' },
+    { label: 'How it works', view: 'how-it-works' },
     { label: 'Options', view: 'options' },
-    { label: 'Mobile App', view: 'mobile-app' },
+    { label: 'Mobile app', view: 'mobile-app' },
+    { label: 'Security', view: 'security' },
+  ];
+
+  // Mobile drawer links
+  const mobileNavLinks: { label: string; view: ViewMode }[] = [
+    { label: 'Products', view: 'products' },
+    { label: 'How it works', view: 'how-it-works' },
+    { label: 'Options', view: 'options' },
+    { label: 'Mobile app', view: 'mobile-app' },
     { label: 'Payments & Ledger', view: 'payments' },
     { label: 'Security', view: 'security' },
+    { label: 'About', view: 'about' },
+    { label: 'FAQ', view: 'faq' },
+    { label: 'Contact', view: 'contact' },
   ];
 
   const handleNavClick = (view: ViewMode) => {
@@ -92,7 +105,7 @@ export const MarketingNavbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Dossier button */}
+          {/* Strategy Dossier Drawer Trigger */}
           <button
             onClick={() => setIsDossierOpen(true)}
             className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-[#087A4A] bg-white hover:bg-[#E9FAF1] border border-[#A2E8C5] rounded-[8px] transition-colors shadow-2xs cursor-pointer"
@@ -120,14 +133,14 @@ export const MarketingNavbar: React.FC = () => {
               Tradeon
             </span>
             <span className="text-[11px] font-medium text-[#6B6B63] block mt-0.5">
-              Trading & Marketplace
+              Marketplace & Trading
             </span>
           </div>
         </button>
 
         {/* Desktop Editorial Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => {
+        <nav className="hidden lg:flex items-center gap-8">
+          {desktopNavLinks.map((link) => {
             const isActive = currentView === link.view;
             return (
               <button
@@ -164,7 +177,7 @@ export const MarketingNavbar: React.FC = () => {
               setCurrentView('app-dashboard');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center gap-1.5 shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 shadow-xs cursor-pointer font-bold"
           >
             <span>Explore platform</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -183,8 +196,8 @@ export const MarketingNavbar: React.FC = () => {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-[#CBCAC2] bg-[#FFFFFF] px-4 py-5 space-y-2 shadow-xl animate-in slide-in-from-top-2">
-          {navLinks.map((link) => (
+        <div className="lg:hidden border-t border-[#CBCAC2] bg-[#FFFFFF] px-4 py-5 space-y-2 shadow-xl">
+          {mobileNavLinks.map((link) => (
             <button
               key={link.view}
               onClick={() => handleNavClick(link.view)}

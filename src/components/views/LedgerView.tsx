@@ -52,7 +52,7 @@ export const LedgerView: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[12px] font-bold text-[#087A4A] uppercase tracking-wider bg-[#E9FAF1] px-2.5 py-0.5 rounded-[6px] border border-[#CFF3E0]">
-              Cryptographic Audit Log
+              Transaction Audit Log
             </span>
           </div>
           <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Financial Ledger</h1>

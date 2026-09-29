@@ -7,8 +7,7 @@ import {
   ArrowRight,
   Receipt,
   Wallet,
-  ArrowDownLeft,
-  ShieldCheck,
+  Check,
   RotateCcw,
 } from 'lucide-react';
 
@@ -17,8 +16,15 @@ export const BuyJourneySection: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
   const [demoUnits, setDemoUnits] = useState<number>(5);
 
-  const sampleProduct = products[0]; // Atlas Contract
-  const unitPrice = sampleProduct.currentValue; // ₹2,480
+  const sampleProduct = products[0] || {
+    id: 'ATLAS-01',
+    name: 'Atlas Contract Units',
+    currentValue: 2450,
+    availableUnits: 4200,
+    category: 'Category A',
+  };
+
+  const unitPrice = sampleProduct.currentValue;
   const subtotal = unitPrice * demoUnits;
   const platformFee = Math.round(subtotal * 0.001);
   const totalCost = subtotal + platformFee;
@@ -26,316 +32,336 @@ export const BuyJourneySection: React.FC = () => {
   const journeySteps = [
     {
       num: 1,
-      title: 'Inspect context',
-      tagline: 'See what you are buying before you commit',
-      summary: 'Review live value, available business supply, and 24h trading spread without bouncing across multiple screens.',
+      title: 'Understand the product',
+      headline: 'Inspect current value and available supply.',
+      detail:
+        'Before committing a single rupee, you see the indicative value, recent movement, available quota, and commercial context on one clear screen.',
     },
     {
       num: 2,
       title: 'Choose quantity',
-      tagline: 'Real-time calculation with zero hidden math',
-      summary: 'Pick exact units or test percentage allocations. Subtotal, fee, and net deduction calculate immediately.',
+      headline: 'Adjust unit count with instant recalculation.',
+      detail:
+        'Select your exact unit quantity with a clean stepper. The interface recalculates the subtotal and fee in real time with zero hidden charges.',
     },
     {
       num: 3,
-      title: 'Confirm order',
-      tagline: 'Instant fill backed by internal balance',
-      summary: 'Execute at market price or place a target limit. The order is timestamped and filled from available quota.',
+      title: 'Review the amount',
+      headline: 'Total deduction displayed clearly before action.',
+      detail:
+        'Review the unit price, unit count, and the explicit 0.1% platform fee. You see the exact cash debit that will be deducted from your wallet.',
     },
     {
       num: 4,
-      title: 'Ledger trail',
-      tagline: 'Permanent record with running balance',
-      summary: 'Your wallet cash debits, your product holding credits, and an immutable audit hash is created in seconds.',
+      title: 'Confirm',
+      headline: 'Authorize with explicit intent.',
+      detail:
+        'A single clear prompt asks for confirmation. No accidental clicks or auto-executing surprises.',
+    },
+    {
+      num: 5,
+      title: 'See the result',
+      headline: 'Instant order execution receipt.',
+      detail:
+        'Your order executes immediately. You receive a structured order slip showing the order reference ID, filled units, and timestamp.',
+    },
+    {
+      num: 6,
+      title: 'See it in your records',
+      headline: 'Itemized entry logged to your ledger.',
+      detail:
+        'The transaction instantly debits from your wallet balance and logs a clean double-entry ledger record with your updated running balance.',
     },
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#CBCAC2]">
+    <section className="py-20 sm:py-32 bg-[#FFFFFF] border-b border-[#CBCAC2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-3 mb-16">
+        {/* Header */}
+        <div className="max-w-3xl space-y-4 mb-14 sm:mb-18">
           <div className="text-xs font-semibold text-[#087A4A] tracking-wider uppercase">
-            Interactive Walkthrough
+            The Complete Story
           </div>
-          <h2 className="text-[36px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
+          <h2 className="text-[34px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
             What happens when you click Buy?
           </h2>
-          <p className="text-[18px] text-[#5A5A53] leading-relaxed">
-            A frictionless order shouldn’t mean blind trust. Here is the exact journey from the moment you decide to act until the record settles in your ledger.
+          <p className="text-[17px] sm:text-[19px] text-[#5A5A53] leading-relaxed">
+            A transparent journey from initial curiosity to verified ledger record. No hidden markups, delayed confirmations, or mystery debits.
           </p>
         </div>
 
-        {/* Interactive Walkthrough Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: 4 Interactive Step Selectors */}
-          <div className="lg:col-span-5 space-y-4">
-            {journeySteps.map((step) => {
-              const isActive = activeStep === step.num;
-              return (
-                <button
-                  key={step.num}
-                  onClick={() => setActiveStep(step.num)}
-                  className={`w-full text-left p-5 rounded-[18px] border transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-[#F7F6F2] border-[#1FC777] shadow-xs'
-                      : 'bg-white border-[#E2E1DA] hover:border-[#CBCAC2]'
-                  }`}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <span
-                        className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                          isActive
-                            ? 'bg-[#1FC777] text-[#0C0F0C]'
-                            : 'bg-[#EFEEE9] text-[#6B6B63]'
-                        }`}
-                      >
-                        0{step.num}
-                      </span>
-                      <h3 className="text-[17px] font-bold text-[#171A17]">{step.title}</h3>
-                    </div>
+        {/* 6-Step Stepper Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-10">
+          {journeySteps.map((step) => {
+            const isCurrent = activeStep === step.num;
+            const isCompleted = activeStep > step.num;
 
-                    {isActive && (
-                      <span className="text-[11px] font-semibold text-[#087A4A]">Active stage</span>
-                    )}
-                  </div>
+            return (
+              <button
+                key={step.num}
+                onClick={() => setActiveStep(step.num)}
+                className={`p-3 rounded-[12px] text-left transition-all border cursor-pointer ${
+                  isCurrent
+                    ? 'bg-[#171A17] text-white border-[#171A17] shadow-xs'
+                    : isCompleted
+                    ? 'bg-[#E9FAF1] text-[#087A4A] border-[#1FC777]'
+                    : 'bg-[#F7F6F2] text-[#5A5A53] border-[#E2E1DA] hover:bg-[#EFEEE9]'
+                }`}
+              >
+                <div className="flex items-center justify-between text-xs font-mono font-bold mb-1">
+                  <span>0{step.num}</span>
+                  {isCompleted && <Check className="w-3.5 h-3.5 text-[#087A4A]" />}
+                </div>
+                <div className="text-xs font-bold truncate">{step.title}</div>
+              </button>
+            );
+          })}
+        </div>
 
-                  <p className="mt-2.5 text-[13px] text-[#5A5A53] leading-relaxed pl-10">
-                    {step.summary}
-                  </p>
-                </button>
-              );
-            })}
+        {/* 2-Column Split: Step Details & Interactive Live Reconstructed Product UI */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Narrative Details */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-3">
+              <span className="text-xs font-bold text-[#087A4A] uppercase tracking-wider block">
+                Step 0{activeStep} of 06 · {journeySteps[activeStep - 1].title}
+              </span>
+              <h3 className="text-[26px] sm:text-[32px] font-extrabold text-[#171A17] leading-tight">
+                {journeySteps[activeStep - 1].headline}
+              </h3>
+              <p className="text-[16px] text-[#5A5A53] leading-relaxed">
+                {journeySteps[activeStep - 1].detail}
+              </p>
+            </div>
+
+            {/* Stepper Navigation Buttons */}
+            <div className="flex items-center gap-3 pt-2">
+              <button
+                disabled={activeStep === 1}
+                onClick={() => setActiveStep((prev) => Math.max(1, prev - 1))}
+                className="px-4 py-2 text-xs font-bold rounded-[8px] border border-[#CBCAC2] text-[#171A17] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#EFEEE9] transition-colors cursor-pointer"
+              >
+                Previous Step
+              </button>
+
+              <button
+                onClick={() => {
+                  if (activeStep === 6) {
+                    setActiveStep(1);
+                  } else {
+                    setActiveStep((prev) => prev + 1);
+                  }
+                }}
+                className="px-5 py-2 text-xs font-bold rounded-[8px] bg-[#1FC777] text-[#0C0F0C] hover:bg-[#18B36A] transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+              >
+                <span>{activeStep === 6 ? 'Restart Walkthrough' : 'Next Step'}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
-          {/* Right Column: Live Interactive Visual State Window */}
-          <div className="lg:col-span-7 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[24px] p-6 sm:p-8 shadow-sm">
-            {/* Step 1 State: Product Inspection */}
+          {/* Right Column: Reconstructed Real Product UI at this Step */}
+          <div className="lg:col-span-7 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[24px] p-6 sm:p-8 shadow-xs">
+            {/* Step 1 UI: Understand the product */}
             {activeStep === 1 && (
-              <div className="space-y-6 animate-in fade-in duration-200">
-                <div className="flex items-center justify-between pb-4 border-b border-[#E2E1DA]">
+              <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
+                <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE9]">
                   <div>
-                    <span className="text-xs font-semibold text-[#087A4A]">{sampleProduct.category}</span>
-                    <h4 className="text-[24px] font-bold text-[#171A17]">{sampleProduct.name}</h4>
+                    <span className="font-mono text-xs text-[#087A4A] font-bold">
+                      {sampleProduct.id}
+                    </span>
+                    <h4 className="text-[22px] font-bold text-[#171A17] mt-0.5">
+                      {sampleProduct.name}
+                    </h4>
                   </div>
                   <div className="text-right">
-                    <div className="text-[24px] font-extrabold text-[#171A17] tabular-nums">
-                      {formatINR(unitPrice)}
+                    <span className="text-xs text-[#6B6B63]">Indicative unit value</span>
+                    <div className="text-[24px] font-extrabold text-[#171A17] tabular-nums mt-0.5">
+                      {formatINR(sampleProduct.currentValue)}
                     </div>
-                    <span className="text-xs font-semibold text-[#0A7A45]">+{sampleProduct.changePercent}% today</span>
                   </div>
                 </div>
 
-                <p className="text-[14px] text-[#5A5A53] leading-relaxed">
-                  {sampleProduct.description}
-                </p>
-
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  <div className="p-3.5 bg-white rounded-[12px] border border-[#E2E1DA]">
-                    <div className="text-xs text-[#6B6B63]">Available Quota</div>
-                    <div className="text-[16px] font-bold text-[#171A17] mt-0.5">
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div className="p-3 bg-[#F7F6F2] rounded-[10px]">
+                    <span className="text-[#6B6B63] block">Available quota</span>
+                    <span className="text-sm font-bold text-[#171A17] block mt-0.5">
                       {sampleProduct.availableUnits.toLocaleString()} units
-                    </div>
+                    </span>
                   </div>
-                  <div className="p-3.5 bg-white rounded-[12px] border border-[#E2E1DA]">
-                    <div className="text-xs text-[#6B6B63]">24h Volume</div>
-                    <div className="text-[16px] font-bold text-[#171A17] mt-0.5">
-                      {formatINR(sampleProduct.volume24h)}
-                    </div>
+                  <div className="p-3 bg-[#F7F6F2] rounded-[10px]">
+                    <span className="text-[#6B6B63] block">Category classification</span>
+                    <span className="text-sm font-bold text-[#171A17] block mt-0.5">
+                      {sampleProduct.category}
+                    </span>
                   </div>
-                </div>
-
-                <div className="pt-4 flex justify-end">
-                  <button
-                    onClick={() => setActiveStep(2)}
-                    className="px-5 py-2.5 bg-[#1FC777] text-[#0C0F0C] font-bold text-[13px] rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
-                  >
-                    <span>Proceed to quantity</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
                 </div>
               </div>
             )}
 
-            {/* Step 2 State: Quantity & Math */}
+            {/* Step 2 UI: Choose quantity */}
             {activeStep === 2 && (
-              <div className="space-y-6 animate-in fade-in duration-200">
-                <div className="flex items-center justify-between pb-4 border-b border-[#E2E1DA]">
-                  <div>
-                    <span className="text-xs text-[#6B6B63]">Select allocation</span>
-                    <h4 className="text-[20px] font-bold text-[#171A17]">Units & Cost Calculation</h4>
-                  </div>
-                  <div className="text-xs font-mono text-[#087A4A]">{sampleProduct.id}</div>
+              <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-5">
+                <div className="flex justify-between items-center text-xs text-[#6B6B63]">
+                  <span>Ordering units for {sampleProduct.name}</span>
+                  <span className="text-[#087A4A] font-medium">Real-time calculator</span>
                 </div>
 
-                {/* Stepper Input */}
-                <div className="p-4 bg-white rounded-[14px] border border-[#E2E1DA] space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#171A17]">Number of units</span>
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => setDemoUnits(Math.max(1, demoUnits - 1))}
-                        className="w-8 h-8 rounded-[8px] bg-[#EFEEE9] hover:bg-[#E2E1DA] text-[#171A17] font-bold text-[16px] flex items-center justify-center cursor-pointer"
-                      >
-                        -
-                      </button>
-                      <span className="font-extrabold text-[18px] text-[#171A17] w-10 text-center tabular-nums">
-                        {demoUnits}
-                      </span>
-                      <button
-                        onClick={() => setDemoUnits(demoUnits + 1)}
-                        className="w-8 h-8 rounded-[8px] bg-[#EFEEE9] hover:bg-[#E2E1DA] text-[#171A17] font-bold text-[16px] flex items-center justify-center cursor-pointer"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Calculations */}
-                  <div className="pt-3 border-t border-[#EFEEE9] space-y-2 text-xs">
-                    <div className="flex justify-between text-[#5A5A53]">
-                      <span>Subtotal ({demoUnits} × {formatINR(unitPrice)})</span>
-                      <span className="font-semibold text-[#171A17] tabular-nums">{formatINR(subtotal)}</span>
-                    </div>
-                    <div className="flex justify-between text-[#5A5A53]">
-                      <span>Estimated platform settlement fee (0.1%)</span>
-                      <span className="font-semibold text-[#171A17] tabular-nums">{formatINR(platformFee)}</span>
-                    </div>
-                    <div className="pt-2 border-t border-[#EFEEE9] flex justify-between text-[14px] font-bold text-[#171A17]">
-                      <span>Total required cash</span>
-                      <span className="text-[#087A4A] tabular-nums">{formatINR(totalCost)}</span>
-                    </div>
+                <div className="p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA] flex items-center justify-between">
+                  <span className="text-sm font-bold text-[#171A17]">Number of units</span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setDemoUnits((u) => Math.max(1, u - 1))}
+                      className="w-8 h-8 rounded-[8px] bg-white border border-[#CBCAC2] font-bold text-[#171A17] hover:bg-[#EFEEE9] flex items-center justify-center cursor-pointer"
+                    >
+                      -
+                    </button>
+                    <span className="text-[20px] font-extrabold text-[#171A17] tabular-nums w-10 text-center">
+                      {demoUnits}
+                    </span>
+                    <button
+                      onClick={() => setDemoUnits((u) => u + 1)}
+                      className="w-8 h-8 rounded-[8px] bg-white border border-[#CBCAC2] font-bold text-[#171A17] hover:bg-[#EFEEE9] flex items-center justify-center cursor-pointer"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  <button
-                    onClick={() => setActiveStep(1)}
-                    className="text-xs text-[#6B6B63] hover:underline"
-                  >
-                    ← Back to inspection
-                  </button>
-                  <button
-                    onClick={() => setActiveStep(3)}
-                    className="px-5 py-2.5 bg-[#1FC777] text-[#0C0F0C] font-bold text-[13px] rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
-                  >
-                    <span>Review & confirm</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                <div className="text-xs text-[#5A5A53] flex justify-between">
+                  <span>Subtotal ({demoUnits} × {formatINR(unitPrice)})</span>
+                  <span className="font-bold text-[#171A17] tabular-nums">{formatINR(subtotal)}</span>
                 </div>
               </div>
             )}
 
-            {/* Step 3 State: Order Confirmation */}
+            {/* Step 3 UI: Review the amount */}
             {activeStep === 3 && (
-              <div className="space-y-6 animate-in fade-in duration-200">
-                <div className="flex items-center gap-3 p-4 bg-[#E9FAF1] border border-[#A2E8C5] rounded-[16px]">
-                  <CheckCircle2 className="w-6 h-6 text-[#12A560] shrink-0" />
-                  <div>
-                    <h4 className="text-[16px] font-bold text-[#0C0F0C]">Order Filled Successfully</h4>
-                    <p className="text-xs text-[#087A4A] mt-0.5">
-                      Matched instantly from business reserve quota.
-                    </p>
+              <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
+                <div className="text-xs font-bold text-[#171A17] uppercase tracking-wider pb-2 border-b border-[#EFEEE9]">
+                  Order Slip Breakdown
+                </div>
+
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between text-[#5A5A53]">
+                    <span>Item: {sampleProduct.name}</span>
+                    <span className="font-semibold text-[#171A17]">{demoUnits} units</span>
+                  </div>
+                  <div className="flex justify-between text-[#5A5A53]">
+                    <span>Price per unit</span>
+                    <span className="font-semibold text-[#171A17]">{formatINR(unitPrice)}</span>
+                  </div>
+                  <div className="flex justify-between text-[#5A5A53]">
+                    <span>Subtotal</span>
+                    <span className="font-semibold text-[#171A17]">{formatINR(subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between text-[#5A5A53]">
+                    <span>Platform processing fee (0.1%)</span>
+                    <span className="font-semibold text-[#171A17]">{formatINR(platformFee)}</span>
                   </div>
                 </div>
 
-                <div className="p-4 bg-white rounded-[14px] border border-[#E2E1DA] space-y-2.5 text-xs">
-                  <div className="flex justify-between text-[#5A5A53]">
-                    <span>Product</span>
-                    <span className="font-bold text-[#171A17]">{sampleProduct.name} ({sampleProduct.id})</span>
+                <div className="pt-3 border-t border-[#EFEEE9] flex justify-between items-baseline">
+                  <div>
+                    <span className="text-xs text-[#6B6B63]">Net wallet debit</span>
+                    <div className="text-[22px] font-extrabold text-[#087A4A] tabular-nums">
+                      {formatINR(totalCost)}
+                    </div>
                   </div>
-                  <div className="flex justify-between text-[#5A5A53]">
-                    <span>Filled quantity</span>
+                  <span className="text-[11px] text-[#6B6B63]">Zero hidden surcharges</span>
+                </div>
+              </div>
+            )}
+
+            {/* Step 4 UI: Confirm */}
+            {activeStep === 4 && (
+              <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-5 text-center">
+                <div className="w-12 h-12 rounded-full bg-[#E9FAF1] text-[#087A4A] flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+
+                <div>
+                  <h4 className="text-[20px] font-bold text-[#171A17]">Confirm Purchase Order</h4>
+                  <p className="text-xs text-[#5A5A53] mt-1">
+                    You are authorizing a debit of {formatINR(totalCost)} from your available cash for {demoUnits} units of {sampleProduct.name}.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-[#F7F6F2] rounded-[12px] text-xs text-[#5A5A53] flex items-center justify-between">
+                  <span>Available wallet cash</span>
+                  <span className="font-bold text-[#171A17]">{formatINR(wallet.availableBalance)}</span>
+                </div>
+
+                <button
+                  onClick={() => setActiveStep(5)}
+                  className="w-full py-3 bg-[#1FC777] text-[#0C0F0C] font-bold text-sm rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer shadow-xs"
+                >
+                  Click to Authorize & Execute
+                </button>
+              </div>
+            )}
+
+            {/* Step 5 UI: See the result */}
+            {activeStep === 5 && (
+              <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#EFEEE9]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#12A560]" />
+                    <span className="font-bold text-xs text-[#171A17]">Order Executed</span>
+                  </div>
+                  <span className="font-mono text-xs text-[#6B6B63]">ORD-9912084</span>
+                </div>
+
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-[#5A5A53]">Product</span>
+                    <span className="font-bold text-[#171A17]">{sampleProduct.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#5A5A53]">Units Acquired</span>
                     <span className="font-bold text-[#171A17]">{demoUnits} units</span>
                   </div>
-                  <div className="flex justify-between text-[#5A5A53]">
-                    <span>Execution price</span>
-                    <span className="font-bold text-[#171A17]">{formatINR(unitPrice)}</span>
+                  <div className="flex justify-between">
+                    <span className="text-[#5A5A53]">Execution Value</span>
+                    <span className="font-bold text-[#171A17]">{formatINR(totalCost)}</span>
                   </div>
-                  <div className="flex justify-between text-[#5A5A53]">
-                    <span>Total deducted</span>
-                    <span className="font-bold text-[#0A7A45]">{formatINR(totalCost)}</span>
-                  </div>
-                  <div className="flex justify-between text-[#5A5A53]">
-                    <span>Order reference</span>
-                    <span className="font-mono text-[#171A17]">ORD-9912084</span>
+                  <div className="flex justify-between">
+                    <span className="text-[#5A5A53]">Status</span>
+                    <span className="font-bold text-[#0A7A45]">Filled & Settled</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  <button
-                    onClick={() => setActiveStep(2)}
-                    className="text-xs text-[#6B6B63] hover:underline"
-                  >
-                    ← Edit units
-                  </button>
-                  <button
-                    onClick={() => setActiveStep(4)}
-                    className="px-5 py-2.5 bg-[#1FC777] text-[#0C0F0C] font-bold text-[13px] rounded-[10px] hover:bg-[#18B36A] transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
-                  >
-                    <span>View ledger record</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                <div className="p-3 bg-[#E9FAF1] rounded-[12px] text-xs text-[#087A4A] flex items-center justify-between">
+                  <span>Unit balance credited to portfolio</span>
+                  <Check className="w-4 h-4" />
                 </div>
               </div>
             )}
 
-            {/* Step 4 State: Ledger Audit Record */}
-            {activeStep === 4 && (
-              <div className="space-y-6 animate-in fade-in duration-200">
-                <div className="flex items-center justify-between pb-3 border-b border-[#E2E1DA]">
-                  <div>
-                    <span className="text-xs font-semibold text-[#087A4A]">Double-Entry Ledger</span>
-                    <h4 className="text-[18px] font-bold text-[#171A17]">Audit Entry #TXN-4921</h4>
+            {/* Step 6 UI: See it reflected in your records */}
+            {activeStep === 6 && (
+              <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[18px] p-6 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#EFEEE9]">
+                  <span className="font-bold text-xs text-[#171A17]">Double-Entry Ledger Record</span>
+                  <span className="font-mono text-xs text-[#087A4A]">TXN-88219</span>
+                </div>
+
+                <div className="p-3 bg-[#F7F6F2] rounded-[12px] space-y-1.5 text-xs">
+                  <div className="flex justify-between font-bold text-[#171A17]">
+                    <span>Bought {demoUnits} units {sampleProduct.name}</span>
+                    <span className="text-[#BF2A2A] font-mono">-{formatINR(totalCost)}</span>
                   </div>
-                  <span className="text-xs font-mono text-[#0A7A45]">Verified</span>
+                  <div className="flex justify-between text-[#5A5A53] pt-1 border-t border-[#E2E1DA]">
+                    <span>Updated Running Cash Balance</span>
+                    <span className="font-bold text-[#171A17]">
+                      {formatINR(wallet.availableBalance - totalCost)}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="bg-white rounded-[14px] border border-[#E2E1DA] overflow-hidden text-xs">
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="bg-[#EFEEE9] text-[10px] font-bold uppercase text-[#6B6B63] border-b border-[#E2E1DA]">
-                        <th className="py-2.5 px-3">Account</th>
-                        <th className="py-2.5 px-3 text-right">Debit</th>
-                        <th className="py-2.5 px-3 text-right">Credit</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-[#EFEEE9]">
-                      <tr>
-                        <td className="py-2.5 px-3 font-semibold text-[#171A17]">Product Holding (Atlas)</td>
-                        <td className="py-2.5 px-3 text-right text-[#0A7A45] font-bold">+{demoUnits} units</td>
-                        <td className="py-2.5 px-3 text-right text-[#6B6B63]">-</td>
-                      </tr>
-                      <tr>
-                        <td className="py-2.5 px-3 font-semibold text-[#171A17]">Wallet Cash Reserve</td>
-                        <td className="py-2.5 px-3 text-right text-[#6B6B63]">-</td>
-                        <td className="py-2.5 px-3 text-right text-[#BF2A2A] font-bold">-{formatINR(totalCost)}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="p-3 bg-[#E9FAF1] border border-[#A2E8C5] rounded-[10px] text-xs text-[#087A4A] flex items-center justify-between">
-                  <span>Running Balance reconciled: {formatINR(wallet.availableBalance)}</span>
-                  <span className="font-bold">Zero variance</span>
-                </div>
-
-                <div className="flex items-center justify-between pt-2">
-                  <button
-                    onClick={() => setActiveStep(1)}
-                    className="text-xs text-[#087A4A] font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                  >
-                    <RotateCcw className="w-3 h-3" />
-                    <span>Replay journey from start</span>
-                  </button>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={() => openBuySell('buy', sampleProduct)}
-                  >
-                    Try in live terminal
-                  </Button>
+                <div className="text-xs text-[#5A5A53] flex items-center justify-between pt-1">
+                  <span>Timestamp: Just now</span>
+                  <span className="text-[#087A4A] font-semibold">Reconciled to ledger</span>
                 </div>
               </div>
             )}

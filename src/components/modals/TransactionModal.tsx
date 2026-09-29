@@ -136,7 +136,7 @@ export const TransactionModal: React.FC = () => {
               </div>
               <div className="text-[12px]">
                 <span className="font-bold text-[#171717] block">Ledger Reconciled</span>
-                <span className="text-[#6B6B6B]">Permanent cryptographic entry stored for audit report</span>
+                <span className="text-[#6B6B6B]">Itemized ledger entry stored with running balance</span>
               </div>
             </div>
           </div>
