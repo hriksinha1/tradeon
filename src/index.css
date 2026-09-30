@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #0b1f33;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f7f9fc;
+  --color-surface-cool: #f1f5f9;
+  --color-brand: #0070ba;
+  --color-brand-hover: #005ea8;
+  --color-brand-navy: #003087;
+  --color-brand-subtle: #eaf4ff;
+  --color-border-subtle: #e4ebf2;
+  --color-border: #d4dde7;
+  --color-border-input: #71829a;
+  --color-muted-foreground: #5b6b7f;
+  --color-secondary-foreground: #405166;
+  --color-positive: #16803c;
+  --color-positive-bg: #e9f7ef;
+  --color-negative: #c62828;
+  --color-negative-bg: #fdeeee;
+  --color-warning: #a15c00;
+  --color-warning-bg: #fff4db;
+  --color-info: #0069c0;
+  --color-info-bg: #e8f4ff;
+}
+
 @layer base {
   :root {
     /* Tradeon Blue Fintech tokens */
