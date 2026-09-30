@@ -1,279 +1,86 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import { ArrowUpDown, Search, Star, TrendingDown, TrendingUp } from 'lucide-react';
 import { useTrading } from '../../context/TradingContext';
-import { formatINR } from '../../constants/designTokens';
-import { Search, Star, ArrowUpDown, ArrowUpRight, ArrowDownLeft, Filter } from 'lucide-react';
+import { formatINR, formatUnits } from '../../constants/designTokens';
 import { Product } from '../../types';
 
+const tabs = ['all', 'popular', 'trending', 'new'] as const;
+
+type Tab = (typeof tabs)[number];
+
 export const MarketsView: React.FC = () => {
-  const {
-    products,
-    watchlist,
-    toggleWatchlist,
-    setCurrentView,
-    setSelectedProductId,
-    openBuySell,
-  } = useTrading();
+  const { products, watchlist, toggleWatchlist, setCurrentView, setSelectedProductId } = useTrading();
+  const [query, setQuery] = useState('');
+  const [tab, setTab] = useState<Tab>('all');
+  const [category, setCategory] = useState('all');
+  const [sort, setSort] = useState<'value' | 'change' | 'volume'>('value');
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTab, setSelectedTab] = useState<'all' | 'popular' | 'trending' | 'new'>('all');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'value-desc' | 'value-asc' | 'change-desc' | 'volume'>('value-desc');
+  const visibleProducts = useMemo(() => products.filter((product) => {
+    const text = `${product.name} ${product.id} ${product.category}`.toLowerCase();
+    const matchesQuery = text.includes(query.toLowerCase());
+    const matchesCategory = category === 'all' || product.category === category;
+    const matchesTab = tab === 'all' || (tab === 'popular' && product.volume24h > 1500000) || (tab === 'trending' && Math.abs(product.changePercent) >= 1) || (tab === 'new' && ['PRISM-11', 'ZENITH-05'].includes(product.id));
+    return matchesQuery && matchesCategory && matchesTab;
+  }).sort((a, b) => sort === 'change' ? b.changePercent - a.changePercent : sort === 'volume' ? b.volume24h - a.volume24h : b.currentValue - a.currentValue), [products, query, tab, category, sort]);
 
-  const filteredProducts = useMemo(() => {
-    return products
-      .filter((p) => {
-        const matchesQuery =
-          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
-        const matchesTab =
-          selectedTab === 'all' ||
-          (selectedTab === 'popular' && p.volume24h > 1500000) ||
-          (selectedTab === 'trending' && Math.abs(p.changePercent) > 1.0) ||
-          (selectedTab === 'new' && (p.id === 'PRISM-11' || p.id === 'ZENITH-05'));
-        return matchesQuery && matchesCategory && matchesTab;
-      })
-      .sort((a, b) => {
-        if (sortBy === 'value-desc') return b.currentValue - a.currentValue;
-        if (sortBy === 'value-asc') return a.currentValue - b.currentValue;
-        if (sortBy === 'change-desc') return b.changePercent - a.changePercent;
-        if (sortBy === 'volume') return b.volume24h - a.volume24h;
-        return 0;
-      });
-  }, [products, searchQuery, selectedCategory, selectedTab, sortBy]);
-
-  const categories = ['all', 'Category A', 'Category B', 'Category C'];
-
-  const handleSelectProduct = (p: Product) => {
-    setSelectedProductId(p.id);
+  const openProduct = (product: Product) => {
+    setSelectedProductId(product.id);
     setCurrentView('product-detail');
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-8 lg:py-8">
+      <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Marketplace & Products</h1>
-          <p className="text-[14px] text-[#6B6B6B] mt-0.5">
-            Discover verified business-supplied products, check valuations, and execute trades.
-          </p>
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-brand">Explore the market</p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Products worth knowing</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Compare verified products, understand movement, then open one product page to decide what to do.</p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[12px] text-[#78716C] bg-white border border-[#E7E5E4] px-3 py-1.5 rounded-[8px] font-semibold">
-            {products.length} Active Listings
-          </span>
-        </div>
-      </div>
+        <span className="w-fit rounded-full border border-border bg-surface px-3 py-2 text-xs font-semibold text-secondary-foreground">{products.length} active listings</span>
+      </header>
 
-      {/* Control Bar: Search, Category Chips, Sort */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[16px] p-4 shadow-2xs space-y-3">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-          {/* Search Box */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-[#78716C]" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by product name, code (e.g. ATLAS-01)..."
-              className="w-full pl-9 pr-4 py-2 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[10px] text-[13px] text-[#171717] focus:outline-[#005EA8] focus:bg-white transition-colors"
-            />
-          </div>
-
-          {/* Sort Selector */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 text-[12px] text-[#78716C]">
-              <ArrowUpDown className="w-3.5 h-3.5" />
-              <span>Sort:</span>
-            </div>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-3 py-1.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[8px] text-[13px] font-semibold text-[#171717] focus:outline-[#005EA8]"
-            >
-              <option value="value-desc">Highest Valuation</option>
-              <option value="value-asc">Lowest Valuation</option>
-              <option value="change-desc">Top Gainers (%)</option>
-              <option value="volume">Highest 24h Volume</option>
+      <section className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm" aria-label="Market filters">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <label className="relative block w-full md:max-w-md">
+            <span className="sr-only">Search products</span>
+            <Search className="pointer-events-none absolute left-3 top-3 size-4 text-muted-foreground" />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products or codes" className="h-10 w-full rounded-xl border border-border bg-surface-soft pl-10 pr-3 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15" />
+          </label>
+          <label className="flex items-center gap-2 text-sm text-muted-foreground">
+            <ArrowUpDown className="size-4" />
+            <span>Sort by</span>
+            <select value={sort} onChange={(event) => setSort(event.target.value as typeof sort)} className="h-10 rounded-xl border border-border bg-surface px-3 font-semibold text-foreground outline-none focus:border-brand">
+              <option value="value">Current value</option><option value="change">Biggest movement</option><option value="volume">Most traded</option>
             </select>
+          </label>
+        </div>
+        <div className="flex flex-col gap-3 border-t border-divider pt-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex gap-1 overflow-x-auto rounded-xl bg-surface-soft p-1">
+            {tabs.map((item) => <button key={item} onClick={() => setTab(item)} className={`min-h-9 rounded-lg px-3 text-xs font-semibold capitalize transition ${tab === item ? 'bg-surface text-brand shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}>{item}</button>)}
+          </div>
+          <div className="flex gap-2 overflow-x-auto">
+            {['all', 'Category A', 'Category B', 'Category C'].map((item) => <button key={item} onClick={() => setCategory(item)} className={`min-h-9 whitespace-nowrap rounded-lg border px-3 text-xs font-semibold ${category === item ? 'border-brand bg-brand-subtle text-brand-hover' : 'border-border text-muted-foreground hover:border-brand'}`}>{item === 'all' ? 'All categories' : item}</button>)}
           </div>
         </div>
+      </section>
 
-        {/* Tab filters and Category segmented bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#E7E5E4]">
-          {/* Status Tabs */}
-          <div className="flex items-center gap-1 p-0.5 bg-[#F5F5F4] rounded-[8px]">
-            {(['all', 'popular', 'trending', 'new'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setSelectedTab(tab)}
-                className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold capitalize transition-all ${
-                  selectedTab === tab ? 'bg-white text-[#005EA8] shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+      <section className="grid gap-3 md:hidden" aria-label="Market products">
+        {visibleProducts.map((product) => <ProductCard key={product.id} product={product} isWatched={watchlist.includes(product.id)} onOpen={() => openProduct(product)} onWatch={() => toggleWatchlist(product.id)} />)}
+      </section>
 
-          {/* Category Chips */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-2.5 py-1 rounded-[8px] text-[12px] font-medium border transition-colors whitespace-nowrap ${
-                  selectedCategory === cat
-                    ? 'border-[#005EA8] bg-[#F0FAFF] text-[#005EA8] font-semibold'
-                    : 'border-[#E7E5E4] bg-white text-[#6B6B6B] hover:text-[#171717]'
-                }`}
-              >
-                {cat === 'all' ? 'All Categories' : cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Desktop Data Grid / Table */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[18px] shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-[13px]">
-            <thead className="bg-[#FAFAF9] border-b border-[#E7E5E4] text-[#78716C] font-bold text-[12px]">
-              <tr>
-                <th className="py-3 px-4 w-10"></th>
-                <th className="py-3 px-4">Product Name & Code</th>
-                <th className="py-3 px-4">Category</th>
-                <th className="py-3 px-4">Current Valuation</th>
-                <th className="py-3 px-4">24h Movement</th>
-                <th className="py-3 px-4">24h Range (Low - High)</th>
-                <th className="py-3 px-4">Available Supply</th>
-                <th className="py-3 px-4 text-right">Quick Order</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E7E5E4]">
-              {filteredProducts.map((prod) => {
-                const isWatchlisted = watchlist.includes(prod.id);
-                return (
-                  <tr
-                    key={prod.id}
-                    className="hover:bg-[#F0FAFF]/60 transition-colors group cursor-pointer"
-                    onClick={() => handleSelectProduct(prod)}
-                  >
-                    {/* Star / Watchlist toggle */}
-                    <td
-                      className="py-3.5 px-4"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleWatchlist(prod.id);
-                      }}
-                    >
-                      <button
-                        className="p-1 text-[#D6D3D1] hover:text-[#B7791F] transition-colors"
-                        title={isWatchlisted ? 'Remove from Watchlist' : 'Add to Watchlist'}
-                      >
-                        <Star
-                          className={`w-4 h-4 ${
-                            isWatchlisted ? 'text-[#B7791F] fill-[#B7791F]' : ''
-                          }`}
-                        />
-                      </button>
-                    </td>
-
-                    {/* Product Name */}
-                    <td className="py-3.5 px-4">
-                      <span className="font-bold text-[15px] text-[#171717] group-hover:text-[#005EA8] block leading-tight">
-                        {prod.name}
-                      </span>
-                      <span className="text-[11px] text-[#78716C] font-mono mt-0.5 block">
-                        {prod.id}
-                      </span>
-                    </td>
-
-                    {/* Category */}
-                    <td className="py-3.5 px-4 text-[#57534E]">
-                      <span className="text-[12px] font-medium">{prod.category}</span>
-                    </td>
-
-                    {/* Valuation */}
-                    <td className="py-3.5 px-4">
-                      <span className="text-[15px] font-bold text-[#171717] tabular-nums block">
-                        {formatINR(prod.currentValue)}
-                      </span>
-                    </td>
-
-                    {/* 24h Movement */}
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={`font-bold tabular-nums block ${
-                          prod.changePercent >= 0 ? 'text-[#16803C]' : 'text-[#C62828]'
-                        }`}
-                      >
-                        {prod.changePercent >= 0 ? '+' : ''}
-                        {prod.changePercent}%
-                      </span>
-                      <span className="text-[11px] text-[#78716C] tabular-nums">
-                        {prod.change >= 0 ? '+' : ''}
-                        {formatINR(prod.change)}
-                      </span>
-                    </td>
-
-                    {/* 24h Range */}
-                    <td className="py-3.5 px-4 text-[12px] tabular-nums text-[#57534E]">
-                      <span>{formatINR(prod.low24h)}</span>
-                      <span className="text-[#A8A29E] mx-1">—</span>
-                      <span>{formatINR(prod.high24h)}</span>
-                    </td>
-
-                    {/* Available supply */}
-                    <td className="py-3.5 px-4 text-[12px] font-medium text-[#57534E] tabular-nums">
-                      {prod.availableUnits.toLocaleString('en-IN')} units
-                    </td>
-
-                    {/* Actions */}
-                    <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
-                      <div className="flex items-center justify-end gap-1.5">
-                        <button
-                          onClick={() => openBuySell('buy', prod)}
-                          className="px-3 py-1 text-[12px] font-semibold text-[#16803C] bg-[#ECFDF3] border border-[#A6F4C5] rounded-[7px] hover:bg-[#D1FADF] transition-colors"
-                        >
-                          Buy
-                        </button>
-                        <button
-                          onClick={() => openBuySell('sell', prod)}
-                          className="px-3 py-1 text-[12px] font-semibold text-[#C62828] bg-[#FEF2F2] border border-[#FECDCA] rounded-[7px] hover:bg-[#FEE4E2] transition-colors"
-                        >
-                          Sell
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Empty State */}
-        {filteredProducts.length === 0 && (
-          <div className="py-12 text-center text-[#78716C] space-y-2">
-            <p className="text-[15px] font-semibold">No products found matching your filter</p>
-            <p className="text-[13px]">Try clearing your search query or switching categories.</p>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedCategory('all');
-                setSelectedTab('all');
-              }}
-              className="text-[13px] font-semibold text-[#005EA8] underline mt-1"
-            >
-              Reset all filters
-            </button>
-          </div>
-        )}
-      </div>
+      <section className="hidden overflow-hidden rounded-2xl border border-border-subtle bg-surface shadow-sm md:block" aria-label="Market products table">
+        <div className="grid grid-cols-[1.6fr_.8fr_1fr_1fr_1fr_auto] gap-4 border-b border-divider bg-surface-soft px-5 py-3 text-xs font-bold text-muted-foreground"><span>Product</span><span>Category</span><span>Current value</span><span>24h movement</span><span>Supply</span><span>Action</span></div>
+        {visibleProducts.map((product) => <button key={product.id} onClick={() => openProduct(product)} className="grid w-full grid-cols-[1.6fr_.8fr_1fr_1fr_1fr_auto] items-center gap-4 border-b border-divider px-5 py-4 text-left transition last:border-0 hover:bg-brand-subtle/40"><ProductName product={product} isWatched={watchlist.includes(product.id)} onWatch={(event) => { event.stopPropagation(); toggleWatchlist(product.id); }} /><span className="text-sm text-secondary-foreground">{product.category}</span><span className="tabular-nums text-sm font-bold">{formatINR(product.currentValue)}</span><Movement product={product} /><span className="text-sm text-secondary-foreground">{formatUnits(product.availableUnits)}</span><span className="rounded-lg border border-brand/30 px-3 py-2 text-xs font-bold text-brand">View details</span></button>)}
+      </section>
+      {visibleProducts.length === 0 && <div className="rounded-2xl border border-dashed border-border bg-surface p-10 text-center text-sm text-muted-foreground">No products match those filters.</div>}
     </div>
   );
 };
+
+const ProductName = ({ product, isWatched, onWatch }: { product: Product; isWatched: boolean; onWatch: (event: React.MouseEvent) => void }) => <div className="flex min-w-0 items-center gap-3"><span onClick={onWatch} role="button" aria-label={isWatched ? 'Remove from watchlist' : 'Add to watchlist'} className="rounded-md p-1 text-amber-600"><Star className="size-4" fill={isWatched ? 'currentColor' : 'none'} /></span><span className="min-w-0"><span className="block truncate font-bold text-foreground">{product.name}</span><span className="block text-xs text-muted-foreground">{product.id}</span></span></div>;
+
+const Movement = ({ product }: { product: Product }) => <div className={`flex items-center gap-1 text-sm font-bold tabular-nums ${product.changePercent >= 0 ? 'text-positive' : 'text-negative'}`}>{product.changePercent >= 0 ? <TrendingUp className="size-4" /> : <TrendingDown className="size-4" />}{product.changePercent >= 0 ? '+' : ''}{product.changePercent}%</div>;
+
+const ProductCard = ({ product, isWatched, onOpen, onWatch }: { product: Product; isWatched: boolean; onOpen: () => void; onWatch: () => void }) => <article className="rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm"><div className="flex items-start justify-between gap-3"><button onClick={onOpen} className="min-w-0 text-left"><span className="block truncate font-bold">{product.name}</span><span className="text-xs text-muted-foreground">{product.id} · {product.category}</span></button><button onClick={onWatch} aria-label={isWatched ? 'Remove from watchlist' : 'Add to watchlist'} className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-border text-amber-600"><Star className="size-4" fill={isWatched ? 'currentColor' : 'none'} /></button></div><div className="mt-5 flex items-end justify-between"><div><span className="block text-xs text-muted-foreground">Current value</span><span className="tabular-nums text-xl font-bold">{formatINR(product.currentValue)}</span></div><Movement product={product} /></div><div className="mt-4 flex items-center justify-between border-t border-divider pt-3 text-xs text-muted-foreground"><span>{formatUnits(product.availableUnits)} available</span><button onClick={onOpen} className="min-h-11 rounded-xl bg-brand px-4 font-bold text-white">Review product</button></div></article>;
+
+export default MarketsView;
