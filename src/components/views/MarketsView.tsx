@@ -60,42 +60,42 @@ export const MarketsView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-5 select-none">
+    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-5 select-none bg-white text-[#181A20]">
       {/* Page Header & Top Summary Cards */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-[22px] sm:text-[26px] font-bold text-[#F5F5F5] tracking-tight">
+          <h1 className="text-[22px] sm:text-[26px] font-bold text-[#181A20] tracking-tight">
             Markets Overview
           </h1>
-          <p className="text-[13px] text-[#848E9C]">
+          <p className="text-xs text-[#707A8A]">
             Live order books, 24h volumes, and execution prices across verified product contracts
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[12px] font-mono text-[#848E9C] border border-[#2B3139] bg-[#111418] px-2.5 py-1 rounded-[4px]">
+          <span className="text-xs font-mono text-[#707A8A] border border-[#DFE2E6] bg-[#F5F6F8] px-2.5 py-1 rounded-[4px]">
             {products.length} Contracts Listed
           </span>
         </div>
       </div>
 
-      {/* Top 3 Market Spotlight Cards (Binance-style highlight row) */}
+      {/* Top 3 Market Spotlight Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {topGainer && (
           <div
             onClick={() => openProduct(topGainer)}
-            className="p-3 bg-[#111418] border border-[#2B3139] hover:border-[#363C45] rounded-[6px] cursor-pointer transition-colors"
+            className="p-3 bg-white border border-[#DFE2E6] hover:border-[#CFD3D8] rounded-[6px] cursor-pointer transition-colors shadow-xs"
           >
-            <div className="flex items-center justify-between text-[11px] text-[#848E9C]">
-              <span className="flex items-center gap-1 font-semibold text-[#0ECB81]">
+            <div className="flex items-center justify-between text-[11px] text-[#707A8A]">
+              <span className="flex items-center gap-1 font-semibold text-[#02A063]">
                 <TrendingUp className="w-3.5 h-3.5" /> Top Gainer
               </span>
-              <span>24h Vol: {formatVolume(topGainer.volume24h)}</span>
+              <span className="font-mono">24h Vol: {formatVolume(topGainer.volume24h)}</span>
             </div>
             <div className="flex items-baseline justify-between mt-2">
-              <span className="font-bold text-[15px] text-[#F5F5F5]">{topGainer.name}</span>
+              <span className="font-bold text-[15px] text-[#181A20]">{topGainer.name}</span>
               <PercentageChange value={topGainer.changePercent} />
             </div>
-            <div className="text-[13px] font-semibold text-[#848E9C] mt-0.5 tabular-nums">
+            <div className="text-xs font-semibold text-[#707A8A] mt-0.5 tabular-nums font-mono">
               {formatINR(topGainer.currentValue)}
             </div>
           </div>
@@ -104,19 +104,19 @@ export const MarketsView: React.FC = () => {
         {mostActive && (
           <div
             onClick={() => openProduct(mostActive)}
-            className="p-3 bg-[#111418] border border-[#2B3139] hover:border-[#363C45] rounded-[6px] cursor-pointer transition-colors"
+            className="p-3 bg-white border border-[#DFE2E6] hover:border-[#CFD3D8] rounded-[6px] cursor-pointer transition-colors shadow-xs"
           >
-            <div className="flex items-center justify-between text-[11px] text-[#848E9C]">
-              <span className="flex items-center gap-1 font-semibold text-[#F0B90B]">
+            <div className="flex items-center justify-between text-[11px] text-[#707A8A]">
+              <span className="flex items-center gap-1 font-semibold text-[#B78103]">
                 <Flame className="w-3.5 h-3.5" /> Most Active (24h)
               </span>
-              <span>Units: {topGainer.availableUnits}</span>
+              <span className="font-mono">Units: {topGainer.availableUnits}</span>
             </div>
             <div className="flex items-baseline justify-between mt-2">
-              <span className="font-bold text-[15px] text-[#F5F5F5]">{mostActive.name}</span>
+              <span className="font-bold text-[15px] text-[#181A20]">{mostActive.name}</span>
               <PercentageChange value={mostActive.changePercent} />
             </div>
-            <div className="text-[13px] font-semibold text-[#848E9C] mt-0.5 tabular-nums">
+            <div className="text-xs font-semibold text-[#707A8A] mt-0.5 tabular-nums font-mono">
               {formatINR(mostActive.currentValue)}
             </div>
           </div>
@@ -125,19 +125,19 @@ export const MarketsView: React.FC = () => {
         {highestPrice && (
           <div
             onClick={() => openProduct(highestPrice)}
-            className="p-3 bg-[#111418] border border-[#2B3139] hover:border-[#363C45] rounded-[6px] cursor-pointer transition-colors"
+            className="p-3 bg-white border border-[#DFE2E6] hover:border-[#CFD3D8] rounded-[6px] cursor-pointer transition-colors shadow-xs"
           >
-            <div className="flex items-center justify-between text-[11px] text-[#848E9C]">
-              <span className="flex items-center gap-1 font-semibold text-[#4C8FFF]">
+            <div className="flex items-center justify-between text-[11px] text-[#707A8A]">
+              <span className="flex items-center gap-1 font-semibold text-[#0066CC]">
                 <Sparkles className="w-3.5 h-3.5" /> Prime Contract
               </span>
-              <span>24h High: {formatINR(highestPrice.high24h)}</span>
+              <span className="font-mono">24h High: {formatINR(highestPrice.high24h)}</span>
             </div>
             <div className="flex items-baseline justify-between mt-2">
-              <span className="font-bold text-[15px] text-[#F5F5F5]">{highestPrice.name}</span>
+              <span className="font-bold text-[15px] text-[#181A20]">{highestPrice.name}</span>
               <PercentageChange value={highestPrice.changePercent} />
             </div>
-            <div className="text-[13px] font-semibold text-[#848E9C] mt-0.5 tabular-nums">
+            <div className="text-xs font-semibold text-[#707A8A] mt-0.5 tabular-nums font-mono">
               {formatINR(highestPrice.currentValue)}
             </div>
           </div>
@@ -145,7 +145,7 @@ export const MarketsView: React.FC = () => {
       </div>
 
       {/* Filter and Tab Bar */}
-      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-3 space-y-3">
+      <div className="bg-white border border-[#DFE2E6] rounded-[6px] p-3 space-y-3 shadow-xs">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           {/* Market Category Tabs */}
           <div className="flex items-center gap-1 overflow-x-auto pb-1 lg:pb-0">
@@ -153,10 +153,10 @@ export const MarketsView: React.FC = () => {
               <button
                 key={item}
                 onClick={() => setTab(item)}
-                className={`px-3 py-1.5 rounded-[4px] text-[12px] font-semibold uppercase tracking-wider transition-colors whitespace-nowrap cursor-pointer ${
+                className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold uppercase tracking-wider transition-colors whitespace-nowrap cursor-pointer ${
                   tab === item
-                    ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]'
-                    : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                    ? 'bg-[#F5F6F8] text-[#181A20] font-bold border border-[#DFE2E6]'
+                    : 'text-[#707A8A] hover:text-[#181A20]'
                 }`}
               >
                 {item.replace('-', ' ')}
@@ -167,20 +167,20 @@ export const MarketsView: React.FC = () => {
           {/* Search Bar + Category Selector */}
           <div className="flex items-center gap-2">
             <div className="relative w-full sm:w-64">
-              <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#848E9C]" />
+              <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#707A8A]" />
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search markets..."
-                className="w-full h-8 pl-8 pr-3 rounded-[4px] bg-[#161A1E] border border-[#2B3139] text-[#F5F5F5] text-[12px] focus:border-[#F0B90B] focus:outline-none"
+                className="w-full h-8 pl-8 pr-3 rounded-[4px] bg-[#F5F6F8] border border-[#DFE2E6] text-[#181A20] text-xs focus:border-[#F0B90B] focus:bg-white focus:outline-none"
               />
             </div>
 
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="h-8 px-2.5 rounded-[4px] bg-[#161A1E] border border-[#2B3139] text-[#848E9C] hover:text-[#F5F5F5] text-[12px] focus:border-[#F0B90B] focus:outline-none cursor-pointer"
+              className="h-8 px-2.5 rounded-[4px] bg-[#F5F6F8] border border-[#DFE2E6] text-[#474D57] hover:text-[#181A20] text-xs focus:border-[#F0B90B] focus:outline-none cursor-pointer"
             >
               <option value="all">All Sectors</option>
               <option value="Category A">Category A</option>
@@ -191,16 +191,16 @@ export const MarketsView: React.FC = () => {
         </div>
       </div>
 
-      {/* Desktop Markets Data Table (Binance High-Density Format) */}
-      <div className="hidden md:block bg-[#111418] border border-[#2B3139] rounded-[6px] overflow-hidden">
-        <table className="w-full text-left text-[13px]">
-          <thead className="bg-[#161A1E] border-b border-[#2B3139] text-[#848E9C] text-[11px] uppercase tracking-wider font-semibold">
+      {/* Desktop Markets Data Table */}
+      <div className="hidden md:block bg-white border border-[#DFE2E6] rounded-[6px] overflow-hidden shadow-xs">
+        <table className="w-full text-left text-xs">
+          <thead className="bg-[#F5F6F8] border-b border-[#DFE2E6] text-[#707A8A] text-[11px] uppercase tracking-wider font-semibold">
             <tr>
               <th className="py-2.5 pl-4 pr-2 w-10">Fav</th>
               <th className="py-2.5 px-3">
                 <button
                   onClick={() => handleSort('currentValue')}
-                  className="flex items-center gap-1 hover:text-[#F5F5F5] cursor-pointer"
+                  className="flex items-center gap-1 hover:text-[#181A20] cursor-pointer"
                 >
                   <span>Asset / Contract</span>
                 </button>
@@ -208,7 +208,7 @@ export const MarketsView: React.FC = () => {
               <th className="py-2.5 px-3">
                 <button
                   onClick={() => handleSort('currentValue')}
-                  className="flex items-center gap-1 hover:text-[#F5F5F5] cursor-pointer"
+                  className="flex items-center gap-1 hover:text-[#181A20] cursor-pointer"
                 >
                   <span>Last Price</span>
                   <ArrowUpDown className="w-3 h-3" />
@@ -217,7 +217,7 @@ export const MarketsView: React.FC = () => {
               <th className="py-2.5 px-3">
                 <button
                   onClick={() => handleSort('changePercent')}
-                  className="flex items-center gap-1 hover:text-[#F5F5F5] cursor-pointer"
+                  className="flex items-center gap-1 hover:text-[#181A20] cursor-pointer"
                 >
                   <span>24h Change</span>
                   <ArrowUpDown className="w-3 h-3" />
@@ -226,7 +226,7 @@ export const MarketsView: React.FC = () => {
               <th className="py-2.5 px-3">
                 <button
                   onClick={() => handleSort('high24h')}
-                  className="flex items-center gap-1 hover:text-[#F5F5F5] cursor-pointer"
+                  className="flex items-center gap-1 hover:text-[#181A20] cursor-pointer"
                 >
                   <span>24h High / Low</span>
                 </button>
@@ -234,7 +234,7 @@ export const MarketsView: React.FC = () => {
               <th className="py-2.5 px-3">
                 <button
                   onClick={() => handleSort('volume24h')}
-                  className="flex items-center gap-1 hover:text-[#F5F5F5] cursor-pointer"
+                  className="flex items-center gap-1 hover:text-[#181A20] cursor-pointer"
                 >
                   <span>24h Volume</span>
                   <ArrowUpDown className="w-3 h-3" />
@@ -244,7 +244,7 @@ export const MarketsView: React.FC = () => {
               <th className="py-2.5 pr-4 text-right">Trade</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#1E2329]">
+          <tbody className="divide-y divide-[#EAECEF]">
             {visibleProducts.map((p) => {
               const isWatched = watchlist.includes(p.id);
               const history = p.history['1W'] || [p.currentValue, p.currentValue];
@@ -267,7 +267,7 @@ export const MarketsView: React.FC = () => {
                 <tr
                   key={p.id}
                   onClick={() => openProduct(p)}
-                  className="hover:bg-[#161A1E] transition-colors cursor-pointer group"
+                  className="hover:bg-[#F8F9FA] transition-colors cursor-pointer group"
                 >
                   {/* Favorite Star */}
                   <td className="py-3 pl-4 pr-2">
@@ -276,7 +276,7 @@ export const MarketsView: React.FC = () => {
                         e.stopPropagation();
                         toggleWatchlist(p.id);
                       }}
-                      className="text-[#848E9C] hover:text-[#F0B90B] transition-colors"
+                      className="text-[#B7BDC6] hover:text-[#F0B90B] transition-colors cursor-pointer"
                       aria-label="Toggle Watchlist"
                     >
                       <Star
@@ -290,16 +290,16 @@ export const MarketsView: React.FC = () => {
                   {/* Asset Symbol & Name */}
                   <td className="py-3 px-3">
                     <div className="flex items-baseline gap-2">
-                      <span className="font-bold text-[#F5F5F5] group-hover:text-[#F0B90B] text-[14px]">
+                      <span className="font-bold text-[#181A20] group-hover:text-[#B78103] text-[14px]">
                         {p.id}
                       </span>
-                      <span className="text-[12px] text-[#848E9C] truncate max-w-[140px]">{p.name}</span>
+                      <span className="text-xs text-[#707A8A] truncate max-w-[140px]">{p.name}</span>
                     </div>
-                    <span className="text-[11px] text-[#5E6673]">{p.category}</span>
+                    <span className="text-[11px] text-[#707A8A]">{p.category}</span>
                   </td>
 
                   {/* Last Price */}
-                  <td className="py-3 px-3 font-semibold text-[#F5F5F5] tabular-nums text-[14px]">
+                  <td className="py-3 px-3 font-semibold text-[#181A20] tabular-nums font-mono text-[14px]">
                     {formatINR(p.currentValue)}
                   </td>
 
@@ -309,15 +309,15 @@ export const MarketsView: React.FC = () => {
                   </td>
 
                   {/* 24h High / Low */}
-                  <td className="py-3 px-3 tabular-nums text-[12px]">
-                    <div className="text-[#848E9C]">H: <span className="text-[#F5F5F5] font-medium">{formatINR(p.high24h)}</span></div>
-                    <div className="text-[#848E9C]">L: <span className="text-[#F5F5F5] font-medium">{formatINR(p.low24h)}</span></div>
+                  <td className="py-3 px-3 tabular-nums font-mono text-xs">
+                    <div className="text-[#707A8A]">H: <span className="text-[#181A20] font-medium">{formatINR(p.high24h)}</span></div>
+                    <div className="text-[#707A8A]">L: <span className="text-[#181A20] font-medium">{formatINR(p.low24h)}</span></div>
                   </td>
 
                   {/* Volume */}
-                  <td className="py-3 px-3 tabular-nums text-[12px]">
-                    <div className="font-medium text-[#F5F5F5]">{formatINR(p.volume24h)}</div>
-                    <div className="text-[#848E9C]">{p.availableUnits} units</div>
+                  <td className="py-3 px-3 tabular-nums font-mono text-xs">
+                    <div className="font-medium text-[#181A20]">{formatINR(p.volume24h)}</div>
+                    <div className="text-[#707A8A]">{p.availableUnits} units</div>
                   </td>
 
                   {/* 7D Sparkline */}
@@ -327,7 +327,7 @@ export const MarketsView: React.FC = () => {
                         <path
                           d={sparkD}
                           fill="none"
-                          stroke={isUp ? '#0ECB81' : '#F6465D'}
+                          stroke={isUp ? '#02A063' : '#CF304A'}
                           strokeWidth="1.75"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -343,7 +343,7 @@ export const MarketsView: React.FC = () => {
                         e.stopPropagation();
                         openBuySell('buy', p);
                       }}
-                      className="px-3 py-1 bg-[#1E2329] hover:bg-[#F0B90B] text-[#F5F5F5] hover:text-[#181A20] font-bold text-[12px] rounded-[4px] border border-[#363C45] hover:border-[#F0B90B] transition-all cursor-pointer shadow-xs"
+                      className="px-3 py-1 bg-[#F5F6F8] hover:bg-[#F0B90B] text-[#181A20] font-bold text-xs rounded-[4px] border border-[#DFE2E6] hover:border-[#F0B90B] transition-all cursor-pointer shadow-xs"
                     >
                       Trade
                     </button>
@@ -363,7 +363,7 @@ export const MarketsView: React.FC = () => {
             <div
               key={p.id}
               onClick={() => openProduct(p)}
-              className="p-3 bg-[#111418] border border-[#2B3139] rounded-[6px] space-y-2 cursor-pointer hover:border-[#363C45] transition-colors"
+              className="p-3 bg-white border border-[#DFE2E6] rounded-[6px] space-y-2 cursor-pointer hover:border-[#CFD3D8] transition-colors shadow-xs"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -372,7 +372,7 @@ export const MarketsView: React.FC = () => {
                       e.stopPropagation();
                       toggleWatchlist(p.id);
                     }}
-                    className="text-[#848E9C]"
+                    className="text-[#B7BDC6]"
                   >
                     <Star
                       className="w-4 h-4"
@@ -381,26 +381,26 @@ export const MarketsView: React.FC = () => {
                     />
                   </button>
                   <div>
-                    <span className="font-bold text-[14px] text-[#F5F5F5]">{p.id}</span>
-                    <span className="text-[11px] text-[#848E9C] block">{p.name}</span>
+                    <span className="font-bold text-[14px] text-[#181A20]">{p.id}</span>
+                    <span className="text-[11px] text-[#707A8A] block">{p.name}</span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-bold text-[14px] text-[#F5F5F5] tabular-nums">
+                  <div className="font-bold text-[14px] text-[#181A20] tabular-nums font-mono">
                     {formatINR(p.currentValue)}
                   </div>
                   <PercentageChange value={p.changePercent} />
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#1E2329] flex items-center justify-between text-[11px] text-[#848E9C]">
-                <span>24h Vol: {formatVolume(p.volume24h)}</span>
+              <div className="pt-2 border-t border-[#EAECEF] flex items-center justify-between text-xs text-[#707A8A]">
+                <span className="font-mono">24h Vol: {formatVolume(p.volume24h)}</span>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     openBuySell('buy', p);
                   }}
-                  className="px-2.5 py-1 bg-[#F0B90B] text-[#181A20] font-bold rounded-[3px]"
+                  className="px-2.5 py-1 bg-[#F0B90B] text-[#181A20] font-bold rounded-[3px] shadow-xs cursor-pointer"
                 >
                   Trade
                 </button>
@@ -411,7 +411,7 @@ export const MarketsView: React.FC = () => {
       </div>
 
       {visibleProducts.length === 0 && (
-        <div className="p-8 text-center bg-[#111418] border border-[#2B3139] rounded-[6px] text-[#848E9C] text-[13px]">
+        <div className="p-8 text-center bg-[#F5F6F8] border border-[#DFE2E6] rounded-[6px] text-[#707A8A] text-xs">
           No markets found matching your filters.
         </div>
       )}

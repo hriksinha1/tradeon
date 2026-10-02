@@ -15,7 +15,7 @@ import { MarketingFooter } from '../marketing/MarketingFooter';
 
 export const LandingPage: React.FC = () => {
   return (
-    <div className="bg-[#0B0E11] text-[#F5F5F5] min-h-screen selection:bg-[#F0B90B] selection:text-[#181A20]">
+    <div className="bg-white text-[#181A20] min-h-screen selection:bg-[#F0B90B] selection:text-[#181A20]">
       {/* 01. Hero: Human Opening, Editorial Product Glimpses */}
       <HeroSection />
 

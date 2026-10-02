@@ -75,17 +75,17 @@ export const BuyJourneySection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 sm:py-24 bg-[#0B0E11] text-[#F5F5F5] border-b border-[#2B3139] select-none">
+    <section className="py-20 sm:py-24 bg-white text-[#181A20] border-b border-[#EAECEF] select-none">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="text-[12px] font-bold text-[#F0B90B] tracking-wider uppercase">
+          <div className="text-[12px] font-bold text-[#946800] tracking-wider uppercase">
             Order Lifecycle
           </div>
-          <h2 className="text-[30px] sm:text-[42px] font-bold text-[#F5F5F5] tracking-tight leading-[1.12]">
+          <h2 className="text-[30px] sm:text-[42px] font-bold text-[#181A20] tracking-tight leading-[1.12]">
             What happens when you click Buy?
           </h2>
-          <p className="text-[16px] text-[#848E9C] leading-relaxed">
+          <p className="text-[16px] text-[#707A8A] leading-relaxed">
             Every trade is an intentional financial event. Here is how Tradeon guides you through order entry, execution review, and immutable accounting.
           </p>
         </div>
@@ -100,8 +100,8 @@ export const BuyJourneySection: React.FC = () => {
                 onClick={() => setActiveStep(s.num)}
                 className={`p-4 rounded-[6px] border transition-all cursor-pointer ${
                   activeStep === s.num
-                    ? 'bg-[#161A1E] border-[#F0B90B]'
-                    : 'bg-[#111418] border-[#2B3139] hover:border-[#363C45]'
+                    ? 'bg-[#FEF6D8]/50 border-[#F0B90B] shadow-xs'
+                    : 'bg-white border-[#DFE2E6] hover:border-[#CFD3D8]'
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -109,14 +109,14 @@ export const BuyJourneySection: React.FC = () => {
                     className={`w-6 h-6 rounded-[3px] flex items-center justify-center text-[12px] font-mono font-bold shrink-0 mt-0.5 ${
                       activeStep === s.num
                         ? 'bg-[#F0B90B] text-[#181A20]'
-                        : 'bg-[#1E2329] text-[#848E9C]'
+                        : 'bg-[#F5F6F8] text-[#707A8A]'
                     }`}
                   >
                     0{s.num}
                   </div>
                   <div>
-                    <h3 className="text-[15px] font-bold text-[#F5F5F5]">{s.title}</h3>
-                    <p className="text-[13px] text-[#848E9C] mt-1 leading-relaxed">{s.detail}</p>
+                    <h3 className="text-[15px] font-bold text-[#181A20]">{s.title}</h3>
+                    <p className="text-[13px] text-[#707A8A] mt-1 leading-relaxed">{s.detail}</p>
                   </div>
                 </div>
               </div>
@@ -124,49 +124,49 @@ export const BuyJourneySection: React.FC = () => {
           </div>
 
           {/* Interactive Simulation Drawer (5 cols) */}
-          <div className="lg:col-span-5 bg-[#111418] border border-[#2B3139] rounded-[6px] p-6 space-y-4 shadow-2xl sticky top-20">
-            <div className="flex items-center justify-between pb-3 border-b border-[#1E2329]">
-              <span className="text-[12px] font-bold text-[#F0B90B] uppercase">
+          <div className="lg:col-span-5 bg-white border border-[#DFE2E6] rounded-[6px] p-6 space-y-4 shadow-xl sticky top-20">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EAECEF]">
+              <span className="text-[12px] font-bold text-[#946800] uppercase font-sans">
                 Stage {activeStep} Simulation
               </span>
-              <span className="text-[11px] font-mono text-[#848E9C]">Step {activeStep} of 6</span>
+              <span className="text-[11px] font-mono text-[#707A8A]">Step {activeStep} of 6</span>
             </div>
 
             <div className="space-y-3 text-[13px]">
-              <div className="p-3 bg-[#161A1E] border border-[#2B3139] rounded-[4px] space-y-2">
-                <div className="flex justify-between text-[#848E9C]">
+              <div className="p-3 bg-[#F5F6F8] border border-[#DFE2E6] rounded-[4px] space-y-2">
+                <div className="flex justify-between text-[#707A8A]">
                   <span>Instrument:</span>
-                  <span className="font-bold text-[#F5F5F5]">{sampleProduct.name}</span>
+                  <span className="font-bold text-[#181A20]">{sampleProduct.name}</span>
                 </div>
-                <div className="flex justify-between text-[#848E9C]">
+                <div className="flex justify-between text-[#707A8A]">
                   <span>Unit Price:</span>
-                  <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(unitPrice)}</span>
+                  <span className="font-semibold text-[#181A20] tabular-nums font-mono">{formatINR(unitPrice)}</span>
                 </div>
-                <div className="flex justify-between items-center text-[#848E9C]">
+                <div className="flex justify-between items-center text-[#707A8A]">
                   <span>Units:</span>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setDemoUnits(Math.max(1, demoUnits - 1))}
-                      className="w-6 h-6 rounded bg-[#1E2329] border border-[#363C45] text-[#F5F5F5] hover:text-[#F0B90B]"
+                      className="w-6 h-6 rounded bg-white border border-[#DFE2E6] text-[#181A20] hover:text-[#946800] cursor-pointer"
                     >
                       -
                     </button>
-                    <span className="font-bold text-[#F5F5F5] tabular-nums">{demoUnits}</span>
+                    <span className="font-bold text-[#181A20] tabular-nums font-mono">{demoUnits}</span>
                     <button
                       onClick={() => setDemoUnits(demoUnits + 1)}
-                      className="w-6 h-6 rounded bg-[#1E2329] border border-[#363C45] text-[#F5F5F5] hover:text-[#F0B90B]"
+                      className="w-6 h-6 rounded bg-white border border-[#DFE2E6] text-[#181A20] hover:text-[#946800] cursor-pointer"
                     >
                       +
                     </button>
                   </div>
                 </div>
-                <div className="flex justify-between text-[#848E9C]">
+                <div className="flex justify-between text-[#707A8A]">
                   <span>Platform Fee (0.10%):</span>
-                  <span className="font-semibold text-[#848E9C] tabular-nums">{formatINR(platformFee)}</span>
+                  <span className="font-semibold text-[#707A8A] tabular-nums font-mono">{formatINR(platformFee)}</span>
                 </div>
-                <div className="pt-2 border-t border-[#2B3139] flex justify-between font-bold text-[14px]">
-                  <span className="text-[#F5F5F5]">Total Net Cost:</span>
-                  <span className="text-[#F0B90B] tabular-nums">{formatINR(totalCost)}</span>
+                <div className="pt-2 border-t border-[#DFE2E6] flex justify-between font-bold text-[14px]">
+                  <span className="text-[#181A20]">Total Net Cost:</span>
+                  <span className="text-[#946800] tabular-nums font-mono">{formatINR(totalCost)}</span>
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@ export const BuyJourneySection: React.FC = () => {
               fullWidth
               size="md"
               onClick={() => openBuySell('buy', sampleProduct)}
-              className="font-bold"
+              className="font-bold cursor-pointer"
             >
               Test Live Order Slip
             </Button>

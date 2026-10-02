@@ -12,40 +12,42 @@ interface PercentageChangeProps {
 export const PercentageChange: React.FC<PercentageChangeProps> = ({
   value,
   decimals = 2,
-  showIcon = true,
+  showIcon = false,
   className = '',
   pill = false,
 }) => {
   const isPositive = value > 0;
   const isZero = value === 0;
-  const sign = isPositive ? '+' : '';
-  const formatted = `${sign}${value.toFixed(decimals)}%`;
+
+  const formatted = `${isPositive ? '+' : ''}${value.toFixed(decimals)}%`;
 
   if (pill) {
-    const bgClass = isPositive
-      ? 'bg-[#102A22] text-[#0ECB81] border border-[#0ECB81]/30'
-      : isZero
-      ? 'bg-[#1E2329] text-[#B7BDC6] border border-[#363C45]'
-      : 'bg-[#301820] text-[#F6465D] border border-[#F6465D]/30';
-
     return (
       <span
-        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] text-[12px] font-semibold tabular-nums ${bgClass} ${className}`}
+        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] text-[11px] font-bold font-mono tabular-nums ${
+          isZero
+            ? 'bg-[#F5F6F8] text-[#707A8A] border border-[#EAECEF]'
+            : isPositive
+            ? 'bg-[#EBFBF3] text-[#02A063] border border-[#A2E8C6]'
+            : 'bg-[#FDF0F2] text-[#CF304A] border border-[#F7B5BE]'
+        } ${className}`}
       >
         {showIcon && !isZero && (
-          isPositive ? <TrendingUp className="w-3 h-3 shrink-0" /> : <TrendingDown className="w-3 h-3 shrink-0" />
+          isPositive ? <TrendingUp className="size-3" /> : <TrendingDown className="size-3" />
         )}
         <span>{formatted}</span>
       </span>
     );
   }
 
-  const textColor = isPositive ? 'text-[#0ECB81]' : isZero ? 'text-[#B7BDC6]' : 'text-[#F6465D]';
-
   return (
-    <span className={`inline-flex items-center gap-1 font-semibold tabular-nums text-[13px] ${textColor} ${className}`}>
+    <span
+      className={`inline-flex items-center gap-0.5 font-bold font-mono tabular-nums ${
+        isZero ? 'text-[#707A8A]' : isPositive ? 'text-[#02A063]' : 'text-[#CF304A]'
+      } ${className}`}
+    >
       {showIcon && !isZero && (
-        isPositive ? <TrendingUp className="w-3.5 h-3.5 shrink-0" /> : <TrendingDown className="w-3.5 h-3.5 shrink-0" />
+        isPositive ? <TrendingUp className="size-3" /> : <TrendingDown className="size-3" />
       )}
       <span>{formatted}</span>
     </span>

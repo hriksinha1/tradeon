@@ -87,13 +87,13 @@ export const BuySellModal: React.FC = () => {
       {step === 'form' && (
         <div className="space-y-4">
           {/* Side Selector (Buy / Sell) */}
-          <div className="grid grid-cols-2 p-1 bg-[#111418] rounded-[6px] border border-[#2B3139]">
+          <div className="grid grid-cols-2 p-1 bg-[#F5F6F8] rounded-[6px] border border-[#DFE2E6]">
             <button
               onClick={() => { setSide('buy'); setStep('form'); }}
               className={`py-2 text-[13px] font-bold rounded-[4px] transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                 side === 'buy'
-                  ? 'bg-[#0ECB81] text-white shadow-xs'
-                  : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                  ? 'bg-[#02A063] text-white shadow-xs'
+                  : 'text-[#707A8A] hover:text-[#181A20]'
               }`}
             >
               <ArrowDownLeft className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -103,8 +103,8 @@ export const BuySellModal: React.FC = () => {
               onClick={() => { setSide('sell'); setStep('form'); }}
               className={`py-2 text-[13px] font-bold rounded-[4px] transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                 side === 'sell'
-                  ? 'bg-[#F6465D] text-white shadow-xs'
-                  : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                  ? 'bg-[#CF304A] text-white shadow-xs'
+                  : 'text-[#707A8A] hover:text-[#181A20]'
               }`}
             >
               <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -112,178 +112,224 @@ export const BuySellModal: React.FC = () => {
             </button>
           </div>
 
-          {/* Order Type Tabs */}
-          <div className="flex items-center gap-1 bg-[#111418] p-1 rounded-[6px] border border-[#2B3139]">
-            {(['market', 'limit', 'stop'] as const).map((type) => (
-              <button
-                key={type}
-                onClick={() => setOrderType(type)}
-                className={`flex-1 py-1 text-[12px] font-semibold capitalize rounded-[4px] transition-colors cursor-pointer ${
-                  orderType === type
-                    ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]'
-                    : 'text-[#848E9C] hover:text-[#F5F5F5]'
-                }`}
-              >
-                {type}
-              </button>
-            ))}
+          {/* Product selector dropdown */}
+          <div>
+            <label className="block text-xs font-semibold text-[#707A8A] mb-1">
+              Selected Product
+            </label>
+            <select
+              value={selectedProduct.id}
+              onChange={(e) => {
+                const p = products.find((prod) => prod.id === e.target.value);
+                if (p) {
+                  setSelectedProduct(p);
+                  setLimitPrice(p.currentValue);
+                }
+              }}
+              className="w-full px-3 py-2 bg-white border border-[#DFE2E6] rounded-[6px] text-xs font-medium text-[#181A20] focus:outline-[#F0B90B] cursor-pointer"
+            >
+              {products.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name} ({p.id}) — {formatINR(p.currentValue)}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Limit / Stop Price input */}
+          {/* Order execution type tabs */}
+          <div>
+            <label className="block text-xs font-semibold text-[#707A8A] mb-1">
+              Order Type
+            </label>
+            <div className="grid grid-cols-3 p-0.5 bg-[#F5F6F8] rounded-[6px] border border-[#DFE2E6]">
+              {(['market', 'limit', 'stop'] as const).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setOrderType(t)}
+                  className={`py-1.5 text-xs font-semibold capitalize rounded-[4px] transition-colors cursor-pointer ${
+                    orderType === t
+                      ? 'bg-white text-[#181A20] shadow-xs'
+                      : 'text-[#707A8A] hover:text-[#181A20]'
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Limit Price Input if limit or stop */}
           {orderType !== 'market' && (
             <div>
-              <label className="text-[12px] font-medium text-[#848E9C] block mb-1.5">
-                {orderType === 'limit' ? 'Limit Price (INR)' : 'Trigger Stop Price (INR)'}
-              </label>
+              <div className="flex justify-between text-xs text-[#707A8A] mb-1">
+                <span className="font-semibold">Target Price</span>
+                <span>Market: {formatINR(selectedProduct.currentValue)}</span>
+              </div>
               <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-[#707A8A] font-mono">
+                  ₹
+                </span>
                 <input
                   type="number"
-                  value={limitPrice}
+                  value={limitPrice || ''}
                   onChange={(e) => setLimitPrice(Number(e.target.value))}
-                  className="w-full h-10 px-3 pr-12 rounded-[6px] bg-[#111418] border border-[#363C45] text-[#F5F5F5] font-semibold text-[14px] tabular-nums focus:border-[#F0B90B] focus:outline-none"
-                  placeholder="0.00"
+                  className="w-full pl-7 pr-3 py-2 bg-white border border-[#DFE2E6] rounded-[6px] text-xs font-mono font-bold text-[#181A20] focus:outline-[#F0B90B]"
+                  placeholder="Enter target price"
                 />
-                <span className="absolute right-3 top-2.5 text-[12px] font-bold text-[#848E9C]">
-                  INR
-                </span>
               </div>
             </div>
           )}
 
           {/* Quantity Input */}
           <div>
-            <div className="flex items-center justify-between text-[12px] mb-1.5">
-              <label className="font-medium text-[#848E9C]">Order Quantity</label>
-              <div className="flex items-center gap-1 text-[#848E9C]">
-                <Wallet className="w-3 h-3 text-[#F0B90B]" />
-                {side === 'buy' ? (
-                  <span>Avail: <strong className="text-[#F5F5F5] tabular-nums">{formatINR(wallet.availableBalance)}</strong></span>
-                ) : (
-                  <span>Holding: <strong className="text-[#F5F5F5] tabular-nums">{holdingQty} units</strong></span>
-                )}
-              </div>
+            <div className="flex justify-between text-xs text-[#707A8A] mb-1">
+              <span className="font-semibold">Units Amount</span>
+              <span>Available Supply: {selectedProduct.availableUnits.toLocaleString()}</span>
             </div>
             <div className="relative">
               <input
                 type="number"
                 min="1"
-                value={quantity}
+                max={side === 'sell' ? holdingQty : selectedProduct.availableUnits}
+                value={quantity || ''}
                 onChange={(e) => setQuantity(Math.max(0, parseInt(e.target.value) || 0))}
-                className="w-full h-10 px-3 pr-16 rounded-[6px] bg-[#111418] border border-[#363C45] text-[#F5F5F5] font-semibold text-[14px] tabular-nums focus:border-[#F0B90B] focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-[#DFE2E6] rounded-[6px] text-xs font-mono font-bold text-[#181A20] focus:outline-[#F0B90B]"
+                placeholder="Units quantity"
               />
-              <span className="absolute right-3 top-2.5 text-[12px] font-semibold text-[#848E9C]">
-                units
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] text-[#707A8A] font-semibold">
+                UNITS
               </span>
             </div>
-          </div>
 
-          {/* Quick Percentage Presets */}
-          <div className="grid grid-cols-4 gap-2">
-            {[0.25, 0.5, 0.75, 1.0].map((pct) => (
-              <button
-                key={pct}
-                type="button"
-                onClick={() => setPercentQuantity(pct)}
-                className="py-1 text-[11px] font-semibold rounded-[4px] bg-[#111418] border border-[#2B3139] text-[#848E9C] hover:text-[#F0B90B] hover:border-[#F0B90B]/50 transition-colors cursor-pointer"
-              >
-                {pct * 100}%
-              </button>
-            ))}
-          </div>
-
-          {/* Cost Summary Box */}
-          <div className="p-3.5 bg-[#111418] rounded-[6px] border border-[#2B3139] space-y-2 text-[12px]">
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Execution Price</span>
-              <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(currentPrice)}</span>
-            </div>
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Gross Notional</span>
-              <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(grossTotal)}</span>
-            </div>
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Trading Fee (0.10%)</span>
-              <span className="font-semibold text-[#848E9C] tabular-nums">{formatINR(estimatedFee, { decimals: 2 })}</span>
-            </div>
-            <div className="pt-2 border-t border-[#2B3139] flex items-center justify-between">
-              <span className="font-bold text-[#F5F5F5]">{side === 'buy' ? 'Total Required' : 'Net Proceeds'}</span>
-              <span className="text-[15px] font-bold text-[#F0B90B] tabular-nums">{formatINR(netTotal)}</span>
+            {/* Quick Percentage Chips */}
+            <div className="grid grid-cols-4 gap-1.5 mt-2">
+              {[0.25, 0.5, 0.75, 1.0].map((pct) => (
+                <button
+                  key={pct}
+                  type="button"
+                  onClick={() => setPercentQuantity(pct)}
+                  className="py-1 bg-white border border-[#DFE2E6] hover:bg-[#F5F6F8] rounded-[4px] text-[11px] font-mono font-semibold text-[#474D57] transition-colors cursor-pointer"
+                >
+                  {pct * 100}%
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Validation Alert */}
+          {/* Balance Context Card */}
+          <div className="p-3 bg-[#F5F6F8] border border-[#EAECEF] rounded-[6px] flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2 text-[#474D57]">
+              <Wallet className="w-3.5 h-3.5 text-[#B78103]" />
+              <span>{side === 'buy' ? 'Available Balance' : 'Current Holding'}:</span>
+            </div>
+            <div className="font-bold text-[#181A20] font-mono tabular-nums">
+              {side === 'buy' ? formatINR(wallet.availableBalance) : `${holdingQty} Units`}
+            </div>
+          </div>
+
+          {/* Breakdown Preview */}
+          <div className="p-3 bg-[#F5F6F8] rounded-[6px] border border-[#DFE2E6] space-y-1.5 text-xs">
+            <div className="flex justify-between text-[#707A8A]">
+              <span>Unit Price</span>
+              <span className="font-mono text-[#181A20]">{formatINR(currentPrice)}</span>
+            </div>
+            <div className="flex justify-between text-[#707A8A]">
+              <span>Gross Order Value</span>
+              <span className="font-mono text-[#181A20]">{formatINR(grossTotal)}</span>
+            </div>
+            <div className="flex justify-between text-[#707A8A]">
+              <span>Estimated Brokerage (0.1%)</span>
+              <span className="font-mono text-[#181A20]">{formatINR(estimatedFee, { decimals: 2 })}</span>
+            </div>
+            <div className="flex justify-between pt-1.5 border-t border-[#DFE2E6] font-bold">
+              <span className="text-[#181A20]">{side === 'buy' ? 'Total Deducted' : 'Total Credited'}</span>
+              <span className="text-[#181A20] font-mono text-[13px]">{formatINR(netTotal)}</span>
+            </div>
+          </div>
+
           {!canAfford && (
-            <div className="p-3 rounded-[6px] bg-[#301820] border border-[#F6465D]/30 flex items-start gap-2.5 text-[#F6465D] text-[12px]">
-              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+            <div className="p-2.5 bg-[#FDF0F2] border border-[#F7B5BE] rounded-[6px] flex items-center gap-2 text-xs text-[#CF304A]">
+              <AlertCircle className="w-4 h-4 shrink-0" />
               <span>
                 {side === 'buy'
-                  ? `Insufficient available balance (${formatINR(wallet.availableBalance)} available). Please deposit funds or adjust quantity.`
-                  : `Insufficient holdings. You only hold ${holdingQty} units of ${selectedProduct.name}.`}
+                  ? 'Insufficient wallet cash. Deposit funds to proceed.'
+                  : 'Insufficient units held in your portfolio to sell this quantity.'}
               </span>
             </div>
           )}
 
-          {/* Submit Action */}
+          {/* Review Order Button */}
           <Button
+            size="md"
             variant={side === 'buy' ? 'buy' : 'sell'}
             fullWidth
-            size="md"
-            disabled={!canAfford || quantity <= 0}
             onClick={handleReview}
-            className="mt-2 text-[14px]"
+            disabled={!canAfford || quantity <= 0}
+            className="cursor-pointer"
           >
-            Review {side === 'buy' ? 'Buy' : 'Sell'} Order
+            Review {side.toUpperCase()} Order
           </Button>
         </div>
       )}
 
-      {/* Step 2: Order Review & Confirmation */}
+      {/* Step 2: Review & Confirmation Slip */}
       {step === 'review' && (
         <div className="space-y-4">
-          <div className="p-4 bg-[#111418] rounded-[6px] border border-[#2B3139] space-y-3 text-[13px]">
-            <div className="flex items-center justify-between pb-2 border-b border-[#2B3139]">
-              <span className="text-[#848E9C]">Action & Asset</span>
-              <span className={`font-bold uppercase ${side === 'buy' ? 'text-[#0ECB81]' : 'text-[#F6465D]'}`}>
-                {side} {selectedProduct.name} ({selectedProduct.id})
+          <div className="p-4 bg-[#F5F6F8] rounded-[8px] border border-[#DFE2E6] space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-[#DFE2E6]">
+              <span className="text-xs text-[#707A8A]">Execution Action</span>
+              <span
+                className={`text-xs font-bold font-mono uppercase px-2 py-0.5 rounded-[4px] ${
+                  side === 'buy' ? 'bg-[#EBFBF3] text-[#02A063]' : 'bg-[#FDF0F2] text-[#CF304A]'
+                }`}
+              >
+                {side} {orderType}
               </span>
             </div>
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Order Type</span>
-              <span className="font-semibold text-[#F5F5F5] capitalize">{orderType} Order</span>
-            </div>
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Quantity</span>
-              <span className="font-semibold text-[#F5F5F5] tabular-nums">{quantity} units</span>
-            </div>
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Price per Unit</span>
-              <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(currentPrice)}</span>
-            </div>
-            <div className="flex items-center justify-between text-[#848E9C]">
-              <span>Est. Exchange Fee</span>
-              <span className="font-semibold text-[#848E9C] tabular-nums">{formatINR(estimatedFee, { decimals: 2 })}</span>
-            </div>
-            <div className="pt-2 border-t border-[#2B3139] flex items-center justify-between text-[14px]">
-              <span className="font-bold text-[#F5F5F5]">Final Settlement Amount</span>
-              <span className="font-bold text-[#F0B90B] tabular-nums">{formatINR(netTotal)}</span>
+
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-[#707A8A]">Instrument</span>
+                <span className="font-bold text-[#181A20]">{selectedProduct.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#707A8A]">Units</span>
+                <span className="font-mono font-bold text-[#181A20]">{quantity} Units</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#707A8A]">Price per Unit</span>
+                <span className="font-mono text-[#181A20]">{formatINR(currentPrice)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#707A8A]">Exchange Fee</span>
+                <span className="font-mono text-[#181A20]">{formatINR(estimatedFee, { decimals: 2 })}</span>
+              </div>
+              <div className="flex justify-between pt-2 border-t border-[#DFE2E6] text-sm font-bold">
+                <span className="text-[#181A20]">{side === 'buy' ? 'Net Cash Outflow' : 'Net Cash Inflow'}</span>
+                <span className="font-mono text-[#181A20] text-base">{formatINR(netTotal)}</span>
+              </div>
             </div>
           </div>
 
-          <div className="p-3 bg-[#161A1E] rounded-[6px] border border-[#2B3139] flex items-center gap-2 text-[12px] text-[#848E9C]">
-            <Shield className="w-4 h-4 text-[#F0B90B] shrink-0" />
-            <span>Orders are routed through Tradeon's low-latency matching engine with instantaneous fill verification.</span>
+          <div className="flex items-center gap-2 text-xs text-[#707A8A] px-1">
+            <Shield className="w-4 h-4 text-[#02A063]" />
+            <span>Instant execution logged to double-entry ledger upon confirmation</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 pt-2">
+          <div className="flex items-center gap-3 pt-2">
             <Button
-              variant="secondary"
+              size="md"
+              variant="outline"
               onClick={() => setStep('form')}
+              className="flex-1 cursor-pointer"
             >
               Modify
             </Button>
             <Button
+              size="md"
               variant={side === 'buy' ? 'buy' : 'sell'}
               onClick={handleConfirmOrder}
+              className="flex-1 font-bold cursor-pointer"
             >
               Confirm & Execute
             </Button>
@@ -291,52 +337,54 @@ export const BuySellModal: React.FC = () => {
         </div>
       )}
 
-      {/* Step 3: Success Confirmation Receipt */}
+      {/* Step 3: Success Screen */}
       {step === 'success' && (
-        <div className="text-center py-4 space-y-4">
-          <div className="w-12 h-12 rounded-full bg-[#102A22] border border-[#0ECB81]/40 flex items-center justify-center mx-auto text-[#0ECB81]">
-            <CheckCircle2 className="w-7 h-7" />
+        <div className="text-center py-6 space-y-4">
+          <div className="w-14 h-14 rounded-full bg-[#EBFBF3] border border-[#A2E8C6] text-[#02A063] flex items-center justify-center mx-auto shadow-sm">
+            <CheckCircle2 className="w-8 h-8" />
           </div>
 
           <div>
-            <h3 className="text-[18px] font-bold text-[#F5F5F5]">Order Executed Successfully</h3>
-            <p className="text-[13px] text-[#848E9C] mt-1">
-              Your {side.toUpperCase()} order was filled on the Tradeon central order book.
+            <h3 className="text-[20px] font-bold text-[#181A20]">
+              Order Executed Successfully
+            </h3>
+            <p className="text-xs text-[#707A8A] mt-1">
+              Your {side.toUpperCase()} order for {quantity} units of {selectedProduct.name} has been processed.
             </p>
           </div>
 
-          <div className="p-4 bg-[#111418] rounded-[6px] border border-[#2B3139] text-left space-y-2 text-[12px]">
-            <div className="flex items-center justify-between">
-              <span className="text-[#848E9C]">Order ID</span>
-              <span className="font-mono text-[#F0B90B]">{completedOrderId}</span>
+          <div className="p-3 bg-[#F5F6F8] rounded-[6px] border border-[#DFE2E6] text-xs space-y-1.5 max-w-sm mx-auto text-left font-mono">
+            <div className="flex justify-between text-[#707A8A]">
+              <span>Order Reference:</span>
+              <span className="text-[#181A20] font-bold">{completedOrderId}</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-[#848E9C]">Status</span>
-              <span className="text-[#0ECB81] font-semibold">FILLED / COMPLETED</span>
+            <div className="flex justify-between text-[#707A8A]">
+              <span>Status:</span>
+              <span className="text-[#02A063] font-bold">FILLED (COMPLETED)</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-[#848E9C]">Executed Amount</span>
-              <span className="font-semibold text-[#F5F5F5] tabular-nums">{quantity} units @ {formatINR(currentPrice)}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-[#848E9C]">Net Settlement</span>
-              <span className="font-bold text-[#F0B90B] tabular-nums">{formatINR(netTotal)}</span>
+            <div className="flex justify-between text-[#707A8A]">
+              <span>Available Cash:</span>
+              <span className="text-[#181A20]">{formatINR(wallet.availableBalance)}</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 pt-2">
+          <div className="pt-2 flex items-center justify-center gap-3">
             <Button
-              variant="secondary"
+              size="sm"
+              variant="outline"
               onClick={() => {
                 closeBuySell();
                 setCurrentView('app-orders');
               }}
+              className="cursor-pointer"
             >
               View in Orders
             </Button>
             <Button
+              size="sm"
               variant="primary"
               onClick={closeBuySell}
+              className="font-bold cursor-pointer"
             >
               Done
             </Button>
@@ -346,5 +394,3 @@ export const BuySellModal: React.FC = () => {
     </Modal>
   );
 };
-
-export default BuySellModal;

@@ -57,23 +57,23 @@ export const Navbar: React.FC = () => {
   const isLedgerActive = currentView === 'app-ledger' || currentView === 'ledger';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#2B3139] bg-[#111418] text-[#F5F5F5] select-none">
+    <header className="sticky top-0 z-40 border-b border-[#EAECEF] bg-white text-[#181A20] select-none shadow-xs">
       <div className="mx-auto flex h-14 max-w-[1560px] items-center justify-between gap-3 px-4 lg:px-6">
         {/* Left: Brand + Terminal Nav */}
         <div className="flex items-center gap-6">
           {/* Tradeon Wordmark & Icon */}
           <button
             onClick={() => navigate('app-dashboard')}
-            className="flex items-center gap-2.5 text-left focus:outline-none cursor-pointer group"
+            className="flex items-center gap-2 text-left focus:outline-none cursor-pointer group"
             aria-label="Tradeon Terminal Home"
           >
             <div className="w-7 h-7 rounded-[4px] bg-[#F0B90B] flex items-center justify-center text-[#181A20] font-black text-[15px] group-hover:bg-[#F8D12F] transition-colors shadow-xs">
               T
             </div>
-            <span className="text-[17px] font-bold tracking-tight text-[#F5F5F5]">
+            <span className="text-[17px] font-bold tracking-tight text-[#181A20]">
               Tradeon
             </span>
-            <span className="hidden sm:inline-block text-[10px] font-semibold uppercase tracking-wider text-[#848E9C] border border-[#2B3139] px-1.5 py-0.5 rounded-[3px]">
+            <span className="hidden sm:inline-block text-[10px] font-semibold uppercase tracking-wider text-[#707A8A] border border-[#DFE2E6] bg-[#F5F6F8] px-1.5 py-0.5 rounded-[3px]">
               PRO
             </span>
           </button>
@@ -84,8 +84,8 @@ export const Navbar: React.FC = () => {
               onClick={() => navigate('app-dashboard')}
               className={`px-3 py-1.5 text-[13px] font-medium rounded-[4px] transition-colors cursor-pointer ${
                 currentView === 'app-dashboard' || currentView === 'dashboard'
-                  ? 'text-[#F0B90B] bg-[#1E2329]'
-                  : 'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E]'
+                  ? 'text-[#181A20] bg-[#F5F6F8] font-bold border border-[#EAECEF]'
+                  : 'text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]'
               }`}
             >
               Dashboard
@@ -103,8 +103,8 @@ export const Navbar: React.FC = () => {
                   onClick={() => navigate(item.view)}
                   className={`px-3 py-1.5 text-[13px] font-medium rounded-[4px] transition-colors cursor-pointer ${
                     isActive
-                      ? 'text-[#F0B90B] bg-[#1E2329]'
-                      : 'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E]'
+                      ? 'text-[#181A20] bg-[#F5F6F8] font-bold border border-[#EAECEF]'
+                      : 'text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]'
                   }`}
                 >
                   {item.label}
@@ -117,35 +117,35 @@ export const Navbar: React.FC = () => {
               <button
                 className={`flex items-center gap-1 px-3 py-1.5 text-[13px] font-medium rounded-[4px] transition-colors cursor-pointer ${
                   isLedgerActive || currentView === 'app-wallet' || currentView === 'wallet'
-                    ? 'text-[#F0B90B] bg-[#1E2329]'
-                    : 'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E]'
+                    ? 'text-[#181A20] bg-[#F5F6F8] font-bold border border-[#EAECEF]'
+                    : 'text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]'
                 }`}
               >
                 <span>Wallet</span>
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
               <div className="invisible absolute left-0 top-full pt-1 w-44 z-50 opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-150">
-                <div className="bg-[#1E2329] border border-[#2B3139] rounded-[6px] shadow-2xl p-1 text-[13px]">
+                <div className="bg-white border border-[#DFE2E6] rounded-[6px] shadow-xl p-1 text-[13px]">
                   <button
                     onClick={() => navigate('app-wallet')}
-                    className="flex w-full items-center justify-between px-3 py-2 text-left rounded-[4px] text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#2B3139]"
+                    className="flex w-full items-center justify-between px-3 py-2 text-left rounded-[4px] text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]"
                   >
                     <span>Overview</span>
-                    <WalletIcon className="w-3.5 h-3.5 text-[#848E9C]" />
+                    <WalletIcon className="w-3.5 h-3.5 text-[#707A8A]" />
                   </button>
                   <button
                     onClick={() => navigate('app-ledger')}
-                    className="flex w-full items-center justify-between px-3 py-2 text-left rounded-[4px] text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#2B3139]"
+                    className="flex w-full items-center justify-between px-3 py-2 text-left rounded-[4px] text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]"
                   >
                     <span>Transaction Ledger</span>
-                    <SlidersHorizontal className="w-3.5 h-3.5 text-[#848E9C]" />
+                    <SlidersHorizontal className="w-3.5 h-3.5 text-[#707A8A]" />
                   </button>
                   <button
                     onClick={() => navigate('watchlist')}
-                    className="flex w-full items-center justify-between px-3 py-2 text-left rounded-[4px] text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#2B3139]"
+                    className="flex w-full items-center justify-between px-3 py-2 text-left rounded-[4px] text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]"
                   >
                     <span>Watchlist</span>
-                    <TrendingUp className="w-3.5 h-3.5 text-[#848E9C]" />
+                    <TrendingUp className="w-3.5 h-3.5 text-[#707A8A]" />
                   </button>
                 </div>
               </div>
@@ -158,12 +158,12 @@ export const Navbar: React.FC = () => {
           {/* Quick Search Trigger */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="hidden sm:flex items-center gap-2 h-8 px-2.5 rounded-[4px] bg-[#161A1E] border border-[#2B3139] text-[#848E9C] hover:border-[#474F59] hover:text-[#F5F5F5] text-[12px] transition-colors cursor-pointer"
+            className="hidden sm:flex items-center gap-2 h-8 px-2.5 rounded-[4px] bg-[#F5F6F8] border border-[#DFE2E6] text-[#707A8A] hover:border-[#CFD3D8] hover:text-[#181A20] text-[12px] transition-colors cursor-pointer"
             aria-label="Search assets (Cmd+K)"
           >
-            <Search className="w-3.5 h-3.5 text-[#848E9C]" />
+            <Search className="w-3.5 h-3.5 text-[#707A8A]" />
             <span>Search coin, pair, contract</span>
-            <kbd className="text-[10px] bg-[#1E2329] border border-[#363C45] px-1 py-0.2 rounded text-[#848E9C]">
+            <kbd className="text-[10px] bg-white border border-[#DFE2E6] px-1 py-0.2 rounded text-[#707A8A]">
               ⌘K
             </kbd>
           </button>
@@ -172,13 +172,13 @@ export const Navbar: React.FC = () => {
           <div className="relative">
             <button
               onClick={() => navigate('app-wallet')}
-              className="flex items-center gap-2 h-8 px-2.5 rounded-[4px] bg-[#161A1E] border border-[#2B3139] hover:border-[#363C45] transition-colors cursor-pointer text-left"
+              className="flex items-center gap-2 h-8 px-2.5 rounded-[4px] bg-[#F5F6F8] border border-[#DFE2E6] hover:border-[#CFD3D8] transition-colors cursor-pointer text-left"
               aria-label="View wallet balance"
             >
-              <WalletIcon className="w-3.5 h-3.5 text-[#F0B90B]" />
+              <WalletIcon className="w-3.5 h-3.5 text-[#B78103]" />
               <div className="text-[12px]">
-                <span className="text-[#848E9C] hidden md:inline">Bal: </span>
-                <span className="font-semibold text-[#F5F5F5] tabular-nums">
+                <span className="text-[#707A8A] hidden md:inline">Bal: </span>
+                <span className="font-bold text-[#181A20] tabular-nums font-mono">
                   {formatINR(wallet.availableBalance)}
                 </span>
               </div>
@@ -199,12 +199,12 @@ export const Navbar: React.FC = () => {
           {/* Notifications Trigger */}
           <button
             onClick={() => navigate('notifications')}
-            className="relative p-2 text-[#848E9C] hover:text-[#F5F5F5] hover:bg-[#1E2329] rounded-[4px] transition-colors cursor-pointer"
+            className="relative p-2 text-[#707A8A] hover:text-[#181A20] hover:bg-[#F5F6F8] rounded-[4px] transition-colors cursor-pointer"
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4" />
             {unreadCount > 0 && (
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#F6465D]" />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#CF304A]" />
             )}
           </button>
 
@@ -213,29 +213,29 @@ export const Navbar: React.FC = () => {
             onClick={() => navigate('app-profile')}
             className={`p-2 rounded-[4px] transition-colors cursor-pointer ${
               currentView === 'app-profile'
-                ? 'text-[#F0B90B] bg-[#1E2329]'
-                : 'text-[#848E9C] hover:text-[#F5F5F5] hover:bg-[#1E2329]'
+                ? 'text-[#181A20] bg-[#F5F6F8]'
+                : 'text-[#707A8A] hover:text-[#181A20] hover:bg-[#F5F6F8]'
             }`}
             aria-label="Profile and Settings"
           >
             <User className="w-4 h-4" />
           </button>
 
-          {/* Switch to Marketing Website link */}
+          {/* Switch to Marketing Website */}
           <button
             onClick={() => navigate('home')}
-            className="hidden xl:flex items-center gap-1 text-[11px] font-medium text-[#848E9C] hover:text-[#F0B90B] px-2 py-1 transition-colors cursor-pointer"
-            title="Go to Marketing Home"
+            className="hidden xl:inline-flex items-center gap-1 text-[11px] font-semibold text-[#707A8A] hover:text-[#181A20] px-2 py-1 rounded-[4px] hover:bg-[#F5F6F8] transition-colors cursor-pointer"
+            title="View public marketplace overview"
           >
-            <span>Marketing</span>
+            <span>Website</span>
             <ExternalLink className="w-3 h-3" />
           </button>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-1.5 text-[#848E9C] hover:text-[#F5F5F5] lg:hidden rounded-[4px]"
-            aria-label="Toggle Navigation Menu"
+            className="lg:hidden p-1.5 text-[#707A8A] hover:text-[#181A20] hover:bg-[#F5F6F8] rounded-[4px] cursor-pointer"
+            aria-label="Toggle navigation drawer"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -244,65 +244,68 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-[#2B3139] bg-[#111418] px-4 py-3 space-y-2">
-          <div className="grid grid-cols-2 gap-2 pb-2 border-b border-[#2B3139]">
+        <div className="lg:hidden border-t border-[#EAECEF] bg-white px-4 py-3 space-y-2">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#707A8A] px-2 pt-1">
+            Trading Terminal Navigation
+          </div>
+          <div className="grid grid-cols-2 gap-1">
             <button
               onClick={() => navigate('app-dashboard')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
+              className={`text-left px-3 py-2 rounded-[4px] text-xs font-medium transition-colors ${
+                currentView === 'app-dashboard' || currentView === 'dashboard'
+                  ? 'text-[#181A20] bg-[#F5F6F8] font-bold'
+                  : 'text-[#474D57] hover:bg-[#F5F6F8]'
+              }`}
             >
               Dashboard
             </button>
+            {mainNav.map((item) => (
+              <button
+                key={item.view}
+                onClick={() => navigate(item.view)}
+                className={`text-left px-3 py-2 rounded-[4px] text-xs font-medium transition-colors ${
+                  currentView === item.view
+                    ? 'text-[#181A20] bg-[#F5F6F8] font-bold'
+                    : 'text-[#474D57] hover:bg-[#F5F6F8]'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
             <button
-              onClick={() => navigate('app-markets')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
+              onClick={() => navigate('app-ledger')}
+              className="text-left px-3 py-2 rounded-[4px] text-xs text-[#474D57] hover:bg-[#F5F6F8]"
             >
-              Markets
-            </button>
-            <button
-              onClick={() => navigate('app-product-detail')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
-            >
-              Trade Terminal
-            </button>
-            <button
-              onClick={() => navigate('app-options')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
-            >
-              Options
-            </button>
-            <button
-              onClick={() => navigate('app-portfolio')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
-            >
-              Portfolio
-            </button>
-            <button
-              onClick={() => navigate('app-orders')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
-            >
-              Orders
+              Ledger
             </button>
             <button
               onClick={() => navigate('app-wallet')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
+              className="text-left px-3 py-2 rounded-[4px] text-xs text-[#474D57] hover:bg-[#F5F6F8]"
             >
               Wallet
             </button>
             <button
-              onClick={() => navigate('app-ledger')}
-              className="text-left px-3 py-2 text-[13px] font-medium text-[#B7BDC6] hover:text-[#F0B90B] hover:bg-[#1E2329] rounded-[4px]"
+              onClick={() => navigate('watchlist')}
+              className="text-left px-3 py-2 rounded-[4px] text-xs text-[#474D57] hover:bg-[#F5F6F8]"
             >
-              Ledger
+              Watchlist
+            </button>
+            <button
+              onClick={() => navigate('app-profile')}
+              className="text-left px-3 py-2 rounded-[4px] text-xs text-[#474D57] hover:bg-[#F5F6F8]"
+            >
+              Profile
             </button>
           </div>
-          <div className="pt-2 flex items-center justify-between text-[13px]">
+
+          <div className="pt-2 border-t border-[#EAECEF] flex items-center justify-between">
             <button
               onClick={() => navigate('home')}
-              className="text-[#848E9C] hover:text-[#F0B90B]"
+              className="text-xs text-[#707A8A] hover:text-[#181A20]"
             >
-              Switch to Public Site
+              Return to Website
             </button>
-            <Button size="xs" variant="primary" onClick={() => { setIsAddFundsOpen(true); setMobileOpen(false); }}>
+            <Button size="xs" variant="primary" onClick={() => setIsAddFundsOpen(true)}>
               Deposit Funds
             </Button>
           </div>
@@ -311,5 +314,3 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
-
-export default Navbar;

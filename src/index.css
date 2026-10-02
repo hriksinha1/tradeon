@@ -6,35 +6,35 @@
   --color-brand-active: #D9A900;
   --color-brand-text: #181A20;
 
-  --color-bg-app: #0B0E11;
-  --color-bg-surface-1: #111418;
-  --color-bg-surface-2: #161A1E;
-  --color-bg-surface-3: #1E2329;
-  --color-bg-elevated: #23282F;
+  --color-bg-app: #FFFFFF;
+  --color-bg-surface-1: #FFFFFF;
+  --color-bg-surface-2: #F5F6F8;
+  --color-bg-surface-3: #ECEFF2;
+  --color-bg-elevated: #FFFFFF;
 
-  --color-text-primary: #F5F5F5;
-  --color-text-secondary: #B7BDC6;
-  --color-text-tertiary: #848E9C;
-  --color-text-disabled: #5E6673;
-  --color-text-inverse: #181A20;
+  --color-text-primary: #181A20;
+  --color-text-secondary: #474D57;
+  --color-text-tertiary: #707A8A;
+  --color-text-disabled: #B7BDC6;
+  --color-text-inverse: #FFFFFF;
 
-  --color-border-subtle: #2B3139;
-  --color-border-default: #363C45;
-  --color-border-strong: #474F59;
+  --color-border-subtle: #EAECEF;
+  --color-border-default: #DFE2E6;
+  --color-border-strong: #CFD3D8;
 
-  --color-market-positive: #0ECB81;
-  --color-market-positive-strong: #02C076;
-  --color-market-positive-subtle: #102A22;
+  --color-market-positive: #02A063;
+  --color-market-positive-strong: #028753;
+  --color-market-positive-subtle: #EBFBF3;
 
-  --color-market-negative: #F6465D;
-  --color-market-negative-strong: #F23645;
-  --color-market-negative-subtle: #301820;
+  --color-market-negative: #CF304A;
+  --color-market-negative-strong: #B5263D;
+  --color-market-negative-subtle: #FDF0F2;
 
-  --color-status-warning: #F0B90B;
-  --color-status-warning-subtle: #302A15;
+  --color-status-warning: #B78103;
+  --color-status-warning-subtle: #FEF9E7;
 
-  --color-status-info: #4C8FFF;
-  --color-status-info-subtle: #18243A;
+  --color-status-info: #0066CC;
+  --color-status-info-subtle: #F0F6FF;
 }
 
 @layer base {
@@ -44,73 +44,73 @@
     --color-brand-primary-active: #D9A900;
     --color-brand-on-primary: #181A20;
 
-    --color-background-app: #0B0E11;
-    --color-background-surface: #111418;
-    --color-background-surface-2: #161A1E;
-    --color-background-surface-3: #1E2329;
-    --color-background-elevated: #23282F;
+    --color-background-app: #FFFFFF;
+    --color-background-surface: #FFFFFF;
+    --color-background-surface-2: #F5F6F8;
+    --color-background-surface-3: #ECEFF2;
+    --color-background-elevated: #FFFFFF;
 
-    --color-text-primary: #F5F5F5;
-    --color-text-secondary: #B7BDC6;
-    --color-text-tertiary: #848E9C;
-    --color-text-disabled: #5E6673;
-    --color-text-inverse: #181A20;
+    --color-text-primary: #181A20;
+    --color-text-secondary: #474D57;
+    --color-text-tertiary: #707A8A;
+    --color-text-disabled: #B7BDC6;
+    --color-text-inverse: #FFFFFF;
 
-    --color-border-subtle: #2B3139;
-    --color-border-default: #363C45;
-    --color-border-strong: #474F59;
+    --color-border-subtle: #EAECEF;
+    --color-border-default: #DFE2E6;
+    --color-border-strong: #CFD3D8;
     --color-border-focus: #F0B90B;
 
-    --color-market-positive: #0ECB81;
-    --color-market-positive-strong: #02C076;
-    --color-market-positive-subtle: #102A22;
+    --color-market-positive: #02A063;
+    --color-market-positive-strong: #028753;
+    --color-market-positive-subtle: #EBFBF3;
 
-    --color-market-negative: #F6465D;
-    --color-market-negative-strong: #F23645;
-    --color-market-negative-subtle: #301820;
+    --color-market-negative: #CF304A;
+    --color-market-negative-strong: #B5263D;
+    --color-market-negative-subtle: #FDF0F2;
 
-    --color-status-warning: #F0B90B;
-    --color-status-warning-subtle: #302A15;
+    --color-status-warning: #B78103;
+    --color-status-warning-subtle: #FEF9E7;
 
-    --color-status-info: #4C8FFF;
-    --color-status-info-subtle: #18243A;
+    --color-status-info: #0066CC;
+    --color-status-info-subtle: #F0F6FF;
   }
 
   body {
     font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #0B0E11;
-    color: #F5F5F5;
+    background-color: #FFFFFF;
+    color: #181A20;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Financial alignment rules */
+  /* Financial tabular alignment */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
 }
 
-/* Financial terminal scrollbars */
+/* Financial terminal light scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0E11;
+  background: #F5F6F8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2B3139;
+  background: #DFE2E6;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #474F59;
+  background: #CFD3D8;
 }
 
 button, a, input, select, textarea {
   outline-color: #F0B90B;
 }
 ::selection {
-  background: #302A15;
-  color: #F0B90B;
+  background: #FEF1C8;
+  color: #181A20;
 }

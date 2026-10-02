@@ -16,17 +16,18 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
   className = '',
   colorCode = false,
 }) => {
-  const formatted = formatINR(value, { showSign, decimals });
-  let colorClass = 'text-[#F5F5F5]';
+  const isPositive = value > 0;
+  const isZero = value === 0;
 
+  let colorClass = 'text-[#181A20]';
   if (colorCode) {
-    if (value > 0) colorClass = 'text-[#0ECB81]';
-    else if (value < 0) colorClass = 'text-[#F6465D]';
+    if (isPositive) colorClass = 'text-[#02A063]';
+    else if (!isZero) colorClass = 'text-[#CF304A]';
   }
 
   return (
-    <span className={`tabular-nums font-semibold ${colorClass} ${className}`}>
-      {formatted}
+    <span className={`font-mono font-bold tabular-nums ${colorClass} ${className}`}>
+      {formatINR(value, { showSign, decimals })}
     </span>
   );
 };

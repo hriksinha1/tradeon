@@ -7,7 +7,7 @@ export interface ModalProps {
   title?: string;
   subtitle?: string;
   children: React.ReactNode;
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl';
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -27,45 +27,58 @@ export const Modal: React.FC<ModalProps> = ({
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const maxWidthClass = {
+  const maxWidthClasses = {
     sm: 'max-w-sm',
     md: 'max-w-md',
     lg: 'max-w-lg',
     xl: 'max-w-xl',
     '2xl': 'max-w-2xl',
-    '4xl': 'max-w-4xl',
-  }[maxWidth];
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs transition-opacity animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
       <div
-        className="fixed inset-0"
+        className="fixed inset-0 bg-black/45 backdrop-blur-[2px] transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
+
+      {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidthClass} max-h-[90vh] overflow-y-auto bg-[#161A1E] text-[#F5F5F5] rounded-[10px] border border-[#2B3139] shadow-2xl p-5 sm:p-6 z-10`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white border border-[#DFE2E6] rounded-[12px] shadow-2xl p-6 text-[#181A20] z-10 max-h-[90vh] overflow-y-auto`}
+        role="dialog"
+        aria-modal="true"
       >
-        <div className="flex items-start justify-between pb-4 border-b border-[#2B3139] mb-5">
+        <div className="flex items-start justify-between pb-4 border-b border-[#EAECEF] mb-5">
           <div>
-            {title && <h2 className="text-[18px] sm:text-[20px] font-bold text-[#F5F5F5] tracking-tight">{title}</h2>}
-            {subtitle && <p className="text-[13px] text-[#848E9C] mt-0.5">{subtitle}</p>}
+            {title && (
+              <h2 className="text-[18px] font-bold text-[#181A20] tracking-tight">
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p className="text-xs text-[#707A8A] mt-0.5">
+                {subtitle}
+              </p>
+            )}
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 -mr-1.5 text-[#848E9C] hover:text-[#F5F5F5] hover:bg-[#1E2329] rounded-[6px] transition-colors cursor-pointer"
-            aria-label="Close modal"
+            className="p-1 rounded-[6px] text-[#707A8A] hover:text-[#181A20] hover:bg-[#F5F6F8] transition-colors cursor-pointer"
+            aria-label="Close dialog"
           >
-            <X className="w-4 h-4" />
+            <X className="size-4" />
           </button>
         </div>
+
         <div>{children}</div>
       </div>
     </div>

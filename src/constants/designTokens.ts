@@ -1,11 +1,11 @@
 /**
  * Tradeon Design System — Foundational Semantic Tokens
- * Dark Trading Environment with Yellow Primary Accent (#F0B90B)
- * Mature Financial Product Design Language inspired by top global trading platforms
+ * White Theme / Light Financial Trading Environment with Yellow Brand Accent (#F0B90B)
+ * Mature Financial Product Design Language inspired by institutional trading platforms in light mode
  */
 
 export const DESIGN_TOKENS = {
-  name: 'Tradeon High-Density Trading System',
+  name: 'Tradeon High-Density Trading System (White Theme)',
   brand: {
     primary: '#F0B90B',
     primaryHover: '#F8D12F',
@@ -13,43 +13,43 @@ export const DESIGN_TOKENS = {
     textOnPrimary: '#181A20',
   },
   background: {
-    app: '#0B0E11',
-    surface1: '#111418',
-    surface2: '#161A1E',
-    surface3: '#1E2329',
-    elevated: '#23282F',
+    app: '#FFFFFF',
+    surface1: '#FFFFFF',
+    surface2: '#F5F6F8',
+    surface3: '#ECEFF2',
+    elevated: '#FFFFFF',
   },
   text: {
-    primary: '#F5F5F5',
-    secondary: '#B7BDC6',
-    tertiary: '#848E9C',
-    disabled: '#5E6673',
-    inverse: '#181A20',
+    primary: '#181A20',
+    secondary: '#474D57',
+    tertiary: '#707A8A',
+    disabled: '#B7BDC6',
+    inverse: '#FFFFFF',
   },
   border: {
-    subtle: '#2B3139',
-    default: '#363C45',
-    strong: '#474F59',
+    subtle: '#EAECEF',
+    default: '#DFE2E6',
+    strong: '#CFD3D8',
     focus: '#F0B90B',
   },
   semantic: {
     positive: {
-      base: '#0ECB81',
-      strong: '#02C076',
-      subtle: '#102A22',
+      base: '#02A063',
+      strong: '#028753',
+      subtle: '#EBFBF3',
     },
     negative: {
-      base: '#F6465D',
-      strong: '#F23645',
-      subtle: '#301820',
+      base: '#CF304A',
+      strong: '#B5263D',
+      subtle: '#FDF0F2',
     },
     warning: {
-      base: '#F0B90B',
-      subtle: '#302A15',
+      base: '#B78103',
+      subtle: '#FEF9E7',
     },
     info: {
-      base: '#4C8FFF',
-      subtle: '#18243A',
+      base: '#0066CC',
+      subtle: '#F0F6FF',
     },
   },
   radius: {

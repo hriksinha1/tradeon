@@ -12,44 +12,44 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'md',
   fullWidth = false,
   className = '',
-  children,
   disabled,
+  children,
   ...props
 }) => {
-  const baseStyles =
-    'inline-flex items-center justify-center font-semibold rounded-[6px] transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[#F0B90B] disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap active:scale-[0.98] cursor-pointer select-none';
+  const baseClasses =
+    'inline-flex items-center justify-center font-bold tracking-tight rounded-[6px] transition-all cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-[0.98]';
 
-  const sizeStyles = {
-    xs: 'text-[12px] px-2.5 py-1 min-h-[28px]',
-    sm: 'text-[13px] px-3.5 py-1.5 min-h-[32px]',
-    md: 'text-[14px] px-4 py-2 min-h-[38px]',
-    lg: 'text-[15px] px-5 py-2.5 min-h-[44px]',
+  const sizeClasses = {
+    xs: 'text-[11px] py-1 px-2.5 gap-1',
+    sm: 'text-xs py-1.5 px-3 gap-1.5',
+    md: 'text-xs py-2 px-4 gap-2',
+    lg: 'text-sm py-2.5 px-5 gap-2.5',
   };
 
-  const variantStyles = {
+  const variantClasses = {
     primary:
-      'bg-[#F0B90B] text-[#181A20] font-bold hover:bg-[#F8D12F] active:bg-[#D9A900] shadow-xs',
+      'bg-[#F0B90B] hover:bg-[#F8D12F] text-[#181A20] font-bold shadow-xs border border-[#E5A800]',
     secondary:
-      'bg-[#1E2329] text-[#F5F5F5] border border-[#363C45] hover:bg-[#2B3139] hover:border-[#474F59] active:bg-[#161A1E]',
+      'bg-[#F5F6F8] hover:bg-[#EAECEF] text-[#181A20] border border-[#DFE2E6]',
     dark:
-      'bg-[#161A1E] text-[#F5F5F5] border border-[#2B3139] hover:bg-[#1E2329]',
+      'bg-[#181A20] hover:bg-[#2B3139] text-white border border-[#181A20]',
     outline:
-      'border border-[#363C45] bg-transparent text-[#F5F5F5] hover:bg-[#1E2329] hover:border-[#474F59]',
+      'bg-white hover:bg-[#F5F6F8] text-[#181A20] border border-[#DFE2E6]',
     ghost:
-      'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#1E2329]',
+      'bg-transparent hover:bg-[#F5F6F8] text-[#474D57] hover:text-[#181A20]',
     positive:
-      'bg-[#0ECB81] text-[#FFFFFF] font-bold hover:bg-[#02C076] active:bg-[#029B5F]',
+      'bg-[#02A063] hover:bg-[#028753] text-white font-bold shadow-xs',
     negative:
-      'bg-[#F6465D] text-[#FFFFFF] font-bold hover:bg-[#F23645] active:bg-[#D02636]',
+      'bg-[#CF304A] hover:bg-[#B5263D] text-white font-bold shadow-xs',
     buy:
-      'bg-[#0ECB81] text-[#FFFFFF] font-bold hover:bg-[#02C076] active:bg-[#029B5F]',
+      'bg-[#02A063] hover:bg-[#028753] text-white font-bold shadow-xs',
     sell:
-      'bg-[#F6465D] text-[#FFFFFF] font-bold hover:bg-[#F23645] active:bg-[#D02636]',
+      'bg-[#CF304A] hover:bg-[#B5263D] text-white font-bold shadow-xs',
   };
 
   return (
     <button
-      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${
+      className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
         fullWidth ? 'w-full' : ''
       } ${className}`}
       disabled={disabled}

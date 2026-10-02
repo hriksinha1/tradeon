@@ -6,140 +6,133 @@ import { ArrowUpRight, ShieldCheck } from 'lucide-react';
 export const MarketingFooter: React.FC = () => {
   const { setCurrentView } = useTrading();
 
-  const handleNav = (view: ViewMode) => {
+  const navigate = (view: ViewMode) => {
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const footerNav = [
+    {
+      title: 'Platform',
+      links: [
+        { label: 'Markets Overview', view: 'markets' as ViewMode },
+        { label: 'Listed Products', view: 'products' as ViewMode },
+        { label: 'Options Trading', view: 'options' as ViewMode },
+        { label: 'Trading Terminal', view: 'app-dashboard' as ViewMode },
+      ],
+    },
+    {
+      title: 'Experience',
+      links: [
+        { label: 'How It Works', view: 'how-it-works' as ViewMode },
+        { label: 'Mobile Application', view: 'mobile-app' as ViewMode },
+        { label: 'Payments & Settlement', view: 'payments' as ViewMode },
+        { label: 'Security Architecture', view: 'security' as ViewMode },
+      ],
+    },
+    {
+      title: 'Company & Trust',
+      links: [
+        { label: 'About Tradeon', view: 'about' as ViewMode },
+        { label: 'Knowledge Base & FAQ', view: 'faq' as ViewMode },
+        { label: 'Support & Help Desk', view: 'contact' as ViewMode },
+        { label: 'System Architecture', view: 'about' as ViewMode },
+      ],
+    },
+    {
+      title: 'Governance',
+      links: [
+        { label: 'Terms of Service', view: 'terms' as ViewMode },
+        { label: 'Privacy & Data Policy', view: 'privacy' as ViewMode },
+        { label: 'Market Integrity Rules', view: 'security' as ViewMode },
+        { label: 'Risk Disclosure Notice', view: 'terms' as ViewMode },
+      ],
+    },
+  ];
+
   return (
-    <footer className="bg-[#0B0E11] text-[#848E9C] border-t border-[#2B3139] pt-16 pb-12 select-none">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-12">
-        {/* Top Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
-          {/* Brand Col */}
-          <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-[4px] bg-[#F0B90B] flex items-center justify-center text-[#181A20] font-black text-[16px] shadow-xs">
-                T
-              </div>
-              <span className="text-[20px] font-bold text-[#F5F5F5] tracking-tight">Tradeon</span>
+    <footer className="border-t border-[#EAECEF] bg-[#F8F9FA] text-[#474D57] select-none">
+      {/* Top Pre-Footer Bar */}
+      <div className="border-b border-[#EAECEF]">
+        <div className="mx-auto flex max-w-7xl flex-col sm:flex-row items-center justify-between gap-4 px-4 py-6 sm:px-8">
+          <div className="flex items-center gap-3">
+            <div className="flex size-7 items-center justify-center rounded-[4px] bg-[#F0B90B] text-[#181A20] font-black text-sm shadow-xs">
+              T
             </div>
-            <p className="text-[14px] text-[#B7BDC6] max-w-sm leading-relaxed">
-              Professional digital trading and asset marketplace built for high-throughput order execution, clear market depth, and auditable accounting.
-            </p>
-            <div className="flex items-center gap-2 text-[12px] text-[#F0B90B]">
-              <span className="w-2 h-2 rounded-full bg-[#F0B90B]" />
-              <span className="font-semibold text-[#848E9C]">Real-Time Trading Terminal & Market Engine</span>
+            <div>
+              <span className="font-bold text-sm text-[#181A20] tracking-tight">
+                Tradeon
+              </span>
+              <span className="text-xs text-[#707A8A] ml-2">
+                White Theme · High-Density Trading System
+              </span>
             </div>
           </div>
 
-          {/* Navigation Columns */}
-          <div>
-            <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#F5F5F5] mb-3">Platform</h4>
-            <ul className="space-y-2 text-[13px] text-[#848E9C]">
-              <li>
-                <button onClick={() => handleNav('products')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Products & Markets
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('how-it-works')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  How It Works
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('mobile-app')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Mobile Application
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('options')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Options Contracts
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('app-dashboard')} className="text-[#F0B90B] font-semibold hover:underline flex items-center gap-1 cursor-pointer">
-                  <span>Trading Terminal</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#F5F5F5] mb-3">Accounting</h4>
-            <ul className="space-y-2 text-[13px] text-[#848E9C]">
-              <li>
-                <button onClick={() => handleNav('payments')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Wallet & Gateway
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('security')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Security Architecture
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('app-ledger')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Transaction Ledger
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('faq')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Help & FAQ
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#F5F5F5] mb-3">Company & Legal</h4>
-            <ul className="space-y-2 text-[13px] text-[#848E9C]">
-              <li>
-                <button onClick={() => handleNav('about')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  About Tradeon
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('contact')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Support Desk
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('privacy')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Privacy Policy
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('terms')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">
-                  Terms of Service
-                </button>
-              </li>
-            </ul>
+          <div className="flex items-center gap-4 text-xs">
+            <button
+              onClick={() => navigate('app-dashboard')}
+              className="font-bold text-[#181A20] hover:text-[#B78103] flex items-center gap-1 transition-colors cursor-pointer"
+            >
+              <span>Launch Live Terminal</span>
+              <ArrowUpRight className="size-3.5" />
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Financial Regulatory & Illustrative Notice */}
-        <div className="pt-8 border-t border-[#2B3139] space-y-4">
-          <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px] text-[12px] text-[#848E9C] leading-relaxed">
-            <span className="font-bold text-[#F5F5F5] block mb-1">Market Data Notice:</span>
-            Digital trading involves financial risk. Product specifications, live bids, order depth, and statistics shown are illustrative of platform capabilities and reflect active testnet allocations.
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-between text-[12px] text-[#5E6673] gap-2">
-            <span>© {new Date().getFullYear()} Tradeon Financial Platform. All rights reserved.</span>
-            <div className="flex items-center gap-4 text-[#848E9C]">
-              <button onClick={() => handleNav('privacy')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">Privacy</button>
-              <span>·</span>
-              <button onClick={() => handleNav('terms')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">Terms</button>
-              <span>·</span>
-              <button onClick={() => handleNav('contact')} className="hover:text-[#F5F5F5] transition-colors cursor-pointer">Support</button>
+      {/* Main Footer Links Columns */}
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
+          {footerNav.map((col) => (
+            <div key={col.title} className="space-y-4">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-[#181A20]">
+                {col.title}
+              </h4>
+              <ul className="space-y-2.5 text-xs">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <button
+                      onClick={() => navigate(link.view)}
+                      className="text-[#474D57] hover:text-[#181A20] transition-colors cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
+          ))}
+        </div>
+
+        {/* Regulatory & Institutional Notice Box */}
+        <div className="mt-12 rounded-[8px] border border-[#EAECEF] bg-white p-5 text-xs text-[#707A8A] space-y-2 shadow-xs">
+          <div className="flex items-center gap-2 text-[#181A20] font-bold text-xs">
+            <ShieldCheck className="w-4 h-4 text-[#02A063]" />
+            <span>Platform Transparency & Operational Notice</span>
+          </div>
+          <p className="leading-relaxed">
+            Tradeon is a structured digital trading platform and product marketplace operating on double-entry ledger settlement architecture. All listed units and valuation references represent demonstrative marketplace models. Digital asset transactions carry financial risk; users must independently assess contract specifications before committing capital.
+          </p>
+        </div>
+
+        {/* Bottom Copyright & Status Bar */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#EAECEF] pt-6 text-[11px] text-[#707A8A]">
+          <div>
+            © {new Date().getFullYear()} Tradeon Technologies Ltd. All rights reserved.
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5">
+              <span className="size-1.5 rounded-full bg-[#02A063]" />
+              <span className="font-mono text-[#181A20]">All Systems Operational</span>
+            </span>
+            <span>·</span>
+            <span>Latency: 8ms</span>
+            <span>·</span>
+            <span>TLS 1.3 Strict</span>
           </div>
         </div>
       </div>
     </footer>
   );
 };
-
-export default MarketingFooter;

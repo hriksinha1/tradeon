@@ -8,33 +8,39 @@ export const ToastContainer: React.FC = () => {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
       {toasts.map((toast) => {
-        const icon = {
-          success: <CheckCircle2 className="w-4 h-4 text-[#0ECB81] shrink-0" />,
-          error: <AlertCircle className="w-4 h-4 text-[#F6465D] shrink-0" />,
-          warning: <AlertCircle className="w-4 h-4 text-[#F0B90B] shrink-0" />,
-          info: <Info className="w-4 h-4 text-[#4C8FFF] shrink-0" />,
-        }[toast.type];
+        const isSuccess = toast.type === 'success';
+        const isError = toast.type === 'error';
+        const isWarning = toast.type === 'warning';
 
         return (
           <div
             key={toast.id}
-            className="pointer-events-auto flex items-start gap-3 p-3.5 bg-[#1E2329] border border-[#2B3139] rounded-[8px] shadow-2xl text-[#F5F5F5] animate-in slide-in-from-bottom-2 duration-150"
+            className="pointer-events-auto flex items-start gap-3 p-3.5 bg-white border border-[#DFE2E6] rounded-[8px] shadow-xl text-[#181A20] transition-all transform translate-y-0"
+            role="status"
           >
-            <div className="mt-0.5">{icon}</div>
+            <div className="shrink-0 pt-0.5">
+              {isSuccess && <CheckCircle2 className="size-4 text-[#02A063]" />}
+              {isError && <AlertCircle className="size-4 text-[#CF304A]" />}
+              {isWarning && <AlertCircle className="size-4 text-[#B78103]" />}
+              {!isSuccess && !isError && !isWarning && <Info className="size-4 text-[#0066CC]" />}
+            </div>
+
             <div className="flex-1 min-w-0">
-              <h4 className="text-[13px] font-bold text-[#F5F5F5]">{toast.title}</h4>
-              {toast.description && (
-                <p className="text-[12px] text-[#848E9C] mt-0.5 leading-snug">{toast.description}</p>
+              <div className="text-xs font-bold text-[#181A20]">{toast.title}</div>
+              {toast.message && (
+                <div className="text-[11px] text-[#707A8A] mt-0.5 leading-relaxed">
+                  {toast.message}
+                </div>
               )}
             </div>
+
             <button
               onClick={() => dismissToast(toast.id)}
-              className="p-1 text-[#848E9C] hover:text-[#F5F5F5] rounded-[4px] transition-colors"
-              aria-label="Dismiss toast"
+              className="text-[#B7BDC6] hover:text-[#181A20] p-0.5 rounded transition-colors cursor-pointer"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="size-3.5" />
             </button>
           </div>
         );

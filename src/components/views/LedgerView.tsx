@@ -46,12 +46,12 @@ export const LedgerView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-4 select-none">
+    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-4 select-none bg-white text-[#181A20]">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#2B3139]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#EAECEF]">
         <div>
-          <h1 className="text-[22px] font-bold text-[#F5F5F5] tracking-tight">Audit & Accounting Ledger</h1>
-          <p className="text-[12px] text-[#848E9C]">
+          <h1 className="text-[22px] font-bold text-[#181A20] tracking-tight">Audit & Accounting Ledger</h1>
+          <p className="text-[12px] text-[#707A8A]">
             Verifiable double-entry ledger with immutable running-balance reconciliation.
           </p>
         </div>
@@ -60,7 +60,7 @@ export const LedgerView: React.FC = () => {
           size="xs"
           variant="secondary"
           onClick={handleExportCSV}
-          className="flex items-center gap-1.5 h-8 font-semibold"
+          className="flex items-center gap-1.5 h-8 font-semibold cursor-pointer"
         >
           <Download className="w-3.5 h-3.5" />
           <span>Export CSV</span>
@@ -68,15 +68,15 @@ export const LedgerView: React.FC = () => {
       </div>
 
       {/* Control Bar: Search & Type filters */}
-      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+      <div className="bg-white border border-[#DFE2E6] rounded-[6px] p-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 shadow-xs">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#848E9C]" />
+          <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#707A8A]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by ID, keyword, or reference..."
-            className="w-full h-8 pl-8 pr-3 bg-[#161A1E] border border-[#2B3139] rounded-[4px] text-[12px] text-[#F5F5F5] focus:border-[#F0B90B] focus:outline-none"
+            className="w-full h-8 pl-8 pr-3 bg-[#F5F6F8] border border-[#DFE2E6] rounded-[4px] text-[12px] text-[#181A20] placeholder-[#707A8A] focus:border-[#F0B90B] focus:bg-white focus:outline-none"
           />
         </div>
 
@@ -88,8 +88,8 @@ export const LedgerView: React.FC = () => {
               onClick={() => setSelectedType(type)}
               className={`px-3 py-1 rounded-[4px] text-[11px] font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
                 selectedType === type
-                  ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]'
-                  : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                  ? 'bg-[#F5F6F8] text-[#181A20] font-bold border border-[#DFE2E6]'
+                  : 'text-[#707A8A] hover:text-[#181A20]'
               }`}
             >
               {type}
@@ -99,9 +99,9 @@ export const LedgerView: React.FC = () => {
       </div>
 
       {/* Desktop Ledger Table */}
-      <div className="hidden md:block bg-[#111418] border border-[#2B3139] rounded-[6px] overflow-hidden">
-        <table className="w-full text-left text-[13px] tabular-nums">
-          <thead className="bg-[#161A1E] border-b border-[#2B3139] text-[#848E9C] text-[11px] font-semibold uppercase">
+      <div className="hidden md:block bg-white border border-[#DFE2E6] rounded-[6px] overflow-hidden shadow-xs">
+        <table className="w-full text-left text-[13px] tabular-nums font-mono">
+          <thead className="bg-[#F5F6F8] border-b border-[#DFE2E6] text-[#707A8A] text-[11px] font-semibold uppercase font-sans">
             <tr>
               <th className="py-2.5 px-3">Transaction ID & Time</th>
               <th className="py-2.5 px-3">Description</th>
@@ -110,26 +110,26 @@ export const LedgerView: React.FC = () => {
               <th className="py-2.5 px-3">Fee</th>
               <th className="py-2.5 px-3">Balance After</th>
               <th className="py-2.5 px-3">Status</th>
-              <th className="py-2.5 px-3 text-right">Audit Ref</th>
+              <th className="py-2.5 px-3 text-right font-sans">Audit Ref</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#1E2329]">
+          <tbody className="divide-y divide-[#EAECEF]">
             {filtered.map((t) => {
               const isCredit = t.amount > 0;
               return (
                 <tr
                   key={t.id}
                   onClick={() => openTransactionDetail(t)}
-                  className="hover:bg-[#161A1E] transition-colors cursor-pointer group"
+                  className="hover:bg-[#F5F6F8] transition-colors cursor-pointer group font-sans"
                 >
                   <td className="py-3 px-3">
-                    <span className="font-mono font-bold text-[12px] text-[#F5F5F5] group-hover:text-[#F0B90B] block">
+                    <span className="font-mono font-bold text-[12px] text-[#946800] group-hover:text-[#181A20] block">
                       {t.id}
                     </span>
-                    <span className="text-[11px] text-[#848E9C]">{t.date} · {t.time}</span>
+                    <span className="text-[11px] text-[#707A8A] font-mono">{t.date} · {t.time}</span>
                   </td>
 
-                  <td className="py-3 px-3 font-semibold text-[#F5F5F5] max-w-xs truncate">
+                  <td className="py-3 px-3 font-semibold text-[#181A20] max-w-xs truncate">
                     {t.description}
                   </td>
 
@@ -137,35 +137,35 @@ export const LedgerView: React.FC = () => {
                     <span
                       className={`inline-flex items-center gap-1 font-bold uppercase text-[11px] px-1.5 py-0.5 rounded ${
                         isCredit
-                          ? 'bg-[#102A22] text-[#0ECB81] border border-[#0ECB81]/30'
-                          : 'bg-[#1E2329] text-[#848E9C] border border-[#363C45]'
+                          ? 'bg-[#EBFBF3] text-[#02A063] border border-[#02A063]/30'
+                          : 'bg-[#F5F6F8] text-[#707A8A] border border-[#DFE2E6]'
                       }`}
                     >
                       {t.type}
                     </span>
                   </td>
 
-                  <td className={`py-3 px-3 font-bold text-[13px] ${isCredit ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'}`}>
+                  <td className={`py-3 px-3 font-bold text-[13px] font-mono ${isCredit ? 'text-[#02A063]' : 'text-[#181A20]'}`}>
                     {isCredit ? '+' : ''}{formatINR(t.amount, { decimals: 2 })}
                   </td>
 
-                  <td className="py-3 px-3 text-[#848E9C]">
+                  <td className="py-3 px-3 text-[#707A8A] font-mono">
                     {formatINR(t.fee, { decimals: 2 })}
                   </td>
 
-                  <td className="py-3 px-3 font-bold text-[#F0B90B]">
+                  <td className="py-3 px-3 font-bold text-[#181A20] font-mono">
                     {formatINR(t.runningBalance, { decimals: 2 })}
                   </td>
 
                   <td className="py-3 px-3">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0ECB81]">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#02A063]">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>Reconciled</span>
                     </span>
                   </td>
 
                   <td className="py-3 px-3 text-right">
-                    <span className="font-mono text-[11px] text-[#848E9C] group-hover:text-[#F0B90B]">
+                    <span className="font-mono text-[11px] text-[#707A8A] group-hover:text-[#946800]">
                       {t.reference}
                     </span>
                   </td>
@@ -184,19 +184,19 @@ export const LedgerView: React.FC = () => {
             <div
               key={t.id}
               onClick={() => openTransactionDetail(t)}
-              className="p-3 bg-[#111418] border border-[#2B3139] rounded-[6px] space-y-2 cursor-pointer hover:border-[#363C45]"
+              className="p-3 bg-white border border-[#DFE2E6] rounded-[6px] space-y-2 cursor-pointer hover:border-[#CFD3D8] shadow-xs"
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="font-bold text-[13px] text-[#F5F5F5] block">{t.description}</span>
-                  <span className="text-[11px] text-[#848E9C] font-mono">{t.id} · {t.date}</span>
+                  <span className="font-bold text-[13px] text-[#181A20] block">{t.description}</span>
+                  <span className="text-[11px] text-[#707A8A] font-mono">{t.id} · {t.date}</span>
                 </div>
-                <span className={`font-bold text-[14px] ${isCredit ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'}`}>
+                <span className={`font-bold text-[14px] font-mono ${isCredit ? 'text-[#02A063]' : 'text-[#181A20]'}`}>
                   {isCredit ? '+' : ''}{formatINR(t.amount)}
                 </span>
               </div>
-              <div className="pt-2 border-t border-[#1E2329] flex items-center justify-between text-[11px] text-[#848E9C]">
-                <span>Bal: <strong className="text-[#F0B90B]">{formatINR(t.runningBalance)}</strong></span>
+              <div className="pt-2 border-t border-[#EAECEF] flex items-center justify-between text-[11px] text-[#707A8A]">
+                <span>Bal: <strong className="text-[#181A20] font-mono">{formatINR(t.runningBalance)}</strong></span>
                 <span className="font-mono">{t.reference}</span>
               </div>
             </div>
@@ -205,7 +205,7 @@ export const LedgerView: React.FC = () => {
       </div>
 
       {filtered.length === 0 && (
-        <div className="p-10 text-center bg-[#111418] border border-[#2B3139] rounded-[6px] text-[#848E9C] text-[13px]">
+        <div className="p-10 text-center bg-white border border-[#DFE2E6] rounded-[6px] text-[#707A8A] text-[13px] shadow-xs">
           No ledger transactions found.
         </div>
       )}

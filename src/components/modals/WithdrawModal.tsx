@@ -39,51 +39,49 @@ export const WithdrawModal: React.FC = () => {
     >
       {isSuccess ? (
         <div className="py-4 text-center space-y-4">
-          <div className="w-12 h-12 bg-[#102A22] border border-[#0ECB81]/40 rounded-full flex items-center justify-center mx-auto text-[#0ECB81]">
+          <div className="w-12 h-12 bg-[#EBFBF3] border border-[#A2E8C6] rounded-full flex items-center justify-center mx-auto text-[#02A063]">
             <CheckCircle2 className="w-7 h-7" />
           </div>
           <div>
-            <h3 className="text-[18px] font-bold text-[#F5F5F5]">Withdrawal Submitted</h3>
-            <p className="text-[13px] text-[#848E9C] mt-1">
+            <h3 className="text-[18px] font-bold text-[#181A20]">Withdrawal Submitted</h3>
+            <p className="text-[13px] text-[#707A8A] mt-1">
               ₹{netCredit.toLocaleString('en-IN')} is being transferred to your registered beneficiary bank account.
             </p>
           </div>
-          <div className="p-3.5 bg-[#111418] border border-[#2B3139] rounded-[6px] text-left text-[12px] space-y-2">
+          <div className="p-3.5 bg-[#F5F6F8] border border-[#DFE2E6] rounded-[6px] text-left text-xs space-y-2">
             <div className="flex justify-between">
-              <span className="text-[#848E9C]">Beneficiary:</span>
-              <span className="font-semibold text-[#F5F5F5]">{selectedAccount}</span>
+              <span className="text-[#707A8A]">Beneficiary:</span>
+              <span className="font-semibold text-[#181A20]">{selectedAccount}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#848E9C]">Processing Speed:</span>
-              <span className="font-semibold text-[#0ECB81]">IMPS (Within 2 Hours)</span>
+              <span className="text-[#707A8A]">Processing Speed:</span>
+              <span className="font-semibold text-[#02A063]">IMPS (Within 2 Hours)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#848E9C]">Bank Transfer Fee:</span>
-              <span className="font-semibold text-[#848E9C] tabular-nums">₹10.00</span>
+              <span className="text-[#707A8A]">Net Bank Transfer:</span>
+              <span className="font-bold text-[#181A20] font-mono">{formatINR(netCredit)}</span>
             </div>
           </div>
-          <Button fullWidth variant="primary" onClick={handleClose}>
+          <Button variant="primary" fullWidth onClick={handleClose} className="cursor-pointer font-bold">
             Done
           </Button>
         </div>
       ) : (
         <div className="space-y-4">
-          {/* Destination Account */}
+          {/* Destination Bank Account */}
           <div>
-            <label className="block text-[12px] font-medium text-[#848E9C] mb-1.5">
-              Verified Destination Account
+            <label className="block text-xs font-semibold text-[#707A8A] mb-1">
+              Beneficiary Bank Account
             </label>
-            <div className="p-3 rounded-[6px] border border-[#363C45] bg-[#111418] flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#1E2329] rounded-[4px] text-[#F0B90B]">
-                  <Building2 className="w-4 h-4" />
-                </div>
+            <div className="p-3 bg-[#F5F6F8] rounded-[6px] border border-[#DFE2E6] flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <Building2 className="w-5 h-5 text-[#B78103]" />
                 <div>
-                  <div className="text-[13px] font-semibold text-[#F5F5F5]">{selectedAccount}</div>
-                  <div className="text-[11px] text-[#848E9C]">IFSC: HDFC0001248 · Primary Savings</div>
+                  <div className="text-xs font-bold text-[#181A20]">{selectedAccount}</div>
+                  <div className="text-[10px] text-[#707A8A]">IFSC: HDFC0001234 · Primary Account</div>
                 </div>
               </div>
-              <span className="text-[11px] font-semibold text-[#0ECB81] bg-[#102A22] border border-[#0ECB81]/30 px-1.5 py-0.5 rounded-[4px]">
+              <span className="text-[10px] text-[#02A063] font-mono bg-[#EBFBF3] px-2 py-0.5 rounded-[4px] border border-[#A2E8C6]">
                 Verified
               </span>
             </div>
@@ -91,71 +89,72 @@ export const WithdrawModal: React.FC = () => {
 
           {/* Amount input */}
           <div>
-            <div className="flex justify-between text-[12px] mb-1.5">
-              <label className="font-medium text-[#848E9C]">Withdrawal Amount (INR)</label>
-              <button
-                type="button"
-                onClick={() => setAmount(wallet.availableBalance)}
-                className="font-semibold text-[#F0B90B] hover:underline cursor-pointer"
-              >
-                Max ({formatINR(wallet.availableBalance)})
-              </button>
+            <div className="flex justify-between text-xs text-[#707A8A] mb-1">
+              <span className="font-semibold">Withdrawal Amount</span>
+              <span>Available: {formatINR(wallet.availableBalance)}</span>
             </div>
             <div className="relative">
-              <span className="absolute left-3 top-2.5 text-[16px] font-bold text-[#848E9C]">₹</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-[#707A8A]">
+                ₹
+              </span>
               <input
                 type="number"
                 min="100"
                 max={wallet.availableBalance}
-                value={amount}
+                value={amount || ''}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full h-11 pl-8 pr-4 rounded-[6px] bg-[#111418] border border-[#363C45] text-[#F5F5F5] font-bold text-[18px] tabular-nums focus:border-[#F0B90B] focus:outline-none"
+                className="w-full pl-8 pr-16 py-2 bg-white border border-[#DFE2E6] rounded-[6px] text-sm font-bold text-[#181A20] focus:outline-[#F0B90B] font-mono"
               />
+              <button
+                type="button"
+                onClick={() => setAmount(wallet.availableBalance)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-bold text-[#B78103] hover:underline px-2 py-0.5 cursor-pointer"
+              >
+                MAX
+              </button>
             </div>
           </div>
 
-          {/* Settlement breakdown */}
-          <div className="p-3 bg-[#111418] rounded-[6px] border border-[#2B3139] space-y-1.5 text-[12px]">
-            <div className="flex justify-between text-[#848E9C]">
+          {/* Summary Box */}
+          <div className="p-3 bg-[#F5F6F8] rounded-[6px] border border-[#DFE2E6] text-xs space-y-1.5">
+            <div className="flex justify-between text-[#707A8A]">
               <span>Requested Amount</span>
-              <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(amount)}</span>
+              <span className="font-mono text-[#181A20]">{formatINR(amount)}</span>
             </div>
-            <div className="flex justify-between text-[#848E9C]">
-              <span>Transfer Network Fee</span>
-              <span className="font-semibold text-[#848E9C] tabular-nums">₹{fee.toFixed(2)}</span>
+            <div className="flex justify-between text-[#707A8A]">
+              <span>IMPS Handling Fee</span>
+              <span className="font-mono text-[#181A20]">{formatINR(fee)}</span>
             </div>
-            <div className="pt-2 border-t border-[#2B3139] flex justify-between font-bold">
-              <span className="text-[#F5F5F5]">Net Bank Credit</span>
-              <span className="text-[14px] text-[#F0B90B] tabular-nums">{formatINR(netCredit)}</span>
+            <div className="flex justify-between pt-1 border-t border-[#DFE2E6] font-bold text-[#181A20]">
+              <span>Net Credit to Bank</span>
+              <span className="font-mono text-[#02A063]">{formatINR(netCredit)}</span>
             </div>
           </div>
 
           {!canWithdraw && (
-            <div className="p-3 rounded-[6px] bg-[#301820] border border-[#F6465D]/30 flex items-start gap-2.5 text-[#F6465D] text-[12px]">
-              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-              <span>Amount must be greater than zero and within available balance ({formatINR(wallet.availableBalance)}).</span>
+            <div className="p-2.5 bg-[#FDF0F2] border border-[#F7B5BE] rounded-[6px] flex items-center gap-2 text-xs text-[#CF304A]">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>Requested withdrawal exceeds your available wallet balance.</span>
             </div>
           )}
 
-          <div className="flex items-center gap-2 text-[12px] text-[#848E9C]">
-            <Clock className="w-3.5 h-3.5 text-[#F0B90B]" />
-            <span>Withdrawals are processed automatically 24x7 via direct IMPS banking rails.</span>
+          <div className="flex items-center gap-1.5 text-xs text-[#707A8A]">
+            <Clock className="w-3.5 h-3.5 text-[#02A063]" />
+            <span>Bank settlements clear around the clock via RBI IMPS rails.</span>
           </div>
 
           <Button
+            size="md"
             variant="primary"
             fullWidth
-            size="md"
-            disabled={!canWithdraw}
             onClick={handleWithdraw}
-            className="font-bold"
+            disabled={!canWithdraw}
+            className="font-bold cursor-pointer"
           >
-            Confirm Withdrawal
+            Authorize Payout of {formatINR(netCredit)}
           </Button>
         </div>
       )}
     </Modal>
   );
 };
-
-export default WithdrawModal;

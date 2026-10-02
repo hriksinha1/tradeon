@@ -4,10 +4,27 @@ import { ViewMode } from '../../types';
 import { Button } from '../common/Button';
 import { Menu, X, ArrowRight, User } from 'lucide-react';
 
+const primaryLinks: { label: string; view: ViewMode }[] = [
+  { label: 'Markets', view: 'markets' },
+  { label: 'Products', view: 'products' },
+  { label: 'How it Works', view: 'how-it-works' },
+  { label: 'Options', view: 'options' },
+  { label: 'Mobile App', view: 'mobile-app' },
+  { label: 'Security', view: 'security' },
+];
+
+const secondaryLinks: { label: string; view: ViewMode }[] = [
+  { label: 'Payments & Settlement', view: 'payments' },
+  { label: 'About Tradeon', view: 'about' },
+  { label: 'Knowledge Base & FAQ', view: 'faq' },
+  { label: 'Help & Contact', view: 'contact' },
+];
+
 export const MarketingNavbar: React.FC = () => {
-  const { currentView, setCurrentView, setIsAuthModalOpen } = useTrading();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { currentView, setCurrentView, setIsAuthModalOpen, user } = useTrading();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,169 +34,201 @@ export const MarketingNavbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks: { label: string; view: ViewMode }[] = [
-    { label: 'Markets', view: 'app-markets' },
-    { label: 'How It Works', view: 'how-it-works' },
-    { label: 'Products', view: 'products' },
-    { label: 'Options', view: 'options' },
-    { label: 'Security', view: 'security' },
-    { label: 'About', view: 'about' },
-  ];
-
-  const handleNavClick = (view: ViewMode) => {
+  const goTo = (view: ViewMode) => {
     setCurrentView(view);
     setMobileMenuOpen(false);
+    setMoreMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-200 select-none ${
+      className={`sticky top-0 z-40 w-full transition-all duration-200 border-b ${
         isScrolled
-          ? 'bg-[#0B0E11]/95 backdrop-blur-md border-b border-[#2B3139] shadow-lg'
-          : 'bg-[#0B0E11] border-b border-[#1E2329]'
+          ? 'bg-white/95 backdrop-blur-md border-[#EAECEF] shadow-sm'
+          : 'bg-white border-[#EAECEF]'
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4">
-        {/* Zone 1: Single text element wordmark + brand icon */}
-        <button
-          onClick={() => handleNavClick('home')}
-          className="flex items-center gap-2.5 text-left focus:outline-none cursor-pointer group"
-          aria-label="Tradeon Home"
-        >
-          <div className="w-8 h-8 rounded-[4px] bg-[#F0B90B] flex items-center justify-center text-[#181A20] font-black text-[16px] group-hover:bg-[#F8D12F] transition-colors shadow-xs">
-            T
-          </div>
-          <span className="text-[20px] font-bold tracking-tight text-[#F5F5F5] block leading-none">
-            Tradeon
-          </span>
-        </button>
-
-        {/* Zone 2: 4-6 clean text navigation links with subtle hover */}
-        <nav className="hidden md:flex items-center gap-7" aria-label="Marketing Navigation">
-          {navLinks.map((link) => {
-            const isActive = currentView === link.view;
-            return (
-              <button
-                key={link.view}
-                onClick={() => handleNavClick(link.view)}
-                className={`text-[14px] font-medium transition-colors cursor-pointer py-1 relative ${
-                  isActive
-                    ? 'text-[#F0B90B] font-semibold'
-                    : 'text-[#B7BDC6] hover:text-[#F5F5F5]'
-                }`}
-              >
-                {link.label}
-                {isActive && (
-                  <span className="absolute -bottom-2.5 left-0 right-0 h-[2px] bg-[#F0B90B] rounded-full" />
-                )}
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Zone 3: 1-2 primary actions (Log In, Sign Up / Trade Terminal) */}
-        <div className="hidden sm:flex items-center gap-3">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
+        {/* Brand identity */}
+        <div className="flex items-center gap-8">
           <button
-            onClick={() => setIsAuthModalOpen(true)}
-            className="text-[14px] font-semibold text-[#B7BDC6] hover:text-[#F5F5F5] px-3 py-1.5 transition-colors cursor-pointer"
+            onClick={() => goTo('home')}
+            className="flex items-center gap-2.5 text-left group cursor-pointer"
+            aria-label="Tradeon home"
           >
-            Log In
+            <div className="flex size-8 items-center justify-center rounded-[6px] bg-[#F0B90B] text-[#181A20] font-extrabold text-base tracking-tighter shadow-xs transition-transform group-hover:scale-105">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm0 4.2l5 2.8v4.4c0 3.32-2.13 6.4-5 7.4-2.87-1-5-4.08-5-7.4V9l5-2.8z" />
+              </svg>
+            </div>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[19px] font-extrabold tracking-tight text-[#181A20] transition-colors">
+                  TRADE<span className="text-[#B78103]">ON</span>
+                </span>
+                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] bg-[#F5F6F8] text-[#707A8A] border border-[#DFE2E6] font-mono">
+                  PRO
+                </span>
+              </div>
+            </div>
           </button>
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={() => setIsAuthModalOpen(true)}
-            className="border-[#363C45] hover:border-[#F0B90B]"
-          >
-            Sign Up
-          </Button>
-          <Button
-            size="sm"
-            variant="primary"
-            onClick={() => handleNavClick('app-dashboard')}
-            className="flex items-center gap-1.5 font-bold"
-          >
-            <span>Trade Terminal</span>
-            <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-          </Button>
+
+          {/* Primary desktop links */}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary marketing navigation">
+            {primaryLinks.map((link) => {
+              const isActive = currentView === link.view;
+              return (
+                <button
+                  key={link.view}
+                  onClick={() => goTo(link.view)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`px-3 py-1.5 rounded-[6px] text-sm font-medium transition-colors cursor-pointer ${
+                    isActive
+                      ? 'text-[#181A20] bg-[#F5F6F8] font-bold border border-[#EAECEF]'
+                      : 'text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+
+            {/* More dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+                onBlur={() => setTimeout(() => setMoreMenuOpen(false), 200)}
+                className="px-3 py-1.5 rounded-[6px] text-sm font-medium text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8] transition-colors cursor-pointer flex items-center gap-1"
+              >
+                <span>More</span>
+                <span className="text-[10px] text-[#707A8A]">▼</span>
+              </button>
+
+              {moreMenuOpen && (
+                <div className="absolute left-0 top-full mt-1.5 w-56 rounded-[8px] border border-[#DFE2E6] bg-white p-1.5 shadow-xl z-50">
+                  {secondaryLinks.map((link) => (
+                    <button
+                      key={link.view}
+                      onClick={() => goTo(link.view)}
+                      className="w-full text-left px-3 py-2 text-xs font-medium text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8] rounded-[4px] transition-colors cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </nav>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex sm:hidden items-center gap-2">
-          <Button
-            size="xs"
-            variant="primary"
-            onClick={() => handleNavClick('app-dashboard')}
-          >
-            Terminal
-          </Button>
+        {/* Action Controls */}
+        <div className="flex items-center gap-3">
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 text-[#B7BDC6] hover:text-[#F5F5F5] rounded-[4px] cursor-pointer"
-            aria-label="Toggle menu"
+            onClick={() => goTo('markets')}
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#474D57] hover:text-[#181A20] px-2.5 py-1.5 rounded-[6px] hover:bg-[#F5F6F8] transition-colors cursor-pointer"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <span className="size-2 rounded-full bg-[#02A063] animate-pulse" />
+            <span className="font-mono">Catalog 24h</span>
+          </button>
+
+          {user ? (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => goTo('dashboard')}
+              className="hidden sm:flex items-center gap-1.5"
+            >
+              <User className="size-3.5 text-[#B78103]" />
+              <span>{user.name.split(' ')[0]}</span>
+            </Button>
+          ) : (
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="hidden sm:inline-flex px-3 py-1.5 text-xs font-semibold text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8] rounded-[6px] transition-colors cursor-pointer"
+            >
+              Log In
+            </button>
+          )}
+
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => goTo('dashboard')}
+            className="flex items-center gap-1.5 font-bold shadow-xs cursor-pointer"
+          >
+            <span>Trade Now</span>
+            <ArrowRight className="size-3.5" />
+          </Button>
+
+          <button
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="rounded-[6px] p-1.5 text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8] lg:hidden cursor-pointer"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-[#111418] border-b border-[#2B3139] px-6 py-5 shadow-2xl space-y-3 animate-in slide-in-from-top-2 duration-150">
-          <nav className="flex flex-col space-y-2 pb-3 border-b border-[#1E2329]">
-            {navLinks.map((link) => (
+        <div className="lg:hidden border-t border-[#EAECEF] bg-white px-4 py-4 space-y-3">
+          <div className="text-[11px] font-semibold text-[#707A8A] uppercase tracking-wider px-2">
+            Navigation
+          </div>
+          <div className="grid grid-cols-2 gap-1">
+            {primaryLinks.map((link) => (
               <button
                 key={link.view}
-                onClick={() => handleNavClick(link.view)}
-                className={`text-left text-[15px] font-medium py-1.5 transition-colors ${
-                  currentView === link.view ? 'text-[#F0B90B] font-bold' : 'text-[#B7BDC6] hover:text-[#F5F5F5]'
+                onClick={() => goTo(link.view)}
+                className={`text-left px-3 py-2 rounded-[6px] text-xs font-medium transition-colors ${
+                  currentView === link.view
+                    ? 'text-[#181A20] bg-[#F5F6F8] font-bold'
+                    : 'text-[#474D57] hover:text-[#181A20] hover:bg-[#F5F6F8]'
                 }`}
               >
                 {link.label}
               </button>
             ))}
-            <button
-              onClick={() => handleNavClick('faq')}
-              className="text-left text-[15px] font-medium py-1.5 text-[#848E9C] hover:text-[#F5F5F5]"
-            >
-              FAQ
-            </button>
-          </nav>
+          </div>
 
-          <div className="pt-2 flex flex-col gap-2">
-            <Button
-              variant="primary"
-              fullWidth
-              size="sm"
-              onClick={() => handleNavClick('app-dashboard')}
-              className="font-bold"
+          <div className="border-t border-[#EAECEF] pt-3 text-[11px] font-semibold text-[#707A8A] uppercase tracking-wider px-2">
+            Platform Resources
+          </div>
+          <div className="grid grid-cols-2 gap-1">
+            {secondaryLinks.map((link) => (
+              <button
+                key={link.view}
+                onClick={() => goTo(link.view)}
+                className="text-left px-3 py-1.5 rounded-[6px] text-xs text-[#707A8A] hover:text-[#181A20] hover:bg-[#F5F6F8]"
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="border-t border-[#EAECEF] pt-3 flex items-center justify-between">
+            <button
+              onClick={() => {
+                setIsAuthModalOpen(true);
+                setMobileMenuOpen(false);
+              }}
+              className="text-xs font-semibold text-[#474D57] hover:text-[#181A20] px-3 py-2"
             >
-              Launch Trading Terminal
+              Sign In
+            </button>
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => goTo('dashboard')}
+              className="text-xs font-bold"
+            >
+              Launch Terminal
             </Button>
-            <div className="grid grid-cols-2 gap-2">
-              <Button
-                variant="secondary"
-                fullWidth
-                size="xs"
-                onClick={() => { setIsAuthModalOpen(true); setMobileMenuOpen(false); }}
-              >
-                Log In
-              </Button>
-              <Button
-                variant="outline"
-                fullWidth
-                size="xs"
-                onClick={() => { setIsAuthModalOpen(true); setMobileMenuOpen(false); }}
-              >
-                Sign Up
-              </Button>
-            </div>
           </div>
         </div>
       )}
     </header>
   );
 };
-
-export default MarketingNavbar;
