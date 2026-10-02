@@ -58,161 +58,159 @@ export const HomepageOptionsSection: React.FC = () => {
         'Allows participation in Orbit unit appreciation above ₹3,100.00 with defined capital outlay.',
     },
     {
-      symbol: 'VECTOR-P 1200',
-      productName: 'Vector Prime Contract',
+      symbol: 'PULSE-P 420',
+      productName: 'Pulse Micro Units',
       type: 'PUT' as const,
-      strike: 1200,
-      currentVal: 1230,
-      premium: 38.0,
-      bid: 36.8,
-      ask: 39.2,
-      expiry: '15 Dec 2026',
-      openInterest: 740,
-      volume: 160,
-      sentiment: 'Floor protection',
+      strike: 420,
+      currentVal: 435,
+      premium: 18.0,
+      bid: 17.5,
+      ask: 18.6,
+      expiry: '28 Nov 2026',
+      openInterest: 3120,
+      volume: 890,
+      sentiment: 'Inventory collar',
       explanation:
-        'Establishes a firm exit floor of ₹1,200.00 for Vector units with minimal capital commitment.',
+        'Provides an exit guarantee at ₹420.00 for active unit traders balancing fluctuating inventory value.',
     },
   ];
 
-  const filteredOptions = optionsData.filter((opt) => opt.type === selectedType);
+  const filteredOptions = optionsData.filter((o) => o.type === selectedType);
 
   return (
-    <section className="py-20 sm:py-28 bg-[#FFFFFF] border-b border-[#CBCAC2]">
+    <section className="py-20 sm:py-28 bg-[#0B0E11] border-b border-[#2B3139]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="max-w-2xl space-y-4">
-            <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
-              Advanced Capability
-            </div>
-            <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
-              More control when the decision gets more complex.
-            </h2>
-            <p className="text-[17px] text-[#5A5A53] leading-relaxed">
-              When a straightforward purchase or sale doesn’t fit your strategy, options-style contracts give you defined risk, asymmetric upside, or downside protection on listed marketplace products.
-            </p>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#F0B90B] tracking-wider uppercase font-mono">
+            <span className="size-1.5 rounded-full bg-[#F0B90B]" />
+            Structured Contracts
           </div>
-
-          {/* Progressive Disclosure Toggle */}
-          <div className="flex items-center gap-2 p-1 bg-[#EFEEE9] rounded-[12px] self-start lg:self-auto border border-[#E2E1DA]">
-            <button
-              onClick={() => setViewMode('intuitive')}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-[8px] transition-all cursor-pointer ${
-                viewMode === 'intuitive'
-                  ? 'bg-[#FFFFFF] text-[#171A17] shadow-xs'
-                  : 'text-[#6B6B63] hover:text-[#171A17]'
-              }`}
-            >
-              Plain English View
-            </button>
-            <button
-              onClick={() => setViewMode('contract')}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-[8px] transition-all cursor-pointer ${
-                viewMode === 'contract'
-                  ? 'bg-[#FFFFFF] text-[#171A17] shadow-xs'
-                  : 'text-[#6B6B63] hover:text-[#171A17]'
-              }`}
-            >
-              Contract Matrix
-            </button>
-          </div>
+          <h2 className="text-[32px] sm:text-[44px] font-extrabold text-[#F5F5F5] tracking-tight leading-[1.12]">
+            More control when the decision gets more complex.
+          </h2>
+          <p className="text-[16px] sm:text-[18px] text-[#848E9C] leading-relaxed">
+            Standard buy and sell orders work well for simple trades. But when you want to take a view with capped downside risk or hedge existing positions, structured contracts give you defined outcomes.
+          </p>
         </div>
 
-        {/* Call vs Put Segmented Tabs */}
-        <div className="flex items-center gap-3 mb-8">
-          <button
-            onClick={() => setSelectedType('CALL')}
-            className={`px-4 py-2 text-sm font-bold rounded-[10px] transition-all cursor-pointer flex items-center gap-2 ${
-              selectedType === 'CALL'
-                ? 'bg-[#171A17] text-white shadow-xs'
-                : 'bg-[#F7F6F2] text-[#5A5A53] border border-[#E2E1DA] hover:text-[#171A17]'
-            }`}
-          >
-            <span>Call Contracts (Right to Acquire)</span>
-            <span className="text-[11px] px-1.5 py-0.2 rounded bg-white/20 text-[#0070BA]">
-              Upside
-            </span>
-          </button>
+        {/* View Mode & Filter Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-[#2B3139]">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSelectedType('CALL')}
+              className={`px-4 py-2 rounded-[6px] text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedType === 'CALL'
+                  ? 'bg-[#102A22] text-[#0ECB81] border border-[#0ECB81]/40'
+                  : 'bg-[#161A1E] text-[#848E9C] hover:text-[#F5F5F5] border border-[#2B3139]'
+              }`}
+            >
+              <span>Call Options</span>
+              <span className="text-[10px] font-mono opacity-80">(Bullish)</span>
+            </button>
 
-          <button
-            onClick={() => setSelectedType('PUT')}
-            className={`px-4 py-2 text-sm font-bold rounded-[10px] transition-all cursor-pointer flex items-center gap-2 ${
-              selectedType === 'PUT'
-                ? 'bg-[#171A17] text-white shadow-xs'
-                : 'bg-[#F7F6F2] text-[#5A5A53] border border-[#E2E1DA] hover:text-[#171A17]'
-            }`}
-          >
-            <span>Put Contracts (Right to Exit)</span>
-            <span className="text-[11px] px-1.5 py-0.2 rounded bg-white/20 text-[#E5484D]">
-              Protection
-            </span>
-          </button>
+            <button
+              onClick={() => setSelectedType('PUT')}
+              className={`px-4 py-2 rounded-[6px] text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedType === 'PUT'
+                  ? 'bg-[#301820] text-[#F6465D] border border-[#F6465D]/40'
+                  : 'bg-[#161A1E] text-[#848E9C] hover:text-[#F5F5F5] border border-[#2B3139]'
+              }`}
+            >
+              <span>Put Options</span>
+              <span className="text-[10px] font-mono opacity-80">(Downside Hedge)</span>
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-[#848E9C]">Display mode:</span>
+            <div className="inline-flex rounded-[6px] border border-[#2B3139] bg-[#161A1E] p-0.5">
+              <button
+                onClick={() => setViewMode('intuitive')}
+                className={`px-3 py-1 text-xs font-medium rounded-[4px] transition-colors cursor-pointer ${
+                  viewMode === 'intuitive'
+                    ? 'bg-[#1E2329] text-[#F0B90B] font-semibold'
+                    : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                }`}
+              >
+                Intuitive Cards
+              </button>
+              <button
+                onClick={() => setViewMode('contract')}
+                className={`px-3 py-1 text-xs font-medium rounded-[4px] transition-colors cursor-pointer ${
+                  viewMode === 'contract'
+                    ? 'bg-[#1E2329] text-[#F0B90B] font-semibold'
+                    : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                }`}
+              >
+                Contract Matrix
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Progressive Options Display */}
         {viewMode === 'intuitive' ? (
-          /* Intuitive View: Clear, human-readable contract cards with defined risk */
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredOptions.map((opt) => (
               <div
                 key={opt.symbol}
-                className="bg-[#F7F6F2] border border-[#CBCAC2] hover:border-[#0070BA] rounded-[20px] p-6 transition-all space-y-5"
+                className="bg-[#161A1E] border border-[#2B3139] hover:border-[#363C45] rounded-[10px] p-6 transition-all space-y-5"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-xs font-mono text-[#005EA8] font-bold block mb-1">
+                    <span className="text-xs font-mono text-[#F0B90B] font-semibold block mb-1">
                       {opt.symbol}
                     </span>
-                    <h3 className="text-[20px] font-bold text-[#171A17]">{opt.productName}</h3>
-                    <div className="text-xs text-[#6B6B63] mt-0.5">
-                      Expiry date: <span className="font-semibold text-[#171A17]">{opt.expiry}</span>
+                    <h3 className="text-[18px] font-bold text-[#F5F5F5]">{opt.productName}</h3>
+                    <div className="text-xs text-[#848E9C] mt-0.5">
+                      Expiry date: <span className="font-semibold text-[#B7BDC6]">{opt.expiry}</span>
                     </div>
                   </div>
 
                   <div className="text-right">
-                    <div className="text-xs text-[#6B6B63]">Contract Premium</div>
-                    <div className="text-[22px] font-extrabold text-[#171A17] tabular-nums mt-0.5">
+                    <div className="text-xs text-[#848E9C]">Contract Premium</div>
+                    <div className="text-[20px] font-extrabold text-[#F5F5F5] tabular-nums mt-0.5">
                       {formatINR(opt.premium)}
                     </div>
-                    <div className="text-[11px] text-[#5A5A53]">
+                    <div className="text-[11px] text-[#848E9C] font-mono">
                       Bid {formatINR(opt.bid)} · Ask {formatINR(opt.ask)}
                     </div>
                   </div>
                 </div>
 
-                <div className="p-3.5 bg-[#FFFFFF] rounded-[12px] border border-[#E2E1DA] text-[13px] text-[#5A5A53] leading-relaxed">
-                  <div className="text-xs font-semibold text-[#171A17] mb-1">
-                    What this contract does:
+                <div className="p-3.5 bg-[#111418] rounded-[6px] border border-[#2B3139] text-[13px] text-[#B7BDC6] leading-relaxed">
+                  <div className="text-xs font-semibold text-[#F5F5F5] mb-1">
+                    Contract Specification:
                   </div>
                   {opt.explanation}
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 pt-1 text-center">
-                  <div className="bg-[#EFEEE9] p-2 rounded-[8px]">
-                    <div className="text-[11px] text-[#6B6B63]">Strike Level</div>
-                    <div className="text-[13px] font-bold text-[#171A17] tabular-nums">
+                  <div className="bg-[#111418] p-2.5 rounded-[6px] border border-[#2B3139]/60">
+                    <div className="text-[11px] text-[#848E9C]">Strike Level</div>
+                    <div className="text-[13px] font-bold text-[#F5F5F5] tabular-nums font-mono mt-0.5">
                       {formatINR(opt.strike)}
                     </div>
                   </div>
-                  <div className="bg-[#EFEEE9] p-2 rounded-[8px]">
-                    <div className="text-[11px] text-[#6B6B63]">Open Interest</div>
-                    <div className="text-[13px] font-bold text-[#171A17] tabular-nums">
+                  <div className="bg-[#111418] p-2.5 rounded-[6px] border border-[#2B3139]/60">
+                    <div className="text-[11px] text-[#848E9C]">Open Interest</div>
+                    <div className="text-[13px] font-bold text-[#F5F5F5] tabular-nums font-mono mt-0.5">
                       {opt.openInterest.toLocaleString()}
                     </div>
                   </div>
-                  <div className="bg-[#EFEEE9] p-2 rounded-[8px]">
-                    <div className="text-[11px] text-[#6B6B63]">Max Capital at Risk</div>
-                    <div className="text-[13px] font-bold text-[#005EA8] tabular-nums">
+                  <div className="bg-[#111418] p-2.5 rounded-[6px] border border-[#2B3139]/60">
+                    <div className="text-[11px] text-[#848E9C]">Max Risk</div>
+                    <div className="text-[13px] font-bold text-[#F0B90B] tabular-nums font-mono mt-0.5">
                       {formatINR(opt.premium)}
                     </div>
                   </div>
                 </div>
 
                 <div className="pt-2 flex items-center justify-between">
-                  <span className="text-xs text-[#6B6B63] flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#16803C]" />
-                    Defined loss profile
+                  <span className="text-xs text-[#848E9C] flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#0ECB81]" />
+                    Defined capital cap
                   </span>
 
                   <button
@@ -220,24 +218,23 @@ export const HomepageOptionsSection: React.FC = () => {
                       setCurrentView('options');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="px-3.5 py-1.5 bg-[#171A17] text-white hover:bg-[#0C0F0C] font-semibold text-xs rounded-[8px] transition-colors flex items-center gap-1.5 cursor-pointer"
+                    className="px-3.5 py-1.5 bg-[#1E2329] text-[#F5F5F5] hover:bg-[#23282F] hover:text-[#F0B90B] font-semibold text-xs rounded-[6px] border border-[#2B3139] transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
-                    <span>Inspect specification</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#0070BA]" />
+                    <span>Inspect Specification</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          /* Contract Matrix View: Clean table for structured traders */
-          <div className="bg-[#F7F6F2] border border-[#CBCAC2] rounded-[20px] overflow-hidden">
+          <div className="bg-[#161A1E] border border-[#2B3139] rounded-[10px] overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
+              <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-[#EFEEE9] border-b border-[#CBCAC2] text-xs font-semibold text-[#5A5A53]">
+                  <tr className="bg-[#111418] border-b border-[#2B3139] text-[11px] font-semibold text-[#848E9C] uppercase tracking-wider">
                     <th className="py-3 px-4">Contract Symbol</th>
-                    <th className="py-3 px-4">Underlying Product</th>
+                    <th className="py-3 px-4">Underlying</th>
                     <th className="py-3 px-4 text-right">Strike</th>
                     <th className="py-3 px-4 text-right">Bid</th>
                     <th className="py-3 px-4 text-right">Ask</th>
@@ -246,27 +243,38 @@ export const HomepageOptionsSection: React.FC = () => {
                     <th className="py-3 px-4 text-right">OI</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E2E1DA]">
+                <tbody className="divide-y divide-[#2B3139]">
                   {filteredOptions.map((opt) => (
-                    <tr key={opt.symbol} className="hover:bg-white/60 transition-colors">
-                      <td className="py-3 px-4 font-mono font-bold text-[#171A17] text-xs">
+                    <tr
+                      key={opt.symbol}
+                      className="hover:bg-[#1E2329] transition-colors cursor-pointer"
+                      onClick={() => {
+                        setCurrentView('options');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      <td className="py-3 px-4 font-mono font-bold text-[#F0B90B]">
                         {opt.symbol}
                       </td>
-                      <td className="py-3 px-4 text-[#5A5A53]">{opt.productName}</td>
-                      <td className="py-3 px-4 text-right font-semibold text-[#171A17] tabular-nums">
+                      <td className="py-3 px-4 font-medium text-[#F5F5F5]">
+                        {opt.productName}
+                      </td>
+                      <td className="py-3 px-4 text-right tabular-nums font-mono text-[#F5F5F5]">
                         {formatINR(opt.strike)}
                       </td>
-                      <td className="py-3 px-4 text-right text-[#5A5A53] tabular-nums">
+                      <td className="py-3 px-4 text-right tabular-nums font-mono text-[#0ECB81]">
                         {formatINR(opt.bid)}
                       </td>
-                      <td className="py-3 px-4 text-right text-[#5A5A53] tabular-nums">
+                      <td className="py-3 px-4 text-right tabular-nums font-mono text-[#F6465D]">
                         {formatINR(opt.ask)}
                       </td>
-                      <td className="py-3 px-4 text-right font-bold text-[#005EA8] tabular-nums">
+                      <td className="py-3 px-4 text-right tabular-nums font-mono font-bold text-[#F5F5F5]">
                         {formatINR(opt.premium)}
                       </td>
-                      <td className="py-3 px-4 text-right text-[#5A5A53] text-xs">{opt.expiry}</td>
-                      <td className="py-3 px-4 text-right text-[#6B6B63] tabular-nums">
+                      <td className="py-3 px-4 text-right text-[#848E9C]">
+                        {opt.expiry}
+                      </td>
+                      <td className="py-3 px-4 text-right tabular-nums font-mono text-[#848E9C]">
                         {opt.openInterest.toLocaleString()}
                       </td>
                     </tr>
@@ -276,27 +284,6 @@ export const HomepageOptionsSection: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Footer Note & Link to Full Options Page */}
-        <div className="mt-10 p-5 rounded-[16px] bg-[#F7F6F2] border border-[#E2E1DA] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 text-xs text-[#5A5A53]">
-            <Info className="w-4 h-4 text-[#6B6B63] shrink-0" />
-            <span>
-              All contract strikes, premiums, and exercise levels are illustrative models for marketplace simulation. No financial investment advice is provided.
-            </span>
-          </div>
-
-          <button
-            onClick={() => {
-              setCurrentView('options');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="text-xs font-bold text-[#005EA8] hover:underline flex items-center gap-1 cursor-pointer whitespace-nowrap"
-          >
-            <span>Explore full options catalog</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
       </div>
     </section>
   );

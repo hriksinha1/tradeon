@@ -1,67 +1,234 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTrading } from '../../context/TradingContext';
 import { ViewMode } from '../../types';
 import { Button } from '../common/Button';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight, User } from 'lucide-react';
 
 const primaryLinks: { label: string; view: ViewMode }[] = [
+  { label: 'Markets', view: 'markets' },
   { label: 'Products', view: 'products' },
-  { label: 'How it works', view: 'how-it-works' },
+  { label: 'How it Works', view: 'how-it-works' },
   { label: 'Options', view: 'options' },
-  { label: 'Mobile', view: 'mobile-app' },
+  { label: 'Mobile App', view: 'mobile-app' },
   { label: 'Security', view: 'security' },
 ];
 
-const moreLinks: { label: string; view: ViewMode }[] = [
-  { label: 'Payments & Ledger', view: 'payments' },
-  { label: 'About', view: 'about' },
-  { label: 'FAQ', view: 'faq' },
-  { label: 'Contact', view: 'contact' },
+const secondaryLinks: { label: string; view: ViewMode }[] = [
+  { label: 'Payments & Settlement', view: 'payments' },
+  { label: 'About Tradeon', view: 'about' },
+  { label: 'Knowledge Base & FAQ', view: 'faq' },
+  { label: 'Help & Contact', view: 'contact' },
 ];
 
 export const MarketingNavbar: React.FC = () => {
-  const { currentView, setCurrentView, setIsAuthModalOpen } = useTrading();
+  const { currentView, setCurrentView, setIsAuthModalOpen, user } = useTrading();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const goTo = (view: ViewMode) => {
     setCurrentView(view);
     setMobileMenuOpen(false);
+    setMoreMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border-subtle bg-white/90 backdrop-blur">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-4 sm:px-8">
-        <button onClick={() => goTo('home')} className="flex items-center gap-2.5 text-left" aria-label="Tradeon home">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-brand text-lg font-bold text-white">T</span>
-          <span className="text-xl font-bold tracking-tight text-foreground">Tradeon</span>
-        </button>
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
-          {primaryLinks.map((link) => (
-            <button key={link.view} onClick={() => goTo(link.view)} aria-current={currentView === link.view ? 'page' : undefined} className={`relative py-2 text-sm font-medium transition-colors ${currentView === link.view ? 'text-brand' : 'text-secondary-foreground hover:text-foreground'}`}>
-              {link.label}
-              {currentView === link.view && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-brand" />}
-            </button>
-          ))}
-          <details className="relative">
-            <summary className="cursor-pointer list-none py-2 text-sm font-medium text-secondary-foreground hover:text-foreground">More</summary>
-            <div className="absolute right-0 top-10 flex min-w-44 flex-col gap-1 rounded-xl border border-border-subtle bg-white p-2 shadow-lg">
-              {moreLinks.map((link) => <button key={link.view} onClick={() => goTo(link.view)} className="rounded-lg px-3 py-2 text-left text-sm text-secondary-foreground hover:bg-surface-soft hover:text-foreground">{link.label}</button>)}
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-200 border-b ${
+        isScrolled
+          ? 'bg-[#0B0E11]/95 backdrop-blur-md border-[#2B3139] shadow-lg shadow-black/40'
+          : 'bg-[#0B0E11] border-[#2B3139]'
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
+        {/* Brand identity */}
+        <div className="flex items-center gap-8">
+          <button
+            onClick={() => goTo('home')}
+            className="flex items-center gap-2.5 text-left group cursor-pointer"
+            aria-label="Tradeon home"
+          >
+            <div className="flex size-8 items-center justify-center rounded-[6px] bg-[#F0B90B] text-black font-extrabold text-base tracking-tighter shadow-sm transition-transform group-hover:scale-105">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm0 4.2l5 2.8v4.4c0 3.32-2.13 6.4-5 7.4-2.87-1-5-4.08-5-7.4V9l5-2.8z" />
+              </svg>
             </div>
-          </details>
-        </nav>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setIsAuthModalOpen(true)} className="hidden px-3 py-2 text-sm font-semibold text-secondary-foreground hover:text-foreground sm:block">Sign in</button>
-          <Button size="md" variant="primary" onClick={() => goTo('app-dashboard')} className="flex items-center gap-2 font-semibold">
-            Get started <ArrowRight className="size-4" />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[19px] font-extrabold tracking-tight text-[#F5F5F5] group-hover:text-white transition-colors">
+                  TRADE<span className="text-[#F0B90B]">ON</span>
+                </span>
+                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] bg-[#1E2329] text-[#848E9C] border border-[#2B3139] font-mono">
+                  PRO
+                </span>
+              </div>
+            </div>
+          </button>
+
+          {/* Primary desktop links */}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary marketing navigation">
+            {primaryLinks.map((link) => {
+              const isActive = currentView === link.view;
+              return (
+                <button
+                  key={link.view}
+                  onClick={() => goTo(link.view)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`px-3 py-1.5 rounded-[6px] text-sm font-medium transition-colors cursor-pointer ${
+                    isActive
+                      ? 'text-[#F0B90B] bg-[#1E2329]'
+                      : 'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E]'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+
+            {/* More dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+                onBlur={() => setTimeout(() => setMoreMenuOpen(false), 200)}
+                className="px-3 py-1.5 rounded-[6px] text-sm font-medium text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E] transition-colors cursor-pointer flex items-center gap-1"
+              >
+                <span>More</span>
+                <span className="text-[10px] text-[#848E9C]">▼</span>
+              </button>
+
+              {moreMenuOpen && (
+                <div className="absolute left-0 top-full mt-1.5 w-56 rounded-[8px] border border-[#2B3139] bg-[#161A1E] p-1.5 shadow-xl shadow-black/60 z-50">
+                  {secondaryLinks.map((link) => (
+                    <button
+                      key={link.view}
+                      onClick={() => goTo(link.view)}
+                      className="w-full text-left px-3 py-2 text-xs font-medium text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#1E2329] rounded-[4px] transition-colors cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </nav>
+        </div>
+
+        {/* Action Controls */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => goTo('markets')}
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#B7BDC6] hover:text-[#F5F5F5] px-2.5 py-1.5 rounded-[6px] hover:bg-[#161A1E] transition-colors cursor-pointer"
+          >
+            <span className="size-2 rounded-full bg-[#0ECB81] animate-pulse" />
+            <span className="font-mono">Catalog 24h</span>
+          </button>
+
+          {user ? (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => goTo('dashboard')}
+              className="hidden sm:flex items-center gap-1.5"
+            >
+              <User className="size-3.5 text-[#F0B90B]" />
+              <span>{user.name.split(' ')[0]}</span>
+            </Button>
+          ) : (
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="hidden sm:inline-flex px-3 py-1.5 text-xs font-semibold text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E] rounded-[6px] transition-colors cursor-pointer"
+            >
+              Log In
+            </button>
+          )}
+
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => goTo('dashboard')}
+            className="flex items-center gap-1.5 font-bold shadow-md cursor-pointer"
+          >
+            <span>Trade Now</span>
+            <ArrowRight className="size-3.5" />
           </Button>
-          <button onClick={() => setMobileMenuOpen((open) => !open)} className="rounded-lg p-2 text-secondary-foreground lg:hidden" aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={mobileMenuOpen}>
+
+          <button
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="rounded-[6px] p-1.5 text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E] lg:hidden cursor-pointer"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
-      {mobileMenuOpen && <div className="border-t border-border-subtle bg-white px-4 py-5 lg:hidden"><nav className="flex flex-col gap-1" aria-label="Mobile navigation">{[...primaryLinks, ...moreLinks].map((link) => <button key={link.view} onClick={() => goTo(link.view)} className="flex items-center justify-between rounded-lg px-3 py-3 text-left text-base font-medium text-foreground hover:bg-surface-soft">{link.label}<ArrowRight className="size-4 text-muted-foreground" /></button>)}</nav><div className="mt-4 border-t border-border-subtle pt-4"><button onClick={() => { setIsAuthModalOpen(true); setMobileMenuOpen(false); }} className="w-full rounded-lg px-3 py-3 text-center text-sm font-semibold text-foreground">Sign in</button></div></div>}
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-t border-[#2B3139] bg-[#111418] px-4 py-4 space-y-3">
+          <div className="text-[11px] font-semibold text-[#848E9C] uppercase tracking-wider px-2">
+            Navigation
+          </div>
+          <div className="grid grid-cols-2 gap-1">
+            {primaryLinks.map((link) => (
+              <button
+                key={link.view}
+                onClick={() => goTo(link.view)}
+                className={`text-left px-3 py-2 rounded-[6px] text-xs font-medium transition-colors ${
+                  currentView === link.view
+                    ? 'text-[#F0B90B] bg-[#1E2329]'
+                    : 'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#161A1E]'
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="border-t border-[#2B3139] pt-3 text-[11px] font-semibold text-[#848E9C] uppercase tracking-wider px-2">
+            Platform Resources
+          </div>
+          <div className="grid grid-cols-2 gap-1">
+            {secondaryLinks.map((link) => (
+              <button
+                key={link.view}
+                onClick={() => goTo(link.view)}
+                className="text-left px-3 py-1.5 rounded-[6px] text-xs text-[#848E9C] hover:text-[#F5F5F5] hover:bg-[#161A1E]"
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="border-t border-[#2B3139] pt-3 flex items-center justify-between">
+            <button
+              onClick={() => {
+                setIsAuthModalOpen(true);
+                setMobileMenuOpen(false);
+              }}
+              className="text-xs font-semibold text-[#B7BDC6] hover:text-[#F5F5F5] px-3 py-2"
+            >
+              Sign In
+            </button>
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => goTo('dashboard')}
+              className="text-xs font-bold"
+            >
+              Launch Terminal
+            </Button>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
-
-export default MarketingNavbar;

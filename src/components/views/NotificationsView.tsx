@@ -11,30 +11,30 @@ export const NotificationsView: React.FC = () => {
   const filtered = notifications.filter((n) => filter === 'all' || n.category === filter);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 space-y-6">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-5 space-y-4 select-none">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 pb-3 border-b border-[#2B3139]">
         <div>
-          <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Notification Center</h1>
-          <p className="text-[14px] text-[#6B6B6B] mt-0.5">
-            Real-time execution alerts, ledger settlement receipts, and account security notifications.
+          <h1 className="text-[22px] font-bold text-[#F5F5F5] tracking-tight">Notification Center</h1>
+          <p className="text-[12px] text-[#848E9C]">
+            Execution alerts, ledger receipts, and security authorization logs.
           </p>
         </div>
 
-        <Button size="sm" variant="outline" onClick={markAllNotificationsRead} className="flex items-center gap-1.5">
-          <CheckCheck className="w-4 h-4" />
+        <Button size="xs" variant="secondary" onClick={markAllNotificationsRead} className="flex items-center gap-1.5 h-8 font-semibold">
+          <CheckCheck className="w-3.5 h-3.5 text-[#0ECB81]" />
           <span>Mark All Read</span>
         </Button>
       </div>
 
-      {/* Category Filter Pills */}
-      <div className="flex items-center gap-1.5 p-1 bg-white border border-[#E7E5E4] rounded-[10px] overflow-x-auto shadow-2xs">
+      {/* Category Filter Tabs */}
+      <div className="flex items-center gap-1 p-1 bg-[#111418] border border-[#2B3139] rounded-[6px] overflow-x-auto">
         {(['all', 'orders', 'payments', 'portfolio', 'security'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setFilter(tab)}
-            className={`px-3 py-1.5 rounded-[8px] text-[12px] font-semibold capitalize transition-all whitespace-nowrap ${
-              filter === tab ? 'bg-[#0070BA] text-[#0C0F0C] font-bold shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+            className={`px-3 py-1 rounded-[4px] text-[11px] font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+              filter === tab ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]' : 'text-[#848E9C] hover:text-[#F5F5F5]'
             }`}
           >
             {tab}
@@ -43,50 +43,52 @@ export const NotificationsView: React.FC = () => {
       </div>
 
       {/* Notifications List */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[18px] shadow-xs divide-y divide-[#E7E5E4] overflow-hidden">
+      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] divide-y divide-[#1E2329] overflow-hidden">
         {filtered.map((item) => {
           const icon = {
-            orders: <FileCheck className="w-5 h-5 text-[#16803C]" />,
-            payments: <CreditCard className="w-5 h-5 text-[#005EA8]" />,
-            portfolio: <PieChart className="w-5 h-5 text-[#1D4ED8]" />,
-            security: <ShieldCheck className="w-5 h-5 text-[#B7791F]" />,
-            system: <Info className="w-5 h-5 text-[#78716C]" />,
+            orders: <FileCheck className="w-4 h-4 text-[#0ECB81]" />,
+            payments: <CreditCard className="w-4 h-4 text-[#F0B90B]" />,
+            portfolio: <PieChart className="w-4 h-4 text-[#4C8FFF]" />,
+            security: <ShieldCheck className="w-4 h-4 text-[#F0B90B]" />,
+            system: <Info className="w-4 h-4 text-[#848E9C]" />,
           }[item.category];
 
           return (
             <div
               key={item.id}
               onClick={() => markNotificationRead(item.id)}
-              className={`p-4 sm:p-5 flex items-start gap-4 cursor-pointer transition-colors ${
-                !item.read ? 'bg-[#F0FAFF]/60' : 'hover:bg-[#FAFAF9]'
+              className={`p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer transition-colors ${
+                !item.read ? 'bg-[#161A1E]' : 'hover:bg-[#161A1E]'
               }`}
             >
-              <div className="p-2 bg-white border border-[#E7E5E4] rounded-[10px] shrink-0 mt-0.5">
+              <div className="p-2 bg-[#1E2329] border border-[#2B3139] rounded-[4px] shrink-0 mt-0.5">
                 {icon}
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-[15px] font-bold text-[#171717]">{item.title}</h4>
+                    <h4 className="text-[14px] font-bold text-[#F5F5F5]">{item.title}</h4>
                     {!item.read && (
-                      <span className="w-2 h-2 rounded-full bg-[#0070BA]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F0B90B]" />
                     )}
                   </div>
-                  <span className="text-[12px] text-[#78716C] shrink-0">{item.timestamp}</span>
+                  <span className="text-[11px] text-[#848E9C] shrink-0">{item.timestamp}</span>
                 </div>
-                <p className="text-[13px] text-[#6B6B6B] mt-1 leading-relaxed">{item.message}</p>
+                <p className="text-[12px] text-[#B7BDC6] mt-1 leading-relaxed">{item.message}</p>
               </div>
             </div>
           );
         })}
 
         {filtered.length === 0 && (
-          <div className="py-12 text-center text-[#78716C]">
-            <p className="text-[14px]">No notifications found in this category.</p>
+          <div className="py-12 text-center text-[#848E9C]">
+            <p className="text-[13px]">No notifications found in this category.</p>
           </div>
         )}
       </div>
     </div>
   );
 };
+
+export default NotificationsView;

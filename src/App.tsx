@@ -1,9 +1,9 @@
 /**
- * Tradeon — Modern Digital Trading & Product Marketplace Platform
+ * Tradeon — Modern Financial Trading & Product Marketplace Platform
  * 
  * Features:
  * - Confidential Product Abstraction Layer
- * - Tradeon Blue (#0070BA) Design Foundation & Cool Neutrals (#F6F8FB)
+ * - Tradeon Black (#0B0E11) & Yellow Accent (#F0B90B) Financial Trading Environment
  * - Complete Marketing Website (Home, Products, How It Works, Options, Mobile App, Payments, Security, About, FAQ, Contact, Terms, Privacy)
  * - Complete Interactive Platform Application (Dashboard, Markets, Product Details, Options, Portfolio, Orders, Wallet, Ledger, Profile)
  * - Multi-Platform simulation (Desktop Web 1440px baseline, iPhone 16 Pro, Pixel 9 Pro)

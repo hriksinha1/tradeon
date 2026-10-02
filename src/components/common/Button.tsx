@@ -1,8 +1,8 @@
 import React from 'react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'dark' | 'outline' | 'ghost' | 'positive' | 'negative';
-  size?: 'sm' | 'md' | 'lg';
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'dark' | 'outline' | 'ghost' | 'positive' | 'negative' | 'buy' | 'sell';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   children: React.ReactNode;
 }
@@ -17,29 +17,34 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'inline-flex items-center justify-center font-bold rounded-[10px] transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0070BA] disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap active:scale-[0.98] duration-150 cursor-pointer select-none';
+    'inline-flex items-center justify-center font-semibold rounded-[6px] transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[#F0B90B] disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap active:scale-[0.98] cursor-pointer select-none';
 
   const sizeStyles = {
-    sm: 'text-[13px] px-3.5 py-1.5 min-h-[38px]',
-    md: 'text-[15px] px-5 py-2.5 min-h-[44px]',
-    lg: 'text-[16px] px-6 py-3 min-h-[50px]',
+    xs: 'text-[12px] px-2.5 py-1 min-h-[28px]',
+    sm: 'text-[13px] px-3.5 py-1.5 min-h-[32px]',
+    md: 'text-[14px] px-4 py-2 min-h-[38px]',
+    lg: 'text-[15px] px-5 py-2.5 min-h-[44px]',
   };
 
   const variantStyles = {
     primary:
-      'bg-[#0070BA] text-white hover:bg-[#005EA8] active:bg-[#003087] shadow-[0_1px_2px_rgba(0,0,0,0.06)]',
+      'bg-[#F0B90B] text-[#181A20] font-bold hover:bg-[#F8D12F] active:bg-[#D9A900] shadow-xs',
     secondary:
-      'bg-[#F0FAFF] text-[#005EA8] hover:bg-[#DFF6FF] active:bg-[#BFEAFF]',
+      'bg-[#1E2329] text-[#F5F5F5] border border-[#363C45] hover:bg-[#2B3139] hover:border-[#474F59] active:bg-[#161A1E]',
     dark:
-      'bg-[#171A17] text-[#FFFFFF] hover:bg-[#2A2A26] active:bg-[#40403B] shadow-sm',
+      'bg-[#161A1E] text-[#F5F5F5] border border-[#2B3139] hover:bg-[#1E2329]',
     outline:
-      'border border-[#C8D1DD] bg-white text-[#101828] hover:bg-[#F6F8FB] hover:border-[#98A5B5]',
+      'border border-[#363C45] bg-transparent text-[#F5F5F5] hover:bg-[#1E2329] hover:border-[#474F59]',
     ghost:
-      'text-[#657386] hover:text-[#101828] hover:bg-[#EEF2F7]',
+      'text-[#B7BDC6] hover:text-[#F5F5F5] hover:bg-[#1E2329]',
     positive:
-      'bg-[#16803C] text-white hover:bg-[#0A7A45]',
+      'bg-[#0ECB81] text-[#FFFFFF] font-bold hover:bg-[#02C076] active:bg-[#029B5F]',
     negative:
-      'bg-[#E5484D] text-white hover:bg-[#BF2A2A]',
+      'bg-[#F6465D] text-[#FFFFFF] font-bold hover:bg-[#F23645] active:bg-[#D02636]',
+    buy:
+      'bg-[#0ECB81] text-[#FFFFFF] font-bold hover:bg-[#02C076] active:bg-[#029B5F]',
+    sell:
+      'bg-[#F6465D] text-[#FFFFFF] font-bold hover:bg-[#F23645] active:bg-[#D02636]',
   };
 
   return (

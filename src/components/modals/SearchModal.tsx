@@ -20,7 +20,7 @@ export const SearchModal: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'products' | 'orders' | 'transactions'>('all');
 
   const filteredProducts = useMemo(() => {
-    if (!query) return products.slice(0, 3);
+    if (!query) return products.slice(0, 4);
     const q = query.toLowerCase();
     return products.filter(
       (p) => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)
@@ -28,7 +28,7 @@ export const SearchModal: React.FC = () => {
   }, [query, products]);
 
   const filteredOrders = useMemo(() => {
-    if (!query) return orders.slice(0, 2);
+    if (!query) return orders.slice(0, 3);
     const q = query.toLowerCase();
     return orders.filter(
       (o) => o.id.toLowerCase().includes(q) || o.productName.toLowerCase().includes(q) || o.side.includes(q)
@@ -36,7 +36,7 @@ export const SearchModal: React.FC = () => {
   }, [query, orders]);
 
   const filteredTransactions = useMemo(() => {
-    if (!query) return transactions.slice(0, 2);
+    if (!query) return transactions.slice(0, 3);
     const q = query.toLowerCase();
     return transactions.filter(
       (t) => t.id.toLowerCase().includes(q) || t.description.toLowerCase().includes(q) || t.reference.toLowerCase().includes(q)
@@ -45,12 +45,12 @@ export const SearchModal: React.FC = () => {
 
   const handleSelectProduct = (productId: string) => {
     setSelectedProductId(productId);
-    setCurrentView('product-detail');
+    setCurrentView('app-product-detail');
     setIsSearchOpen(false);
   };
 
   const handleSelectOrder = () => {
-    setCurrentView('orders');
+    setCurrentView('app-orders');
     setIsSearchOpen(false);
   };
 
@@ -64,25 +64,25 @@ export const SearchModal: React.FC = () => {
       <div className="space-y-4">
         {/* Search Bar */}
         <div className="relative">
-          <Search className="w-5 h-5 absolute left-3.5 top-3.5 text-[#78716C]" />
+          <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-[#848E9C]" />
           <input
             type="text"
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search products, orders, ledger, IDs..."
-            className="w-full pl-11 pr-4 py-3 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] text-[16px] text-[#171717] focus:outline-[#005EA8] focus:bg-white transition-colors"
+            placeholder="Search coin, token, pair, order ID or transaction..."
+            className="w-full h-11 pl-10 pr-4 bg-[#111418] border border-[#363C45] rounded-[6px] text-[15px] text-[#F5F5F5] placeholder-[#848E9C] focus:border-[#F0B90B] focus:outline-none transition-colors"
           />
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex items-center gap-1.5 p-1 bg-[#F5F5F4] rounded-[10px]">
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-1 p-1 bg-[#111418] rounded-[6px] border border-[#2B3139]">
           {(['all', 'products', 'orders', 'transactions'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setFilter(tab)}
-              className={`px-3 py-1 rounded-[7px] text-[12px] font-semibold capitalize transition-all ${
-                filter === tab ? 'bg-white text-[#005EA8] shadow-xs' : 'text-[#6B6B6B] hover:text-[#171717]'
+              className={`px-3 py-1 rounded-[4px] text-[12px] font-semibold capitalize transition-all cursor-pointer ${
+                filter === tab ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]' : 'text-[#848E9C] hover:text-[#F5F5F5]'
               }`}
             >
               {tab}
@@ -90,38 +90,38 @@ export const SearchModal: React.FC = () => {
           ))}
         </div>
 
-        {/* Results */}
+        {/* Results list */}
         <div className="max-h-[50vh] overflow-y-auto space-y-4 pr-1">
           {/* Products Section */}
           {(filter === 'all' || filter === 'products') && (
             <div>
-              <div className="text-[11px] font-bold text-[#78716C] uppercase tracking-wider mb-2 flex items-center gap-1">
-                <Compass className="w-3.5 h-3.5 text-[#005EA8]" />
-                <span>Tradable Products ({filteredProducts.length})</span>
+              <div className="text-[11px] font-bold text-[#848E9C] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <Compass className="w-3.5 h-3.5 text-[#F0B90B]" />
+                <span>Markets & Contracts ({filteredProducts.length})</span>
               </div>
               <div className="space-y-1">
                 {filteredProducts.map((p) => (
                   <div
                     key={p.id}
                     onClick={() => handleSelectProduct(p.id)}
-                    className="p-2.5 hover:bg-[#F0FAFF] rounded-[10px] cursor-pointer border border-transparent hover:border-[#DFF6FF] transition-all flex items-center justify-between group"
+                    className="p-2.5 hover:bg-[#1E2329] rounded-[6px] cursor-pointer border border-transparent hover:border-[#363C45] transition-all flex items-center justify-between group"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-[14px] text-[#171717] group-hover:text-[#005EA8]">
+                        <span className="font-bold text-[14px] text-[#F5F5F5] group-hover:text-[#F0B90B]">
                           {p.name}
                         </span>
-                        <span className="text-[12px] text-[#8A8A8A] font-mono">{p.id}</span>
+                        <span className="text-[12px] text-[#848E9C] font-mono">{p.id}</span>
                       </div>
-                      <span className="text-[11px] text-[#78716C]">{p.category}</span>
+                      <span className="text-[11px] text-[#848E9C]">{p.category}</span>
                     </div>
                     <div className="text-right">
-                      <span className="text-[14px] font-bold text-[#171717] tabular-nums block">
+                      <span className="text-[14px] font-bold text-[#F5F5F5] tabular-nums block">
                         {formatINR(p.currentValue)}
                       </span>
                       <span
                         className={`text-[12px] font-semibold tabular-nums ${
-                          p.changePercent >= 0 ? 'text-[#16803C]' : 'text-[#C62828]'
+                          p.changePercent >= 0 ? 'text-[#0ECB81]' : 'text-[#F6465D]'
                         }`}
                       >
                         {p.changePercent >= 0 ? '+' : ''}
@@ -137,35 +137,42 @@ export const SearchModal: React.FC = () => {
           {/* Orders Section */}
           {(filter === 'all' || filter === 'orders') && filteredOrders.length > 0 && (
             <div>
-              <div className="text-[11px] font-bold text-[#78716C] uppercase tracking-wider mb-2 flex items-center gap-1">
-                <FileCheck className="w-3.5 h-3.5 text-[#005EA8]" />
-                <span>Orders ({filteredOrders.length})</span>
+              <div className="text-[11px] font-bold text-[#848E9C] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <FileCheck className="w-3.5 h-3.5 text-[#F0B90B]" />
+                <span>Recent Orders ({filteredOrders.length})</span>
               </div>
               <div className="space-y-1">
                 {filteredOrders.map((o) => (
                   <div
                     key={o.id}
                     onClick={handleSelectOrder}
-                    className="p-2.5 hover:bg-[#F5F5F4] rounded-[10px] cursor-pointer border border-[#E7E5E4] flex items-center justify-between"
+                    className="p-2.5 hover:bg-[#1E2329] rounded-[6px] cursor-pointer border border-transparent hover:border-[#363C45] transition-all flex items-center justify-between"
                   >
                     <div className="flex items-center gap-2.5">
                       <div
-                        className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs ${
-                          o.side === 'buy' ? 'bg-[#16803C]' : 'bg-[#C62828]'
+                        className={`w-6 h-6 rounded flex items-center justify-center ${
+                          o.side === 'buy' ? 'bg-[#102A22] text-[#0ECB81]' : 'bg-[#301820] text-[#F6465D]'
                         }`}
                       >
-                        {o.side === 'buy' ? <ArrowDownLeft className="w-3.5 h-3.5" /> : <ArrowUpRight className="w-3.5 h-3.5" />}
+                        {o.side === 'buy' ? (
+                          <ArrowDownLeft className="w-3.5 h-3.5" />
+                        ) : (
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        )}
                       </div>
                       <div>
-                        <span className="font-bold text-[13px] text-[#171717] block">
-                          {o.side.toUpperCase()} {o.quantity} {o.productName}
-                        </span>
-                        <span className="text-[11px] text-[#8A8A8A] font-mono">{o.id} · {o.createdAt}</span>
+                        <div className="font-semibold text-[13px] text-[#F5F5F5]">
+                          {o.side.toUpperCase()} {o.productName}
+                        </div>
+                        <span className="text-[11px] text-[#848E9C] font-mono">{o.id}</span>
                       </div>
                     </div>
-                    <span className="text-[13px] font-bold text-[#171717] tabular-nums">
-                      {formatINR(o.totalValue)}
-                    </span>
+                    <div className="text-right">
+                      <span className="text-[13px] font-bold text-[#F5F5F5] tabular-nums block">
+                        {formatINR(o.totalValue)}
+                      </span>
+                      <span className="text-[11px] text-[#848E9C]">{o.createdAt}</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -175,8 +182,8 @@ export const SearchModal: React.FC = () => {
           {/* Transactions Section */}
           {(filter === 'all' || filter === 'transactions') && filteredTransactions.length > 0 && (
             <div>
-              <div className="text-[11px] font-bold text-[#78716C] uppercase tracking-wider mb-2 flex items-center gap-1">
-                <Receipt className="w-3.5 h-3.5 text-[#005EA8]" />
+              <div className="text-[11px] font-bold text-[#848E9C] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <Receipt className="w-3.5 h-3.5 text-[#F0B90B]" />
                 <span>Ledger Entries ({filteredTransactions.length})</span>
               </div>
               <div className="space-y-1">
@@ -184,20 +191,23 @@ export const SearchModal: React.FC = () => {
                   <div
                     key={t.id}
                     onClick={() => handleSelectTransaction(t)}
-                    className="p-2.5 hover:bg-[#F5F5F4] rounded-[10px] cursor-pointer border border-[#E7E5E4] flex items-center justify-between"
+                    className="p-2.5 hover:bg-[#1E2329] rounded-[6px] cursor-pointer border border-transparent hover:border-[#363C45] transition-all flex items-center justify-between"
                   >
                     <div>
-                      <span className="font-semibold text-[13px] text-[#171717] block">{t.description}</span>
-                      <span className="text-[11px] text-[#8A8A8A] font-mono">{t.id} · {t.date}</span>
+                      <div className="font-semibold text-[13px] text-[#F5F5F5]">{t.description}</div>
+                      <span className="text-[11px] text-[#848E9C] font-mono">{t.reference}</span>
                     </div>
-                    <span
-                      className={`text-[13px] font-bold tabular-nums ${
-                        t.amount >= 0 ? 'text-[#16803C]' : 'text-[#171717]'
-                      }`}
-                    >
-                      {t.amount >= 0 ? '+' : ''}
-                      {formatINR(t.amount, { decimals: 2 })}
-                    </span>
+                    <div className="text-right">
+                      <span
+                        className={`text-[13px] font-bold tabular-nums block ${
+                          t.amount >= 0 ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'
+                        }`}
+                      >
+                        {t.amount >= 0 ? '+' : ''}
+                        {formatINR(t.amount)}
+                      </span>
+                      <span className="text-[11px] text-[#848E9C]">{t.date}</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -208,3 +218,5 @@ export const SearchModal: React.FC = () => {
     </Modal>
   );
 };
+
+export default SearchModal;

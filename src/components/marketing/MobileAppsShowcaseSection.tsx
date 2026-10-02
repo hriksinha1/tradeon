@@ -22,16 +22,16 @@ export const MobileAppsShowcaseSection: React.FC = () => {
       title: 'Find it.',
       headline: 'Quick discovery without endless scrolling.',
       description:
-        'Search products, filter by activity, or inspect trending units with clean indicative pricing and unit quotas right from your home feed.',
+        'Search products, filter by 24h volume, or inspect trending units with real-time indicative pricing and unit quotas right from your home feed.',
       screenContent: (
         <div className="space-y-3 text-left">
-          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
-            <span className="text-xs font-bold text-[#171A17]">Marketplace</span>
-            <span className="text-[10px] font-mono text-[#005EA8] bg-[#F0FAFF] px-2 py-0.5 rounded">Live</span>
+          <div className="flex items-center justify-between pb-2 border-b border-[#2B3139]">
+            <span className="text-xs font-bold text-[#F5F5F5]">Marketplace</span>
+            <span className="text-[10px] font-mono text-[#F0B90B] bg-[#302A15] px-2 py-0.5 rounded-[4px] border border-[#F0B90B]/30">Live</span>
           </div>
 
-          <div className="p-2 bg-white rounded-[10px] border border-[#E2E1DA] flex items-center gap-2 text-xs text-[#6B6B63]">
-            <Search className="w-3.5 h-3.5 text-[#5A5A53]" />
+          <div className="p-2 bg-[#111418] rounded-[6px] border border-[#2B3139] flex items-center gap-2 text-xs text-[#848E9C]">
+            <Search className="w-3.5 h-3.5 text-[#848E9C]" />
             <span>Search listed products...</span>
           </div>
 
@@ -39,19 +39,19 @@ export const MobileAppsShowcaseSection: React.FC = () => {
             {products.slice(0, 3).map((p) => (
               <div
                 key={p.id}
-                className="p-2.5 bg-white rounded-[12px] border border-[#E2E1DA] flex items-center justify-between shadow-2xs"
+                className="p-2.5 bg-[#161A1E] rounded-[6px] border border-[#2B3139] flex items-center justify-between"
               >
                 <div>
-                  <div className="font-bold text-[13px] text-[#171A17]">{p.name}</div>
-                  <div className="text-[10px] text-[#6B6B63]">
+                  <div className="font-bold text-[13px] text-[#F5F5F5]">{p.name}</div>
+                  <div className="text-[10px] text-[#848E9C]">
                     {p.availableUnits.toLocaleString()} units
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-extrabold text-[13px] text-[#171A17] tabular-nums">
+                  <div className="font-extrabold text-[13px] text-[#F5F5F5] tabular-nums font-mono">
                     {formatINR(p.currentValue)}
                   </div>
-                  <div className="text-[10px] font-semibold text-[#0A7A45]">+{p.changePercent}%</div>
+                  <div className="text-[10px] font-semibold text-[#0ECB81] font-mono">+{p.changePercent}%</div>
                 </div>
               </div>
             ))}
@@ -62,75 +62,69 @@ export const MobileAppsShowcaseSection: React.FC = () => {
     {
       kicker: 'Phase 02',
       title: 'Understand it.',
-      headline: 'All the context before you place a rupee.',
+      headline: 'Full context before committing a rupee.',
       description:
-        'Tap any listing to inspect unit history, allocation limits, recent volatility, and double-entry settlement terms.',
+        'Every unit card opens a structured dossier: verified specifications, spread indicators, risk notes, and double-entry settlement terms.',
       screenContent: (
         <div className="space-y-3 text-left">
-          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
-            <div>
-              <div className="font-bold text-[14px] text-[#171A17]">Atlas Contract</div>
-              <div className="text-[10px] font-mono text-[#6B6B63]">ATLAS-01</div>
-            </div>
-            <span className="text-[14px] font-extrabold text-[#171A17] tabular-nums">₹2,450.00</span>
+          <div className="flex items-center justify-between pb-2 border-b border-[#2B3139]">
+            <span className="text-xs font-bold text-[#F5F5F5]">Unit Dossier</span>
+            <span className="text-[10px] font-mono text-[#0ECB81]">Verified</span>
           </div>
 
-          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] space-y-2">
-            <div className="flex justify-between text-xs">
-              <span className="text-[#5A5A53]">Available quota</span>
-              <span className="font-bold text-[#171A17]">4,200 units</span>
+          <div className="p-3 bg-[#161A1E] rounded-[6px] border border-[#2B3139] space-y-2">
+            <div className="text-sm font-bold text-[#F5F5F5]">Atlas Contract Units</div>
+            <div className="text-[11px] text-[#848E9C] leading-relaxed">
+              Standardized units for enterprise allocation. Settles to available cash upon order confirmation.
             </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-[#5A5A53]">24h Movement</span>
-              <span className="font-bold text-[#0A7A45]">+3.4%</span>
+            <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+              <div className="bg-[#111418] p-1.5 rounded-[4px]">
+                <div className="text-[#848E9C]">Max Supply</div>
+                <div className="font-bold text-[#F5F5F5] font-mono">10,000</div>
+              </div>
+              <div className="bg-[#111418] p-1.5 rounded-[4px]">
+                <div className="text-[#848E9C]">Unit Price</div>
+                <div className="font-bold text-[#F0B90B] font-mono">₹2,450.00</div>
+              </div>
             </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-[#5A5A53]">Settlement rail</span>
-              <span className="font-bold text-[#005EA8]">Direct Reconciled</span>
-            </div>
-          </div>
-
-          <div className="p-2.5 bg-[#EFEEE9] rounded-[10px] text-[11px] text-[#5A5A53]">
-            Verified commercial supply with direct seller double-entry settlement.
           </div>
         </div>
       ),
     },
     {
       kicker: 'Phase 03',
-      title: 'Act.',
-      headline: 'A bottom-sheet order slip with zero guesswork.',
+      title: 'Decide with clarity.',
+      headline: 'A two-step slip with zero hidden math.',
       description:
-        'Choose your quantity. The total debit, fee breakdown, and execution prompt are calculated right above your thumb before you commit.',
+        'Review unit quantity, total cost, and platform fees with complete visual clarity before confirming your order.',
       screenContent: (
         <div className="space-y-3 text-left">
-          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
-            <span className="font-bold text-[13px] text-[#171A17]">Order Slip</span>
-            <span className="text-[11px] text-[#005EA8] font-semibold">Ready to submit</span>
+          <div className="flex items-center justify-between pb-2 border-b border-[#2B3139]">
+            <span className="text-xs font-bold text-[#F5F5F5]">Order Confirmation</span>
+            <span className="text-[10px] font-mono text-[#4C8FFF]">Step 2 of 2</span>
           </div>
 
-          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] flex justify-between items-center">
-            <span className="text-xs text-[#5A5A53]">Quantity</span>
-            <span className="font-bold text-[16px] text-[#171A17]">5 units</span>
+          <div className="p-3 bg-[#161A1E] rounded-[6px] border border-[#2B3139] space-y-2.5">
+            <div className="flex justify-between text-xs">
+              <span className="text-[#848E9C]">Order Type</span>
+              <span className="font-bold text-[#0ECB81]">BUY (Market)</span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-[#848E9C]">Units</span>
+              <span className="font-bold text-[#F5F5F5] font-mono">5 Units</span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-[#848E9C]">Gross Amount</span>
+              <span className="font-bold text-[#F5F5F5] font-mono">₹12,250.00</span>
+            </div>
+            <div className="flex justify-between text-xs pt-1 border-t border-[#2B3139]">
+              <span className="font-bold text-[#F5F5F5]">Total Deduction</span>
+              <span className="font-extrabold text-[#F0B90B] font-mono">₹12,250.00</span>
+            </div>
           </div>
 
-          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] space-y-1.5 text-xs">
-            <div className="flex justify-between text-[#5A5A53]">
-              <span>5 × ₹2,450.00</span>
-              <span className="font-semibold text-[#171A17]">₹12,250.00</span>
-            </div>
-            <div className="flex justify-between text-[#5A5A53]">
-              <span>Platform fee (0.1%)</span>
-              <span className="font-semibold text-[#171A17]">₹12.25</span>
-            </div>
-            <div className="pt-2 border-t border-[#EFEEE9] flex justify-between font-bold text-[13px] text-[#171A17]">
-              <span>Total deduction</span>
-              <span className="text-[#005EA8]">₹12,262.25</span>
-            </div>
-          </div>
-
-          <div className="w-full py-2.5 bg-[#0070BA] text-[#0C0F0C] font-bold text-xs rounded-[10px] text-center shadow-xs">
-            Authorize Order
+          <div className="w-full py-2 bg-[#0ECB81] text-[#181A20] font-bold text-center rounded-[6px] text-xs">
+            Confirm & Execute Order
           </div>
         </div>
       ),
@@ -138,157 +132,125 @@ export const MobileAppsShowcaseSection: React.FC = () => {
     {
       kicker: 'Phase 04',
       title: 'Keep track.',
-      headline: 'A transparent ledger entry before you close the app.',
+      headline: 'Your portfolio and ledger in one pocket.',
       description:
-        'The moment your order fills, your wallet updates and an itemized receipt appears with sequential timestamp and updated running balance.',
+        'Real-time P&L changes, open order statuses, and sequential ledger audit entries available instantly on your phone.',
       screenContent: (
         <div className="space-y-3 text-left">
-          <div className="flex items-center justify-between pb-2 border-b border-[#E2E1DA]">
-            <span className="font-bold text-[13px] text-[#171A17]">Ledger Receipt</span>
-            <span className="text-[10px] text-[#16803C] font-semibold flex items-center gap-1">
-              <Check className="w-3 h-3" />
-              Cleared
-            </span>
+          <div className="flex items-center justify-between pb-2 border-b border-[#2B3139]">
+            <span className="text-xs font-bold text-[#F5F5F5]">Portfolio Summary</span>
+            <span className="text-[10px] font-mono text-[#0ECB81]">+3.4% 24h</span>
           </div>
 
-          <div className="p-3 bg-white rounded-[12px] border border-[#E2E1DA] space-y-2">
-            <div className="text-[10px] text-[#6B6B63] font-mono">ORD-9912084 · Just now</div>
-            <div className="flex justify-between items-baseline">
-              <span className="text-xs font-bold text-[#171A17]">Bought 5 Atlas units</span>
-              <span className="font-bold text-xs text-[#E5484D]">-₹12,262.25</span>
+          <div className="p-3 bg-[#161A1E] rounded-[6px] border border-[#2B3139] space-y-2">
+            <div className="text-[11px] text-[#848E9C]">Total Portfolio Value</div>
+            <div className="text-xl font-extrabold text-[#F5F5F5] font-mono tabular-nums">
+              {formatINR(wallet.totalValue)}
             </div>
-            <div className="text-[11px] text-[#5A5A53] pt-1 border-t border-[#EFEEE9]">
-              Updated Wallet Balance: <span className="font-bold text-[#171A17]">₹71,987.75</span>
+            <div className="flex items-center justify-between text-[11px] pt-1 border-t border-[#2B3139]">
+              <span className="text-[#848E9C]">Available Cash</span>
+              <span className="font-bold text-[#F0B90B] font-mono">{formatINR(wallet.availableBalance)}</span>
             </div>
-          </div>
-
-          <div className="p-2.5 bg-[#F0FAFF] rounded-[10px] text-[11px] text-[#005EA8] flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 shrink-0" />
-            <span>Auditable in your permanent transaction ledger</span>
           </div>
         </div>
       ),
     },
   ];
 
+  const currentStage = stages[activeStageIndex];
+
   return (
-    <section className="py-20 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
+    <section className="py-20 sm:py-28 bg-[#0B0E11] text-[#F5F5F5] border-b border-[#2B3139]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Header */}
-        <div className="max-w-3xl space-y-4 mb-14 sm:mb-20">
-          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
-            Mobile Experience
+        <div className="max-w-3xl mb-14 sm:mb-18 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#F0B90B] tracking-wider uppercase font-mono">
+            <span className="size-1.5 rounded-full bg-[#F0B90B]" />
+            Multi-Platform Experience
           </div>
-          <h2 className="text-[34px] sm:text-[50px] font-extrabold text-[#171A17] tracking-tight leading-[1.1]">
-            The whole product in your hand.
+          <h2 className="text-[32px] sm:text-[44px] font-extrabold text-[#F5F5F5] tracking-tight leading-[1.12]">
+            The whole trading terminal in your hand.
           </h2>
-          <p className="text-[17px] sm:text-[19px] text-[#5A5A53] leading-relaxed">
-            Not a watered-down mobile web wrapper. A complete, fluid touch interface designed for native Apple iOS and Google Android devices.
+          <p className="text-[16px] sm:text-[18px] text-[#848E9C] leading-relaxed">
+            Tradeon is engineered natively for high-density mobile viewports. No trimmed-down tables or missing controls.
           </p>
         </div>
 
-        {/* Narrative Split: Authentic Human Photo + 4-Stage Step Walkthrough + Real Mobile Device */}
+        {/* 2-Column Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Column: Human Context Photo & Stage Steps */}
-          <div className="lg:col-span-6 space-y-6">
-            {/* Real Lifestyle Image */}
-            <div className="relative rounded-[20px] overflow-hidden border border-[#CBCAC2] shadow-sm mb-6">
-              <img
-                src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=80"
-                alt="Person calmly using mobile application in a clean workspace"
-                className="w-full h-48 sm:h-56 object-cover filter brightness-[0.98]"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F0C]/75 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-xs text-[#0070BA] font-bold uppercase tracking-wider block">
-                  On-the-go Clarity
-                </span>
-                <span className="text-sm font-semibold">
-                  Every feature from the desktop terminal, thoughtfully scaled for handheld clarity.
-                </span>
-              </div>
-            </div>
-
-            {/* 4 Interactive Stages (Find it -> Understand it -> Act -> Keep track) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {stages.map((stage, idx) => {
-                const isSelected = activeStageIndex === idx;
-                return (
-                  <button
-                    key={stage.title}
-                    onClick={() => setActiveStageIndex(idx)}
-                    className={`p-4 rounded-[16px] text-left transition-all border cursor-pointer ${
-                      isSelected
-                        ? 'bg-[#FFFFFF] border-[#0070BA] shadow-sm'
-                        : 'bg-white/60 border-[#E2E1DA] hover:bg-white'
+          {/* Left: 4 Progression Stages */}
+          <div className="lg:col-span-6 space-y-3">
+            {stages.map((stage, idx) => (
+              <div
+                key={stage.title}
+                onClick={() => setActiveStageIndex(idx)}
+                className={`p-5 rounded-[8px] border transition-all cursor-pointer ${
+                  activeStageIndex === idx
+                    ? 'bg-[#161A1E] border-[#F0B90B]/50 shadow-md'
+                    : 'bg-[#111418] border-[#2B3139] hover:border-[#363C45]'
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-1.5">
+                  <span
+                    className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded-[4px] ${
+                      activeStageIndex === idx
+                        ? 'bg-[#F0B90B] text-[#181A20]'
+                        : 'bg-[#1E2329] text-[#848E9C]'
                     }`}
                   >
-                    <div className="flex items-center justify-between text-xs text-[#005EA8] font-semibold mb-1">
-                      <span>{stage.kicker}</span>
-                      <span className="text-[11px] text-[#6B6B63]">0{idx + 1}</span>
-                    </div>
-                    <div className="text-[18px] font-bold text-[#171A17]">{stage.title}</div>
-                    <p className="text-xs text-[#5A5A53] mt-1 line-clamp-2 leading-relaxed">
-                      {stage.headline}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Simulator Launchers */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <Button
-                variant="primary"
-                onClick={() => {
-                  setDeviceFrame('ios');
-                  setCurrentView('app-dashboard');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="flex items-center gap-2 cursor-pointer font-bold shadow-xs text-xs sm:text-sm"
-              >
-                <span>Launch iPhone 16 Pro Simulator</span>
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setDeviceFrame('android');
-                  setCurrentView('app-dashboard');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="cursor-pointer text-xs sm:text-sm"
-              >
-                Launch Pixel 9 Pro Simulator
-              </Button>
-            </div>
+                    {stage.kicker}
+                  </span>
+                  <span className="text-base font-bold text-[#F5F5F5]">{stage.title}</span>
+                </div>
+                <div className="text-sm font-semibold text-[#B7BDC6] mb-1">
+                  {stage.headline}
+                </div>
+                <p className="text-xs text-[#848E9C] leading-relaxed">
+                  {stage.description}
+                </p>
+              </div>
+            ))}
           </div>
 
-          {/* Right Column: Realistic Phone Frame Displaying Active Screen */}
-          <div className="lg:col-span-6 flex justify-center">
-            <div className="w-[300px] sm:w-[330px] h-[600px] sm:h-[630px] bg-[#0C0F0C] rounded-[48px] p-3 shadow-2xl border-4 border-[#2A2A26] relative">
-              {/* Dynamic Island Header */}
-              <div className="w-24 h-5 bg-[#000000] rounded-full absolute left-1/2 -translate-x-1/2 top-4 flex items-center justify-end px-2 z-30">
-                <div className="w-2 h-2 rounded-full bg-[#1A1A1A]" />
+          {/* Right: High-Fidelity Mobile Frame Preview */}
+          <div className="lg:col-span-6 flex flex-col items-center justify-center">
+            {/* Phone Mockup */}
+            <div className="w-[300px] h-[580px] bg-[#111418] border-[6px] border-[#23282F] rounded-[40px] p-3 shadow-2xl shadow-black relative flex flex-col justify-between overflow-hidden">
+              {/* Dynamic Island */}
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-4 bg-black rounded-full z-20 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-[#161A1E] mr-2" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#0ECB81]" />
               </div>
 
-              {/* Screen Glass */}
-              <div className="w-full h-full bg-[#F7F6F2] rounded-[38px] overflow-hidden flex flex-col justify-between p-4 pt-10 text-left">
-                {/* Active Screen Content */}
-                <div className="pt-2">
-                  <div className="text-[11px] font-semibold text-[#005EA8] uppercase tracking-wider mb-2">
-                    {stages[activeStageIndex].kicker} · {stages[activeStageIndex].title}
-                  </div>
-                  {stages[activeStageIndex].screenContent}
-                </div>
-
-                {/* Bottom Home Indicator */}
-                <div className="h-4 flex items-center justify-center">
-                  <div className="w-24 h-1 bg-[#171A17]/40 rounded-full" />
-                </div>
+              {/* Status bar */}
+              <div className="pt-2 px-3 flex items-center justify-between text-[10px] text-[#848E9C] font-mono">
+                <span>09:41</span>
+                <span className="flex items-center gap-1">5G 100%</span>
               </div>
+
+              {/* Active Stage Screen Content */}
+              <div className="flex-1 my-3 overflow-y-auto px-2">
+                {currentStage.screenContent}
+              </div>
+
+              {/* Bottom Home Indicator */}
+              <div className="w-28 h-1 bg-[#474F59] rounded-full mx-auto mb-1" />
+            </div>
+
+            {/* Device Switcher Trigger */}
+            <div className="mt-6 flex items-center gap-2">
+              <span className="text-xs text-[#848E9C]">Simulate on device:</span>
+              <button
+                onClick={() => setDeviceFrame('ios')}
+                className="px-2.5 py-1 text-xs font-mono font-medium rounded-[4px] bg-[#161A1E] text-[#B7BDC6] border border-[#2B3139] hover:text-[#F0B90B] hover:border-[#F0B90B]/50 transition-colors cursor-pointer"
+              >
+                iPhone 16 Pro
+              </button>
+              <button
+                onClick={() => setDeviceFrame('android')}
+                className="px-2.5 py-1 text-xs font-mono font-medium rounded-[4px] bg-[#161A1E] text-[#B7BDC6] border border-[#2B3139] hover:text-[#F0B90B] hover:border-[#F0B90B]/50 transition-colors cursor-pointer"
+              >
+                Pixel 9 Pro
+              </button>
             </div>
           </div>
         </div>

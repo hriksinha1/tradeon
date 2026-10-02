@@ -1,88 +1,116 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #ffffff;
-  --color-foreground: #0b1f33;
-  --color-surface: #ffffff;
-  --color-surface-soft: #f7f9fc;
-  --color-surface-cool: #f1f5f9;
-  --color-brand: #0070ba;
-  --color-brand-hover: #005ea8;
-  --color-brand-navy: #003087;
-  --color-brand-subtle: #eaf4ff;
-  --color-border-subtle: #e4ebf2;
-  --color-border: #d4dde7;
-  --color-border-input: #71829a;
-  --color-muted-foreground: #5b6b7f;
-  --color-secondary-foreground: #405166;
-  --color-positive: #16803c;
-  --color-positive-bg: #e9f7ef;
-  --color-negative: #c62828;
-  --color-negative-bg: #fdeeee;
-  --color-warning: #a15c00;
-  --color-warning-bg: #fff4db;
-  --color-info: #0069c0;
-  --color-info-bg: #e8f4ff;
+  --color-brand-primary: #F0B90B;
+  --color-brand-hover: #F8D12F;
+  --color-brand-active: #D9A900;
+  --color-brand-text: #181A20;
+
+  --color-bg-app: #0B0E11;
+  --color-bg-surface-1: #111418;
+  --color-bg-surface-2: #161A1E;
+  --color-bg-surface-3: #1E2329;
+  --color-bg-elevated: #23282F;
+
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #B7BDC6;
+  --color-text-tertiary: #848E9C;
+  --color-text-disabled: #5E6673;
+  --color-text-inverse: #181A20;
+
+  --color-border-subtle: #2B3139;
+  --color-border-default: #363C45;
+  --color-border-strong: #474F59;
+
+  --color-market-positive: #0ECB81;
+  --color-market-positive-strong: #02C076;
+  --color-market-positive-subtle: #102A22;
+
+  --color-market-negative: #F6465D;
+  --color-market-negative-strong: #F23645;
+  --color-market-negative-subtle: #301820;
+
+  --color-status-warning: #F0B90B;
+  --color-status-warning-subtle: #302A15;
+
+  --color-status-info: #4C8FFF;
+  --color-status-info-subtle: #18243A;
 }
 
 @layer base {
   :root {
-    /* Tradeon Blue Fintech tokens */
-    --color-brand-primary: #0070BA;
-    --color-brand-primary-hover: #005EA8;
-    --color-brand-primary-active: #003087;
-    --color-brand-primary-subtle: #F0FAFF;
-    --color-brand-primary-strong: #003087;
-    --color-brand-on-primary: #FFFFFF;
-    --color-background-default: #F6F8FB;
-    --color-background-surface: #FFFFFF;
-    --color-background-secondary: #EEF2F7;
-    --color-background-elevated: #FFFFFF;
-    --color-background-subtle: #F0FAFF;
-    --color-background-inverse: #001B4D;
-    --color-text-primary: #101828;
-    --color-text-secondary: #344256;
-    --color-text-tertiary: #657386;
-    --color-text-disabled: #98A5B5;
-    --color-text-placeholder: #657386;
-    --color-text-inverse: #FFFFFF;
-    --color-text-link: #005EA8;
-    --color-border-subtle: #E1E7EF;
-    --color-border-default: #C8D1DD;
-    --color-border-strong: #98A5B5;
-    --color-border-focus: #0070BA;
-    --color-divider: #EEF2F7;
-    --color-status-success: #16803C;
-    --color-status-success-strong: #11632F;
-    --color-status-success-subtle: #E8F7EE;
-    --color-status-error: #C62828;
-    --color-status-error-strong: #A61F1F;
-    --color-status-error-subtle: #FDECEC;
-    --color-status-warning: #A15C00;
-    --color-status-warning-strong: #804900;
-    --color-status-warning-subtle: #FFF4DB;
-    --color-status-info: #0069C0;
-    --color-status-info-strong: #00549A;
-    --color-status-info-subtle: #E8F4FF;
+    --color-brand-primary: #F0B90B;
+    --color-brand-primary-hover: #F8D12F;
+    --color-brand-primary-active: #D9A900;
+    --color-brand-on-primary: #181A20;
+
+    --color-background-app: #0B0E11;
+    --color-background-surface: #111418;
+    --color-background-surface-2: #161A1E;
+    --color-background-surface-3: #1E2329;
+    --color-background-elevated: #23282F;
+
+    --color-text-primary: #F5F5F5;
+    --color-text-secondary: #B7BDC6;
+    --color-text-tertiary: #848E9C;
+    --color-text-disabled: #5E6673;
+    --color-text-inverse: #181A20;
+
+    --color-border-subtle: #2B3139;
+    --color-border-default: #363C45;
+    --color-border-strong: #474F59;
+    --color-border-focus: #F0B90B;
+
+    --color-market-positive: #0ECB81;
+    --color-market-positive-strong: #02C076;
+    --color-market-positive-subtle: #102A22;
+
+    --color-market-negative: #F6465D;
+    --color-market-negative-strong: #F23645;
+    --color-market-negative-subtle: #301820;
+
+    --color-status-warning: #F0B90B;
+    --color-status-warning-subtle: #302A15;
+
+    --color-status-info: #4C8FFF;
+    --color-status-info-subtle: #18243A;
   }
 
   body {
     font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--color-background-default);
-    color: var(--color-text-primary);
+    background-color: #0B0E11;
+    color: #F5F5F5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Ensure tabular numbers for financial figures */
+  /* Financial alignment rules */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
+/* Financial terminal scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0E11;
+}
+::-webkit-scrollbar-thumb {
+  background: #2B3139;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #474F59;
+}
 
-button, a, input, select, textarea { outline-color: var(--color-brand-primary); }
-::selection { background: var(--color-brand-primary-subtle); color: var(--color-brand-primary-strong); }
+button, a, input, select, textarea {
+  outline-color: #F0B90B;
+}
+::selection {
+  background: #302A15;
+  color: #F0B90B;
+}

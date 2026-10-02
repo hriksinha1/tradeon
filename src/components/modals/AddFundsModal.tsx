@@ -10,7 +10,7 @@ export const AddFundsModal: React.FC = () => {
 
   const [amount, setAmount] = useState<number>(25000);
   const [method, setMethod] = useState<'upi' | 'netbanking' | 'card'>('upi');
-  const [upiId, setUpiId] = useState('user@okaxis');
+  const [upiId, setUpiId] = useState('trader@hdfcbank');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -21,13 +21,13 @@ export const AddFundsModal: React.FC = () => {
     setIsProcessing(true);
 
     const methodName =
-      method === 'upi' ? `UPI (${upiId})` : method === 'netbanking' ? 'Net Banking (HDFC Bank)' : 'Debit Card (··4091)';
+      method === 'upi' ? `UPI Instant (${upiId})` : method === 'netbanking' ? 'Net Banking (HDFC Bank)' : 'Debit Card (··4091)';
 
     setTimeout(() => {
       addFunds(amount, methodName);
       setIsProcessing(false);
       setIsSuccess(true);
-    }, 1200);
+    }, 900);
   };
 
   const handleClose = () => {
@@ -40,59 +40,59 @@ export const AddFundsModal: React.FC = () => {
     <Modal
       isOpen={isAddFundsOpen}
       onClose={handleClose}
-      title={isSuccess ? undefined : 'Add Funds to Wallet'}
-      subtitle={isSuccess ? undefined : `Current Balance: ${formatINR(wallet.availableBalance)} · Instant Credit`}
+      title={isSuccess ? undefined : 'Deposit Funds'}
+      subtitle={isSuccess ? undefined : `Available Balance: ${formatINR(wallet.availableBalance)} · Instant Settlement`}
       maxWidth="md"
     >
       {isSuccess ? (
         <div className="py-4 text-center space-y-4">
-          <div className="w-14 h-14 bg-[#ECFDF3] rounded-full flex items-center justify-center mx-auto text-[#16803C]">
-            <CheckCircle2 className="w-8 h-8" />
+          <div className="w-12 h-12 bg-[#102A22] border border-[#0ECB81]/40 rounded-full flex items-center justify-center mx-auto text-[#0ECB81]">
+            <CheckCircle2 className="w-7 h-7" />
           </div>
           <div>
-            <h3 className="text-[20px] font-bold text-[#171717]">Funds Added Successfully</h3>
-            <p className="text-[13px] text-[#6B6B6B] mt-1">
-              ₹{amount.toLocaleString('en-IN')} has been deposited and is immediately available for trading.
+            <h3 className="text-[18px] font-bold text-[#F5F5F5]">Deposit Completed</h3>
+            <p className="text-[13px] text-[#848E9C] mt-1">
+              ₹{amount.toLocaleString('en-IN')} credited to your trading wallet.
             </p>
           </div>
-          <div className="p-3 bg-[#F0FAFF] border border-[#DFF6FF] rounded-[12px] text-[13px] font-semibold text-[#005EA8]">
-            New Available Balance: {formatINR(wallet.availableBalance)}
+          <div className="p-3 bg-[#111418] border border-[#2B3139] rounded-[6px] text-[13px] font-semibold text-[#0ECB81]">
+            Updated Balance: {formatINR(wallet.availableBalance)}
           </div>
-          <Button fullWidth onClick={handleClose}>
-            Continue Trading
+          <Button fullWidth variant="primary" onClick={handleClose}>
+            Return to Trading
           </Button>
         </div>
       ) : (
         <div className="space-y-4">
           {/* Amount Input */}
           <div>
-            <label className="block text-[12px] font-semibold text-[#78716C] mb-1">
+            <label className="block text-[12px] font-medium text-[#848E9C] mb-1.5">
               Deposit Amount (INR)
             </label>
             <div className="relative">
-              <span className="absolute left-3.5 top-3 text-[18px] font-bold text-[#78716C]">₹</span>
+              <span className="absolute left-3 top-2 text-[16px] font-bold text-[#848E9C]">₹</span>
               <input
                 type="number"
                 min="100"
                 step="500"
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full pl-9 pr-4 py-2.5 border border-[#E7E5E4] rounded-[10px] text-[20px] font-bold text-[#171717] tabular-nums focus:outline-[#005EA8]"
+                className="w-full h-11 pl-8 pr-4 rounded-[6px] bg-[#111418] border border-[#363C45] text-[#F5F5F5] font-bold text-[18px] tabular-nums focus:border-[#F0B90B] focus:outline-none"
                 placeholder="Enter amount"
               />
             </div>
 
             {/* Quick Presets */}
-            <div className="flex gap-2 mt-2">
+            <div className="grid grid-cols-4 gap-2 mt-2">
               {presets.map((p) => (
                 <button
                   key={p}
                   type="button"
                   onClick={() => setAmount(p)}
-                  className={`flex-1 py-1 text-[12px] font-semibold rounded-[8px] border transition-colors ${
+                  className={`py-1 text-[11px] font-semibold rounded-[4px] border transition-colors cursor-pointer ${
                     amount === p
-                      ? 'border-[#005EA8] bg-[#F0FAFF] text-[#005EA8]'
-                      : 'border-[#E7E5E4] hover:bg-[#F5F5F4] text-[#57534E]'
+                      ? 'border-[#F0B90B] bg-[#302A15] text-[#F0B90B]'
+                      : 'border-[#2B3139] bg-[#111418] text-[#848E9C] hover:text-[#F5F5F5] hover:border-[#474F59]'
                   }`}
                 >
                   +{formatINR(p)}
@@ -103,126 +103,111 @@ export const AddFundsModal: React.FC = () => {
 
           {/* Payment Method Selector */}
           <div>
-            <label className="block text-[12px] font-semibold text-[#78716C] mb-1.5">
-              Select Payment Method
+            <label className="block text-[12px] font-medium text-[#848E9C] mb-1.5">
+              Select Deposit Gateway
             </label>
             <div className="space-y-2">
-              {/* UPI */}
-              <div
+              <button
+                type="button"
                 onClick={() => setMethod('upi')}
-                className={`p-3 rounded-[10px] border cursor-pointer transition-all flex items-center justify-between ${
+                className={`w-full p-3 rounded-[6px] border text-left flex items-center justify-between transition-colors cursor-pointer ${
                   method === 'upi'
-                    ? 'border-[#005EA8] bg-[#F0FAFF]'
-                    : 'border-[#E7E5E4] hover:border-[#D6D3D1]'
+                    ? 'border-[#F0B90B] bg-[#1E2329]'
+                    : 'border-[#2B3139] bg-[#111418] hover:border-[#363C45]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#005EA8]">
+                  <div className={`p-2 rounded-[4px] ${method === 'upi' ? 'bg-[#302A15] text-[#F0B90B]' : 'bg-[#161A1E] text-[#848E9C]'}`}>
                     <Smartphone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[13px] font-bold text-[#171717] block">UPI / QR (Instant)</span>
-                    <span className="text-[11px] text-[#6B6B6B]">GPay, PhonePe, Paytm, BHIM</span>
+                    <div className="text-[13px] font-semibold text-[#F5F5F5]">UPI Instant Transfer</div>
+                    <div className="text-[11px] text-[#848E9C]">Google Pay, PhonePe, BHIM · Zero Fee</div>
                   </div>
                 </div>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  checked={method === 'upi'}
-                  onChange={() => setMethod('upi')}
-                  className="accent-[#005EA8]"
-                />
-              </div>
+                <span className="text-[11px] text-[#0ECB81] font-semibold">Immediate</span>
+              </button>
 
-              {method === 'upi' && (
-                <div className="px-3 pb-2 pt-1 bg-[#F0FAFF] rounded-b-[10px] -mt-1 border-x border-b border-[#005EA8]/30">
-                  <input
-                    type="text"
-                    value={upiId}
-                    onChange={(e) => setUpiId(e.target.value)}
-                    placeholder="Enter UPI VPA (e.g. mobile@upi)"
-                    className="w-full px-3 py-1.5 bg-white border border-[#DFF6FF] rounded-[8px] text-[13px] focus:outline-[#005EA8]"
-                  />
-                </div>
-              )}
-
-              {/* Net Banking */}
-              <div
+              <button
+                type="button"
                 onClick={() => setMethod('netbanking')}
-                className={`p-3 rounded-[10px] border cursor-pointer transition-all flex items-center justify-between ${
+                className={`w-full p-3 rounded-[6px] border text-left flex items-center justify-between transition-colors cursor-pointer ${
                   method === 'netbanking'
-                    ? 'border-[#005EA8] bg-[#F0FAFF]'
-                    : 'border-[#E7E5E4] hover:border-[#D6D3D1]'
+                    ? 'border-[#F0B90B] bg-[#1E2329]'
+                    : 'border-[#2B3139] bg-[#111418] hover:border-[#363C45]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#1D4ED8]">
+                  <div className={`p-2 rounded-[4px] ${method === 'netbanking' ? 'bg-[#302A15] text-[#F0B90B]' : 'bg-[#161A1E] text-[#848E9C]'}`}>
                     <Building className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[13px] font-bold text-[#171717] block">Net Banking</span>
-                    <span className="text-[11px] text-[#6B6B6B]">All major Indian banks supported</span>
+                    <div className="text-[13px] font-semibold text-[#F5F5F5]">Net Banking (IMPS / NEFT)</div>
+                    <div className="text-[11px] text-[#848E9C]">HDFC, ICICI, SBI, Axis & 50+ Banks</div>
                   </div>
                 </div>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  checked={method === 'netbanking'}
-                  onChange={() => setMethod('netbanking')}
-                  className="accent-[#005EA8]"
-                />
-              </div>
+                <span className="text-[11px] text-[#0ECB81] font-semibold">&lt; 2 mins</span>
+              </button>
 
-              {/* Card */}
-              <div
+              <button
+                type="button"
                 onClick={() => setMethod('card')}
-                className={`p-3 rounded-[10px] border cursor-pointer transition-all flex items-center justify-between ${
+                className={`w-full p-3 rounded-[6px] border text-left flex items-center justify-between transition-colors cursor-pointer ${
                   method === 'card'
-                    ? 'border-[#005EA8] bg-[#F0FAFF]'
-                    : 'border-[#E7E5E4] hover:border-[#D6D3D1]'
+                    ? 'border-[#F0B90B] bg-[#1E2329]'
+                    : 'border-[#2B3139] bg-[#111418] hover:border-[#363C45]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#57534E]">
+                  <div className={`p-2 rounded-[4px] ${method === 'card' ? 'bg-[#302A15] text-[#F0B90B]' : 'bg-[#161A1E] text-[#848E9C]'}`}>
                     <CreditCard className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[13px] font-bold text-[#171717] block">Debit / Corporate Card</span>
-                    <span className="text-[11px] text-[#6B6B6B]">Visa, Mastercard, RuPay</span>
+                    <div className="text-[13px] font-semibold text-[#F5F5F5]">Corporate / Debit Card</div>
+                    <div className="text-[11px] text-[#848E9C]">Visa, Mastercard, RuPay verified</div>
                   </div>
                 </div>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  checked={method === 'card'}
-                  onChange={() => setMethod('card')}
-                  className="accent-[#005EA8]"
-                />
-              </div>
+                <span className="text-[11px] text-[#0ECB81] font-semibold">Immediate</span>
+              </button>
             </div>
           </div>
 
-          {/* Trust notice */}
-          <div className="flex items-center gap-2 text-[11px] text-[#78716C] bg-[#F5F5F4] p-2 rounded-[8px]">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#16803C] shrink-0" />
-            <span>Secure 256-bit encrypted gateway. Zero payment fees applied.</span>
+          {method === 'upi' && (
+            <div>
+              <label className="block text-[12px] font-medium text-[#848E9C] mb-1">
+                Virtual Payment Address (VPA / UPI ID)
+              </label>
+              <input
+                type="text"
+                value={upiId}
+                onChange={(e) => setUpiId(e.target.value)}
+                className="w-full h-10 px-3 rounded-[6px] bg-[#111418] border border-[#363C45] text-[#F5F5F5] text-[13px] focus:border-[#F0B90B] focus:outline-none"
+                placeholder="username@bank"
+              />
+            </div>
+          )}
+
+          {/* Security guarantee */}
+          <div className="p-3 bg-[#111418] rounded-[6px] border border-[#2B3139] flex items-center gap-2.5 text-[12px] text-[#848E9C]">
+            <ShieldCheck className="w-4 h-4 text-[#0ECB81] shrink-0" />
+            <span>256-bit encrypted escrow banking gateway with automated double-entry ledger ledgering.</span>
           </div>
 
-          {/* CTA */}
           <Button
+            variant="primary"
             fullWidth
-            size="lg"
-            onClick={handleDeposit}
+            size="md"
             disabled={amount <= 0 || isProcessing}
-            className="flex items-center justify-center gap-2"
+            onClick={handleDeposit}
+            className="font-bold"
           >
             {isProcessing ? (
-              <>
+              <span className="flex items-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Authorizing Payment...</span>
-              </>
+                <span>Processing Deposit...</span>
+              </span>
             ) : (
-              <span>Proceed to Add {formatINR(amount)}</span>
+              `Deposit ${formatINR(amount)}`
             )}
           </Button>
         </div>
@@ -230,3 +215,5 @@ export const AddFundsModal: React.FC = () => {
     </Modal>
   );
 };
+
+export default AddFundsModal;

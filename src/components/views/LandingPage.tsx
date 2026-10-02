@@ -15,41 +15,41 @@ import { MarketingFooter } from '../marketing/MarketingFooter';
 
 export const LandingPage: React.FC = () => {
   return (
-    <div className="bg-[#F6F8FB] text-[#101828] min-h-screen">
+    <div className="bg-[#0B0E11] text-[#F5F5F5] min-h-screen selection:bg-[#F0B90B] selection:text-[#181A20]">
       {/* 01. Hero: Human Opening, Editorial Product Glimpses */}
       <HeroSection />
 
-      {/* 02. Problem Recognition: "Most platforms show you the number. We want you to understand the number." with human photography */}
+      {/* 02. Problem Recognition: Understanding the number */}
       <ProblemRecognitionSection />
 
-      {/* 03. What Tradeon Is: "One place to discover products, act on them, and keep track of what happens next." */}
+      {/* 03. What Tradeon Is: One place to discover, act, track */}
       <WhatTradeonIsSection />
 
-      {/* 04. Product Discovery: "Start with curiosity." */}
+      {/* 04. Product Discovery */}
       <ProductShowcaseSection />
 
-      {/* 05. The Mental Journey: "What happens when you click Buy?" (6-step walkthrough) */}
+      {/* 05. The Mental Journey: What happens when you click Buy? */}
       <BuyJourneySection />
 
-      {/* 06. Options for Advanced Users: "More control when the decision gets more complex." */}
+      {/* 06. Options for Advanced Users: Structured trading with defined risk */}
       <HomepageOptionsSection />
 
-      {/* 07 & 08. Wallet, Payments & Ledger: "Moving money should never feel like a mystery" & "Later, you'll want to know where every rupee went." */}
+      {/* 07 & 08. Wallet, Payments & Ledger */}
       <PaymentsAndLedgerSection />
 
-      {/* 09. Native Mobile Story: "The whole product in your hand." with lifestyle imagery & 4-step progression */}
+      {/* 09. Native Mobile Story */}
       <MobileAppsShowcaseSection />
 
-      {/* 10. Product Principles Manifesto: 5 principles (Clarity over clutter, Context before action, Visible consequences, Useful records, One product everywhere) */}
+      {/* 10. Product Principles Manifesto */}
       <FeaturesGridSection />
 
-      {/* 11. Security & Confidence: "Confidence comes from visibility, not vague promises." */}
+      {/* 11. Security & Confidence */}
       <HomepageSecuritySection />
 
       {/* 12. Straightforward FAQ Answers */}
       <MarketingFaqSection />
 
-      {/* 13. Grounded Final CTA: "See where a clearer trading experience can take you." */}
+      {/* 13. Grounded Final CTA */}
       <FinalCtaSection />
 
       {/* 14. Comprehensive Footer with Disclaimers */}

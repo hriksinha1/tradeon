@@ -6,64 +6,91 @@ import {
   Wallet as WalletIcon,
   Plus,
   ArrowUpRight,
+  ArrowDownLeft,
   Building2,
   Smartphone,
   CreditCard,
   ShieldCheck,
   CheckCircle2,
+  Lock,
+  ArrowLeftRight,
 } from 'lucide-react';
 
 export const WalletView: React.FC = () => {
-  const { wallet, transactions, setIsAddFundsOpen, setIsWithdrawOpen, openTransactionDetail, setCurrentView } = useTrading();
+  const { wallet, positions, transactions, setIsAddFundsOpen, setIsWithdrawOpen, openTransactionDetail, setCurrentView, openBuySell } = useTrading();
 
   const walletTxns = transactions.filter((t) => t.type === 'deposit' || t.type === 'withdrawal');
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
+    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-5 select-none">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#2B3139]">
         <div>
-          <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Trading Wallet & Cash</h1>
-          <p className="text-[14px] text-[#6B6B6B] mt-0.5">
-            Manage liquid trading reserves, deposit fiat rails, and configure bank settlement accounts.
+          <h1 className="text-[22px] font-bold text-[#F5F5F5] tracking-tight">Wallet Overview & Funding</h1>
+          <p className="text-[12px] text-[#848E9C]">
+            Instant deposit rails, bank settlement withdrawals, and segregated trading capital.
           </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            size="xs"
+            variant="primary"
+            onClick={() => setIsAddFundsOpen(true)}
+            className="flex items-center gap-1 font-bold h-8"
+          >
+            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>Deposit</span>
+          </Button>
+          <Button
+            size="xs"
+            variant="secondary"
+            onClick={() => setIsWithdrawOpen(true)}
+            className="flex items-center gap-1 h-8"
+          >
+            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Withdraw</span>
+          </Button>
         </div>
       </div>
 
-      {/* Main Balance Banner Card */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[20px] p-6 sm:p-7 shadow-xs">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#E7E5E4]">
+      {/* Main Balance Card (Binance-style Dark Wallet Header) */}
+      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-5 space-y-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[#1E2329]">
           <div>
-            <span className="text-[12px] uppercase font-bold tracking-wider text-[#78716C] block">
-              Available Cash for Orders
-            </span>
-            <div className="flex items-baseline gap-3 mt-1">
-              <span className="text-[34px] sm:text-[42px] font-bold text-[#171717] tracking-tight tabular-nums">
-                {formatINR(wallet.availableBalance)}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#848E9C]">
+                Total Estimated Balance
               </span>
-              <span className="text-[13px] text-[#16803C] font-semibold bg-[#ECFDF3] border border-[#A6F4C5] px-2.5 py-0.5 rounded-full">
-                Instant Liquidity
+              <span className="text-[10px] font-mono text-[#F0B90B] bg-[#302A15] px-1.5 py-0.2 rounded">
+                INR
               </span>
             </div>
-            <p className="text-[13px] text-[#6B6B6B] mt-1">
-              Backed by segregated institutional treasury escrow accounts.
-            </p>
+            <div className="flex items-baseline gap-3 mt-1.5">
+              <span className="text-[32px] sm:text-[38px] font-bold text-[#F5F5F5] tracking-tight tabular-nums">
+                {formatINR(wallet.totalValue)}
+              </span>
+              <span className="text-[12px] text-[#0ECB81] font-semibold flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>100% Escrow Backed</span>
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button
-              size="lg"
+              size="sm"
+              variant="primary"
               onClick={() => setIsAddFundsOpen(true)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1.5 font-bold"
             >
-              <Plus className="w-4 h-4" />
-              <span>Add Funds (Deposit)</span>
+              <Plus className="w-4 h-4 stroke-[2.5]" />
+              <span>Deposit INR</span>
             </Button>
             <Button
-              size="lg"
-              variant="outline"
+              size="sm"
+              variant="secondary"
               onClick={() => setIsWithdrawOpen(true)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1.5"
             >
               <ArrowUpRight className="w-4 h-4" />
               <span>Withdraw to Bank</span>
@@ -71,120 +98,178 @@ export const WalletView: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-[13px]">
-          <div className="p-3.5 bg-[#FAF4F9] rounded-[12px] border border-[#ECD6E9]">
-            <span className="text-[#78716C] text-[11px] font-bold uppercase block">Total Net Balance</span>
-            <span className="text-[18px] font-bold text-[#6A2E62] tabular-nums block mt-0.5">
-              {formatINR(wallet.totalValue)}
+        {/* Balance Breakdown Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-[12px] tabular-nums">
+          <div className="p-3 bg-[#161A1E] rounded-[4px] border border-[#2B3139]">
+            <span className="text-[#848E9C] text-[11px] font-semibold uppercase block">Available Trading Balance</span>
+            <span className="text-[18px] font-bold text-[#F0B90B] block mt-1">
+              {formatINR(wallet.availableBalance)}
             </span>
-            <span className="text-[11px] text-[#78716C] block mt-0.5">Cash + Holdings</span>
+            <span className="text-[11px] text-[#848E9C] block mt-0.5">Ready for immediate order placement</span>
           </div>
 
-          <div className="p-3.5 bg-[#FAFAF9] rounded-[12px] border border-[#E7E5E4]">
-            <span className="text-[#78716C] text-[11px] font-bold uppercase block">Holdings Value</span>
-            <span className="text-[18px] font-bold text-[#171717] tabular-nums block mt-0.5">
+          <div className="p-3 bg-[#161A1E] rounded-[4px] border border-[#2B3139]">
+            <span className="text-[#848E9C] text-[11px] font-semibold uppercase block">Active Holdings Collateral</span>
+            <span className="text-[18px] font-bold text-[#F5F5F5] block mt-1">
               {formatINR(wallet.investedValue)}
             </span>
-            <span className="text-[11px] text-[#78716C] block mt-0.5">Mark-to-market</span>
+            <span className="text-[11px] text-[#848E9C] block mt-0.5">{positions.length} position contracts</span>
           </div>
 
-          <div className="p-3.5 bg-[#FAFAF9] rounded-[12px] border border-[#E7E5E4]">
-            <span className="text-[#78716C] text-[11px] font-bold uppercase block">Uncleared Pending</span>
-            <span className="text-[18px] font-bold text-[#171717] tabular-nums block mt-0.5">
+          <div className="p-3 bg-[#161A1E] rounded-[4px] border border-[#2B3139]">
+            <span className="text-[#848E9C] text-[11px] font-semibold uppercase block">In-Order / Locked Balance</span>
+            <span className="text-[18px] font-bold text-[#F5F5F5] block mt-1">
               ₹0.00
             </span>
-            <span className="text-[11px] text-[#16803C] block mt-0.5">All settlements cleared</span>
+            <span className="text-[11px] text-[#0ECB81] block mt-0.5">Zero capital locked in pending triggers</span>
           </div>
         </div>
       </div>
 
-      {/* Two Columns: Linked Accounts + Recent Cash Flow */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Linked Rails */}
-        <div className="bg-white border border-[#E7E5E4] rounded-[18px] p-5 sm:p-6 shadow-xs space-y-4">
-          <h3 className="text-[17px] font-bold text-[#171717]">Linked Payment Rails</h3>
-          <div className="space-y-3">
-            <div className="p-3.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#6A2E62]">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-bold text-[14px] text-[#171717] block">HDFC Bank Limited</span>
-                  <span className="text-[12px] text-[#6B6B6B]">••••4091 · Primary Settlement</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-semibold text-[#16803C] bg-[#ECFDF3] px-2 py-0.5 rounded">
-                Verified
-              </span>
-            </div>
-
-            <div className="p-3.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-white border border-[#E7E5E4] flex items-center justify-center text-[#1D4ED8]">
-                  <Smartphone className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-bold text-[14px] text-[#171717] block">Unified Payments Interface</span>
-                  <span className="text-[12px] text-[#6B6B6B]">user@okaxis · Instant Autopay</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-semibold text-[#16803C] bg-[#ECFDF3] px-2 py-0.5 rounded">
-                Active
-              </span>
-            </div>
-          </div>
-
-          <div className="pt-2 flex items-center gap-2 text-[12px] text-[#78716C]">
-            <ShieldCheck className="w-4 h-4 text-[#16803C]" />
-            <span>Bank-grade 256-bit SSL encryption on all financial movements.</span>
-          </div>
+      {/* Assets / Holdings in Wallet Table */}
+      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-4 space-y-3">
+        <div className="flex items-center justify-between pb-2 border-b border-[#1E2329]">
+          <h3 className="text-[15px] font-bold text-[#F5F5F5]">Fund Balances & Asset Ledger</h3>
+          <span className="text-[11px] text-[#848E9C]">Real-time fiat and derivative allocations</span>
         </div>
 
-        {/* Recent Deposit / Withdrawal Events */}
-        <div className="bg-white border border-[#E7E5E4] rounded-[18px] p-5 sm:p-6 shadow-xs flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[17px] font-bold text-[#171717]">Recent Cash Activity</h3>
-              <button
-                onClick={() => setCurrentView('ledger')}
-                className="text-[12px] font-semibold text-[#6A2E62] hover:underline"
-              >
-                View full ledger
-              </button>
-            </div>
-
-            <div className="space-y-2.5">
-              {walletTxns.slice(0, 3).map((t) => {
-                const isCredit = t.amount > 0;
-                return (
-                  <div
-                    key={t.id}
-                    onClick={() => openTransactionDetail(t)}
-                    className="p-3 bg-[#FAFAF9] hover:bg-[#F5F5F4] border border-[#E7E5E4] rounded-[12px] cursor-pointer transition-colors flex items-center justify-between"
-                  >
-                    <div>
-                      <span className="font-semibold text-[13px] text-[#171717] block">{t.description}</span>
-                      <span className="text-[11px] text-[#8A8A8A] font-mono">{t.id} · {t.date}</span>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-[13px] tabular-nums">
+            <thead className="bg-[#161A1E] border-b border-[#2B3139] text-[#848E9C] text-[11px] font-semibold uppercase">
+              <tr>
+                <th className="py-2.5 px-3">Asset</th>
+                <th className="py-2.5 px-3">Total Balance</th>
+                <th className="py-2.5 px-3">Available Balance</th>
+                <th className="py-2.5 px-3">In Orders</th>
+                <th className="py-2.5 px-3">Valuation (INR)</th>
+                <th className="py-2.5 px-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#1E2329]">
+              {/* Cash Row */}
+              <tr className="hover:bg-[#161A1E] transition-colors">
+                <td className="py-3 px-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-[#302A15] border border-[#F0B90B]/30 flex items-center justify-center text-[#F0B90B] font-bold text-[12px]">
+                      ₹
                     </div>
-                    <div className="text-right">
-                      <span
-                        className={`text-[14px] font-bold tabular-nums block ${
-                          isCredit ? 'text-[#16803C]' : 'text-[#171717]'
-                        }`}
-                      >
-                        {isCredit ? '+' : ''}
-                        {formatINR(t.amount)}
-                      </span>
-                      <span className="text-[11px] text-[#16803C] font-semibold">Completed</span>
+                    <div>
+                      <span className="font-bold text-[#F5F5F5] block">Indian Rupee</span>
+                      <span className="text-[11px] text-[#848E9C]">INR (Fiat)</span>
                     </div>
                   </div>
-                );
-              })}
+                </td>
+                <td className="py-3 px-3 font-semibold text-[#F5F5F5]">{formatINR(wallet.availableBalance)}</td>
+                <td className="py-3 px-3 text-[#0ECB81] font-semibold">{formatINR(wallet.availableBalance)}</td>
+                <td className="py-3 px-3 text-[#848E9C]">₹0.00</td>
+                <td className="py-3 px-3 font-bold text-[#F0B90B]">{formatINR(wallet.availableBalance)}</td>
+                <td className="py-3 px-3 text-right">
+                  <button
+                    onClick={() => setIsAddFundsOpen(true)}
+                    className="px-2.5 py-1 text-[11px] font-bold bg-[#F0B90B] text-[#181A20] rounded-[3px] hover:bg-[#F8D12F] cursor-pointer"
+                  >
+                    Deposit
+                  </button>
+                </td>
+              </tr>
+
+              {/* Positions as assets */}
+              {positions.map((pos) => (
+                <tr key={pos.id} className="hover:bg-[#161A1E] transition-colors">
+                  <td className="py-3 px-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded bg-[#1E2329] border border-[#363C45] flex items-center justify-center text-[#F5F5F5] font-bold text-[11px]">
+                        {pos.productId.slice(0, 2)}
+                      </div>
+                      <div>
+                        <span className="font-bold text-[#F5F5F5] block">{pos.productName}</span>
+                        <span className="text-[11px] text-[#848E9C] font-mono">{pos.productId}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-3 px-3 font-semibold text-[#F5F5F5]">{pos.quantity} units</td>
+                  <td className="py-3 px-3 text-[#F5F5F5]">{pos.quantity} units</td>
+                  <td className="py-3 px-3 text-[#848E9C]">0 units</td>
+                  <td className="py-3 px-3 font-bold text-[#F5F5F5]">{formatINR(pos.totalCurrent)}</td>
+                  <td className="py-3 px-3 text-right">
+                    <button
+                      onClick={() => openBuySell('sell')}
+                      className="px-2.5 py-1 text-[11px] font-semibold bg-[#1E2329] text-[#F5F5F5] border border-[#363C45] hover:border-[#474F59] rounded-[3px] cursor-pointer"
+                    >
+                      Trade
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Recent Funding Activity */}
+      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-4 space-y-3">
+        <div className="flex items-center justify-between pb-2 border-b border-[#1E2329]">
+          <h3 className="text-[15px] font-bold text-[#F5F5F5]">Funding & Withdrawal Records</h3>
+          <button
+            onClick={() => setCurrentView('app-ledger')}
+            className="text-[12px] font-semibold text-[#F0B90B] hover:underline cursor-pointer"
+          >
+            All Ledger Records
+          </button>
+        </div>
+
+        <div className="overflow-x-auto">
+          {walletTxns.length > 0 ? (
+            <table className="w-full text-left text-[12px] tabular-nums">
+              <thead className="bg-[#161A1E] text-[#848E9C] border-b border-[#2B3139] text-[11px] font-semibold uppercase">
+                <tr>
+                  <th className="py-2 px-3">Date / Time</th>
+                  <th className="py-2 px-3">Type</th>
+                  <th className="py-2 px-3">Gateway / Account</th>
+                  <th className="py-2 px-3">Amount</th>
+                  <th className="py-2 px-3">Fee</th>
+                  <th className="py-2 px-3">Status</th>
+                  <th className="py-2 px-3 text-right">Audit Ref</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#1E2329]">
+                {walletTxns.slice(0, 5).map((txn) => {
+                  const isCredit = txn.amount > 0;
+                  return (
+                    <tr
+                      key={txn.id}
+                      onClick={() => openTransactionDetail(txn)}
+                      className="hover:bg-[#161A1E] cursor-pointer transition-colors"
+                    >
+                      <td className="py-2.5 px-3 text-[#848E9C]">{txn.date} · {txn.time}</td>
+                      <td className="py-2.5 px-3">
+                        <span className={`font-bold uppercase text-[11px] ${isCredit ? 'text-[#0ECB81]' : 'text-[#F6465D]'}`}>
+                          {txn.type}
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 text-[#F5F5F5]">{txn.paymentMethod || 'Bank IMPS'}</td>
+                      <td className={`py-2.5 px-3 font-semibold ${isCredit ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'}`}>
+                        {isCredit ? '+' : ''}{formatINR(txn.amount)}
+                      </td>
+                      <td className="py-2.5 px-3 text-[#848E9C]">{formatINR(txn.fee, { decimals: 2 })}</td>
+                      <td className="py-2.5 px-3">
+                        <span className="text-[#0ECB81] font-semibold text-[11px]">Reconciled</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-[11px] text-[#F0B90B]">{txn.reference}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div className="py-8 text-center text-[#848E9C] text-[13px]">
+              No deposits or withdrawals yet.
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
+export default WalletView;

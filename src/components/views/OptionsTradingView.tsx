@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTrading } from '../../context/TradingContext';
 import { formatINR } from '../../constants/designTokens';
 import { Button } from '../common/Button';
@@ -12,15 +12,18 @@ import {
   CheckCircle2,
   ArrowRight,
   TrendingUp,
+  Shield,
+  Wallet,
 } from 'lucide-react';
 
 export const OptionsTradingView: React.FC = () => {
-  const { options, products, wallet, addFunds, showToast } = useTrading();
+  const { options, products, wallet, showToast } = useTrading();
 
   const [selectedProductRef, setSelectedProductRef] = useState<string>('ATLAS-01');
   const [selectedType, setSelectedType] = useState<'all' | 'call' | 'put'>('all');
   const [selectedOption, setSelectedOption] = useState<OptionContract | null>(options[0]);
   const [contractsCount, setContractsCount] = useState<number>(5);
+  const [expiry, setExpiry] = useState<string>('28-OCT-2026');
   const [isOrdered, setIsOrdered] = useState(false);
 
   const product = products.find((p) => p.id === selectedProductRef) || products[0];
@@ -32,7 +35,7 @@ export const OptionsTradingView: React.FC = () => {
   });
 
   const activeOption = selectedOption || filteredOptions[0] || options[0];
-  const lotSize = 10; // 10 units per option contract
+  const lotSize = 10;
   const totalUnits = contractsCount * lotSize;
   const premiumCost = totalUnits * activeOption.premium;
   const breakeven =
@@ -54,106 +57,103 @@ export const OptionsTradingView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-4 select-none">
+      {/* Header & Underlying Selector */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#2B3139]">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[12px] font-bold text-[#005EA8] uppercase tracking-wider bg-[#F0FAFF] px-2.5 py-0.5 rounded-[6px] border border-[#DFF6FF]">
-              Derivative Contract Shell
+            <span className="text-[10px] font-bold text-[#F0B90B] uppercase tracking-wider bg-[#302A15] border border-[#F0B90B]/30 px-2 py-0.5 rounded-[3px]">
+              Derivatives Desk
             </span>
           </div>
-          <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Options Trading Chain</h1>
-          <p className="text-[14px] text-[#6B6B6B] mt-0.5">
-            Trade structured Call and Put contracts with transparent premium settlement and defined expiries.
+          <h1 className="text-[22px] font-bold text-[#F5F5F5] tracking-tight">Options Chain & Trading</h1>
+          <p className="text-[12px] text-[#848E9C]">
+            Standardized European-style contracts with transparent margin and settlement against underlying index.
           </p>
         </div>
 
-        {/* Product Selector */}
-        <div className="flex items-center gap-3">
-          <label className="text-[12px] font-semibold text-[#78716C]">Underlying:</label>
-          <select
-            value={selectedProductRef}
-            onChange={(e) => {
-              setSelectedProductRef(e.target.value);
-              const firstOpt = options.find((o) => o.productRef === e.target.value);
-              if (firstOpt) setSelectedOption(firstOpt);
-            }}
-            className="px-3 py-2 bg-white border border-[#E7E5E4] rounded-[10px] text-[13px] font-bold text-[#171717] focus:outline-[#005EA8]"
-          >
-            {products.slice(0, 4).map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name} ({p.id}) — {formatINR(p.currentValue)}
-              </option>
+        {/* Underlying Selector & Expiry Tabs */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-[12px] text-[#848E9C]">Underlying:</span>
+            <select
+              value={selectedProductRef}
+              onChange={(e) => {
+                setSelectedProductRef(e.target.value);
+                const firstOpt = options.find((o) => o.productRef === e.target.value);
+                if (firstOpt) setSelectedOption(firstOpt);
+              }}
+              className="h-8 px-2.5 bg-[#161A1E] border border-[#363C45] rounded-[4px] text-[12px] font-semibold text-[#F5F5F5] focus:border-[#F0B90B] focus:outline-none cursor-pointer"
+            >
+              {products.slice(0, 5).map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name} ({p.id}) — {formatINR(p.currentValue)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-1 bg-[#161A1E] p-0.5 rounded-[4px] border border-[#2B3139] text-[11px]">
+            {['28-OCT-2026', '25-NOV-2026', '30-DEC-2026'].map((exp) => (
+              <button
+                key={exp}
+                onClick={() => setExpiry(exp)}
+                className={`px-2 py-0.5 rounded-[3px] font-semibold transition-colors cursor-pointer ${
+                  expiry === exp ? 'bg-[#1E2329] text-[#F0B90B]' : 'text-[#848E9C] hover:text-[#F5F5F5]'
+                }`}
+              >
+                {exp.slice(0, 6)}
+              </button>
             ))}
-          </select>
+          </div>
         </div>
       </div>
 
-      {/* Underlying Asset Banner */}
-      <div className="p-4 bg-white border border-[#E7E5E4] rounded-[16px] shadow-2xs flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <span className="text-[11px] text-[#78716C] uppercase font-bold tracking-wider block">
-              Reference Valuation
-            </span>
-            <span className="text-[22px] font-bold text-[#171717] tabular-nums">
-              {formatINR(product.currentValue)}
-            </span>
-          </div>
-          <div className="h-8 w-[1px] bg-[#E7E5E4]" />
-          <div>
-            <span className="text-[11px] text-[#78716C] uppercase font-bold tracking-wider block">
-              Current Expiry Cycle
-            </span>
-            <div className="flex items-center gap-1.5 text-[13px] font-semibold text-[#171717] mt-0.5">
-              <Calendar className="w-3.5 h-3.5 text-[#005EA8]" />
-              <span>29 Oct 2026 (Monthly)</span>
+      {/* Main Grid: Options Chain Table (Left 8 cols) + Contract Order Entry (Right 4 cols) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Left: Options Chain Matrix (8 Cols) */}
+        <div className="lg:col-span-8 bg-[#111418] border border-[#2B3139] rounded-[6px] p-4 space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-[#1E2329]">
+            <div className="flex items-center gap-2">
+              <span className="text-[13px] font-bold text-[#F5F5F5]">Options Matrix</span>
+              <span className="text-[11px] text-[#848E9C]">Spot Ref: <strong className="text-[#0ECB81] tabular-nums">{formatINR(product.currentValue)}</strong></span>
+            </div>
+
+            {/* Call / Put Filter */}
+            <div className="flex items-center gap-1 bg-[#161A1E] p-0.5 rounded border border-[#2B3139] text-[11px]">
+              {(['all', 'call', 'put'] as const).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setSelectedType(t)}
+                  className={`px-2.5 py-0.5 rounded-[3px] uppercase font-semibold transition-colors cursor-pointer ${
+                    selectedType === t ? 'bg-[#1E2329] text-[#F0B90B]' : 'text-[#848E9C]'
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Call / Put Filter Selector */}
-        <div className="flex items-center gap-1 p-1 bg-[#F5F5F4] rounded-[8px]">
-          {(['all', 'call', 'put'] as const).map((t) => (
-            <button
-              key={t}
-              onClick={() => setSelectedType(t)}
-              className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold uppercase transition-all ${
-                selectedType === t ? 'bg-white text-[#005EA8] shadow-2xs' : 'text-[#6B6B6B] hover:text-[#171717]'
-              }`}
-            >
-              {t === 'all' ? 'All Contracts' : `${t}s`}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Options Grid + Order Calculator */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Options Chain Table (2 Columns) */}
-        <div className="lg:col-span-2 bg-white border border-[#E7E5E4] rounded-[18px] shadow-xs overflow-hidden">
-          <div className="p-4 border-b border-[#E7E5E4] flex items-center justify-between">
-            <h3 className="text-[16px] font-bold text-[#171717]">Available Strike Contracts</h3>
-            <span className="text-[12px] text-[#78716C]">Lot size: 10 units / contract</span>
-          </div>
-
+          {/* Options Chain Table */}
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[13px]">
-              <thead className="bg-[#FAFAF9] border-b border-[#E7E5E4] text-[#78716C] font-bold text-[12px]">
+            <table className="w-full text-left text-[12px] tabular-nums">
+              <thead className="bg-[#161A1E] border-b border-[#2B3139] text-[#848E9C] text-[11px] font-semibold uppercase">
                 <tr>
-                  <th className="py-2.5 px-3">Contract Instrument</th>
-                  <th className="py-2.5 px-3">Type</th>
-                  <th className="py-2.5 px-3">Strike</th>
-                  <th className="py-2.5 px-3">Bid / Ask</th>
-                  <th className="py-2.5 px-3">Premium</th>
-                  <th className="py-2.5 px-3">Volume</th>
-                  <th className="py-2.5 px-3 text-right">Select</th>
+                  <th className="py-2 px-2.5">Symbol</th>
+                  <th className="py-2 px-2.5">Type</th>
+                  <th className="py-2 px-2.5">Strike</th>
+                  <th className="py-2 px-2.5">Bid</th>
+                  <th className="py-2 px-2.5">Ask</th>
+                  <th className="py-2 px-2.5">Premium</th>
+                  <th className="py-2 px-2.5">Open Int</th>
+                  <th className="py-2 px-2.5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E7E5E4]">
+              <tbody className="divide-y divide-[#1E2329]">
                 {filteredOptions.map((opt) => {
                   const isSelected = activeOption.id === opt.id;
+                  const isCall = opt.type === 'call';
                   return (
                     <tr
                       key={opt.id}
@@ -161,43 +161,41 @@ export const OptionsTradingView: React.FC = () => {
                         setSelectedOption(opt);
                         setIsOrdered(false);
                       }}
-                      className={`hover:bg-[#F0FAFF]/60 cursor-pointer transition-colors ${
-                        isSelected ? 'bg-[#F0FAFF]' : ''
+                      className={`hover:bg-[#161A1E] cursor-pointer transition-colors ${
+                        isSelected ? 'bg-[#1E2329] border-l-2 border-[#F0B90B]' : ''
                       }`}
                     >
-                      <td className="py-3 px-3">
-                        <span className="font-bold text-[#171717] block">{opt.symbol}</span>
-                        <span className="text-[11px] text-[#78716C] font-mono">{opt.expiry}</span>
-                      </td>
-                      <td className="py-3 px-3">
-                        <Badge
-                          status={opt.type === 'call' ? 'positive' : 'negative'}
-                          label={opt.type.toUpperCase()}
-                        />
-                      </td>
-                      <td className="py-3 px-3 font-bold text-[#171717] tabular-nums">
-                        {formatINR(opt.strike)}
-                      </td>
-                      <td className="py-3 px-3 text-[12px] tabular-nums text-[#57534E]">
-                        <span>{formatINR(opt.bid, { decimals: 1 })}</span>
-                        <span className="text-[#A8A29E] mx-1">/</span>
-                        <span>{formatINR(opt.ask, { decimals: 1 })}</span>
-                      </td>
-                      <td className="py-3 px-3 font-bold text-[#005EA8] tabular-nums">
-                        {formatINR(opt.premium, { decimals: 1 })}
-                      </td>
-                      <td className="py-3 px-3 text-[12px] text-[#57534E] tabular-nums">
-                        {opt.volume} lots
-                      </td>
-                      <td className="py-3 px-3 text-right">
-                        <button
-                          className={`px-3 py-1 rounded-[6px] text-[12px] font-semibold transition-colors ${
-                            isSelected
-                              ? 'bg-[#0070BA] text-[#0C0F0C] font-bold'
-                              : 'bg-white border border-[#E7E5E4] text-[#6B6B6B] hover:text-[#171717]'
+                      <td className="py-2 px-2.5 font-mono font-bold text-[#F5F5F5]">{opt.symbol}</td>
+                      <td className="py-2 px-2.5">
+                        <span
+                          className={`px-1.5 py-0.2 rounded text-[10px] font-bold uppercase ${
+                            isCall
+                              ? 'bg-[#102A22] text-[#0ECB81] border border-[#0ECB81]/30'
+                              : 'bg-[#301820] text-[#F6465D] border border-[#F6465D]/30'
                           }`}
                         >
-                          {isSelected ? 'Active' : 'Pick'}
+                          {opt.type}
+                        </span>
+                      </td>
+                      <td className="py-2 px-2.5 font-bold text-[#F5F5F5]">{formatINR(opt.strike)}</td>
+                      <td className="py-2 px-2.5 text-[#0ECB81]">{formatINR(opt.bid)}</td>
+                      <td className="py-2 px-2.5 text-[#F6465D]">{formatINR(opt.ask)}</td>
+                      <td className="py-2 px-2.5 font-bold text-[#F0B90B]">{formatINR(opt.premium)}</td>
+                      <td className="py-2 px-2.5 text-[#848E9C]">{opt.openInterest} contracts</td>
+                      <td className="py-2 px-2.5 text-right">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedOption(opt);
+                            setIsOrdered(false);
+                          }}
+                          className={`px-2 py-0.5 text-[11px] font-bold rounded-[3px] border transition-colors ${
+                            isSelected
+                              ? 'bg-[#F0B90B] text-[#181A20] border-[#F0B90B]'
+                              : 'bg-[#161A1E] text-[#848E9C] border-[#363C45] hover:text-[#F5F5F5]'
+                          }`}
+                        >
+                          Select
                         </button>
                       </td>
                     </tr>
@@ -208,92 +206,94 @@ export const OptionsTradingView: React.FC = () => {
           </div>
         </div>
 
-        {/* Option Payoff & Order Calculator Panel (1 Column) */}
-        <div className="bg-white border border-[#E7E5E4] rounded-[18px] p-5 sm:p-6 shadow-xs flex flex-col justify-between">
-          <div className="space-y-4">
-            <div>
-              <span className="text-[11px] uppercase font-bold tracking-wider text-[#78716C] block">
-                Order Configuration
-              </span>
-              <h3 className="text-[18px] font-bold text-[#171717] mt-0.5">{activeOption.symbol}</h3>
-              <p className="text-[12px] text-[#6B6B6B]">Expiry: {activeOption.expiry} · Strike {formatINR(activeOption.strike)}</p>
-            </div>
-
-            {/* Contracts quantity */}
-            <div>
-              <label className="block text-[12px] font-semibold text-[#78716C] mb-1">
-                Number of Contracts (Lots)
-              </label>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setContractsCount((c) => Math.max(1, c - 1))}
-                  className="w-9 h-9 rounded-[8px] border border-[#E7E5E4] flex items-center justify-center font-bold hover:bg-[#F5F5F4]"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  min="1"
-                  value={contractsCount}
-                  onChange={(e) => setContractsCount(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="flex-1 text-center py-1.5 border border-[#E7E5E4] rounded-[8px] font-bold text-[15px] tabular-nums"
-                />
-                <button
-                  type="button"
-                  onClick={() => setContractsCount((c) => c + 1)}
-                  className="w-9 h-9 rounded-[8px] border border-[#E7E5E4] flex items-center justify-center font-bold hover:bg-[#F5F5F4]"
-                >
-                  +
-                </button>
-              </div>
-              <span className="text-[11px] text-[#78716C] mt-1 block">
-                Total exposure: {totalUnits} underlying units
+        {/* Right: Order Entry & Risk Profile (4 Cols) */}
+        <div className="lg:col-span-4 bg-[#111418] border border-[#2B3139] rounded-[6px] p-4 space-y-4">
+          <div className="pb-3 border-b border-[#1E2329]">
+            <span className="text-[11px] font-bold uppercase text-[#848E9C] block">Contract Summary</span>
+            <div className="flex items-center justify-between mt-1">
+              <span className="font-bold text-[16px] text-[#F5F5F5]">{activeOption.symbol}</span>
+              <span className={`px-2 py-0.5 text-[11px] font-bold uppercase rounded ${
+                activeOption.type === 'call' ? 'bg-[#102A22] text-[#0ECB81]' : 'bg-[#301820] text-[#F6465D]'
+              }`}>
+                {activeOption.type.toUpperCase()}
               </span>
             </div>
-
-            {/* Payoff Breakdown Card */}
-            <div className="p-3.5 bg-[#F0FAFF] border border-[#DFF6FF] rounded-[12px] text-[13px] space-y-2">
-              <div className="flex justify-between">
-                <span className="text-[#6B6B6B]">Unit Premium</span>
-                <span className="font-semibold text-[#171717] tabular-nums">
-                  {formatINR(activeOption.premium, { decimals: 1 })}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[#6B6B6B]">Breakeven Valuation</span>
-                <span className="font-bold text-[#171717] tabular-nums">{formatINR(breakeven)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[#6B6B6B]">Max Downside Risk</span>
-                <span className="font-semibold text-[#C62828] tabular-nums">{formatINR(premiumCost)}</span>
-              </div>
-              <div className="pt-2 border-t border-[#DFF6FF] flex justify-between font-bold text-[14px]">
-                <span className="text-[#171717]">Total Premium Payable</span>
-                <span className="text-[#005EA8] tabular-nums">{formatINR(premiumCost)}</span>
-              </div>
+            <div className="text-[12px] text-[#848E9C] mt-0.5">
+              Strike: {formatINR(activeOption.strike)} · Expiry: {activeOption.expiry}
             </div>
+          </div>
 
-            {isOrdered && (
-              <div className="p-3 bg-[#ECFDF3] border border-[#A6F4C5] rounded-[10px] text-[#16803C] text-[12px] flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 shrink-0" />
-                <span>Option position entered into active contract portfolio.</span>
-              </div>
+          {/* Number of Contracts Input */}
+          <div>
+            <label className="text-[11px] text-[#848E9C] block mb-1">Contract Quantity (10 Units / Lot)</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                min="1"
+                value={contractsCount}
+                onChange={(e) => setContractsCount(Math.max(1, parseInt(e.target.value) || 0))}
+                className="w-full h-9 px-3 rounded-[4px] bg-[#161A1E] border border-[#363C45] text-[#F5F5F5] font-bold text-[14px] tabular-nums focus:border-[#F0B90B] focus:outline-none"
+              />
+              <span className="text-[12px] text-[#848E9C] whitespace-nowrap">{totalUnits} units</span>
+            </div>
+          </div>
+
+          {/* Risk & Payoff Breakdown */}
+          <div className="p-3 bg-[#161A1E] rounded-[4px] border border-[#2B3139] space-y-2 text-[12px] tabular-nums">
+            <div className="flex justify-between text-[#848E9C]">
+              <span>Premium per Unit:</span>
+              <span className="font-semibold text-[#F5F5F5]">{formatINR(activeOption.premium)}</span>
+            </div>
+            <div className="flex justify-between text-[#848E9C]">
+              <span>Max Loss (Capped):</span>
+              <span className="font-semibold text-[#F6465D]">{formatINR(premiumCost)}</span>
+            </div>
+            <div className="flex justify-between text-[#848E9C]">
+              <span>Breakeven Price:</span>
+              <span className="font-semibold text-[#F5F5F5]">{formatINR(breakeven)}</span>
+            </div>
+            <div className="pt-2 border-t border-[#2B3139] flex justify-between font-bold">
+              <span className="text-[#F5F5F5]">Total Required Capital:</span>
+              <span className="text-[14px] text-[#F0B90B]">{formatINR(premiumCost)}</span>
+            </div>
+          </div>
+
+          {/* Wallet check */}
+          <div className="flex items-center justify-between text-[11px] text-[#848E9C]">
+            <span className="flex items-center gap-1">
+              <Wallet className="w-3.5 h-3.5 text-[#F0B90B]" />
+              Available Cash:
+            </span>
+            <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(wallet.availableBalance)}</span>
+          </div>
+
+          {/* Action button */}
+          <Button
+            variant="primary"
+            fullWidth
+            size="md"
+            disabled={premiumCost > wallet.availableBalance || isOrdered}
+            onClick={handleExecuteOptionOrder}
+            className="font-bold"
+          >
+            {isOrdered ? (
+              <span className="flex items-center gap-1.5 text-[#181A20]">
+                <CheckCircle2 className="w-4 h-4" /> Position Opened
+              </span>
+            ) : (
+              `Buy ${contractsCount} Contracts (${formatINR(premiumCost)})`
             )}
-          </div>
+          </Button>
 
-          <div className="mt-6 pt-3 border-t border-[#E7E5E4]">
-            <Button
-              fullWidth
-              size="lg"
-              onClick={handleExecuteOptionOrder}
-              disabled={isOrdered}
-            >
-              {isOrdered ? 'Position Active' : `Buy Option (${formatINR(premiumCost)})`}
-            </Button>
-          </div>
+          {isOrdered && (
+            <div className="p-2.5 bg-[#102A22] border border-[#0ECB81]/40 rounded-[4px] text-[11px] text-[#0ECB81] text-center font-medium">
+              Order confirmed. Position added to your derivatives portfolio.
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
+export default OptionsTradingView;

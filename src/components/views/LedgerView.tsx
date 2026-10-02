@@ -3,7 +3,7 @@ import { useTrading } from '../../context/TradingContext';
 import { formatINR } from '../../constants/designTokens';
 import { Badge } from '../common/Badge';
 import { Button } from '../common/Button';
-import { Search, Download, CheckCircle2, ArrowDownLeft, ArrowUpRight, Receipt } from 'lucide-react';
+import { Search, Download, CheckCircle2, ArrowDownLeft, ArrowUpRight, Receipt, FileText } from 'lucide-react';
 
 export const LedgerView: React.FC = () => {
   const { transactions, openTransactionDetail, showToast } = useTrading();
@@ -11,7 +11,7 @@ export const LedgerView: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string>('all');
 
-  const types = ['all', 'buy', 'sell', 'deposit', 'withdrawal', 'adjustment'];
+  const types = ['all', 'buy', 'sell', 'deposit', 'withdrawal'];
 
   const filtered = useMemo(() => {
     return transactions.filter((t) => {
@@ -27,74 +27,69 @@ export const LedgerView: React.FC = () => {
   const handleExportCSV = () => {
     const csvContent =
       'data:text/csv;charset=utf-8,' +
-      ['ID,Date,Time,Description,Type,Amount,RunningBalance,Reference']
+      ['ID,Date,Time,Description,Type,Amount,Fee,RunningBalance,Reference']
         .concat(
           filtered.map(
             (t) =>
-              `"${t.id}","${t.date}","${t.time}","${t.description}","${t.type}",${t.amount},${t.runningBalance},"${t.reference}"`
+              `"${t.id}","${t.date}","${t.time}","${t.description}","${t.type}",${t.amount},${t.fee},${t.runningBalance},"${t.reference}"`
           )
         )
         .join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `tradeon_ledger_export_${Date.now()}.csv`);
+    link.setAttribute('download', `tradeon_ledger_${Date.now()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast('Ledger Exported', 'CSV download initiated.', 'success');
+    showToast('Ledger Exported', 'CSV download generated successfully.', 'success');
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
+    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-4 select-none">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#2B3139]">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[12px] font-bold text-[#005EA8] uppercase tracking-wider bg-[#F0FAFF] px-2.5 py-0.5 rounded-[6px] border border-[#DFF6FF]">
-              Transaction Audit Log
-            </span>
-          </div>
-          <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Financial Ledger</h1>
-          <p className="text-[14px] text-[#6B6B6B] mt-0.5">
-            Immutable, verifiable double-entry transaction record with continuous running balance tracking.
+          <h1 className="text-[22px] font-bold text-[#F5F5F5] tracking-tight">Audit & Accounting Ledger</h1>
+          <p className="text-[12px] text-[#848E9C]">
+            Verifiable double-entry ledger with immutable running-balance reconciliation.
           </p>
         </div>
 
         <Button
-          size="sm"
-          variant="outline"
+          size="xs"
+          variant="secondary"
           onClick={handleExportCSV}
-          className="flex items-center gap-2 self-start sm:self-auto"
+          className="flex items-center gap-1.5 h-8 font-semibold"
         >
-          <Download className="w-4 h-4" />
-          <span>Export CSV Statement</span>
+          <Download className="w-3.5 h-3.5" />
+          <span>Export CSV</span>
         </Button>
       </div>
 
-      {/* Control Bar */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[16px] p-4 shadow-2xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+      {/* Control Bar: Search & Type filters */}
+      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 absolute left-3.5 top-3 text-[#78716C]" />
+          <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#848E9C]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by ID, keyword, reference code..."
-            className="w-full pl-9 pr-4 py-2 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[10px] text-[13px] text-[#171717] focus:outline-[#005EA8] focus:bg-white"
+            placeholder="Search by ID, keyword, or reference..."
+            className="w-full h-8 pl-8 pr-3 bg-[#161A1E] border border-[#2B3139] rounded-[4px] text-[12px] text-[#F5F5F5] focus:border-[#F0B90B] focus:outline-none"
           />
         </div>
 
-        {/* Type Filter Pills */}
-        <div className="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0">
+        {/* Type Filter Tabs */}
+        <div className="flex items-center gap-1 overflow-x-auto">
           {types.map((type) => (
             <button
               key={type}
               onClick={() => setSelectedType(type)}
-              className={`px-3 py-1.5 rounded-[8px] text-[12px] font-semibold capitalize transition-all whitespace-nowrap ${
+              className={`px-3 py-1 rounded-[4px] text-[11px] font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
                 selectedType === type
-                  ? 'bg-[#0070BA] text-[#0C0F0C] font-bold shadow-2xs'
-                  : 'bg-[#F5F5F4] text-[#6B6B6B] hover:text-[#171717]'
+                  ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]'
+                  : 'text-[#848E9C] hover:text-[#F5F5F5]'
               }`}
             >
               {type}
@@ -103,100 +98,119 @@ export const LedgerView: React.FC = () => {
         </div>
       </div>
 
-      {/* Ledger Table */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[18px] shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-[13px]">
-            <thead className="bg-[#FAFAF9] border-b border-[#E7E5E4] text-[#78716C] font-bold text-[12px]">
-              <tr>
-                <th className="py-3 px-4">Transaction ID & Timestamp</th>
-                <th className="py-3 px-4">Activity Description</th>
-                <th className="py-3 px-4">Type</th>
-                <th className="py-3 px-4">Amount</th>
-                <th className="py-3 px-4">Platform Fee</th>
-                <th className="py-3 px-4">Running Balance</th>
-                <th className="py-3 px-4">Audit Reference</th>
-                <th className="py-3 px-4 text-right">Details</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E7E5E4]">
-              {filtered.map((txn) => {
-                const isCredit = txn.amount > 0;
-                return (
-                  <tr
-                    key={txn.id}
-                    onClick={() => openTransactionDetail(txn)}
-                    className="hover:bg-[#F0FAFF]/60 cursor-pointer transition-colors group"
-                  >
-                    <td className="py-3.5 px-4">
-                      <span className="font-mono font-bold text-[13px] text-[#171717] group-hover:text-[#005EA8] block">
-                        {txn.id}
-                      </span>
-                      <span className="text-[11px] text-[#78716C]">
-                        {txn.date} · {txn.time}
-                      </span>
-                    </td>
+      {/* Desktop Ledger Table */}
+      <div className="hidden md:block bg-[#111418] border border-[#2B3139] rounded-[6px] overflow-hidden">
+        <table className="w-full text-left text-[13px] tabular-nums">
+          <thead className="bg-[#161A1E] border-b border-[#2B3139] text-[#848E9C] text-[11px] font-semibold uppercase">
+            <tr>
+              <th className="py-2.5 px-3">Transaction ID & Time</th>
+              <th className="py-2.5 px-3">Description</th>
+              <th className="py-2.5 px-3">Type</th>
+              <th className="py-2.5 px-3">Amount (INR)</th>
+              <th className="py-2.5 px-3">Fee</th>
+              <th className="py-2.5 px-3">Balance After</th>
+              <th className="py-2.5 px-3">Status</th>
+              <th className="py-2.5 px-3 text-right">Audit Ref</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#1E2329]">
+            {filtered.map((t) => {
+              const isCredit = t.amount > 0;
+              return (
+                <tr
+                  key={t.id}
+                  onClick={() => openTransactionDetail(t)}
+                  className="hover:bg-[#161A1E] transition-colors cursor-pointer group"
+                >
+                  <td className="py-3 px-3">
+                    <span className="font-mono font-bold text-[12px] text-[#F5F5F5] group-hover:text-[#F0B90B] block">
+                      {t.id}
+                    </span>
+                    <span className="text-[11px] text-[#848E9C]">{t.date} · {t.time}</span>
+                  </td>
 
-                    <td className="py-3.5 px-4 font-semibold text-[#171717] max-w-xs">
-                      <span className="block truncate">{txn.description}</span>
-                    </td>
+                  <td className="py-3 px-3 font-semibold text-[#F5F5F5] max-w-xs truncate">
+                    {t.description}
+                  </td>
 
-                    <td className="py-3.5 px-4">
-                      <Badge
-                        status={
-                          txn.type === 'buy'
-                            ? 'neutral'
-                            : txn.type === 'sell' || txn.type === 'deposit'
-                            ? 'positive'
-                            : txn.type === 'withdrawal'
-                            ? 'warning'
-                            : 'info'
-                        }
-                        label={txn.type.toUpperCase()}
-                      />
-                    </td>
+                  <td className="py-3 px-3">
+                    <span
+                      className={`inline-flex items-center gap-1 font-bold uppercase text-[11px] px-1.5 py-0.5 rounded ${
+                        isCredit
+                          ? 'bg-[#102A22] text-[#0ECB81] border border-[#0ECB81]/30'
+                          : 'bg-[#1E2329] text-[#848E9C] border border-[#363C45]'
+                      }`}
+                    >
+                      {t.type}
+                    </span>
+                  </td>
 
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={`font-bold tabular-nums block ${
-                          isCredit ? 'text-[#16803C]' : 'text-[#171717]'
-                        }`}
-                      >
-                        {isCredit ? '+' : ''}
-                        {formatINR(txn.amount, { decimals: 2 })}
-                      </span>
-                    </td>
+                  <td className={`py-3 px-3 font-bold text-[13px] ${isCredit ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'}`}>
+                    {isCredit ? '+' : ''}{formatINR(t.amount, { decimals: 2 })}
+                  </td>
 
-                    <td className="py-3.5 px-4 tabular-nums text-[#78716C]">
-                      {txn.fee > 0 ? formatINR(txn.fee, { decimals: 2 }) : '₹0.00'}
-                    </td>
+                  <td className="py-3 px-3 text-[#848E9C]">
+                    {formatINR(t.fee, { decimals: 2 })}
+                  </td>
 
-                    <td className="py-3.5 px-4 font-bold text-[#005EA8] tabular-nums">
-                      {formatINR(txn.runningBalance, { decimals: 2 })}
-                    </td>
+                  <td className="py-3 px-3 font-bold text-[#F0B90B]">
+                    {formatINR(t.runningBalance, { decimals: 2 })}
+                  </td>
 
-                    <td className="py-3.5 px-4 font-mono text-[12px] text-[#78716C]">
-                      {txn.reference}
-                    </td>
+                  <td className="py-3 px-3">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0ECB81]">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Reconciled</span>
+                    </span>
+                  </td>
 
-                    <td className="py-3.5 px-4 text-right">
-                      <button className="text-[12px] font-semibold text-[#005EA8] group-hover:underline">
-                        Receipt
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="py-12 text-center text-[#78716C]">
-            <p className="text-[14px]">No transactions match your current search.</p>
-          </div>
-        )}
+                  <td className="py-3 px-3 text-right">
+                    <span className="font-mono text-[11px] text-[#848E9C] group-hover:text-[#F0B90B]">
+                      {t.reference}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
+
+      {/* Mobile Ledger List */}
+      <div className="md:hidden space-y-2 tabular-nums">
+        {filtered.map((t) => {
+          const isCredit = t.amount > 0;
+          return (
+            <div
+              key={t.id}
+              onClick={() => openTransactionDetail(t)}
+              className="p-3 bg-[#111418] border border-[#2B3139] rounded-[6px] space-y-2 cursor-pointer hover:border-[#363C45]"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <span className="font-bold text-[13px] text-[#F5F5F5] block">{t.description}</span>
+                  <span className="text-[11px] text-[#848E9C] font-mono">{t.id} · {t.date}</span>
+                </div>
+                <span className={`font-bold text-[14px] ${isCredit ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'}`}>
+                  {isCredit ? '+' : ''}{formatINR(t.amount)}
+                </span>
+              </div>
+              <div className="pt-2 border-t border-[#1E2329] flex items-center justify-between text-[11px] text-[#848E9C]">
+                <span>Bal: <strong className="text-[#F0B90B]">{formatINR(t.runningBalance)}</strong></span>
+                <span className="font-mono">{t.reference}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="p-10 text-center bg-[#111418] border border-[#2B3139] rounded-[6px] text-[#848E9C] text-[13px]">
+          No ledger transactions found.
+        </div>
+      )}
     </div>
   );
 };
+
+export default LedgerView;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTrading } from '../../context/TradingContext';
 import { formatINR } from '../../constants/designTokens';
-import { Product } from '../../types';
 import {
   TrendingUp,
   TrendingDown,
@@ -36,47 +35,48 @@ export const ProductsPage: React.FC = () => {
     });
 
   return (
-    <div className="bg-[#F7F6F2] min-h-screen py-16 sm:py-24">
+    <div className="bg-[#0B0E11] text-[#F5F5F5] min-h-screen py-14 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Header with Narrative: "Start with curiosity." */}
-        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
+        {/* Header */}
+        <div className="max-w-3xl mb-10 sm:mb-14 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#F0B90B] tracking-wider uppercase font-mono">
+            <span className="size-1.5 rounded-full bg-[#F0B90B]" />
             Marketplace Catalog
           </div>
-          <h1 className="text-[38px] sm:text-[54px] font-extrabold text-[#171A17] tracking-tight leading-[1.08]">
+          <h1 className="text-[34px] sm:text-[48px] font-extrabold text-[#F5F5F5] tracking-tight leading-[1.08]">
             Start with curiosity.
           </h1>
-          <p className="text-[17px] sm:text-[19px] text-[#5A5A53] leading-relaxed">
+          <p className="text-[16px] sm:text-[18px] text-[#848E9C] leading-relaxed">
             There’s more to a product than a number. Explore listings with tangible context, verified unit availability, 24-hour activity, and direct settlement terms.
           </p>
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[18px] p-4 sm:p-5 mb-10 shadow-2xs space-y-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-[#161A1E] border border-[#2B3139] rounded-[8px] p-4 mb-8 space-y-3">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             {/* Search Input */}
             <div className="relative w-full sm:w-80">
-              <Search className="w-4 h-4 text-[#A3A29A] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-[#848E9C] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search products by name or ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#005EA8] focus:bg-white"
+                className="w-full pl-9 pr-4 py-2 bg-[#111418] border border-[#2B3139] rounded-[6px] text-xs text-[#F5F5F5] placeholder-[#848E9C] focus:outline-[#F0B90B] focus:border-[#F0B90B]"
               />
             </div>
 
             {/* Sort & Category Selectors */}
-            <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-              <div className="flex items-center gap-1 p-1 bg-[#F7F6F2] border border-[#E2E1DA] rounded-[10px]">
+            <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+              <div className="flex items-center gap-1 p-1 bg-[#111418] border border-[#2B3139] rounded-[6px]">
                 {categories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-3 py-1 rounded-[7px] text-[12px] font-semibold transition-all cursor-pointer ${
+                    className={`px-3 py-1 rounded-[4px] text-xs font-semibold transition-all cursor-pointer ${
                       selectedCategory === cat
-                        ? 'bg-[#0070BA] text-[#0C0F0C] shadow-2xs'
-                        : 'text-[#5A5A53] hover:text-[#171A17]'
+                        ? 'bg-[#F0B90B] text-[#181A20]'
+                        : 'text-[#848E9C] hover:text-[#F5F5F5]'
                     }`}
                   >
                     {cat}
@@ -87,7 +87,7 @@ export const ProductsPage: React.FC = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3 py-2 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[10px] text-[13px] font-medium text-[#171A17] focus:outline-[#005EA8] cursor-pointer"
+                className="px-3 py-2 bg-[#111418] border border-[#2B3139] rounded-[6px] text-xs font-medium text-[#F5F5F5] focus:outline-[#F0B90B] cursor-pointer"
               >
                 <option value="value-desc">Sort by highest value</option>
                 <option value="value-asc">Sort by lowest value</option>
@@ -98,7 +98,7 @@ export const ProductsPage: React.FC = () => {
         </div>
 
         {/* Product Cards List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((product) => {
             const isPositive = product.changePercent >= 0;
             const inWatchlist = watchlist.includes(product.id);
@@ -106,15 +106,15 @@ export const ProductsPage: React.FC = () => {
             return (
               <div
                 key={product.id}
-                className="bg-[#FFFFFF] border border-[#CBCAC2] hover:border-[#0070BA] rounded-[20px] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
+                className="bg-[#161A1E] border border-[#2B3139] hover:border-[#363C45] rounded-[10px] p-5 transition-all flex flex-col justify-between group shadow-sm hover:shadow-md"
               >
                 <div>
                   {/* Clean unboxed metadata header */}
-                  <div className="flex items-center justify-between text-xs text-[#5A5A53] pb-3 border-b border-[#EFEEE9]">
+                  <div className="flex items-center justify-between text-xs text-[#848E9C] pb-3 border-b border-[#2B3139]">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-[#005EA8]">{product.category}</span>
-                      <span aria-hidden="true">·</span>
-                      <span className="font-mono">{product.id}</span>
+                      <span className="font-semibold text-[#F0B90B]">{product.category}</span>
+                      <span aria-hidden="true" className="text-[#363C45]">·</span>
+                      <span className="font-mono text-[#848E9C]">{product.id}</span>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -124,7 +124,7 @@ export const ProductsPage: React.FC = () => {
                           toggleWatchlist(product.id);
                         }}
                         className={`p-1 rounded transition-colors cursor-pointer ${
-                          inWatchlist ? 'text-[#C77700]' : 'text-[#CBCAC2] hover:text-[#5A5A53]'
+                          inWatchlist ? 'text-[#F0B90B]' : 'text-[#5E6673] hover:text-[#B7BDC6]'
                         }`}
                         title={inWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}
                       >
@@ -132,8 +132,8 @@ export const ProductsPage: React.FC = () => {
                       </button>
 
                       <span
-                        className={`font-semibold tabular-nums ${
-                          isPositive ? 'text-[#0A7A45]' : 'text-[#BF2A2A]'
+                        className={`font-semibold tabular-nums font-mono text-xs ${
+                          isPositive ? 'text-[#0ECB81]' : 'text-[#F6465D]'
                         }`}
                       >
                         {isPositive ? '+' : ''}
@@ -142,36 +142,36 @@ export const ProductsPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <h3 className="mt-4 text-[22px] font-bold text-[#171A17] group-hover:text-[#005EA8] transition-colors">
+                  <h3 className="mt-3.5 text-[18px] font-bold text-[#F5F5F5] group-hover:text-[#F0B90B] transition-colors">
                     {product.name}
                   </h3>
 
-                  <p className="mt-2 text-[14px] text-[#5A5A53] leading-relaxed line-clamp-2">
+                  <p className="mt-1.5 text-xs text-[#848E9C] leading-relaxed line-clamp-2">
                     {product.description || 'Verified product listing with structured supply quota.'}
                   </p>
 
                   {/* Valuation box */}
-                  <div className="mt-6 p-4 bg-[#F7F6F2] rounded-[14px] border border-[#E2E1DA]">
+                  <div className="mt-4 p-3.5 bg-[#111418] rounded-[6px] border border-[#2B3139]">
                     <div className="flex justify-between items-baseline">
-                      <span className="text-xs text-[#6B6B63] font-medium">Indicative unit value</span>
-                      <span className="text-xs text-[#5A5A53]">
-                        {product.availableUnits.toLocaleString()} units available
+                      <span className="text-[11px] text-[#848E9C] font-medium">Indicative unit value</span>
+                      <span className="text-[11px] text-[#848E9C] font-mono">
+                        {product.availableUnits.toLocaleString()} units
                       </span>
                     </div>
-                    <div className="text-[26px] font-extrabold text-[#171A17] tabular-nums mt-1">
+                    <div className="text-[22px] font-extrabold text-[#F5F5F5] tabular-nums font-mono mt-0.5">
                       {formatINR(product.currentValue)}
                     </div>
 
-                    <div className="mt-3 pt-2.5 border-t border-[#E2E1DA] grid grid-cols-2 gap-2 text-xs text-[#6B6B63]">
+                    <div className="mt-2.5 pt-2 border-t border-[#2B3139] grid grid-cols-2 gap-2 text-[11px] text-[#848E9C]">
                       <div>
                         <span>24h Range</span>
-                        <div className="font-semibold text-[#171A17] mt-0.5">
+                        <div className="font-semibold text-[#B7BDC6] mt-0.5 font-mono">
                           {formatINR(product.low24h)} – {formatINR(product.high24h)}
                         </div>
                       </div>
                       <div>
                         <span>24h Volume</span>
-                        <div className="font-semibold text-[#171A17] mt-0.5">
+                        <div className="font-semibold text-[#B7BDC6] mt-0.5 font-mono">
                           {formatINR(product.volume24h)}
                         </div>
                       </div>
@@ -180,22 +180,22 @@ export const ProductsPage: React.FC = () => {
                 </div>
 
                 {/* CTAs */}
-                <div className="mt-6 pt-4 border-t border-[#EFEEE9] flex items-center gap-3">
+                <div className="mt-5 pt-3.5 border-t border-[#2B3139] flex items-center gap-2.5">
                   <button
                     onClick={() => {
                       setSelectedProductId(product.id);
                       setCurrentView('app-product-detail');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="flex-1 py-2.5 text-center text-[13px] font-semibold text-[#171A17] bg-[#EFEEE9] hover:bg-[#E2E1DA] rounded-[10px] transition-colors cursor-pointer"
+                    className="flex-1 py-2 text-center text-xs font-semibold text-[#B7BDC6] bg-[#1E2329] hover:bg-[#23282F] hover:text-[#F5F5F5] rounded-[6px] border border-[#2B3139] transition-colors cursor-pointer"
                   >
-                    View details
+                    View Details
                   </button>
                   <button
                     onClick={() => openBuySell('buy', product)}
-                    className="flex-1 py-2.5 text-center text-[13px] font-bold text-[#0C0F0C] bg-[#0070BA] hover:bg-[#005EA8] rounded-[10px] transition-colors cursor-pointer shadow-2xs"
+                    className="flex-1 py-2 text-center text-xs font-bold text-[#181A20] bg-[#F0B90B] hover:bg-[#F8D12F] rounded-[6px] transition-colors cursor-pointer shadow-sm"
                   >
-                    Trade unit
+                    Trade Unit
                   </button>
                 </div>
               </div>
@@ -203,10 +203,10 @@ export const ProductsPage: React.FC = () => {
           })}
         </div>
 
-        {/* Quiet Footnote */}
-        <div className="mt-12 p-4 bg-[#FFFFFF] border border-[#E2E1DA] rounded-[14px] flex items-center justify-between text-xs text-[#5A5A53]">
+        {/* Footnote */}
+        <div className="mt-10 p-4 bg-[#161A1E] border border-[#2B3139] rounded-[8px] flex items-center justify-between text-xs text-[#848E9C]">
           <div className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-[#6B6B63] shrink-0" />
+            <Info className="w-4 h-4 text-[#F0B90B] shrink-0" />
             <span>
               All products listed are demonstration models designed to test marketplace workflows and do not represent real securities.
             </span>
@@ -217,7 +217,7 @@ export const ProductsPage: React.FC = () => {
               setCurrentView('app-dashboard');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-bold text-[#005EA8] hover:underline cursor-pointer whitespace-nowrap ml-4"
+            className="font-bold text-[#F0B90B] hover:underline cursor-pointer whitespace-nowrap ml-4"
           >
             Launch terminal preview →
           </button>

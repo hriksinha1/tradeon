@@ -3,7 +3,7 @@ import { useTrading } from '../../context/TradingContext';
 import { Modal } from '../common/Modal';
 import { Button } from '../common/Button';
 import { formatINR } from '../../constants/designTokens';
-import { CheckCircle2, Building2, Clock, AlertCircle } from 'lucide-react';
+import { CheckCircle2, Building2, Clock, AlertCircle, Shield } from 'lucide-react';
 
 export const WithdrawModal: React.FC = () => {
   const { isWithdrawOpen, setIsWithdrawOpen, wallet, withdrawFunds } = useTrading();
@@ -34,120 +34,128 @@ export const WithdrawModal: React.FC = () => {
       isOpen={isWithdrawOpen}
       onClose={handleClose}
       title={isSuccess ? undefined : 'Withdraw Funds'}
-      subtitle={isSuccess ? undefined : `Available for Withdrawal: ${formatINR(wallet.availableBalance)}`}
+      subtitle={isSuccess ? undefined : `Available Balance: ${formatINR(wallet.availableBalance)} · Bank Transfer`}
       maxWidth="md"
     >
       {isSuccess ? (
         <div className="py-4 text-center space-y-4">
-          <div className="w-14 h-14 bg-[#ECFDF3] rounded-full flex items-center justify-center mx-auto text-[#16803C]">
-            <CheckCircle2 className="w-8 h-8" />
+          <div className="w-12 h-12 bg-[#102A22] border border-[#0ECB81]/40 rounded-full flex items-center justify-center mx-auto text-[#0ECB81]">
+            <CheckCircle2 className="w-7 h-7" />
           </div>
           <div>
-            <h3 className="text-[20px] font-bold text-[#171717]">Withdrawal Initiated</h3>
-            <p className="text-[13px] text-[#6B6B6B] mt-1">
-              ₹{netCredit.toLocaleString('en-IN')} is being transferred to your registered bank account.
+            <h3 className="text-[18px] font-bold text-[#F5F5F5]">Withdrawal Submitted</h3>
+            <p className="text-[13px] text-[#848E9C] mt-1">
+              ₹{netCredit.toLocaleString('en-IN')} is being transferred to your registered beneficiary bank account.
             </p>
           </div>
-          <div className="p-3 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] text-left text-[12px] space-y-1.5">
+          <div className="p-3.5 bg-[#111418] border border-[#2B3139] rounded-[6px] text-left text-[12px] space-y-2">
             <div className="flex justify-between">
-              <span className="text-[#78716C]">Beneficiary:</span>
-              <span className="font-semibold text-[#171717]">{selectedAccount}</span>
+              <span className="text-[#848E9C]">Beneficiary:</span>
+              <span className="font-semibold text-[#F5F5F5]">{selectedAccount}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#78716C]">Expected Arrival:</span>
-              <span className="font-semibold text-[#16803C]">Within 2 Hours (IMPS)</span>
+              <span className="text-[#848E9C]">Processing Speed:</span>
+              <span className="font-semibold text-[#0ECB81]">IMPS (Within 2 Hours)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#78716C]">Remaining Balance:</span>
-              <span className="font-semibold text-[#171717] tabular-nums">{formatINR(wallet.availableBalance)}</span>
+              <span className="text-[#848E9C]">Bank Transfer Fee:</span>
+              <span className="font-semibold text-[#848E9C] tabular-nums">₹10.00</span>
             </div>
           </div>
-          <Button fullWidth onClick={handleClose}>
+          <Button fullWidth variant="primary" onClick={handleClose}>
             Done
           </Button>
         </div>
       ) : (
         <div className="space-y-4">
-          {/* Amount */}
+          {/* Destination Account */}
           <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-[12px] font-semibold text-[#78716C]">Withdrawal Amount</label>
+            <label className="block text-[12px] font-medium text-[#848E9C] mb-1.5">
+              Verified Destination Account
+            </label>
+            <div className="p-3 rounded-[6px] border border-[#363C45] bg-[#111418] flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-[#1E2329] rounded-[4px] text-[#F0B90B]">
+                  <Building2 className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[13px] font-semibold text-[#F5F5F5]">{selectedAccount}</div>
+                  <div className="text-[11px] text-[#848E9C]">IFSC: HDFC0001248 · Primary Savings</div>
+                </div>
+              </div>
+              <span className="text-[11px] font-semibold text-[#0ECB81] bg-[#102A22] border border-[#0ECB81]/30 px-1.5 py-0.5 rounded-[4px]">
+                Verified
+              </span>
+            </div>
+          </div>
+
+          {/* Amount input */}
+          <div>
+            <div className="flex justify-between text-[12px] mb-1.5">
+              <label className="font-medium text-[#848E9C]">Withdrawal Amount (INR)</label>
               <button
                 type="button"
                 onClick={() => setAmount(wallet.availableBalance)}
-                className="text-[11px] font-semibold text-[#005EA8] hover:underline"
+                className="font-semibold text-[#F0B90B] hover:underline cursor-pointer"
               >
-                Withdraw Full ({formatINR(wallet.availableBalance)})
+                Max ({formatINR(wallet.availableBalance)})
               </button>
             </div>
             <div className="relative">
-              <span className="absolute left-3.5 top-3 text-[18px] font-bold text-[#78716C]">₹</span>
+              <span className="absolute left-3 top-2.5 text-[16px] font-bold text-[#848E9C]">₹</span>
               <input
                 type="number"
                 min="100"
                 max={wallet.availableBalance}
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full pl-9 pr-4 py-2.5 border border-[#E7E5E4] rounded-[10px] text-[20px] font-bold text-[#171717] tabular-nums focus:outline-[#005EA8]"
-                placeholder="Enter amount"
+                className="w-full h-11 pl-8 pr-4 rounded-[6px] bg-[#111418] border border-[#363C45] text-[#F5F5F5] font-bold text-[18px] tabular-nums focus:border-[#F0B90B] focus:outline-none"
               />
             </div>
           </div>
 
-          {/* Destination Account */}
-          <div>
-            <label className="block text-[12px] font-semibold text-[#78716C] mb-1">
-              Destination Bank Account
-            </label>
-            <div className="p-3 bg-[#F5F5F4] border border-[#E7E5E4] rounded-[10px] flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Building2 className="w-5 h-5 text-[#005EA8]" />
-                <div>
-                  <span className="text-[13px] font-bold text-[#171717] block">HDFC Bank Limited</span>
-                  <span className="text-[11px] text-[#6B6B6B]">A/C No: ••••••••4091 · IFSC: HDFC000124</span>
-                </div>
-              </div>
-              <span className="text-[11px] font-semibold text-[#16803C] bg-[#ECFDF3] px-2 py-0.5 rounded">
-                Verified
-              </span>
-            </div>
-          </div>
-
-          {/* Breakdown */}
-          <div className="bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px] p-3 text-[13px] space-y-1.5">
-            <div className="flex items-center justify-between text-[#6B6B6B]">
+          {/* Settlement breakdown */}
+          <div className="p-3 bg-[#111418] rounded-[6px] border border-[#2B3139] space-y-1.5 text-[12px]">
+            <div className="flex justify-between text-[#848E9C]">
               <span>Requested Amount</span>
-              <span className="font-semibold text-[#171717] tabular-nums">{formatINR(amount)}</span>
+              <span className="font-semibold text-[#F5F5F5] tabular-nums">{formatINR(amount)}</span>
             </div>
-            <div className="flex items-center justify-between text-[#6B6B6B]">
-              <span>Processing Fee</span>
-              <span className="font-semibold text-[#171717] tabular-nums">{formatINR(fee)}</span>
+            <div className="flex justify-between text-[#848E9C]">
+              <span>Transfer Network Fee</span>
+              <span className="font-semibold text-[#848E9C] tabular-nums">₹{fee.toFixed(2)}</span>
             </div>
-            <div className="pt-2 border-t border-[#E7E5E4] flex items-center justify-between text-[14px] font-bold">
-              <span className="text-[#171717]">Net Amount to Account</span>
-              <span className="text-[#005EA8] tabular-nums">{formatINR(netCredit)}</span>
+            <div className="pt-2 border-t border-[#2B3139] flex justify-between font-bold">
+              <span className="text-[#F5F5F5]">Net Bank Credit</span>
+              <span className="text-[14px] text-[#F0B90B] tabular-nums">{formatINR(netCredit)}</span>
             </div>
-          </div>
-
-          {/* Arrival Notice */}
-          <div className="flex items-center gap-2 text-[11px] text-[#78716C] bg-[#FFFBEB] border border-[#FEDF89] p-2.5 rounded-[8px]">
-            <Clock className="w-3.5 h-3.5 text-[#B7791F] shrink-0" />
-            <span>Funds settle directly via IMPS 24x7 within 2 business hours.</span>
           </div>
 
           {!canWithdraw && (
-            <div className="flex items-center gap-2 p-2 bg-[#FEF2F2] border border-[#FECDCA] rounded-[8px] text-[#C62828] text-[12px]">
-              <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>Amount must be greater than zero and cannot exceed available balance.</span>
+            <div className="p-3 rounded-[6px] bg-[#301820] border border-[#F6465D]/30 flex items-start gap-2.5 text-[#F6465D] text-[12px]">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span>Amount must be greater than zero and within available balance ({formatINR(wallet.availableBalance)}).</span>
             </div>
           )}
 
-          {/* CTA */}
-          <Button fullWidth size="lg" onClick={handleWithdraw} disabled={!canWithdraw}>
-            Confirm Withdrawal of {formatINR(netCredit)}
+          <div className="flex items-center gap-2 text-[12px] text-[#848E9C]">
+            <Clock className="w-3.5 h-3.5 text-[#F0B90B]" />
+            <span>Withdrawals are processed automatically 24x7 via direct IMPS banking rails.</span>
+          </div>
+
+          <Button
+            variant="primary"
+            fullWidth
+            size="md"
+            disabled={!canWithdraw}
+            onClick={handleWithdraw}
+            className="font-bold"
+          >
+            Confirm Withdrawal
           </Button>
         </div>
       )}
     </Modal>
   );
 };
+
+export default WithdrawModal;

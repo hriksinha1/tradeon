@@ -25,13 +25,13 @@ export const TransactionModal: React.FC = () => {
     <Modal
       isOpen={!!selectedTransaction}
       onClose={closeTransactionDetail}
-      title="Transaction Audit Entry"
+      title="Transaction Audit Record"
       subtitle={`Immutable Ledger ID: ${selectedTransaction.id}`}
       maxWidth="md"
     >
       <div className="space-y-4">
         {/* Header Amount Card */}
-        <div className="p-4 bg-[#F0FAFF] border border-[#DFF6FF] rounded-[14px] text-center">
+        <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px] text-center">
           <Badge
             status={
               selectedTransaction.type === 'buy'
@@ -46,113 +46,100 @@ export const TransactionModal: React.FC = () => {
             className="mb-1 uppercase font-bold"
           />
           <h2
-            className={`text-[28px] font-bold tabular-nums tracking-tight mt-1 ${
-              isCredit ? 'text-[#16803C]' : 'text-[#171717]'
+            className={`text-[26px] font-bold tabular-nums tracking-tight mt-1.5 ${
+              isCredit ? 'text-[#0ECB81]' : 'text-[#F5F5F5]'
             }`}
           >
             {isCredit ? '+' : ''}
             {formatINR(selectedTransaction.amount, { decimals: 2 })}
           </h2>
-          <p className="text-[13px] text-[#6B6B6B] mt-0.5">{selectedTransaction.description}</p>
+          <p className="text-[12px] text-[#848E9C] mt-1">{selectedTransaction.description}</p>
         </div>
 
         {/* Ledger Details Grid */}
-        <div className="bg-white border border-[#E7E5E4] rounded-[12px] divide-y divide-[#E7E5E4] text-[13px]">
+        <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] divide-y divide-[#1E2329] text-[13px]">
           <div className="p-3 flex items-center justify-between">
-            <span className="text-[#6B6B6B]">Timestamp</span>
-            <span className="font-semibold text-[#171717]">
+            <span className="text-[#848E9C]">Execution Timestamp</span>
+            <span className="font-semibold text-[#F5F5F5]">
               {selectedTransaction.date} · {selectedTransaction.time}
             </span>
           </div>
           <div className="p-3 flex items-center justify-between">
-            <span className="text-[#6B6B6B]">Transaction Status</span>
-            <span className="inline-flex items-center gap-1 font-semibold text-[#16803C]">
-              <CheckCircle2 className="w-4 h-4" />
+            <span className="text-[#848E9C]">Status</span>
+            <span className="inline-flex items-center gap-1 font-semibold text-[#0ECB81]">
+              <CheckCircle2 className="w-3.5 h-3.5" />
               <span>Settled & Reconciled</span>
             </span>
           </div>
           <div className="p-3 flex items-center justify-between">
-            <span className="text-[#6B6B6B]">Platform / Processing Fee</span>
-            <span className="font-semibold text-[#171717] tabular-nums">
+            <span className="text-[#848E9C]">Processing / Exchange Fee</span>
+            <span className="font-semibold text-[#848E9C] tabular-nums">
               {formatINR(selectedTransaction.fee, { decimals: 2 })}
             </span>
           </div>
           <div className="p-3 flex items-center justify-between">
-            <span className="text-[#6B6B6B]">Running Balance Post-Transaction</span>
-            <span className="font-bold text-[#005EA8] tabular-nums">
+            <span className="text-[#848E9C]">Balance After Transaction</span>
+            <span className="font-bold text-[#F0B90B] tabular-nums">
               {formatINR(selectedTransaction.runningBalance, { decimals: 2 })}
             </span>
           </div>
           <div className="p-3 flex items-center justify-between">
-            <span className="text-[#6B6B6B]">Source / Payment Rail</span>
-            <span className="font-semibold text-[#171717]">
-              {selectedTransaction.paymentMethod || 'Internal Account Ledger'}
+            <span className="text-[#848E9C]">Payment Method / Settlement Rail</span>
+            <span className="font-semibold text-[#F5F5F5]">
+              {selectedTransaction.paymentMethod || 'Internal Exchange Ledger'}
             </span>
           </div>
           <div className="p-3 flex items-center justify-between">
-            <span className="text-[#6B6B6B]">Audit Reference</span>
+            <span className="text-[#848E9C]">Audit Reference</span>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[12px] font-semibold text-[#171717]">
+              <span className="font-mono text-[12px] font-semibold text-[#F0B90B]">
                 {selectedTransaction.reference}
               </span>
               <button
                 onClick={handleCopyRef}
-                className="p-1 hover:bg-[#F5F5F4] rounded transition-colors text-[#005EA8]"
+                className="p-1 hover:bg-[#1E2329] rounded transition-colors text-[#848E9C] hover:text-[#F0B90B] cursor-pointer"
                 title="Copy reference"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-[#16803C]" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[#0ECB81]" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
             </div>
           </div>
         </div>
 
         {/* 3-Stage Verification Timeline */}
-        <div className="p-3.5 bg-[#FAFAF9] border border-[#E7E5E4] rounded-[12px]">
-          <h4 className="text-[12px] font-bold text-[#78716C] uppercase tracking-wider mb-2.5">
-            Settlement Lifecycle
+        <div className="p-3 bg-[#111418] border border-[#2B3139] rounded-[6px]">
+          <h4 className="text-[11px] font-bold text-[#848E9C] uppercase tracking-wider mb-2.5">
+            Settlement Audit Lifecycle
           </h4>
-          <div className="space-y-3 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#A6F4C5]">
-            <div className="flex items-start gap-3 relative">
-              <div className="w-4 h-4 rounded-full bg-[#16803C] text-white flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="w-2.5 h-2.5" />
-              </div>
-              <div className="text-[12px]">
-                <span className="font-bold text-[#171717] block">Transaction Initiated</span>
-                <span className="text-[#6B6B6B]">Validated against user session and authorized credentials</span>
-              </div>
+          <div className="space-y-2.5 text-[12px]">
+            <div className="flex items-center gap-2 text-[#0ECB81]">
+              <Check className="w-3.5 h-3.5" />
+              <span className="font-semibold text-[#F5F5F5]">1. Order Signature Verified & Authorization Granted</span>
             </div>
-            <div className="flex items-start gap-3 relative">
-              <div className="w-4 h-4 rounded-full bg-[#16803C] text-white flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="w-2.5 h-2.5" />
-              </div>
-              <div className="text-[12px]">
-                <span className="font-bold text-[#171717] block">Execution & Balance Adjusted</span>
-                <span className="text-[#6B6B6B]">Debits/credits applied with strict zero-loss concurrency locks</span>
-              </div>
+            <div className="flex items-center gap-2 text-[#0ECB81]">
+              <Check className="w-3.5 h-3.5" />
+              <span className="font-semibold text-[#F5F5F5]">2. High-Throughput Matching Engine Filled Contract</span>
             </div>
-            <div className="flex items-start gap-3 relative">
-              <div className="w-4 h-4 rounded-full bg-[#16803C] text-white flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="w-2.5 h-2.5" />
-              </div>
-              <div className="text-[12px]">
-                <span className="font-bold text-[#171717] block">Ledger Reconciled</span>
-                <span className="text-[#6B6B6B]">Itemized ledger entry stored with running balance</span>
-              </div>
+            <div className="flex items-center gap-2 text-[#0ECB81]">
+              <Check className="w-3.5 h-3.5" />
+              <span className="font-semibold text-[#F5F5F5]">3. Double-Entry Running Balance Reconciled</span>
             </div>
           </div>
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2">
-          <Button variant="outline" fullWidth onClick={handleCopyRef} className="flex items-center gap-1.5">
-            <FileText className="w-4 h-4" />
-            <span>Copy Receipt Data</span>
+        <div className="flex gap-2 pt-1">
+          <Button variant="secondary" fullWidth onClick={handleCopyRef} className="flex items-center gap-1.5">
+            <FileText className="w-3.5 h-3.5" />
+            <span>Copy Audit Data</span>
           </Button>
-          <Button fullWidth onClick={closeTransactionDetail}>
-            Close
+          <Button variant="primary" fullWidth onClick={closeTransactionDetail}>
+            Dismiss
           </Button>
         </div>
       </div>
     </Modal>
   );
 };
+
+export default TransactionModal;

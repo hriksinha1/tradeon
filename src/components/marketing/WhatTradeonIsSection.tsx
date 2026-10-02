@@ -33,85 +33,85 @@ export const WhatTradeonIsSection: React.FC = () => {
     {
       id: 'discover',
       name: 'Discover',
-      kicker: 'Step 01 · Catalog',
+      kicker: 'Stage 01 · Catalog',
       headline: 'Find listed products with clear context.',
       description:
-        'Browse available products without being blinded by flashing tickers. Every listing shows current indicative value, available unit supply, and 24-hour activity.',
+        'Browse available products without distracting noise. Every listing shows current indicative value, available unit supply, and 24-hour turnover.',
       icon: Compass,
       previewSnippet: {
         label: 'Active Listing',
-        value: 'ATLAS-01 · ₹2,450.00',
-        subtext: '4,200 units available in marketplace quota',
+        value: 'ATLAS-01 · ₹2,480.00',
+        subtext: '1,240 units available in marketplace quota',
       },
     },
     {
       id: 'review',
       name: 'Review',
-      kicker: 'Step 02 · Context',
+      kicker: 'Stage 02 · Context',
       headline: 'Inspect historical movement and unit availability.',
       description:
-        'Before you act, see price history, unit allocations, and commercial context. You should never have to guess what you are looking at.',
+        'Before you act, see price history, order depth, and commercial context. You should never have to guess what you are looking at.',
       icon: FileText,
       previewSnippet: {
         label: 'Product Context',
-        value: '+3.4% 24h Movement',
-        subtext: 'Double-entry settlement verified with seller',
+        value: '+2.84% 24h Movement',
+        subtext: 'Double-entry settlement verified with clearing desk',
       },
     },
     {
       id: 'trade',
-      name: 'Buy & Sell',
-      kicker: 'Step 03 · Execution',
-      headline: 'Place orders with full breakdown before confirmation.',
+      name: 'Execute',
+      kicker: 'Stage 03 · Orders',
+      headline: 'Place buy and sell orders with clear fees.',
       description:
-        'Specify your exact quantity. Tradeon calculates total costs, unit allocation, and settlement timing in real time before you click confirm.',
+        'Specify units, see transparent fee calculations in advance, and confirm before execution. No surprise slippage.',
       icon: ArrowRightLeft,
       previewSnippet: {
-        label: 'Order Ticket',
-        value: '5 Units · ₹12,250.00',
-        subtext: 'Zero hidden processing fees',
+        label: 'Order Simulation',
+        value: 'Buy 10 Units · ₹24,800.00',
+        subtext: '0.10% platform fee shown prior to signature',
+      },
+    },
+    {
+      id: 'manage',
+      name: 'Track',
+      kicker: 'Stage 04 · Holdings',
+      headline: 'Monitor your positions with live mark-to-market.',
+      description:
+        'Keep track of entry prices, current values, and net unrealized gains across every asset you hold in your portfolio.',
+      icon: PieChart,
+      previewSnippet: {
+        label: 'Position Ledger',
+        value: '₹4,82,640 Portfolio Valuation',
+        subtext: '12 active product positions marked to market',
       },
     },
     {
       id: 'wallet',
-      name: 'Wallet',
-      kicker: 'Step 04 · Liquidity',
-      headline: 'Deposit and withdraw through transparent rails.',
+      name: 'Settle',
+      kicker: 'Stage 05 · Wallet',
+      headline: 'Move money with segregated escrow rails.',
       description:
-        'Move money into your trading wallet with instant UPI, net banking, or debit cards. Your available balance is reconciled with every order.',
+        'Deposit via instant UPI or Net Banking, and withdraw directly to verified domestic bank accounts within 2 hours.',
       icon: Wallet,
       previewSnippet: {
-        label: 'Wallet Balance',
-        value: '₹24,850.00 Available',
-        subtext: 'Instant deposit tracking with bank reference',
+        label: 'Liquid Balance',
+        value: '₹84,250 Available Cash',
+        subtext: 'Instant IMPS bank withdrawal ready',
       },
     },
     {
-      id: 'portfolio',
-      name: 'Portfolio',
-      kicker: 'Step 05 · Ownership',
-      headline: 'Track active holdings and realized returns.',
+      id: 'audit',
+      name: 'Audit',
+      kicker: 'Stage 06 · Accounting',
+      headline: 'A clear double-entry record of every event.',
       description:
-        'See all open positions, acquired units, average purchase price, and current market valuations grouped cleanly on one calm dashboard.',
-      icon: PieChart,
-      previewSnippet: {
-        label: 'Holdings Valuation',
-        value: '₹84,200.00 Net Value',
-        subtext: '12 active product contracts in custody',
-      },
-    },
-    {
-      id: 'ledger',
-      name: 'Ledger',
-      kicker: 'Step 06 · Accounting',
-      headline: 'Every rupee leaves an immutable, auditable trail.',
-      description:
-        'Later, you will want to know where every rupee went. Tradeon logs every order, debit, credit, and withdrawal to a double-entry ledger with a running balance.',
+        'Every trade, deposit, withdrawal, and fee adjustment writes an immutable running-balance ledger entry exportable as CSV.',
       icon: Receipt,
       previewSnippet: {
-        label: 'Ledger Entry',
-        value: 'TXN-88219 · Cleared',
-        subtext: 'Running balance: ₹24,850.00 after settlement',
+        label: 'Verified Entry',
+        value: 'TXN-90342 · Balanced',
+        subtext: 'Double-entry cryptographic verification',
       },
     },
   ];
@@ -120,29 +120,25 @@ export const WhatTradeonIsSection: React.FC = () => {
   const IconComponent = current.icon;
 
   return (
-    <section className="py-20 sm:py-28 bg-[#FFFFFF] border-b border-[#CBCAC2]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="py-20 sm:py-24 bg-[#0B0E11] text-[#F5F5F5] border-b border-[#2B3139] select-none">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-14 sm:mb-18 space-y-4">
-          <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
-            The Complete Product
+        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
+          <div className="text-[12px] font-bold text-[#F0B90B] tracking-wider uppercase">
+            Platform Workflow
           </div>
-          <h2 className="text-[34px] sm:text-[46px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
+          <h2 className="text-[30px] sm:text-[42px] font-bold text-[#F5F5F5] tracking-tight leading-[1.12]">
             One place to discover products, act on them, and keep track of what happens next.
           </h2>
-          <p className="text-[17px] sm:text-[19px] text-[#5A5A53] leading-relaxed">
-            Tradeon brings product discovery, straightforward order execution, and double-entry accounting into one coherent experience across web and mobile.
+          <p className="text-[16px] text-[#848E9C] leading-relaxed">
+            Tradeon brings product discovery, straightforward order execution, and double-entry accounting into one coherent terminal across web and mobile.
           </p>
         </div>
 
         {/* Ecosystem Interactive Flow */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Horizontal / Vertical Step Selector */}
-          <div className="lg:col-span-5 space-y-2">
-            <div className="text-xs font-semibold text-[#6B6B63] mb-3 uppercase tracking-wider">
-              Ecosystem Stages
-            </div>
-
+          {/* Left Column: Step Selector */}
+          <div className="lg:col-span-5 space-y-1.5">
             {steps.map((step, idx) => {
               const StepIcon = step.icon;
               const isActive = idx === activeStepIndex;
@@ -151,28 +147,28 @@ export const WhatTradeonIsSection: React.FC = () => {
                 <button
                   key={step.id}
                   onClick={() => setActiveStepIndex(idx)}
-                  className={`w-full text-left p-4 rounded-[14px] transition-all flex items-center justify-between border cursor-pointer ${
+                  className={`w-full text-left p-3.5 rounded-[6px] transition-all flex items-center justify-between border cursor-pointer ${
                     isActive
-                      ? 'bg-[#F7F6F2] border-[#0070BA] shadow-xs'
-                      : 'bg-transparent border-transparent hover:bg-[#F7F6F2]/60 hover:border-[#E2E1DA]'
+                      ? 'bg-[#161A1E] border-[#F0B90B]'
+                      : 'bg-[#111418] border-[#2B3139] hover:border-[#363C45]'
                   }`}
                 >
-                  <div className="flex items-center gap-3.5">
+                  <div className="flex items-center gap-3">
                     <div
-                      className={`w-9 h-9 rounded-[10px] flex items-center justify-center transition-colors ${
+                      className={`w-8 h-8 rounded-[4px] flex items-center justify-center transition-colors ${
                         isActive
-                          ? 'bg-[#0070BA] text-[#0C0F0C]'
-                          : 'bg-[#EFEEE9] text-[#5A5A53]'
+                          ? 'bg-[#F0B90B] text-[#181A20]'
+                          : 'bg-[#1E2329] text-[#848E9C]'
                       }`}
                     >
-                      <StepIcon className="w-4 h-4" />
+                      <StepIcon className="w-4 h-4 stroke-[2.2]" />
                     </div>
 
                     <div>
-                      <div className="text-xs text-[#6B6B63] font-medium">{step.kicker}</div>
+                      <div className="text-[11px] text-[#848E9C] font-mono">{step.kicker}</div>
                       <div
-                        className={`text-[16px] font-bold ${
-                          isActive ? 'text-[#171A17]' : 'text-[#5A5A53]'
+                        className={`text-[15px] font-bold ${
+                          isActive ? 'text-[#F5F5F5]' : 'text-[#848E9C]'
                         }`}
                       >
                         {step.name}
@@ -182,7 +178,7 @@ export const WhatTradeonIsSection: React.FC = () => {
 
                   <ArrowRight
                     className={`w-4 h-4 transition-transform ${
-                      isActive ? 'text-[#005EA8] translate-x-1' : 'text-[#CBCAC2]'
+                      isActive ? 'text-[#F0B90B] translate-x-1' : 'text-[#363C45]'
                     }`}
                   />
                 </button>
@@ -190,75 +186,48 @@ export const WhatTradeonIsSection: React.FC = () => {
             })}
           </div>
 
-          {/* Right Column: Detailed Stage Story & Live Preview Visual */}
-          <div className="lg:col-span-7 bg-[#F7F6F2] border border-[#CBCAC2] rounded-[24px] p-6 sm:p-10 space-y-8">
-            <div className="flex items-center justify-between border-b border-[#E2E1DA] pb-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-[12px] bg-[#0070BA] text-[#0C0F0C] flex items-center justify-center font-bold">
-                  <IconComponent className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-xs font-semibold text-[#005EA8] uppercase tracking-wider block">
-                    {current.kicker}
-                  </span>
-                  <h3 className="text-[22px] font-bold text-[#171A17]">{current.name} Experience</h3>
-                </div>
+          {/* Right Column: Active Step Stage Details */}
+          <div className="lg:col-span-7 bg-[#111418] border border-[#2B3139] rounded-[6px] p-6 sm:p-8 space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-[#1E2329]">
+              <div className="w-10 h-10 rounded-[4px] bg-[#302A15] border border-[#F0B90B]/30 text-[#F0B90B] flex items-center justify-center">
+                <IconComponent className="w-5 h-5" />
               </div>
+              <div>
+                <span className="text-[11px] font-mono font-bold text-[#F0B90B] uppercase">
+                  {current.kicker}
+                </span>
+                <h3 className="text-[20px] font-bold text-[#F5F5F5]">{current.headline}</h3>
+              </div>
+            </div>
 
-              <span className="text-xs font-mono text-[#6B6B63] bg-[#EFEEE9] px-2.5 py-1 rounded-[6px]">
-                0{activeStepIndex + 1} / 06
+            <p className="text-[15px] text-[#B7BDC6] leading-relaxed">
+              {current.description}
+            </p>
+
+            {/* Contextual Metric Snippet */}
+            <div className="p-4 bg-[#161A1E] rounded-[6px] border border-[#2B3139] space-y-1 text-[13px] tabular-nums">
+              <span className="text-[11px] text-[#848E9C] font-semibold uppercase block">
+                {current.previewSnippet.label}
+              </span>
+              <span className="text-[18px] font-bold text-[#F5F5F5] block">
+                {current.previewSnippet.value}
+              </span>
+              <span className="text-[12px] text-[#0ECB81] flex items-center gap-1.5 pt-1">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                {current.previewSnippet.subtext}
               </span>
             </div>
 
-            <div className="space-y-4">
-              <h4 className="text-[24px] sm:text-[28px] font-bold text-[#171A17] leading-snug">
-                {current.headline}
-              </h4>
-              <p className="text-[16px] sm:text-[17px] text-[#5A5A53] leading-relaxed">
-                {current.description}
-              </p>
-            </div>
-
-            {/* Stage Preview Snippet Box */}
-            <div className="bg-[#FFFFFF] border border-[#E2E1DA] rounded-[16px] p-5 shadow-2xs space-y-3">
-              <div className="flex items-center justify-between text-xs text-[#6B6B63]">
-                <span className="font-semibold text-[#171A17]">{current.previewSnippet.label}</span>
-                <span className="text-[#005EA8] flex items-center gap-1 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Live in Platform
-                </span>
-              </div>
-
-              <div className="text-[20px] sm:text-[22px] font-extrabold text-[#171A17] tabular-nums">
-                {current.previewSnippet.value}
-              </div>
-
-              <div className="text-xs text-[#5A5A53] pt-2 border-t border-[#EFEEE9]">
-                {current.previewSnippet.subtext}
-              </div>
-            </div>
-
-            {/* Quick Action Button */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+            <div className="pt-2">
               <button
                 onClick={() => {
                   setCurrentView('app-dashboard');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="w-full sm:w-auto px-5 py-2.5 bg-[#171A17] text-[#FFFFFF] hover:bg-[#0C0F0C] font-semibold text-sm rounded-[10px] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="inline-flex items-center gap-2 text-[14px] font-bold text-[#F0B90B] hover:underline cursor-pointer"
               >
-                <span>Preview {current.name} in interactive terminal</span>
-                <ArrowRight className="w-4 h-4 text-[#0070BA]" />
-              </button>
-
-              <button
-                onClick={() => {
-                  setCurrentView('how-it-works');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="text-xs font-semibold text-[#005EA8] hover:underline cursor-pointer"
-              >
-                Read full {current.name.toLowerCase()} specification →
+                <span>Launch this stage in Tradeon Terminal</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
           </div>
@@ -267,3 +236,5 @@ export const WhatTradeonIsSection: React.FC = () => {
     </section>
   );
 };
+
+export default WhatTradeonIsSection;

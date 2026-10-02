@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useTrading } from '../../context/TradingContext';
 import { formatINR } from '../../constants/designTokens';
 import { Product } from '../../types';
+import { PercentageChange } from '../common/PercentageChange';
 import {
   TrendingUp,
   TrendingDown,
   ArrowRight,
   Search,
-  Info,
+  ChevronRight,
 } from 'lucide-react';
 
 export const ProductShowcaseSection: React.FC = () => {
@@ -26,44 +27,44 @@ export const ProductShowcaseSection: React.FC = () => {
   });
 
   return (
-    <section className="py-20 sm:py-32 bg-[#F7F6F2] border-b border-[#CBCAC2]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="py-20 sm:py-24 bg-[#0B0E11] text-[#F5F5F5] border-b border-[#2B3139] select-none">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 sm:mb-16">
-          <div className="max-w-2xl space-y-3">
-            <div className="text-xs font-semibold text-[#005EA8] tracking-wider uppercase">
-              Product Discovery
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div className="max-w-2xl space-y-2">
+            <div className="text-[12px] font-bold text-[#F0B90B] tracking-wider uppercase">
+              Market Catalog
             </div>
-            <h2 className="text-[34px] sm:text-[48px] font-extrabold text-[#171A17] tracking-tight leading-[1.12]">
-              Start with curiosity.
+            <h2 className="text-[30px] sm:text-[42px] font-bold text-[#F5F5F5] tracking-tight leading-[1.12]">
+              Explore verified product contracts.
             </h2>
-            <p className="text-[17px] text-[#5A5A53] leading-relaxed">
-              Explore listings with transparent unit valuations, available supply limits, and visible 24-hour activity. Every listing provides clear context before you decide.
+            <p className="text-[16px] text-[#848E9C] leading-relaxed">
+              Explore listings with transparent unit valuations, available supply quotas, and real-time book depth.
             </p>
           </div>
 
-          {/* Interactive Filter & Search Controls */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Search & Filter Controls */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
             <div className="relative">
-              <Search className="w-4 h-4 text-[#A3A29A] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-[#848E9C] absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search products or IDs..."
+                placeholder="Search contracts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full sm:w-60 pl-9 pr-3.5 py-2 bg-white border border-[#CBCAC2] rounded-[10px] text-[13px] text-[#171A17] placeholder-[#A3A29A] focus:outline-[#005EA8]"
+                className="w-full sm:w-56 h-8 pl-8 pr-3 bg-[#111418] border border-[#363C45] rounded-[4px] text-[12px] text-[#F5F5F5] placeholder-[#848E9C] focus:border-[#F0B90B] focus:outline-none"
               />
             </div>
 
-            <div className="flex items-center gap-1 p-1 bg-[#FFFFFF] border border-[#CBCAC2] rounded-[10px]">
+            <div className="flex items-center gap-1 p-0.5 bg-[#111418] border border-[#2B3139] rounded-[4px]">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-[7px] text-[12px] font-semibold transition-all cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-[3px] text-[11px] font-semibold transition-all cursor-pointer ${
                     selectedCategory === cat
-                      ? 'bg-[#0070BA] text-[#0C0F0C]'
-                      : 'text-[#5A5A53] hover:text-[#171A17]'
+                      ? 'bg-[#1E2329] text-[#F0B90B] border border-[#363C45]'
+                      : 'text-[#848E9C] hover:text-[#F5F5F5]'
                   }`}
                 >
                   {cat}
@@ -73,112 +74,67 @@ export const ProductShowcaseSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Clean Marketplace UI: Products List with Natural Hierarchy */}
-        {/* Hierarchy: Name -> Context -> Value -> Movement -> Available Units -> Action */}
-        <div className="bg-[#FFFFFF] border border-[#CBCAC2] rounded-[24px] overflow-hidden shadow-2xs divide-y divide-[#E2E1DA]">
-          {filteredProducts.map((p) => {
-            const isPositive = p.changePercent >= 0;
-            return (
-              <div
-                key={p.id}
-                className="p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:bg-[#F7F6F2]/50 transition-colors"
-              >
-                {/* 1. What is it? (Name + Context) */}
-                <div className="lg:w-1/3 space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-[#005EA8]">{p.id}</span>
-                    <span className="text-xs text-[#6B6B63]">·</span>
-                    <span className="text-xs text-[#6B6B63] font-medium">{p.category}</span>
-                  </div>
-                  <h3 className="text-[20px] font-bold text-[#171A17]">{p.name}</h3>
-                  <p className="text-xs text-[#5A5A53] line-clamp-1">
-                    {p.description || 'Verified listed product available in marketplace quota.'}
-                  </p>
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {filteredProducts.map((p) => (
+            <div
+              key={p.id}
+              className="p-5 bg-[#111418] border border-[#2B3139] hover:border-[#363C45] rounded-[6px] transition-all flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div className="flex items-center justify-between pb-3 border-b border-[#1E2329]">
+                  <span className="text-[10px] font-mono font-bold text-[#F0B90B] uppercase bg-[#302A15] px-1.5 py-0.5 rounded">
+                    {p.id}
+                  </span>
+                  <span className="text-[11px] text-[#848E9C]">{p.category}</span>
                 </div>
 
-                {/* 2 & 3. What is its current value & What changed? */}
-                <div className="flex items-baseline lg:items-center gap-8">
-                  <div>
-                    <div className="text-[11px] text-[#6B6B63]">Current value</div>
-                    <div className="text-[22px] font-extrabold text-[#171A17] tabular-nums mt-0.5">
-                      {formatINR(p.currentValue)}
-                    </div>
-                  </div>
+                <h3
+                  onClick={() => {
+                    setSelectedProductId(p.id);
+                    setCurrentView('app-product-detail');
+                  }}
+                  className="text-[17px] font-bold text-[#F5F5F5] hover:text-[#F0B90B] mt-2.5 cursor-pointer"
+                >
+                  {p.name}
+                </h3>
+                <p className="text-[12px] text-[#848E9C] line-clamp-2 mt-1 leading-relaxed">
+                  {p.description}
+                </p>
+              </div>
 
-                  <div>
-                    <div className="text-[11px] text-[#6B6B63]">24h Movement</div>
-                    <div
-                      className={`text-sm font-bold flex items-center gap-1 mt-1 tabular-nums ${
-                        isPositive ? 'text-[#0A7A45]' : 'text-[#BF2A2A]'
-                      }`}
-                    >
-                      {isPositive ? (
-                        <TrendingUp className="w-3.5 h-3.5" />
-                      ) : (
-                        <TrendingDown className="w-3.5 h-3.5" />
-                      )}
-                      <span>
-                        {isPositive ? '+' : ''}
-                        {p.changePercent}%
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* 4. How many units are available? */}
-                  <div className="hidden sm:block">
-                    <div className="text-[11px] text-[#6B6B63]">Available supply</div>
-                    <div className="text-sm font-bold text-[#171A17] tabular-nums mt-1">
-                      {p.availableUnits.toLocaleString()} units
-                    </div>
-                  </div>
+              <div className="space-y-3 pt-2 border-t border-[#1E2329]">
+                <div className="flex items-baseline justify-between tabular-nums">
+                  <span className="text-[20px] font-bold text-[#F5F5F5]">
+                    {formatINR(p.currentValue)}
+                  </span>
+                  <PercentageChange value={p.changePercent} pill />
                 </div>
 
-                {/* 5. What can I do next? (Action) */}
-                <div className="flex items-center gap-3 pt-2 lg:pt-0 border-t lg:border-t-0 border-[#EFEEE9]">
+                <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => {
                       setSelectedProductId(p.id);
                       setCurrentView('app-product-detail');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="px-3.5 py-2 text-xs font-bold text-[#171A17] hover:bg-[#EFEEE9] rounded-[10px] transition-colors cursor-pointer"
+                    className="py-1.5 px-3 bg-[#161A1E] hover:bg-[#1E2329] border border-[#363C45] text-[#F5F5F5] text-[12px] font-semibold rounded-[4px] transition-colors cursor-pointer text-center"
                   >
-                    View details
+                    View Chart
                   </button>
-
                   <button
                     onClick={() => openBuySell('buy', p)}
-                    className="px-4 py-2 bg-[#0070BA] text-[#0C0F0C] font-bold text-xs rounded-[10px] hover:bg-[#005EA8] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
+                    className="py-1.5 px-3 bg-[#F0B90B] hover:bg-[#F8D12F] text-[#181A20] text-[12px] font-bold rounded-[4px] transition-colors cursor-pointer text-center shadow-xs"
                   >
-                    <span>Order units</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    Trade
                   </button>
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Illustrative Demo Notice */}
-        <div className="mt-8 p-4 bg-[#FFFFFF] border border-[#E2E1DA] rounded-[14px] flex items-center justify-between text-xs text-[#5A5A53]">
-          <div className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-[#6B6B63] shrink-0" />
-            <span>
-              All product listings, unit allocations, and valuation changes displayed above are illustrative models for platform demonstration.
-            </span>
-          </div>
-
-          <button
-            onClick={() => {
-              setCurrentView('products');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="font-bold text-[#005EA8] hover:underline cursor-pointer whitespace-nowrap ml-4"
-          >
-            Explore full catalog →
-          </button>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
+
+export default ProductShowcaseSection;

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTrading } from '../../context/TradingContext';
-import { formatINR } from '../../constants/designTokens';
+import { formatINR, formatPercent } from '../../constants/designTokens';
 import { Button } from '../common/Button';
-import { PieChart, TrendingUp, ArrowDownLeft, ArrowUpRight, Plus, ExternalLink } from 'lucide-react';
+import { PercentageChange } from '../common/PercentageChange';
+import { PieChart, TrendingUp, ArrowDownLeft, ArrowUpRight, Plus, ExternalLink, Wallet, ShieldCheck } from 'lucide-react';
 
 export const PortfolioView: React.FC = () => {
   const { positions, wallet, products, openBuySell, setIsAddFundsOpen, setCurrentView, setSelectedProductId } = useTrading();
@@ -13,62 +14,62 @@ export const PortfolioView: React.FC = () => {
   const totalPnlPercent = totalInvested > 0 ? (totalPnl / totalInvested) * 100 : 0;
 
   // Allocation calculation
-  const cashPercent = Math.round((wallet.availableBalance / wallet.totalValue) * 100);
+  const cashPercent = Math.round((wallet.availableBalance / (wallet.totalValue || 1)) * 100);
   const holdingsPercent = 100 - cashPercent;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
+    <div className="max-w-[1560px] mx-auto px-4 lg:px-6 py-5 space-y-5 select-none">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#2B3139]">
         <div>
-          <h1 className="text-[26px] font-bold text-[#171717] tracking-tight">Portfolio & Holdings</h1>
-          <p className="text-[14px] text-[#6B6B6B] mt-0.5">
-            Comprehensive overview of your active product allocations, current yields, and valuation performance.
+          <h1 className="text-[22px] font-bold text-[#F5F5F5] tracking-tight">Portfolio & Position Balances</h1>
+          <p className="text-[12px] text-[#848E9C] mt-0.5">
+            Active position performance, unrealized yields, and multi-asset exposure breakdown.
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button size="sm" onClick={() => setIsAddFundsOpen(true)} className="flex items-center gap-1.5">
-            <Plus className="w-4 h-4" />
-            <span>Add Funds</span>
+          <Button size="xs" variant="primary" onClick={() => setIsAddFundsOpen(true)} className="flex items-center gap-1 font-bold h-8">
+            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>Deposit Funds</span>
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => setCurrentView('markets')}>
-            Explore More Products
+          <Button size="xs" variant="secondary" onClick={() => setCurrentView('app-markets')} className="h-8">
+            Marketplace
           </Button>
         </div>
       </div>
 
-      {/* Main Metric Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 bg-white border border-[#E7E5E4] rounded-[16px] shadow-xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#78716C] block">
-            Net Portfolio Value
+      {/* Main Metric Cards Grid (Binance financial statistics bar) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#848E9C] block">
+            Total Portfolio Value
           </span>
-          <span className="text-[26px] font-bold text-[#171717] tabular-nums block mt-1">
+          <span className="text-[24px] font-bold text-[#F5F5F5] tabular-nums block mt-1">
             {formatINR(wallet.totalValue)}
           </span>
-          <span className="text-[12px] text-[#16803C] font-semibold mt-1 flex items-center gap-1">
+          <span className="text-[12px] text-[#0ECB81] font-semibold mt-1 flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
-            <span>+1.42% intraday movement</span>
+            <span>+1.42% Today (+₹6,840)</span>
           </span>
         </div>
 
-        <div className="p-5 bg-white border border-[#E7E5E4] rounded-[16px] shadow-xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#78716C] block">
-            Invested in Holdings
+        <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#848E9C] block">
+            Active Holdings Value
           </span>
-          <span className="text-[26px] font-bold text-[#171717] tabular-nums block mt-1">
-            {formatINR(totalInvested)}
+          <span className="text-[24px] font-bold text-[#F5F5F5] tabular-nums block mt-1">
+            {formatINR(wallet.investedValue)}
           </span>
-          <span className="text-[12px] text-[#78716C] block mt-1">Across {positions.length} active listings</span>
+          <span className="text-[12px] text-[#848E9C] block mt-1">{positions.length} active contracts held</span>
         </div>
 
-        <div className="p-5 bg-white border border-[#E7E5E4] rounded-[16px] shadow-xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#78716C] block">
+        <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#848E9C] block">
             Total Unrealized Return
           </span>
           <span
-            className={`text-[26px] font-bold tabular-nums block mt-1 ${
-              totalPnl >= 0 ? 'text-[#16803C]' : 'text-[#C62828]'
+            className={`text-[24px] font-bold tabular-nums block mt-1 ${
+              totalPnl >= 0 ? 'text-[#0ECB81]' : 'text-[#F6465D]'
             }`}
           >
             {totalPnl >= 0 ? '+' : ''}
@@ -76,7 +77,7 @@ export const PortfolioView: React.FC = () => {
           </span>
           <span
             className={`text-[12px] font-semibold mt-1 block ${
-              totalPnlPercent >= 0 ? 'text-[#16803C]' : 'text-[#C62828]'
+              totalPnlPercent >= 0 ? 'text-[#0ECB81]' : 'text-[#F6465D]'
             }`}
           >
             {totalPnlPercent >= 0 ? '+' : ''}
@@ -84,137 +85,153 @@ export const PortfolioView: React.FC = () => {
           </span>
         </div>
 
-        <div className="p-5 bg-white border border-[#E7E5E4] rounded-[16px] shadow-xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#78716C] block">
-            Unallocated Cash Reserve
+        <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px]">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#848E9C] block">
+            Available Trading Cash
           </span>
-          <span className="text-[26px] font-bold text-[#005EA8] tabular-nums block mt-1">
+          <span className="text-[24px] font-bold text-[#F0B90B] tabular-nums block mt-1">
             {formatINR(wallet.availableBalance)}
           </span>
-          <span className="text-[12px] text-[#78716C] block mt-1">{cashPercent}% of total portfolio</span>
+          <span className="text-[12px] text-[#848E9C] block mt-1">{cashPercent}% cash reserve</span>
         </div>
       </div>
 
-      {/* Allocation Visual Bar */}
-      <div className="p-5 bg-white border border-[#E7E5E4] rounded-[16px] shadow-xs space-y-3">
-        <div className="flex items-center justify-between">
-          <span className="text-[13px] font-bold text-[#171717]">Asset Allocation Breakdown</span>
-          <span className="text-[12px] text-[#78716C]">
-            {holdingsPercent}% Holdings · {cashPercent}% Liquid Cash
-          </span>
-        </div>
-        <div className="w-full h-3 bg-[#E7E5E4] rounded-full overflow-hidden flex">
-          <div style={{ width: `${holdingsPercent}%` }} className="bg-[#0070BA] h-full" title="Active Holdings" />
-          <div style={{ width: `${cashPercent}%` }} className="bg-[#A6F4C5] h-full" title="Cash Balance" />
-        </div>
-        <div className="flex items-center gap-6 text-[12px] text-[#57534E]">
+      {/* Allocation Breakdown Bar */}
+      <div className="p-4 bg-[#111418] border border-[#2B3139] rounded-[6px] space-y-2.5">
+        <div className="flex items-center justify-between text-[12px]">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#0070BA]" />
-            <span>Active Product Contracts ({formatINR(totalCurrent)})</span>
+            <PieChart className="w-4 h-4 text-[#F0B90B]" />
+            <span className="font-bold text-[#F5F5F5]">Asset Allocation Distribution</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#16803C]" />
-            <span>Liquid Trading Balance ({formatINR(wallet.availableBalance)})</span>
+          <div className="flex items-center gap-4 text-[#848E9C]">
+            <span className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#F0B90B]" />
+              Holdings: <strong className="text-[#F5F5F5]">{holdingsPercent}%</strong>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#363C45]" />
+              Cash Balance: <strong className="text-[#F5F5F5]">{cashPercent}%</strong>
+            </span>
           </div>
+        </div>
+
+        {/* Stacked Percentage Bar */}
+        <div className="w-full h-2 rounded-full bg-[#161A1E] overflow-hidden flex">
+          <div style={{ width: `${holdingsPercent}%` }} className="bg-[#F0B90B] h-full" />
+          <div style={{ width: `${cashPercent}%` }} className="bg-[#363C45] h-full" />
         </div>
       </div>
 
-      {/* Positions Table */}
-      <div className="bg-white border border-[#E7E5E4] rounded-[18px] shadow-xs overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-[#E7E5E4] flex items-center justify-between">
+      {/* Holdings Table */}
+      <div className="bg-[#111418] border border-[#2B3139] rounded-[6px] p-4 space-y-3">
+        <div className="flex items-center justify-between pb-2 border-b border-[#1E2329]">
           <div>
-            <h3 className="text-[17px] font-bold text-[#171717]">Your Active Holdings</h3>
-            <p className="text-[12px] text-[#6B6B6B]">Units purchased through platform listings</p>
+            <h3 className="text-[15px] font-bold text-[#F5F5F5]">Position Holdings ({positions.length})</h3>
+            <p className="text-[11px] text-[#848E9C]">Marked-to-market live valuations with instant liquidation routing</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-[13px]">
-            <thead className="bg-[#FAFAF9] border-b border-[#E7E5E4] text-[#78716C] font-bold text-[12px]">
-              <tr>
-                <th className="py-3 px-4">Product Name</th>
-                <th className="py-3 px-4">Holding Units</th>
-                <th className="py-3 px-4">Average Acquisition Cost</th>
-                <th className="py-3 px-4">Current Valuation</th>
-                <th className="py-3 px-4">Invested Value</th>
-                <th className="py-3 px-4">Current Market Value</th>
-                <th className="py-3 px-4">Total P&L</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E7E5E4]">
-              {positions.map((pos) => {
-                const prod = products.find((p) => p.id === pos.productId);
-                return (
-                  <tr key={pos.id} className="hover:bg-[#F0FAFF]/60 transition-colors">
-                    <td className="py-3.5 px-4">
-                      <button
-                        onClick={() => {
-                          setSelectedProductId(pos.productId);
-                          setCurrentView('product-detail');
-                        }}
-                        className="font-bold text-[14px] text-[#171717] hover:text-[#005EA8] text-left block"
-                      >
-                        {pos.productName}
-                      </button>
-                      <span className="text-[11px] text-[#78716C] font-mono">{pos.productId}</span>
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-[#171717] tabular-nums">
-                      {pos.quantity} units
-                    </td>
-                    <td className="py-3.5 px-4 tabular-nums text-[#57534E]">
-                      {formatINR(pos.averageValue)}
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-[#171717] tabular-nums">
-                      {formatINR(pos.currentValue)}
-                    </td>
-                    <td className="py-3.5 px-4 tabular-nums text-[#57534E]">
-                      {formatINR(pos.totalInvested)}
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-[#171717] tabular-nums">
-                      {formatINR(pos.totalCurrent)}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={`font-bold tabular-nums block ${
-                          pos.pnl >= 0 ? 'text-[#16803C]' : 'text-[#C62828]'
-                        }`}
-                      >
-                        {pos.pnl >= 0 ? '+' : ''}
-                        {formatINR(pos.pnl)}
-                      </span>
-                      <span
-                        className={`text-[11px] tabular-nums ${
-                          pos.pnlPercent >= 0 ? 'text-[#16803C]' : 'text-[#C62828]'
-                        }`}
-                      >
-                        {pos.pnlPercent >= 0 ? '+' : ''}
-                        {pos.pnlPercent}%
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        <button
-                          onClick={() => openBuySell('buy', prod)}
-                          className="px-2.5 py-1 text-[11px] font-semibold text-[#16803C] bg-[#ECFDF3] border border-[#A6F4C5] rounded-[6px] hover:bg-[#D1FADF] transition-colors"
+          {positions.length > 0 ? (
+            <table className="w-full text-left text-[13px] tabular-nums">
+              <thead className="bg-[#161A1E] border-b border-[#2B3139] text-[#848E9C] text-[11px] font-semibold uppercase">
+                <tr>
+                  <th className="py-2.5 px-3">Asset</th>
+                  <th className="py-2.5 px-3">Position Size</th>
+                  <th className="py-2.5 px-3">Entry Avg Price</th>
+                  <th className="py-2.5 px-3">Market Price</th>
+                  <th className="py-2.5 px-3">Total Value</th>
+                  <th className="py-2.5 px-3">Unrealized P&L</th>
+                  <th className="py-2.5 px-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#1E2329]">
+                {positions.map((pos) => {
+                  const product = products.find((p) => p.id === pos.productId);
+                  return (
+                    <tr key={pos.id} className="hover:bg-[#161A1E] transition-colors">
+                      <td className="py-3 px-3">
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => {
+                            setSelectedProductId(pos.productId);
+                            setCurrentView('app-product-detail');
+                          }}
                         >
-                          Buy More
-                        </button>
-                        <button
-                          onClick={() => openBuySell('sell', prod)}
-                          className="px-2.5 py-1 text-[11px] font-semibold text-[#C62828] bg-[#FEF2F2] border border-[#FECDCA] rounded-[6px] hover:bg-[#FEE4E2] transition-colors"
+                          <span className="font-bold text-[#F5F5F5] hover:text-[#F0B90B] block">
+                            {pos.productName}
+                          </span>
+                          <span className="text-[11px] text-[#848E9C] font-mono">{pos.productId}</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-3 font-semibold text-[#F5F5F5]">
+                        {pos.quantity} units
+                      </td>
+                      <td className="py-3 px-3 text-[#848E9C]">
+                        {formatINR(pos.averageValue)}
+                      </td>
+                      <td className="py-3 px-3 font-semibold text-[#F5F5F5]">
+                        {formatINR(pos.currentValue)}
+                      </td>
+                      <td className="py-3 px-3 font-bold text-[#F5F5F5]">
+                        {formatINR(pos.totalCurrent)}
+                      </td>
+                      <td className="py-3 px-3">
+                        <span
+                          className={`font-bold block ${
+                            pos.pnl >= 0 ? 'text-[#0ECB81]' : 'text-[#F6465D]'
+                          }`}
                         >
-                          Sell
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                          {pos.pnl >= 0 ? '+' : ''}
+                          {formatINR(pos.pnl)}
+                        </span>
+                        <span
+                          className={`text-[11px] ${
+                            pos.pnlPercent >= 0 ? 'text-[#0ECB81]' : 'text-[#F6465D]'
+                          }`}
+                        >
+                          {pos.pnlPercent >= 0 ? '+' : ''}
+                          {pos.pnlPercent.toFixed(2)}%
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => openBuySell('buy', product)}
+                            className="px-2.5 py-1 text-[11px] font-bold text-[#0ECB81] bg-[#102A22] border border-[#0ECB81]/30 rounded-[4px] hover:bg-[#0ECB81]/20 transition-colors cursor-pointer"
+                          >
+                            Buy More
+                          </button>
+                          <button
+                            onClick={() => openBuySell('sell', product)}
+                            className="px-2.5 py-1 text-[11px] font-bold text-[#F6465D] bg-[#301820] border border-[#F6465D]/30 rounded-[4px] hover:bg-[#F6465D]/20 transition-colors cursor-pointer"
+                          >
+                            Close / Sell
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div className="py-12 text-center text-[#848E9C]">
+              <p className="text-[14px]">You do not have any active positions.</p>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => setCurrentView('app-markets')}
+                className="mt-3 font-bold"
+              >
+                Explore Listed Markets
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
+export default PortfolioView;

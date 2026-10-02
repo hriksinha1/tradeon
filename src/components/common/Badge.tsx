@@ -1,26 +1,37 @@
 import React from 'react';
 
-interface BadgeProps {
+export interface BadgeProps {
   status: 'brand' | 'positive' | 'negative' | 'warning' | 'info' | 'neutral';
   label: string;
   className?: string;
+  dot?: boolean;
 }
 
-export const Badge: React.FC<BadgeProps> = ({ status, label, className = '' }) => {
+export const Badge: React.FC<BadgeProps> = ({ status, label, className = '', dot = false }) => {
   const styles = {
-    brand: 'text-[#005EA8] bg-[#F0FAFF] border border-[#A2E8C5]',
-    positive: 'text-[#0A7A45] bg-[#E3F6EC] border border-[#A2E8C5]',
-    negative: 'text-[#BF2A2A] bg-[#FCE9E7] border border-[#E5484D]/30',
-    warning: 'text-[#8A5A00] bg-[#FFF3D6] border border-[#C77700]/30',
-    info: 'text-[#1B5FBF] bg-[#E6EFFC] border border-[#2F80ED]/30',
-    neutral: 'text-[#5A5A53] bg-[#EFEEE9] border border-[#CBCAC2]',
+    brand: 'text-[#F0B90B] bg-[#302A15] border border-[#F0B90B]/30',
+    positive: 'text-[#0ECB81] bg-[#102A22] border border-[#0ECB81]/30',
+    negative: 'text-[#F6465D] bg-[#301820] border border-[#F6465D]/30',
+    warning: 'text-[#F0B90B] bg-[#302A15] border border-[#F0B90B]/30',
+    info: 'text-[#4C8FFF] bg-[#18243A] border border-[#4C8FFF]/30',
+    neutral: 'text-[#B7BDC6] bg-[#1E2329] border border-[#363C45]',
+  };
+
+  const dotColors = {
+    brand: 'bg-[#F0B90B]',
+    positive: 'bg-[#0ECB81]',
+    negative: 'bg-[#F6465D]',
+    warning: 'bg-[#F0B90B]',
+    info: 'bg-[#4C8FFF]',
+    neutral: 'bg-[#848E9C]',
   };
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 text-[12px] font-semibold rounded-full whitespace-nowrap ${styles[status]} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-medium rounded-[4px] whitespace-nowrap ${styles[status]} ${className}`}
     >
-      {label}
+      {dot && <span className={`w-1.5 h-1.5 rounded-full ${dotColors[status]}`} />}
+      <span>{label}</span>
     </span>
   );
 };
